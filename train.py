@@ -101,8 +101,7 @@ def main(args):
                 
                 # Cal Loss
                 mel_loss, mel_postnet_loss, d_loss, f_loss, e_loss = Loss(
-                        duration_output, D, f0_output, f0, energy_output, energy, mel_output, mel_postnet_output, mel_target, mel_len)
-                
+                        duration_output, D, f0_output, f0, energy_output, energy, mel_output, mel_postnet_output, mel_target)
                 total_loss = mel_loss + mel_postnet_loss + d_loss + f_loss + e_loss
                  
                 # Logger

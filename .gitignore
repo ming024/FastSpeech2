@@ -113,7 +113,7 @@ montreal-forced-aligner/
 # data, checkpoint, and models
 preprocessed/
 ckpt/
-result/
+results/
 synth/
 log/
 eval/
