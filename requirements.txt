@@ -1,0 +1,9 @@
+numpy == 1.19.0
+tgt == 1.4.4
+scipy == 1.5.0
+pyworld == 0.2.10
+librosa == 0.7.2
+numba == 0.48
+matplotlib == 3.2.2
+unidecode == 1.1.1
+inflect == 4.1.0
