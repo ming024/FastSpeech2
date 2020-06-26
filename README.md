@@ -2,6 +2,8 @@
 
 This is a Pytorch implementation of Microsoft's text-to-speech system [**FastSpeech 2: Fast and High-Quality End-to-End Text to Speech**](https://arxiv.org/abs/2006.04558). This project is based on [xcmyz's implementation](https://github.com/xcmyz/FastSpeech) of FastSpeech. Feel free to use/modify the code. Any improvement suggestion is appreciated.
 
+This repository contains only FastSpeech 2 but FastSpeech 2s so far. I will update it once I reproduce FastSpeech 2s, the end-to-end version of FastSpeech2, successfully.
+
 ![](./model.png)
 
 # Audio Samples
@@ -54,7 +56,7 @@ Then run the preprocessing sctipt by
 python3 preprocess.py
 ```
 
-Alternately, you can align the corpus by yourself. First, download the MFA package and the pretrained lexicon file. (We use LibriSpeech lexicon instead of the G2p_en python package proposed in the paper)
+Alternately, you can align the corpus by yourself. First, download the MFA package and the pretrained lexicon file. (We use LibriSpeech lexicon instead of the G2p\_en python package proposed in the paper)
 
 ```
 wget https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/releases/download/v1.1.0-beta.2/montreal-forced-aligner_linux.tar.gz
@@ -98,7 +100,7 @@ There might be some room for improvement for this repository. For example, I jus
 ## Implementation Issues
 
 There are several differences between my implementation and the paper.
-- The paper includes punctuations in the transcripts. However, MFA discards puntuations by default and I haven't find a way to solve it.
+- The paper includes punctuations in the transcripts. However, MFA discards puntuations by default and I haven't found a way to solve it.
 - Following [xcmyz's implementation](https://github.com/xcmyz/FastSpeech), I use an additional Tacotron-2-styled postnet after the FastSpeech decoder, which is not used in the original paper.
 - The [transformer paper](https://arxiv.org/abs/1706.03762) suggests to use dropout after the input and positional embedding. I haven't try it yet.
 - The paper suggest to use L1 loss for mel loss and L2 loss for variance predictor losses. But I find it easier to train the model with L2 mel loss and L1 variance adaptor losses, for unknown reason.
@@ -109,6 +111,7 @@ There are several differences between my implementation and the paper.
 - My loss computation does not mask out the paddings.
 - Evaluate the quality of the synthesized audio over the validation set.
 - Find the difference between the F0 & energy predicted by the variance predictors and the F0 & energy of the synthesized utterance measured by PyWorld Vocoder.
+- Implement FastSpeech 2s.
 
 # References
 - [FastSpeech 2: Fast and High-Quality End-to-End Text to Speech](https://arxiv.org/abs/2006.04558), Y. Ren, *et al*.
