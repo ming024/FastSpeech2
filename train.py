@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
+from torch.utils.tensorboard import SummaryWriter
 
 import numpy as np
 import argparse
@@ -56,9 +57,10 @@ def main(args):
     wave_glow = utils.get_WaveGlow()
 
     # Init logger
-    logger_path = hp.logger_path
-    if not os.path.exists(logger_path):
-        os.makedirs(logger_path)
+    log_path = hp.log_path
+    if not os.path.exists(log_path):
+        os.makedirs(log_path)
+    logger = SummaryWriter(log_path)
 
     # Init synthesis directory
     synth_path = hp.synth_path
@@ -111,17 +113,17 @@ def main(args):
                 d_l = d_loss.item()
                 f_l = f_loss.item()
                 e_l = e_loss.item()
-                with open(os.path.join(logger_path, "total_loss.txt"), "a") as f_total_loss:
+                with open(os.path.join(log_path, "total_loss.txt"), "a") as f_total_loss:
                     f_total_loss.write(str(t_l)+"\n")
-                with open(os.path.join(logger_path, "mel_loss.txt"), "a") as f_mel_loss:
+                with open(os.path.join(log_path, "mel_loss.txt"), "a") as f_mel_loss:
                     f_mel_loss.write(str(m_l)+"\n")
-                with open(os.path.join(logger_path, "mel_postnet_loss.txt"), "a") as f_mel_postnet_loss:
+                with open(os.path.join(log_path, "mel_postnet_loss.txt"), "a") as f_mel_postnet_loss:
                     f_mel_postnet_loss.write(str(m_p_l)+"\n")
-                with open(os.path.join(logger_path, "duration_loss.txt"), "a") as f_d_loss:
+                with open(os.path.join(log_path, "duration_loss.txt"), "a") as f_d_loss:
                     f_d_loss.write(str(d_l)+"\n")
-                with open(os.path.join(logger_path, "f0_loss.txt"), "a") as f_f_loss:
+                with open(os.path.join(log_path, "f0_loss.txt"), "a") as f_f_loss:
                     f_f_loss.write(str(f_l)+"\n")
-                with open(os.path.join(logger_path, "energy_loss.txt"), "a") as f_e_loss:
+                with open(os.path.join(log_path, "energy_loss.txt"), "a") as f_e_loss:
                     f_e_loss.write(str(e_l)+"\n")
                  
                 # Backward
@@ -148,12 +150,19 @@ def main(args):
                     print(str2)
                     print(str3)
                     
-                    with open(os.path.join(logger_path, "logger.txt"), "a") as f_logger:
-                        f_logger.write(str1 + "\n")
-                        f_logger.write(str2 + "\n")
-                        f_logger.write(str3 + "\n")
-                        f_logger.write("\n")
+                    with open(os.path.join(log_path, "log.txt"), "a") as f_log:
+                        f_log.write(str1 + "\n")
+                        f_log.write(str2 + "\n")
+                        f_log.write(str3 + "\n")
+                        f_log.write("\n")
 
+                    logger.add_scalar('Loss/total_loss', t_l, current_step)
+                    logger.add_scalar('Loss/mel_loss', m_l, current_step)
+                    logger.add_scalar('Loss/mel_postnet_loss', m_p_l, current_step)
+                    logger.add_scalar('Loss/duration_loss', d_l, current_step)
+                    logger.add_scalar('Loss/F0_loss', f_l, current_step)
+                    logger.add_scalar('Loss/energy_loss', e_l, current_step)
+                
                 if current_step % hp.save_step == 0:
                     torch.save({'model': model.state_dict(), 'optimizer': optimizer.state_dict(
                     )}, os.path.join(checkpoint_path, 'checkpoint_{}.pth.tar'.format(current_step)))

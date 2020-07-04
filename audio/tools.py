@@ -26,11 +26,12 @@ def get_mel(filename):
     audio_norm = audio / hparams.max_wav_value
     audio_norm = audio_norm.unsqueeze(0)
     audio_norm = torch.autograd.Variable(audio_norm, requires_grad=False)
-    melspec = _stft.mel_spectrogram(audio_norm)
+    melspec, energy = _stft.mel_spectrogram(audio_norm)
     melspec = torch.squeeze(melspec, 0)
+    energy = torch.squeeze(energy, 0)
     # melspec = torch.from_numpy(_normalize(melspec.numpy()))
 
-    return melspec
+    return melspec, energy
 
 
 def get_mel_from_wav(audio):
@@ -41,10 +42,11 @@ def get_mel_from_wav(audio):
     audio_norm = audio / hparams.max_wav_value
     audio_norm = audio_norm.unsqueeze(0)
     audio_norm = torch.autograd.Variable(audio_norm, requires_grad=False)
-    melspec = _stft.mel_spectrogram(audio_norm)
+    melspec, energy = _stft.mel_spectrogram(audio_norm)
     melspec = torch.squeeze(melspec, 0)
+    energy = torch.squeeze(energy, 0)
 
-    return melspec
+    return melspec, energy
 
 
 def inv_mel_spec(mel, out_filename, griffin_iters=60):

@@ -45,14 +45,14 @@ class VarianceAdaptor(nn.Module):
             pitch_embedding = self.pitch_embedding(torch.bucketize(pitch_target, self.pitch_bins))
         else:
             pitch_embedding = self.pitch_embedding(torch.bucketize(pitch_prediction, self.pitch_bins))
-        x = x + pitch_embedding
         
         energy_prediction = self.energy_predictor(x)
         if energy_target is not None:
             energy_embedding = self.energy_embedding(torch.bucketize(energy_target, self.energy_bins))
         else:
             energy_embedding = self.energy_embedding(torch.bucketize(energy_prediction, self.energy_bins))
-        x = x + energy_embedding
+        
+        x = x + pitch_embedding + energy_embedding
         
         return x, duration_prediction, pitch_prediction, energy_prediction, mel_pos
 

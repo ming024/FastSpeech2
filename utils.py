@@ -69,7 +69,7 @@ def plot_data(data, titles=None, figsize=None, filename=None):
         axes[i][0].imshow(spectrogram, aspect='auto', origin='bottom', interpolation='none')
         axes[i][0].title.set_text(titles[i]) 
     plt.savefig(filename)
-
+    plt.clf()
 
 def get_mask_from_lengths(lengths, max_len=None):
     if max_len == None:

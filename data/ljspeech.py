@@ -88,14 +88,12 @@ def process_utterance(in_dir, out_dir, basename):
     f0, _ = pw.dio(wav.astype(np.float64), hp.sampling_rate, frame_period=hp.hop_length/hp.sampling_rate*1000)
     f0 = f0[:sum(duration)]
 
-    # Compute mel-scale spectrogram
-    mel_spectrogram = Audio.tools.get_mel_from_wav(torch.FloatTensor(wav)).numpy().astype(np.float32)
-    mel_spectrogram = mel_spectrogram[:, :sum(duration)]
+    # Compute mel-scale spectrogram and energy
+    mel_spectrogram, energy = Audio.tools.get_mel_from_wav(torch.FloatTensor(wav))
+    mel_spectrogram = mel_spectrogram.numpy().astype(np.float32)[:, :sum(duration)]
+    energy = energy.numpy().astype(np.float32)[:sum(duration)]
     if mel_spectrogram.shape[1] >= hp.max_seq_len:
         return None
-
-    # Compute energy
-    energy = np.linalg.norm(mel_spectrogram, axis=0)
 
     # Save alignment
     ali_filename = '{}-ali-{}.npy'.format(hp.dataset, basename)

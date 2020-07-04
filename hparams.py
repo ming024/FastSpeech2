@@ -68,7 +68,7 @@ preprocessed_path = os.path.join("./preprocessed/", dataset)
 checkpoint_path = os.path.join("./ckpt/", dataset)
 synth_path = os.path.join("./synth/", dataset)
 eval_path = os.path.join("./eval/", dataset)
-logger_path = os.path.join("./log/", dataset)
+log_path = os.path.join("./log/", dataset)
 test_path = "./results"
 waveglow_path = "./waveglow/pretrained_model/waveglow_256channels.pt"
 
