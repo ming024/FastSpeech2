@@ -108,7 +108,6 @@ There are several differences between my implementation and the paper.
 
 ## TODO
 - Try difference weights for the loss terms.
-- My loss computation does not mask out the paddings.
 - Evaluate the quality of the synthesized audio over the validation set.
 - Find the difference between the F0 & energy predicted by the variance predictors and the F0 & energy of the synthesized utterance measured by PyWorld Vocoder.
 - Implement FastSpeech 2s.

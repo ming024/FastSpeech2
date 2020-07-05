@@ -103,7 +103,7 @@ def main(args):
                 
                 # Cal Loss
                 mel_loss, mel_postnet_loss, d_loss, f_loss, e_loss = Loss(
-                        duration_output, D, f0_output, f0, energy_output, energy, mel_output, mel_postnet_output, mel_target)
+                        duration_output, D, f0_output, f0, energy_output, energy, mel_output, mel_postnet_output, mel_target, mel_len)
                 total_loss = mel_loss + mel_postnet_loss + d_loss + f_loss + e_loss
                  
                 # Logger
@@ -181,7 +181,13 @@ def main(args):
                     waveglow.inference.inference(mel_torch, wave_glow, os.path.join(synth_path, "step_{}_waveglow.wav".format(current_step)))
                     waveglow.inference.inference(mel_postnet_torch, wave_glow, os.path.join(synth_path, "step_{}_postnet_waveglow.wav".format(current_step)))
                     waveglow.inference.inference(mel_target_torch, wave_glow, os.path.join(synth_path, "step_{}_ground-truth_waveglow.wav".format(current_step)))
-                    utils.plot_data([(mel_postnet.numpy(), None, None), (mel_target.numpy(), None, None)], 
+                    
+                    f0 = f0[0, :length].detach().cpu().numpy()
+                    energy = energy[0, :length].detach().cpu().numpy()
+                    f0_output = f0_output[0, :length].detach().cpu().numpy()
+                    energy_output = energy_output[0, :length].detach().cpu().numpy()
+                    
+                    utils.plot_data([(mel_postnet.numpy(), f0_output, energy_output), (mel_target.numpy(), f0, energy)], 
                             ['Synthetized Spectrogram', 'Ground-Truth Spectrogram'], filename=os.path.join(synth_path, 'step_{}.png'.format(current_step)))
                 
                 end_time = time.perf_counter()

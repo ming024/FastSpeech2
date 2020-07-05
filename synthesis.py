@@ -43,13 +43,15 @@ def synthesize(model, text, sentence, prefix=''):
     src_pos = torch.from_numpy(src_pos).to(device).long()
         
     model.to(device)
-    mel, mel_postnet, d_prediction, p_prediction, e_prediction = model(text, src_pos)
+    mel, mel_postnet, duration_output, f0_output, energy_output = model(text, src_pos)
     model.to('cpu')
     
     mel_torch = mel.transpose(1, 2).detach()
     mel_postnet_torch = mel_postnet.transpose(1, 2).detach()
     mel = mel[0].cpu().transpose(0, 1).detach()
     mel_postnet = mel_postnet[0].cpu().transpose(0, 1).detach()
+    f0_output = f0_output[0].detach().cpu().numpy()
+    energy_output = energy_output[0].detach().cpu().numpy()
 
     if not os.path.exists(hp.test_path):
         os.makedirs(hp.test_path)
@@ -59,7 +61,7 @@ def synthesize(model, text, sentence, prefix=''):
     waveglow.inference.inference(mel_postnet_torch, wave_glow, os.path.join(
         hp.test_path, '{}_waveglow_{}.wav'.format(prefix, sentence)))
 
-    utils.plot_data([(mel_postnet.numpy(), None, None)], ['Synthesized Spectrogram'], filename=os.path.join(hp.test_path, '{}_{}.png'.format(prefix, sentence)))
+    utils.plot_data([(mel_postnet.numpy(), f0_output, energy_output)], ['Synthesized Spectrogram'], filename=os.path.join(hp.test_path, '{}_{}.png'.format(prefix, sentence)))
 
 
 if __name__ == "__main__":
@@ -69,8 +71,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     sentence = "Printing, in the only sense with which we are at present concerned, differs from most if not from all the arts and crafts represented in the Exhibition"
-    #sentence = "in being comparatively modern."
-    #sentence = "For although the Chinese took impressions from wood blocks engraved in relief for centuries before the woodcutters of the Netherlands, by a similar process"
+    sentence = "in being comparatively modern."
+    sentence = "For although the Chinese took impressions from wood blocks engraved in relief for centuries before the woodcutters of the Netherlands, by a similar process"
     #sentence = "produced the block books, which were the immediate predecessors of the true printed book,"
     #sentence = "the invention of movable metal letters in the middle of the fifteenth century may justly be considered as the invention of the art of printing."
     #sentence = "And it is worth mention in passing that, as an example of fine typography,"

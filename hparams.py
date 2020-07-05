@@ -52,8 +52,8 @@ max_seq_len = 1000
 ### for LJSpeech ###
 f0_min = 71.0
 f0_max = 795.8
-energy_min = 17.76
-energy_max = 91.42
+energy_min = 0.0
+energy_max = 315.0
 ### for Blizzard2013 ###
 #f0_min = 71.0
 #f0_max = 786.7

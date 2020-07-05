@@ -81,7 +81,7 @@ def main(args):
                 
                 # Cal Loss
                 mel_loss, mel_postnet_loss, d_loss, f_loss, e_loss = Loss(
-                    duration_output, D, f0_output, f0, energy_output, energy, mel_output, mel_postnet_output, mel_target)
+                        duration_output, D, f0_output, f0, energy_output, energy, mel_output, mel_postnet_output, mel_target, mel_len)
                 
                 d_l.append(d_loss.item())
                 f_l.append(f_loss.item())
