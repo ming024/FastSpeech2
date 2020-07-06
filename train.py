@@ -12,6 +12,7 @@ from fastspeech2 import FastSpeech2
 from loss import FastSpeech2Loss
 from dataset import Dataset
 from optimizer import ScheduledOptim
+from evaluate import evaluate
 import hparams as hp
 import utils
 import audio as Audio
@@ -94,6 +95,7 @@ def main(args):
                 energy = torch.from_numpy(data_of_batch["energy"]).float().to(device)
                 mel_pos = torch.from_numpy(data_of_batch["mel_pos"]).long().to(device)
                 src_pos = torch.from_numpy(data_of_batch["src_pos"]).long().to(device)
+                src_len = torch.from_numpy(data_of_batch["src_len"]).long().to(device)
                 mel_len = torch.from_numpy(data_of_batch["mel_len"]).long().to(device)
                 max_len = max(data_of_batch["mel_len"]).astype(np.int16)
                 
@@ -103,7 +105,7 @@ def main(args):
                 
                 # Cal Loss
                 mel_loss, mel_postnet_loss, d_loss, f_loss, e_loss = Loss(
-                        duration_output, D, f0_output, f0, energy_output, energy, mel_output, mel_postnet_output, mel_target, mel_len)
+                        duration_output, D, f0_output, f0, energy_output, energy, mel_output, mel_postnet_output, mel_target, src_len, mel_len)
                 total_loss = mel_loss + mel_postnet_loss + d_loss + f_loss + e_loss
                  
                 # Logger
@@ -156,12 +158,12 @@ def main(args):
                         f_log.write(str3 + "\n")
                         f_log.write("\n")
 
-                    logger.add_scalar('Loss/total_loss', t_l, current_step)
-                    logger.add_scalar('Loss/mel_loss', m_l, current_step)
-                    logger.add_scalar('Loss/mel_postnet_loss', m_p_l, current_step)
-                    logger.add_scalar('Loss/duration_loss', d_l, current_step)
-                    logger.add_scalar('Loss/F0_loss', f_l, current_step)
-                    logger.add_scalar('Loss/energy_loss', e_l, current_step)
+                    logger.add_scalars('Loss/total_loss', {'training': t_l}, current_step)
+                    logger.add_scalars('Loss/mel_loss', {'training': m_l}, current_step)
+                    logger.add_scalars('Loss/mel_postnet_loss', {'training': m_p_l}, current_step)
+                    logger.add_scalars('Loss/duration_loss', {'training': d_l}, current_step)
+                    logger.add_scalars('Loss/F0_loss', {'training': f_l}, current_step)
+                    logger.add_scalars('Loss/energy_loss', {'training': e_l}, current_step)
                 
                 if current_step % hp.save_step == 0:
                     torch.save({'model': model.state_dict(), 'optimizer': optimizer.state_dict(
@@ -188,8 +190,23 @@ def main(args):
                     energy_output = energy_output[0, :length].detach().cpu().numpy()
                     
                     utils.plot_data([(mel_postnet.numpy(), f0_output, energy_output), (mel_target.numpy(), f0, energy)], 
-                            ['Synthetized Spectrogram', 'Ground-Truth Spectrogram'], filename=os.path.join(synth_path, 'step_{}.png'.format(current_step)))
+                        ['Synthetized Spectrogram', 'Ground-Truth Spectrogram'], filename=os.path.join(synth_path, 'step_{}.png'.format(current_step)))
                 
+                if current_step % hp.eval_step == 0:
+                    model.eval()
+                    with torch.no_grad():
+                        d_l, f_l, e_l, m_l, m_p_l = evaluate(model, current_step)
+                        t_l = d_l + f_l + e_l + m_l + m_p_l
+                        
+                        logger.add_scalars('Loss/total_loss', {'validation': t_l}, current_step)
+                        logger.add_scalars('Loss/mel_loss', {'validation': m_l}, current_step)
+                        logger.add_scalars('Loss/mel_postnet_loss', {'validation': m_p_l}, current_step)
+                        logger.add_scalars('Loss/duration_loss', {'validation': d_l}, current_step)
+                        logger.add_scalars('Loss/F0_loss', {'validation': f_l}, current_step)
+                        logger.add_scalars('Loss/energy_loss', {'validation': e_l}, current_step)
+
+                    model.train()
+
                 end_time = time.perf_counter()
                 Time = np.append(Time, end_time - start_time)
                 if len(Time) == hp.clear_Time:

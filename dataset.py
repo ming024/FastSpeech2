@@ -52,7 +52,7 @@ class Dataset(Dataset):
         f0s = [batch[ind]["f0"] for ind in cut_list]
         energies = [batch[ind]["energy"] for ind in cut_list]
 
-        length_text = np.array([])
+        length_text = np.array(list())
         for text in texts:
             length_text = np.append(length_text, text.shape[0])
 
@@ -87,6 +87,7 @@ class Dataset(Dataset):
                "energy": energies,
                "mel_pos": mel_pos,
                "src_pos": src_pos,
+               "src_len": length_text,
                "mel_len": length_mel}
         
         return out

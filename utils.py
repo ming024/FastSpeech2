@@ -51,11 +51,9 @@ def process_meta(meta_path):
             text.append(t)
         return name, text
 
-
 def get_param_num(model):
     num_param = sum(param.numel() for param in model.parameters())
     return num_param
-
 
 def plot_data(data, titles=None, filename=None):
     fig, axes = plt.subplots(len(data), 1, squeeze=False)
@@ -90,7 +88,7 @@ def plot_data(data, titles=None, filename=None):
         ax2.set_ylabel('Energy', color='darkviolet')
         ax2.yaxis.set_label_position('right')
         ax2.tick_params(labelsize='x-small', colors='darkviolet', bottom=False, labelbottom=False, left=False, labelleft=False, right=True, labelright=True)
-       
+    
     plt.savefig(filename, dpi=200)
     plt.clf()
 
@@ -103,7 +101,6 @@ def get_mask_from_lengths(lengths, max_len=None):
 
     return mask
 
-
 def get_WaveGlow():
     waveglow_path = hp.waveglow_path
     wave_glow = torch.load(waveglow_path)['model']
@@ -114,7 +111,6 @@ def get_WaveGlow():
             setattr(m, 'padding_mode', 'zeros')
 
     return wave_glow
-
 
 def pad_1D(inputs, PAD=0):
 
@@ -128,7 +124,6 @@ def pad_1D(inputs, PAD=0):
     padded = np.stack([pad_data(x, max_len, PAD) for x in inputs])
 
     return padded
-
 
 def pad_2D(inputs, maxlen=None):
 
@@ -150,7 +145,6 @@ def pad_2D(inputs, maxlen=None):
         output = np.stack([pad(x, max_len) for x in inputs])
 
     return output
-
 
 def pad(input_ele, mel_max_length=None):
     if mel_max_length:

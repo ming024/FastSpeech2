@@ -24,7 +24,7 @@ class FastSpeech2Loss(nn.Module):
     def __init__(self):
         super(FastSpeech2Loss, self).__init__()
 
-    def forward(self, d_predicted, d_target, p_predicted, p_target, e_predicted, e_target, mel, mel_postnet, mel_target, mel_length):
+    def forward(self, d_predicted, d_target, p_predicted, p_target, e_predicted, e_target, mel, mel_postnet, mel_target, src_length, mel_length):
         d_target.requires_grad = False
         p_target.requires_grad = False
         e_target.requires_grad = False
@@ -33,8 +33,8 @@ class FastSpeech2Loss(nn.Module):
         mel_loss = mse_loss(mel, mel_target, mel_length)
         mel_postnet_loss = mse_loss(mel_postnet, mel_target, mel_length)
 
-        d_loss = mae_loss(d_predicted, d_target.float(), mel_length)
-        p_loss = mae_loss(p_predicted, p_target, length)
-        e_loss = mae_loss(e_predicted, e_target, length)
+        d_loss = mae_loss(d_predicted, d_target.float(), src_length)
+        p_loss = mae_loss(p_predicted, p_target, mel_length)
+        e_loss = mae_loss(e_predicted, e_target, mel_length)
         
         return mel_loss, mel_postnet_loss, d_loss, p_loss, e_loss

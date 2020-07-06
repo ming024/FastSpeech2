@@ -2,7 +2,7 @@ import os
 
 # Dataset
 dataset = "LJSpeech"
-data_path = "./LJSpeech-1.1"
+data_path = "/home/ming/Data/Raw/LJSpeech-1.1"
 #dataset = "Blizzard2013"
 #data_path = "./Blizzard-2013/train/segmented/"
 
@@ -87,6 +87,7 @@ weight_decay = 1e-6
 # Save, log and synthesis
 save_step = 10000
 synth_step = 1000
+eval_step = 1000
 eval_size = 256
 log_step = 50
 clear_Time = 20
