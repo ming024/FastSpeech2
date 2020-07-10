@@ -95,6 +95,18 @@ The model takes less than 10k steps (less than 1 hour on my GTX1080 GPU) of trai
 
 There might be some room for improvement for this repository. For example, I just simply add up the duration loss, f0 loss, energy loss and mel loss without any weighting. Please inform me if you find any useful tip for training the FastSpeech2 model.
 
+# TensorBoard
+
+The TensorBoard loggers are stored in the ``log/hp.dataset/`` directory. Use
+```
+tensorboard --logdir log/hp.dataset/
+```
+to serve the TensorBoard on your localhost. Here is an example training the model on LJSpeech for 750k steps.
+
+![](./tensorboard.png)
+
+There is a great gap between the training and validation mel loss since we does not use ground-truth enery and pitch labels when evaluating the model on the validation set.
+
 # Notes
 
 ## Implementation Issues

@@ -90,7 +90,7 @@ def plot_data(data, titles=None, filename=None):
         ax2.tick_params(labelsize='x-small', colors='darkviolet', bottom=False, labelbottom=False, left=False, labelleft=False, right=True, labelright=True)
     
     plt.savefig(filename, dpi=200)
-    plt.clf()
+    plt.close()
 
 def get_mask_from_lengths(lengths, max_len=None):
     if max_len == None:

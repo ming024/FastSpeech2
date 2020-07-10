@@ -6,7 +6,7 @@ def mse_loss(prediction, target, length):
     batch_size = target.shape[0]
     loss = 0
     for p, t, l in zip(prediction, target, length):
-        loss += torch.mean((prediction[:l]-target[:l])**2)
+        loss += torch.mean((p[:l]-t[:l])**2)
     loss /= batch_size
     return loss
 
@@ -14,7 +14,7 @@ def mae_loss(prediction, target, length):
     batch_size = target.shape[0]
     loss = 0
     for p, t, l in zip(prediction, target, length):
-        loss += torch.mean(torch.abs(prediction[:l]-target[:l]))
+        loss += torch.mean(torch.abs(p[:l]-t[:l]))
     loss /= batch_size
     return loss
 

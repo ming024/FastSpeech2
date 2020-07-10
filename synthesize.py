@@ -73,13 +73,13 @@ if __name__ == "__main__":
     sentence = "Printing, in the only sense with which we are at present concerned, differs from most if not from all the arts and crafts represented in the Exhibition"
     sentence = "in being comparatively modern."
     sentence = "For although the Chinese took impressions from wood blocks engraved in relief for centuries before the woodcutters of the Netherlands, by a similar process"
-    #sentence = "produced the block books, which were the immediate predecessors of the true printed book,"
-    #sentence = "the invention of movable metal letters in the middle of the fifteenth century may justly be considered as the invention of the art of printing."
-    #sentence = "And it is worth mention in passing that, as an example of fine typography,"
-    #sentence = "the earliest book printed with movable types, the Gutenberg, or \"forty-two line Bible\" of about 1455,"
-    #sentence = "has never been surpassed."
-    #sentence = "Printing, then, for our purpose, may be considered as the art of making books by means of movable types."
-    #sentence = "Now, as all books not primarily intended as picture-books consist principally of types composed to form letterpress,"
+    sentence = "produced the block books, which were the immediate predecessors of the true printed book,"
+    sentence = "the invention of movable metal letters in the middle of the fifteenth century may justly be considered as the invention of the art of printing."
+    sentence = "And it is worth mention in passing that, as an example of fine typography,"
+    sentence = "the earliest book printed with movable types, the Gutenberg, or \"forty-two line Bible\" of about 1455,"
+    sentence = "has never been surpassed."
+    sentence = "Printing, then, for our purpose, may be considered as the art of making books by means of movable types."
+    sentence = "Now, as all books not primarily intended as picture-books consist principally of types composed to form letterpress,"
 
     text = preprocess(sentence)
     model = get_FastSpeech2(args.step)
