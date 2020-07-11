@@ -84,6 +84,10 @@ eps = 1e-9
 weight_decay = 1e-6
 
 
+# Vocoder
+vocoder = 'melgan' # 'waveglow' or 'melgan'
+
+
 # Save, log and synthesis
 save_step = 10000
 synth_step = 1000

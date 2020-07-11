@@ -16,7 +16,6 @@ from evaluate import evaluate
 import hparams as hp
 import utils
 import audio as Audio
-import waveglow
 
 def main(args):
     torch.manual_seed(0)
@@ -55,7 +54,12 @@ def main(args):
             os.makedirs(checkpoint_path)
 
     # Load vocoder
-    wave_glow = utils.get_WaveGlow()
+    if hp.vocoder == 'melgan':
+        melgan = utils.get_melgan()
+        melgan.to(device)
+    elif hp.vocoder == 'waveglow':
+        waveglow = utils.get_waveglow()
+        waveglow.to(device)
 
     # Init logger
     log_path = hp.log_path
@@ -180,9 +184,15 @@ def main(args):
                     mel_postnet = mel_postnet_output[0, :length].detach().cpu().transpose(0, 1)
                     Audio.tools.inv_mel_spec(mel, os.path.join(synth_path, "step_{}_griffin_lim.wav".format(current_step)))
                     Audio.tools.inv_mel_spec(mel_postnet, os.path.join(synth_path, "step_{}_postnet_griffin_lim.wav".format(current_step)))
-                    waveglow.inference.inference(mel_torch, wave_glow, os.path.join(synth_path, "step_{}_waveglow.wav".format(current_step)))
-                    waveglow.inference.inference(mel_postnet_torch, wave_glow, os.path.join(synth_path, "step_{}_postnet_waveglow.wav".format(current_step)))
-                    waveglow.inference.inference(mel_target_torch, wave_glow, os.path.join(synth_path, "step_{}_ground-truth_waveglow.wav".format(current_step)))
+                    
+                    if hp.vocoder == 'melgan':
+                        utils.melgan_infer(mel_torch, melgan, os.path.join(hp.test_path, 'step_{}_{}.wav'.format(current_step, hp.vocoder)))
+                        utils.melgan_infer(mel_postnet_torch, melgan, os.path.join(hp.test_path, 'step_{}_postnet_{}.wav'.format(current_step, hp.vocoder)))
+                        utils.melgan_infer(mel_target_torch, melgan, os.path.join(hp.test_path, 'step_{}_ground-truch_{}.wav'.format(current_step, hp.vocoder)))
+                    elif hp.vocoder == 'waveglow':
+                        utils.waveglow_infer(mel_torch, waveglow, os.path.join(hp.test_path, 'step_{}_{}.wav'.format(current_step, hp.vocoder)))
+                        utils.waveglow_infer(mel_postnet_torch, waveglow, os.path.join(hp.test_path, 'step_{}_postnet_{}.wav'.format(current_step, hp.vocoder)))
+                        utils.waveglow_infer(mel_target_torch, waveglow, os.path.join(hp.test_path, 'step_{}_ground-truch_{}.wav'.format(current_step, hp.vocoder)))
                     
                     f0 = f0[0, :length].detach().cpu().numpy()
                     energy = energy[0, :length].detach().cpu().numpy()

@@ -15,7 +15,6 @@ from text import text_to_sequence, sequence_to_text
 import hparams as hp
 import utils
 import audio as Audio
-import waveglow
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -27,7 +26,7 @@ def get_FastSpeech2(num):
     model.eval()
     return model
 
-def evaluate(model, step, wave_glow=None):
+def evaluate(model, step, vocoder=None):
     torch.manual_seed(0)
     
     # Get dataset
@@ -74,18 +73,23 @@ def evaluate(model, step, wave_glow=None):
                 mel_l.append(mel_loss.item())
                 mel_p_l.append(mel_postnet_loss.item())
                 
-                if wave_glow is not None:
+                if vocoder is not None:
                     # Run vocoding and plotting spectrogram only when the vocoder is defined
                     for k in range(len(mel_target)):
                         length = mel_len[k]
                         
                         mel_target_torch = mel_target[k:k+1, :length].transpose(1, 2).detach()
                         mel_target_ = mel_target[k, :length].cpu().transpose(0, 1).detach()
-                        waveglow.inference.inference(mel_target_torch, wave_glow, os.path.join(hp.eval_path, 'ground-truth_{}_waveglow.wav'.format(idx)))
                         
                         mel_postnet_torch = mel_postnet_output[k:k+1, :length].transpose(1, 2).detach()
                         mel_postnet = mel_postnet_output[k, :length].cpu().transpose(0, 1).detach()
-                        waveglow.inference.inference(mel_postnet_torch, wave_glow, os.path.join(hp.eval_path, 'eval_{}_waveglow.wav'.format(idx)))
+                        
+                        if hp.vocoder == 'melgan':
+                            utils.melgan_infer(mel_target_torch, vocoder, os.path.join(hp.eval_path, 'ground-truth_{}_{}.wav'.format(idx, hp.vocoder)))
+                            utils.melgan_infer(mel_postnet_torch, vocoder, os.path.join(hp.eval_path, 'eval_{}_{}.wav'.format(idx, hp.vocoder)))
+                        elif hp.vocoder == 'waveglow':
+                            utils.waveglow_infer(mel_target_torch, vocoder, os.path.join(hp.eval_path, 'ground-truth_{}_{}.wav'.format(idx, hp.vocoder)))
+                            utils.waveglow_infer(mel_postnet_torch, vocoder, os.path.join(hp.eval_path, 'eval_{}_{}.wav'.format(idx, hp.vocoder)))
         
                         f0_ = f0[k, :length].detach().cpu().numpy()
                         energy_ = energy[k, :length].detach().cpu().numpy()
@@ -142,7 +146,11 @@ if __name__ == "__main__":
     print('Number of FastSpeech2 Parameters:', num_param)
     
     # Load vocoder
-    wave_glow = utils.get_WaveGlow()
+    if hp.vocoder == 'melgan':
+        vocoder = utils.get_melgan()
+    elif hp.vocoder == 'waveglow':
+        vocoder = utils.get_waveglow()
+    vocoder.to(device)
         
     # Init directories
     if not os.path.exists(hp.log_path):
@@ -150,4 +158,4 @@ if __name__ == "__main__":
     if not os.path.exists(hp.eval_path):
         os.makedirs(hp.eval_path)
 
-    evaluate(model, args.step, wave_glow)
+    evaluate(model, args.step, vocoder)

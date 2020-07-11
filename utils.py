@@ -6,6 +6,7 @@ import matplotlib
 import matplotlib
 matplotlib.use("Agg")
 from matplotlib import pyplot as plt
+from scipy.io import wavfile
 import os
 
 import text
@@ -101,16 +102,33 @@ def get_mask_from_lengths(lengths, max_len=None):
 
     return mask
 
-def get_WaveGlow():
-    waveglow_path = hp.waveglow_path
-    wave_glow = torch.load(waveglow_path)['model']
-    wave_glow = wave_glow.remove_weightnorm(wave_glow)
-    wave_glow.cuda().eval()
-    for m in wave_glow.modules():
+def get_waveglow():
+    waveglow = torch.hub.load('nvidia/DeepLearningExamples:torchhub', 'nvidia_waveglow')
+    waveglow = waveglow.remove_weightnorm(waveglow)
+    waveglow.eval()
+    for m in waveglow.modules():
         if 'Conv' in str(type(m)):
             setattr(m, 'padding_mode', 'zeros')
 
-    return wave_glow
+    return waveglow
+
+def waveglow_infer(mel, waveglow, path):
+    with torch.no_grad():
+        wav = waveglow.infer(mel, sigma=1.0) * hp.max_wav_value
+        wav = wav.squeeze().cpu().numpy()
+    wav = wav.astype('int16')
+    wavfile.write(path, hp.sampling_rate, wav)
+
+def melgan_infer(mel, melgan, path):
+    with torch.no_grad():
+        wav = melgan.inference(mel).cpu().numpy()
+    wav = wav.astype('int16')
+    wavfile.write(path, hp.sampling_rate, wav)
+
+def get_melgan():
+    melgan = torch.hub.load('seungwonpark/melgan', 'melgan')
+    melgan.eval()
+    return melgan
 
 def pad_1D(inputs, PAD=0):
 

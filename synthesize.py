@@ -11,7 +11,6 @@ from text import text_to_sequence, sequence_to_text
 import hparams as hp
 import utils
 import audio as Audio
-import waveglow
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -57,10 +56,16 @@ def synthesize(model, text, sentence, prefix=''):
         os.makedirs(hp.test_path)
 
     Audio.tools.inv_mel_spec(mel_postnet, os.path.join(hp.test_path, '{}_griffin_lim_{}.wav'.format(prefix, sentence)))
-    wave_glow = utils.get_WaveGlow()
-    waveglow.inference.inference(mel_postnet_torch, wave_glow, os.path.join(
-        hp.test_path, '{}_waveglow_{}.wav'.format(prefix, sentence)))
 
+    if hp.vocoder == 'melgan':
+        melgan = utils.get_melgan()
+        melgan.to(device)
+        utils.melgan_infer(mel_postnet_torch, melgan, os.path.join(hp.test_path, '{}_{}_{}.wav'.format(prefix, hp.vocoder, sentence)))
+    elif hp.vocoder == 'waveglow':
+        waveglow = utils.get_waveglow()
+        waveglow.to(device)
+        utils.waveglow_infer(mel_postnet_torch, waveglow, os.path.join(hp.test_path, '{}_{}_{}.wav'.format(prefix, hp.vocoder, sentence)))
+    
     utils.plot_data([(mel_postnet.numpy(), f0_output, energy_output)], ['Synthesized Spectrogram'], filename=os.path.join(hp.test_path, '{}_{}.png'.format(prefix, sentence)))
 
 
@@ -72,15 +77,15 @@ if __name__ == "__main__":
     
     sentence = "Printing, in the only sense with which we are at present concerned, differs from most if not from all the arts and crafts represented in the Exhibition"
     sentence = "in being comparatively modern."
-    sentence = "For although the Chinese took impressions from wood blocks engraved in relief for centuries before the woodcutters of the Netherlands, by a similar process"
-    sentence = "produced the block books, which were the immediate predecessors of the true printed book,"
-    sentence = "the invention of movable metal letters in the middle of the fifteenth century may justly be considered as the invention of the art of printing."
-    sentence = "And it is worth mention in passing that, as an example of fine typography,"
-    sentence = "the earliest book printed with movable types, the Gutenberg, or \"forty-two line Bible\" of about 1455,"
-    sentence = "has never been surpassed."
-    sentence = "Printing, then, for our purpose, may be considered as the art of making books by means of movable types."
-    sentence = "Now, as all books not primarily intended as picture-books consist principally of types composed to form letterpress,"
-
+    #sentence = "For although the Chinese took impressions from wood blocks engraved in relief for centuries before the woodcutters of the Netherlands, by a similar process"
+    #sentence = "produced the block books, which were the immediate predecessors of the true printed book,"
+    #sentence = "the invention of movable metal letters in the middle of the fifteenth century may justly be considered as the invention of the art of printing."
+    #sentence = "And it is worth mention in passing that, as an example of fine typography,"
+    #sentence = "the earliest book printed with movable types, the Gutenberg, or \"forty-two line Bible\" of about 1455,"
+    #sentence = "has never been surpassed."
+    #sentence = "Printing, then, for our purpose, may be considered as the art of making books by means of movable types."
+    #sentence = "Now, as all books not primarily intended as picture-books consist principally of types composed to form letterpress,"
+    sentence = "The nation's tourism minister has also encouraged Australian's to take their holidays within the country this year."
     text = preprocess(sentence)
     model = get_FastSpeech2(args.step)
     synthesize(model, text, sentence, prefix='step_{}'.format(args.step))
