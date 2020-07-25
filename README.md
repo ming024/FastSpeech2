@@ -131,8 +131,8 @@ Please inform me if you find any mistake in this repo, or any useful tip to trai
 # References
 - [FastSpeech 2: Fast and High-Quality End-to-End Text to Speech](https://arxiv.org/abs/2006.04558), Y. Ren, *et al*.
 - [FastSpeech: Fast, Robust and Controllable Text to Speech](https://arxiv.org/abs/1905.09263), Y. Ren, *et al*.
-- [xcmyz's PyTorch FastSpeech implementation](https://github.com/xcmyz/FastSpeech)
-- [rishikksh20's PyTorch FastSpeech2 implementation](https://github.com/rishikksh20/FastSpeech2)
-- [TensorSpeech's TensorFLow FastSpeech2 implementation](https://github.com/TensorSpeech/TensorflowTTS)
-- [NVIDIA's PyTorch WaveGlow implementation](https://github.com/NVIDIA/waveglow)
-- [seungwonpark's PYTorch MelGAN implementation](https://github.com/seungwonpark/melgan)
+- [xcmyz's FastSpeech implementation](https://github.com/xcmyz/FastSpeech)
+- [rishikksh20's FastSpeech2 implementation](https://github.com/rishikksh20/FastSpeech2)
+- [TensorSpeech's FastSpeech2 implementation](https://github.com/TensorSpeech/TensorflowTTS)
+- [NVIDIA's WaveGlow implementation](https://github.com/NVIDIA/waveglow)
+- [seungwonpark's MelGAN implementation](https://github.com/seungwonpark/melgan)
