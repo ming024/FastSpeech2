@@ -19,19 +19,12 @@ class MultiHeadAttention(nn.Module):
         self.w_qs = nn.Linear(d_model, n_head * d_k)
         self.w_ks = nn.Linear(d_model, n_head * d_k)
         self.w_vs = nn.Linear(d_model, n_head * d_v)
-        nn.init.normal_(self.w_qs.weight, mean=0,
-                        std=np.sqrt(2.0 / (d_model + d_k)))
-        nn.init.normal_(self.w_ks.weight, mean=0,
-                        std=np.sqrt(2.0 / (d_model + d_k)))
-        nn.init.normal_(self.w_vs.weight, mean=0,
-                        std=np.sqrt(2.0 / (d_model + d_v)))
-
+        
         self.attention = ScaledDotProductAttention(
             temperature=np.power(d_k, 0.5))
         self.layer_norm = nn.LayerNorm(d_model)
 
         self.fc = nn.Linear(n_head * d_v, d_model)
-        nn.init.xavier_normal_(self.fc.weight)
 
         self.dropout = nn.Dropout(dropout)
 
@@ -80,7 +73,7 @@ class PositionwiseFeedForward(nn.Module):
             d_in, d_hid, kernel_size=hp.fft_conv1d_kernel_size[0], padding=(hp.fft_conv1d_kernel_size[0]-1)//2)
         # position-wise
         self.w_2 = nn.Conv1d(
-                d_hid, d_in, kernel_size=hp.fft_conv1d_kernel_size[1], padding=(hp.fft_conv1d_kernel_size[1]-1)//2)
+            d_hid, d_in, kernel_size=hp.fft_conv1d_kernel_size[1], padding=(hp.fft_conv1d_kernel_size[1]-1)//2)
 
         self.layer_norm = nn.LayerNorm(d_in)
         self.dropout = nn.Dropout(dropout)

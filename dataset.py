@@ -23,7 +23,7 @@ class Dataset(Dataset):
 
     def __getitem__(self, idx):
         basename = self.basename[idx]
-        phone = np.array(text_to_sequence(self.text[idx], hparams.text_cleaners))
+        phone = np.array(text_to_sequence(self.text[idx], []))
         mel_path = os.path.join(
             hparams.preprocessed_path, "mel", "{}-mel-{}.npy".format(hparams.dataset, basename))
         mel_target = np.load(mel_path)
@@ -37,7 +37,8 @@ class Dataset(Dataset):
             hparams.preprocessed_path, "energy", "{}-energy-{}.npy".format(hparams.dataset, basename))
         energy = np.load(energy_path)
         
-        sample = {"text": phone,
+        sample = {"id": basename,
+                  "text": phone,
                   "mel_target": mel_target,
                   "D": D,
                   "f0": f0,
@@ -46,47 +47,37 @@ class Dataset(Dataset):
         return sample
 
     def reprocess(self, batch, cut_list):
+        ids = [batch[ind]["id"] for ind in cut_list]
         texts = [batch[ind]["text"] for ind in cut_list]
         mel_targets = [batch[ind]["mel_target"] for ind in cut_list]
         Ds = [batch[ind]["D"] for ind in cut_list]
         f0s = [batch[ind]["f0"] for ind in cut_list]
         energies = [batch[ind]["energy"] for ind in cut_list]
-
+        for text, D, id_ in zip(texts, Ds, ids):
+            if len(text) != len(D):
+                print(text, text.shape, D, D.shape, id_)
         length_text = np.array(list())
         for text in texts:
             length_text = np.append(length_text, text.shape[0])
 
-        src_pos = list()
-        max_len = int(max(length_text))
-        for length_src_row in length_text:
-            src_pos.append(np.pad([i+1 for i in range(int(length_src_row))],
-                                  (0, max_len-int(length_src_row)), 'constant'))
-        src_pos = np.array(src_pos)
-
         length_mel = np.array(list())
         for mel in mel_targets:
             length_mel = np.append(length_mel, mel.shape[0])
-        
-        mel_pos = list()
-        max_mel_len = int(max(length_mel))
-        for length_mel_row in length_mel:
-            mel_pos.append(np.pad([i+1 for i in range(int(length_mel_row))],
-                                  (0, max_mel_len-int(length_mel_row)), 'constant'))
-        mel_pos = np.array(mel_pos)
         
         texts = pad_1D(texts)
         Ds = pad_1D(Ds)
         mel_targets = pad_2D(mel_targets)
         f0s = pad_1D(f0s)
         energies = pad_1D(energies)
-        
-        out = {"text": texts,
+        log_Ds = np.log(Ds + hparams.log_offset)
+
+        out = {"id": ids,
+               "text": texts,
                "mel_target": mel_targets,
                "D": Ds,
+               "log_D": log_Ds,
                "f0": f0s,
                "energy": energies,
-               "mel_pos": mel_pos,
-               "src_pos": src_pos,
                "src_len": length_text,
                "mel_len": length_mel}
         

@@ -31,22 +31,23 @@ class VarianceAdaptor(nn.Module):
         self.pitch_embedding = nn.Embedding(hp.n_bins, hp.encoder_hidden)
         self.energy_embedding = nn.Embedding(hp.n_bins, hp.encoder_hidden)
     
-    def forward(self, x, duration_target=None, pitch_target=None, energy_target=None, max_length=None):
+    def forward(self, x, src_mask, mel_mask=None, duration_target=None, pitch_target=None, energy_target=None, max_len=None):
 
-        duration_prediction = self.duration_predictor(x)
+        log_duration_prediction = self.duration_predictor(x, src_mask)
         if duration_target is not None:
-            x, mel_pos = self.length_regulator(x, duration_target, max_length)
+            x, mel_len = self.length_regulator(x, duration_target, max_len)
         else:
-            duration_rounded = torch.round(duration_prediction)
-            x, mel_pos = self.length_regulator(x, duration_rounded)
+            duration_rounded = torch.clamp(torch.round(torch.exp(log_duration_prediction)-hp.log_offset), min=0)
+            x, mel_len = self.length_regulator(x, duration_rounded, max_len)
+            mel_mask = utils.get_mask_from_lengths(mel_len)
         
-        pitch_prediction = self.pitch_predictor(x)
+        pitch_prediction = self.pitch_predictor(x, mel_mask)
         if pitch_target is not None:
             pitch_embedding = self.pitch_embedding(torch.bucketize(pitch_target, self.pitch_bins))
         else:
             pitch_embedding = self.pitch_embedding(torch.bucketize(pitch_prediction, self.pitch_bins))
         
-        energy_prediction = self.energy_predictor(x)
+        energy_prediction = self.energy_predictor(x, mel_mask)
         if energy_target is not None:
             energy_embedding = self.energy_embedding(torch.bucketize(energy_target, self.energy_bins))
         else:
@@ -54,7 +55,7 @@ class VarianceAdaptor(nn.Module):
         
         x = x + pitch_embedding + energy_embedding
         
-        return x, duration_prediction, pitch_prediction, energy_prediction, mel_pos
+        return x, log_duration_prediction, pitch_prediction, energy_prediction, mel_len, mel_mask
 
 
 class LengthRegulator(nn.Module):
@@ -63,22 +64,20 @@ class LengthRegulator(nn.Module):
     def __init__(self):
         super(LengthRegulator, self).__init__()
 
-    def LR(self, x, duration, max_length=None):
+    def LR(self, x, duration, max_len):
         output = list()
-        mel_pos = list()
-
+        mel_len = list()
         for batch, expand_target in zip(x, duration):
-            output.append(self.expand(batch, expand_target))
-            mel_pos.append(torch.arange(1, len(output[-1])+1).to(device))
-         
-        if max_length is not None:
-            output = utils.pad(output, max_length)
-            mel_pos = utils.pad(output, max_length)
+            expanded = self.expand(batch, expand_target)
+            output.append(expanded)
+            mel_len.append(expanded.shape[0])
+
+        if max_len is not None:
+            output = utils.pad(output, max_len)
         else:
             output = utils.pad(output)
-            mel_pos = utils.pad(mel_pos)
 
-        return output, mel_pos
+        return output, torch.LongTensor(mel_len).to(device)
 
     def expand(self, batch, predicted):
         out = list()
@@ -90,9 +89,9 @@ class LengthRegulator(nn.Module):
 
         return out
 
-    def forward(self, x, duration, max_length=None):
-        output, mel_pos = self.LR(x, duration, max_length)
-        return output, mel_pos
+    def forward(self, x, duration, max_len):
+        output, mel_len = self.LR(x, duration, max_len)
+        return output, mel_len
 
 
 class VariancePredictor(nn.Module):
@@ -111,7 +110,7 @@ class VariancePredictor(nn.Module):
             ("conv1d_1", Conv(self.input_size,
                               self.filter_size,
                               kernel_size=self.kernel,
-                              padding=1)),
+                              padding=(self.kernel-1)//2)),
             ("relu_1", nn.ReLU()),
             ("layer_norm_1", nn.LayerNorm(self.filter_size)),
             ("dropout_1", nn.Dropout(self.dropout)),
@@ -124,16 +123,16 @@ class VariancePredictor(nn.Module):
             ("dropout_2", nn.Dropout(self.dropout))
         ]))
 
-        self.linear_layer = Linear(self.conv_output_size, 1)
+        self.linear_layer = nn.Linear(self.conv_output_size, 1)
 
-    def forward(self, encoder_output):
+    def forward(self, encoder_output, mask):
         out = self.conv_layer(encoder_output)
         out = self.linear_layer(out)
         out = out.squeeze(-1)
         
-        if not self.training and out.dim() == 1:
-            out = out.unsqueeze(0)
-
+        if mask is not None:
+            out = out.masked_fill(mask, 0.)
+        
         return out
 
 
@@ -171,36 +170,9 @@ class Conv(nn.Module):
                               dilation=dilation,
                               bias=bias)
 
-        nn.init.xavier_uniform_(
-            self.conv.weight, gain=nn.init.calculate_gain(w_init))
-
     def forward(self, x):
         x = x.contiguous().transpose(1, 2)
         x = self.conv(x)
         x = x.contiguous().transpose(1, 2)
 
         return x
-
-
-class Linear(nn.Module):
-    """
-    Linear Module
-    """
-
-    def __init__(self, in_dim, out_dim, bias=True, w_init='linear'):
-        """
-        :param in_dim: dimension of input
-        :param out_dim: dimension of output
-        :param bias: boolean. if True, bias is included.
-        :param w_init: str. weight inits with xavier initialization.
-        """
-        super(Linear, self).__init__()
-        self.linear_layer = nn.Linear(in_dim, out_dim, bias=bias)
-
-        nn.init.xavier_uniform_(
-            self.linear_layer.weight,
-            gain=nn.init.calculate_gain(w_init))
-
-    def forward(self, x):
-        return self.linear_layer(x)
-

@@ -8,7 +8,7 @@ data_path = "/home/ming/Data/Raw/LJSpeech-1.1"
 
 
 # Text
-text_cleaners = []
+text_cleaners = ['english_cleaners']
 
 
 # Audio and mel
@@ -70,7 +70,6 @@ synth_path = os.path.join("./synth/", dataset)
 eval_path = os.path.join("./eval/", dataset)
 log_path = os.path.join("./log/", dataset)
 test_path = "./results"
-waveglow_path = "./waveglow/pretrained_model/waveglow_256channels.pt"
 
 
 # Optimizer
@@ -78,14 +77,19 @@ batch_size = 16
 epochs = 1000
 n_warm_up_step = 4000
 grad_clip_thresh = 1.0
+acc_steps = 1
 
 betas = (0.9, 0.98)
 eps = 1e-9
-weight_decay = 1e-6
+weight_decay = 0.
 
 
 # Vocoder
-vocoder = 'melgan' # 'waveglow' or 'melgan'
+vocoder = 'waveglow' # 'waveglow' or 'melgan'
+
+
+# Log-scaled duration
+log_offset = 1.
 
 
 # Save, log and synthesis
@@ -93,5 +97,5 @@ save_step = 10000
 synth_step = 1000
 eval_step = 1000
 eval_size = 256
-log_step = 50
+log_step = 1000
 clear_Time = 20

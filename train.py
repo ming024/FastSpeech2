@@ -65,7 +65,10 @@ def main(args):
     log_path = hp.log_path
     if not os.path.exists(log_path):
         os.makedirs(log_path)
-    logger = SummaryWriter(log_path)
+        os.makedirs(os.path.join(log_path, 'train'))
+        os.makedirs(os.path.join(log_path, 'validation'))
+    train_logger = SummaryWriter(os.path.join(log_path, 'train'))
+    val_logger = SummaryWriter(os.path.join(log_path, 'validation'))
 
     # Init synthesis directory
     synth_path = hp.synth_path
@@ -87,29 +90,26 @@ def main(args):
                 start_time = time.perf_counter()
 
                 current_step = i*hp.batch_size + j + args.restore_step + epoch*len(loader)*hp.batch_size + 1
-
-                # Init
-                scheduled_optim.zero_grad()
-
+                
                 # Get Data
                 text = torch.from_numpy(data_of_batch["text"]).long().to(device)
                 mel_target = torch.from_numpy(data_of_batch["mel_target"]).float().to(device)
-                D = torch.from_numpy(data_of_batch["D"]).int().to(device)
+                D = torch.from_numpy(data_of_batch["D"]).long().to(device)
+                log_D = torch.from_numpy(data_of_batch["log_D"]).float().to(device)
                 f0 = torch.from_numpy(data_of_batch["f0"]).float().to(device)
                 energy = torch.from_numpy(data_of_batch["energy"]).float().to(device)
-                mel_pos = torch.from_numpy(data_of_batch["mel_pos"]).long().to(device)
-                src_pos = torch.from_numpy(data_of_batch["src_pos"]).long().to(device)
                 src_len = torch.from_numpy(data_of_batch["src_len"]).long().to(device)
                 mel_len = torch.from_numpy(data_of_batch["mel_len"]).long().to(device)
-                max_len = max(data_of_batch["mel_len"]).astype(np.int16)
+                max_src_len = np.max(data_of_batch["src_len"]).astype(np.int32)
+                max_mel_len = np.max(data_of_batch["mel_len"]).astype(np.int32)
                 
                 # Forward
-                mel_output, mel_postnet_output, duration_output, f0_output, energy_output = model(
-                    text, src_pos, mel_pos, max_len, D, f0, energy)
+                mel_output, mel_postnet_output, log_duration_output, f0_output, energy_output, src_mask, mel_mask, _ = model(
+                    text, src_len, mel_len, D, f0, energy, max_src_len, max_mel_len)
                 
                 # Cal Loss
                 mel_loss, mel_postnet_loss, d_loss, f_loss, e_loss = Loss(
-                        duration_output, D, f0_output, f0, energy_output, energy, mel_output, mel_postnet_output, mel_target, src_len, mel_len)
+                        log_duration_output, log_D, f0_output, f0, energy_output, energy, mel_output, mel_postnet_output, mel_target, ~src_mask, ~mel_mask)
                 total_loss = mel_loss + mel_postnet_loss + d_loss + f_loss + e_loss
                  
                 # Logger
@@ -133,13 +133,17 @@ def main(args):
                     f_e_loss.write(str(e_l)+"\n")
                  
                 # Backward
+                total_loss = total_loss / hp.acc_steps
                 total_loss.backward()
+                if current_step % hp.acc_steps != 0:
+                    continue
 
                 # Clipping gradients to avoid gradient explosion
                 nn.utils.clip_grad_norm_(model.parameters(), hp.grad_clip_thresh)
 
                 # Update weights
                 scheduled_optim.step_and_update_lr()
+                scheduled_optim.zero_grad()
                 
                 # Print
                 if current_step % hp.log_step == 0:
@@ -162,12 +166,12 @@ def main(args):
                         f_log.write(str3 + "\n")
                         f_log.write("\n")
 
-                    logger.add_scalars('Loss/total_loss', {'training': t_l}, current_step)
-                    logger.add_scalars('Loss/mel_loss', {'training': m_l}, current_step)
-                    logger.add_scalars('Loss/mel_postnet_loss', {'training': m_p_l}, current_step)
-                    logger.add_scalars('Loss/duration_loss', {'training': d_l}, current_step)
-                    logger.add_scalars('Loss/F0_loss', {'training': f_l}, current_step)
-                    logger.add_scalars('Loss/energy_loss', {'training': e_l}, current_step)
+                    train_logger.add_scalar('Loss/total_loss', t_l, current_step)
+                    train_logger.add_scalar('Loss/mel_loss', m_l, current_step)
+                    train_logger.add_scalar('Loss/mel_postnet_loss', m_p_l, current_step)
+                    train_logger.add_scalar('Loss/duration_loss', d_l, current_step)
+                    train_logger.add_scalar('Loss/F0_loss', f_l, current_step)
+                    train_logger.add_scalar('Loss/energy_loss', e_l, current_step)
                 
                 if current_step % hp.save_step == 0:
                     torch.save({'model': model.state_dict(), 'optimizer': optimizer.state_dict(
@@ -186,13 +190,13 @@ def main(args):
                     Audio.tools.inv_mel_spec(mel_postnet, os.path.join(synth_path, "step_{}_postnet_griffin_lim.wav".format(current_step)))
                     
                     if hp.vocoder == 'melgan':
-                        utils.melgan_infer(mel_torch, melgan, os.path.join(hp.test_path, 'step_{}_{}.wav'.format(current_step, hp.vocoder)))
-                        utils.melgan_infer(mel_postnet_torch, melgan, os.path.join(hp.test_path, 'step_{}_postnet_{}.wav'.format(current_step, hp.vocoder)))
-                        utils.melgan_infer(mel_target_torch, melgan, os.path.join(hp.test_path, 'step_{}_ground-truch_{}.wav'.format(current_step, hp.vocoder)))
+                        utils.melgan_infer(mel_torch, melgan, os.path.join(hp.synth_path, 'step_{}_{}.wav'.format(current_step, hp.vocoder)))
+                        utils.melgan_infer(mel_postnet_torch, melgan, os.path.join(hp.synth_path, 'step_{}_postnet_{}.wav'.format(current_step, hp.vocoder)))
+                        utils.melgan_infer(mel_target_torch, melgan, os.path.join(hp.synth_path, 'step_{}_ground-truth_{}.wav'.format(current_step, hp.vocoder)))
                     elif hp.vocoder == 'waveglow':
-                        utils.waveglow_infer(mel_torch, waveglow, os.path.join(hp.test_path, 'step_{}_{}.wav'.format(current_step, hp.vocoder)))
-                        utils.waveglow_infer(mel_postnet_torch, waveglow, os.path.join(hp.test_path, 'step_{}_postnet_{}.wav'.format(current_step, hp.vocoder)))
-                        utils.waveglow_infer(mel_target_torch, waveglow, os.path.join(hp.test_path, 'step_{}_ground-truch_{}.wav'.format(current_step, hp.vocoder)))
+                        utils.waveglow_infer(mel_torch, waveglow, os.path.join(hp.synth_path, 'step_{}_{}.wav'.format(current_step, hp.vocoder)))
+                        utils.waveglow_infer(mel_postnet_torch, waveglow, os.path.join(hp.synth_path, 'step_{}_postnet_{}.wav'.format(current_step, hp.vocoder)))
+                        utils.waveglow_infer(mel_target_torch, waveglow, os.path.join(hp.synth_path, 'step_{}_ground-truth_{}.wav'.format(current_step, hp.vocoder)))
                     
                     f0 = f0[0, :length].detach().cpu().numpy()
                     energy = energy[0, :length].detach().cpu().numpy()
@@ -208,12 +212,12 @@ def main(args):
                         d_l, f_l, e_l, m_l, m_p_l = evaluate(model, current_step)
                         t_l = d_l + f_l + e_l + m_l + m_p_l
                         
-                        logger.add_scalars('Loss/total_loss', {'validation': t_l}, current_step)
-                        logger.add_scalars('Loss/mel_loss', {'validation': m_l}, current_step)
-                        logger.add_scalars('Loss/mel_postnet_loss', {'validation': m_p_l}, current_step)
-                        logger.add_scalars('Loss/duration_loss', {'validation': d_l}, current_step)
-                        logger.add_scalars('Loss/F0_loss', {'validation': f_l}, current_step)
-                        logger.add_scalars('Loss/energy_loss', {'validation': e_l}, current_step)
+                        val_logger.add_scalar('Loss/total_loss', t_l, current_step)
+                        val_logger.add_scalar('Loss/mel_loss', m_l, current_step)
+                        val_logger.add_scalar('Loss/mel_postnet_loss', m_p_l, current_step)
+                        val_logger.add_scalar('Loss/duration_loss', d_l, current_step)
+                        val_logger.add_scalar('Loss/F0_loss', f_l, current_step)
+                        val_logger.add_scalar('Loss/energy_loss', e_l, current_step)
 
                     model.train()
 

@@ -47,25 +47,26 @@ def evaluate(model, step, vocoder=None):
     for i, batchs in enumerate(loader):
         for j, data_of_batch in enumerate(batchs):
             # Get Data
+            id_ = data_of_batch["id"]
             text = torch.from_numpy(data_of_batch["text"]).long().to(device)
             mel_target = torch.from_numpy(data_of_batch["mel_target"]).float().to(device)
             D = torch.from_numpy(data_of_batch["D"]).int().to(device)
+            log_D = torch.from_numpy(data_of_batch["log_D"]).int().to(device)
             f0 = torch.from_numpy(data_of_batch["f0"]).float().to(device)
             energy = torch.from_numpy(data_of_batch["energy"]).float().to(device)
-            mel_pos = torch.from_numpy(data_of_batch["mel_pos"]).long().to(device)
-            src_pos = torch.from_numpy(data_of_batch["src_pos"]).long().to(device)
             src_len = torch.from_numpy(data_of_batch["src_len"]).long().to(device)
             mel_len = torch.from_numpy(data_of_batch["mel_len"]).long().to(device)
-            max_len = max(data_of_batch["mel_len"]).astype(np.int16)
+            max_src_len = np.max(data_of_batch["src_len"]).astype(np.int32)
+            max_mel_len = np.max(data_of_batch["mel_len"]).astype(np.int32)
         
             with torch.no_grad():
                 # Forward
-                mel_output, mel_postnet_output, duration_output, f0_output, energy_output = model(
-                    text, src_pos, mel_pos, max_len, D)
+                mel_output, mel_postnet_output, log_duration_output, f0_output, energy_output, src_mask, mel_mask, out_mel_len = model(
+                        text, src_len, mel_len, D, f0, energy, max_src_len, max_mel_len)
                 
                 # Cal Loss
                 mel_loss, mel_postnet_loss, d_loss, f_loss, e_loss = Loss(
-                        duration_output, D, f0_output, f0, energy_output, energy, mel_output, mel_postnet_output, mel_target, src_len, mel_len)
+                        log_duration_output, log_D, f0_output, f0, energy_output, energy, mel_output, mel_postnet_output, mel_target, ~src_mask, ~mel_mask)
                 
                 d_l.append(d_loss.item())
                 f_l.append(f_loss.item())
@@ -76,28 +77,32 @@ def evaluate(model, step, vocoder=None):
                 if vocoder is not None:
                     # Run vocoding and plotting spectrogram only when the vocoder is defined
                     for k in range(len(mel_target)):
-                        length = mel_len[k]
+                        basename = id_[k]
+                        gt_length = mel_len[k]
+                        out_length = out_mel_len[k]
                         
-                        mel_target_torch = mel_target[k:k+1, :length].transpose(1, 2).detach()
-                        mel_target_ = mel_target[k, :length].cpu().transpose(0, 1).detach()
+                        mel_target_torch = mel_target[k:k+1, :gt_length].transpose(1, 2).detach()
+                        mel_target_ = mel_target[k, :gt_length].cpu().transpose(0, 1).detach()
                         
-                        mel_postnet_torch = mel_postnet_output[k:k+1, :length].transpose(1, 2).detach()
-                        mel_postnet = mel_postnet_output[k, :length].cpu().transpose(0, 1).detach()
+                        mel_postnet_torch = mel_postnet_output[k:k+1, :out_length].transpose(1, 2).detach()
+                        mel_postnet = mel_postnet_output[k, :out_length].cpu().transpose(0, 1).detach()
                         
                         if hp.vocoder == 'melgan':
-                            utils.melgan_infer(mel_target_torch, vocoder, os.path.join(hp.eval_path, 'ground-truth_{}_{}.wav'.format(idx, hp.vocoder)))
-                            utils.melgan_infer(mel_postnet_torch, vocoder, os.path.join(hp.eval_path, 'eval_{}_{}.wav'.format(idx, hp.vocoder)))
+                            utils.melgan_infer(mel_target_torch, vocoder, os.path.join(hp.eval_path, 'ground-truth_{}_{}.wav'.format(basename, hp.vocoder)))
+                            utils.melgan_infer(mel_postnet_torch, vocoder, os.path.join(hp.eval_path, 'eval_{}_{}.wav'.format(basename, hp.vocoder)))
                         elif hp.vocoder == 'waveglow':
-                            utils.waveglow_infer(mel_target_torch, vocoder, os.path.join(hp.eval_path, 'ground-truth_{}_{}.wav'.format(idx, hp.vocoder)))
-                            utils.waveglow_infer(mel_postnet_torch, vocoder, os.path.join(hp.eval_path, 'eval_{}_{}.wav'.format(idx, hp.vocoder)))
+                            utils.waveglow_infer(mel_target_torch, vocoder, os.path.join(hp.eval_path, 'ground-truth_{}_{}.wav'.format(basename, hp.vocoder)))
+                            utils.waveglow_infer(mel_postnet_torch, vocoder, os.path.join(hp.eval_path, 'eval_{}_{}.wav'.format(basename, hp.vocoder)))
         
-                        f0_ = f0[k, :length].detach().cpu().numpy()
-                        energy_ = energy[k, :length].detach().cpu().numpy()
-                        f0_output_ = f0_output[k, :length].detach().cpu().numpy()
-                        energy_output_ = energy_output[k, :length].detach().cpu().numpy()
+                        np.save(os.path.join(hp.eval_path, 'eval_{}_mel.npy'.format(basename)), mel_postnet.numpy())
+                        
+                        f0_ = f0[k, :gt_length].detach().cpu().numpy()
+                        energy_ = energy[k, :gt_length].detach().cpu().numpy()
+                        f0_output_ = f0_output[k, :out_length].detach().cpu().numpy()
+                        energy_output_ = energy_output[k, :out_length].detach().cpu().numpy()
                         
                         utils.plot_data([(mel_postnet.numpy(), f0_output_, energy_output_), (mel_target_.numpy(), f0_, energy_)], 
-                            ['Synthesized Spectrogram', 'Ground-Truth Spectrogram'], filename=os.path.join(hp.eval_path, 'eval_{}.png'.format(idx)))
+                            ['Synthesized Spectrogram', 'Ground-Truth Spectrogram'], filename=os.path.join(hp.eval_path, 'eval_{}.png'.format(basename)))
                         idx += 1
                 
             current_step += 1            
@@ -157,5 +162,5 @@ if __name__ == "__main__":
         os.makedirs(hp.log_path)
     if not os.path.exists(hp.eval_path):
         os.makedirs(hp.eval_path)
-
+    
     evaluate(model, args.step, vocoder)

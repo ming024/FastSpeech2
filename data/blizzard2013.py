@@ -8,6 +8,7 @@ import pyworld as pw
 import torch
 import audio as Audio
 from utils import get_alignment
+from text import _clean_text
 import hparams as hp
 
 def prepare_align(in_dir):
@@ -18,6 +19,7 @@ def prepare_align(in_dir):
             if os.path.exists(wav_path):
                 text = re.sub(' +', ' ', re.sub(r'[#@|]', '', next(f).strip())).strip(' ')
                 text = re.sub(r'\s([?.!":,-;\'\"](?:\s|$))', r'\1', text)
+                text = _clean_text(text, hp.text_cleaners)
             
                 with open(os.path.join(in_dir, 'wavn', '{}.txt'.format(basename)), 'w') as f1:
                     f1.write(text)

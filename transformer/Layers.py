@@ -5,30 +5,7 @@ import numpy as np
 from collections import OrderedDict
 
 from transformer.SubLayers import MultiHeadAttention, PositionwiseFeedForward
-from text.symbols import symbols
 
-
-class Linear(nn.Module):
-    """
-    Linear Module
-    """
-
-    def __init__(self, in_dim, out_dim, bias=True, w_init='linear'):
-        """
-        :param in_dim: dimension of input
-        :param out_dim: dimension of output
-        :param bias: boolean. if True, bias is included.
-        :param w_init: str. weight inits with xavier initialization.
-        """
-        super(Linear, self).__init__()
-        self.linear_layer = nn.Linear(in_dim, out_dim, bias=bias)
-
-        nn.init.xavier_uniform_(
-            self.linear_layer.weight,
-            gain=nn.init.calculate_gain(w_init))
-
-    def forward(self, x):
-        return self.linear_layer(x)
 
 class FFTBlock(torch.nn.Module):
     """FFT Block"""
@@ -45,14 +22,13 @@ class FFTBlock(torch.nn.Module):
             n_head, d_model, d_k, d_v, dropout=dropout)
         self.pos_ffn = PositionwiseFeedForward(
             d_model, d_inner, dropout=dropout)
-
-    def forward(self, enc_input, non_pad_mask=None, slf_attn_mask=None):
+    def forward(self, enc_input, mask=None, slf_attn_mask=None):
         enc_output, enc_slf_attn = self.slf_attn(
             enc_input, enc_input, enc_input, mask=slf_attn_mask)
-        enc_output *= non_pad_mask
+        enc_output = enc_output.masked_fill(mask.unsqueeze(-1), 0)
 
         enc_output = self.pos_ffn(enc_output)
-        enc_output *= non_pad_mask
+        enc_output = enc_output.masked_fill(mask.unsqueeze(-1), 0)
 
         return enc_output, enc_slf_attn
 
@@ -80,9 +56,6 @@ class ConvNorm(torch.nn.Module):
                                     padding=padding,
                                     dilation=dilation,
                                     bias=bias)
-
-        torch.nn.init.xavier_uniform_(
-            self.conv.weight, gain=torch.nn.init.calculate_gain(w_init_gain))
 
     def forward(self, signal):
         conv_signal = self.conv(signal)

@@ -12,8 +12,10 @@ import os
 import text
 import hparams as hp
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 def get_alignment(tier):
-    sil_phones = ['sil', 'sp', 'spn', '']
+    sil_phones = ['sil', 'sp', 'spn']
 
     phones = []
     durations = []
@@ -24,17 +26,18 @@ def get_alignment(tier):
         s, e, p = t.start_time, t.end_time, t.text
 
         # Trimming leading silences
-        if phones == [] and p in sil_phones:
-            start_time = e
-            continue
-        else:
-            if p not in sil_phones:
-                phones.append(p)
-                end_time = e
-                end_idx = len(phones)
+        if phones == []:
+            if p in sil_phones:
+                continue
             else:
-                phones.append('$')
-            durations.append(int(e*hp.sampling_rate/hp.hop_length)-int(s*hp.sampling_rate/hp.hop_length))
+                start_time = s
+        if p not in sil_phones:
+            phones.append(p)
+            end_time = e
+            end_idx = len(phones)
+        else:
+            phones.append(p)
+        durations.append(int(e*hp.sampling_rate/hp.hop_length)-int(s*hp.sampling_rate/hp.hop_length))
 
     # Trimming tailing silences
     phones = phones[:end_idx]
@@ -94,11 +97,12 @@ def plot_data(data, titles=None, filename=None):
     plt.close()
 
 def get_mask_from_lengths(lengths, max_len=None):
-    if max_len == None:
+    batch_size = lengths.shape[0]
+    if max_len is None:
         max_len = torch.max(lengths).item()
 
-    ids = torch.arange(0, max_len, out=torch.cuda.LongTensor(max_len))
-    mask = (ids < lengths.unsqueeze(1)).byte()
+    ids = torch.arange(0, max_len).unsqueeze(0).expand(batch_size, -1).to(device)
+    mask = (ids >= lengths.unsqueeze(1).expand(-1, max_len))
 
     return mask
 
@@ -181,6 +185,3 @@ def pad(input_ele, mel_max_length=None):
         out_list.append(one_batch_padded)
     out_padded = torch.stack(out_list)
     return out_padded
-    mel = mel[0].cpu().numpy()
-
-    return mel, cemb, D

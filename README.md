@@ -1,6 +1,6 @@
 # FastSpeech 2 - Pytorch Implementation
 
-This is a Pytorch implementation of Microsoft's text-to-speech system [**FastSpeech 2: Fast and High-Quality End-to-End Text to Speech**](https://arxiv.org/abs/2006.04558). This project is based on [xcmyz's implementation](https://github.com/xcmyz/FastSpeech) of FastSpeech. Feel free to use/modify the code. Any improvement suggestion is appreciated.
+This is a Pytorch implementation of Microsoft's text-to-speech system [**FastSpeech 2: Fast and High-Quality End-to-End Text to Speech**](https://arxiv.org/abs/2006.04558). This project is based on [xcmyz's implementation](https://github.com/xcmyz/FastSpeech) of FastSpeech. Feel free to use/modify the code. Any suggestion for improvement is appreciated.
 
 This repository contains only FastSpeech 2 but FastSpeech 2s so far. I will update it once I reproduce FastSpeech 2s, the end-to-end version of FastSpeech2, successfully.
 
@@ -23,11 +23,11 @@ Noticeably, because I use a new functionality ``torch.bucketize``, which is only
 pip3 install --pre torch==1.6.0.dev20200428 -f https://download.pytorch.org/whl/nightly/cu102/torch_nightly.html
 ```
 
-Since PyTorch 1.6 is still unstable, I suggest that Python virtual environment should be used.
+Since PyTorch 1.6 is still unstable, it is suggested that Python virtual environment should be used.
 
 ## Synthesis
 
-You have to download our [FastSpeech2 pretrained model](https://drive.google.com/file/d/1jXNDPMt1ybTN97_MztoTFyrPIthoQuSO/view?usp=sharing) and then put it in the ``ckpt/LJSpeech/`` directory.
+You have to download our [FastSpeech2 pretrained model](https://drive.google.com/file/d/1jXNDPMt1ybTN97_MztoTFyrPIthoQuSO/view?usp=sharing) and put it in the ``ckpt/LJSpeech/`` directory.
 
 Your can run
 ```
@@ -43,7 +43,7 @@ Here is a generated spectrogram of the sentence "Printing, in the only sense wit
 ## Datasets
 This project supports two datasets:
 - [LJSpeech](https://keithito.com/LJ-Speech-Dataset/): consisting of 13100 short audio clips of a single female speaker reading passages from 7 non-fiction books, approximately 24 hours in total.
-- [Blizzard2013](http://www.cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/): a male speaker reading 10 audio books. The prosody variance are greater than the LJSpeech dataset. Only the 9741 segmented utterances are used in this project.
+- [Blizzard2013](http://www.cstr.ed.ac.uk/projects/blizzard/2013/lessac_blizzard2013/): a female speaker reading 10 audio books. The prosody variance are greater than the LJSpeech dataset. Only the 9741 segmented utterances are used in this project.
 
 After downloading the dataset, extract the compressed files, you have to modify the ``hp.data_path`` and some other parameters in ``hparams.py``. Default parameters are for the LJSpeech dataset.
 
@@ -51,7 +51,7 @@ After downloading the dataset, extract the compressed files, you have to modify 
 
 As described in the paper, [Montreal Forced Aligner](https://montreal-forced-aligner.readthedocs.io/en/latest/)(MFA) is used to obtain the alignments between the utterances and the phoneme sequences. Alignments for the LJSpeech dataset is provided [here](https://drive.google.com/file/d/1ukb8o-SnqhXCxq7drI3zye3tZdrGvQDA/view?usp=sharing). You have to put the ``TextGrid.zip`` file in your ``hp.preprocessed_path/`` and extract the files before you continue.
 
-Then run the preprocessing sctipt by
+After that, run the preprocessing script by
 ```
 python3 preprocess.py
 ```
@@ -73,16 +73,16 @@ python3 prepare_align.py
 
 Running MFA and put the .TextGrid files in your ``hp.preprocessed_path``.
 ```
-# Replace $DATA_PATH and $PREPROCESSED_PATH with ./LJSpeech-1.1 and ./preprocessed/LJSpeech/TextGrid, for example
+# Replace $DATA_PATH and $PREPROCESSED_PATH with ./LJSpeech-1.1/wavs and ./preprocessed/LJSpeech/TextGrid, for example
 ./montreal-forced-aligner/bin/mfa_align $YOUR_DATA_PATH montreal-forced-aligner/pretrained_models/librispeech-lexicon.txt english $YOUR_PREPROCESSED_PATH -j 8
 ```
 
-Remember to run the preprocessing sctipt.
+Remember to run the preprocessing script.
 ```
 python3 preprocess.py
 ```
 
-After preprocessing, you will get a ``stat.txt`` file in your ``hp.preprocessed_path/``, recording the maximum and minimum values of the fundamental frequency and energy values in the entire corpus. You have to modify the f0 and energy parameters in the ``hparams.py`` according to the content of ``stat.txt``.
+After preprocessing, you will get a ``stat.txt`` file in your ``hp.preprocessed_path/``, recording the maximum and minimum values of the fundamental frequency and energy values throughout the entire corpus. You have to modify the f0 and energy parameters in the ``hparams.py`` according to the content of ``stat.txt``.
 
 ## Training
 
@@ -93,7 +93,7 @@ python3 train.py
 
 The model takes less than 10k steps (less than 1 hour on my GTX1080 GPU) of training to generate audio samples with acceptable quality, which is much more efficient than the autoregressive models such as Tacotron2.
 
-There might be some room for improvement for this repository. For example, I just simply add up the duration loss, f0 loss, energy loss and mel loss without any weighting. Please inform me if you find any useful tip for training the FastSpeech2 model.
+There might be some room for improvement for this repository. For example, I just simply add up the duration loss, f0 loss, energy loss and mel loss without any weighting.
 
 # TensorBoard
 
@@ -101,28 +101,31 @@ The TensorBoard loggers are stored in the ``log/hp.dataset/`` directory. Use
 ```
 tensorboard --logdir log/hp.dataset/
 ```
-to serve the TensorBoard on your localhost. Here is an example training the model on LJSpeech for 750k steps.
+to serve the TensorBoard on your localhost. Here is an example training the model on LJSpeech for 400k steps.
 
 ![](./tensorboard.png)
-
-There is a great gap between the training and validation mel loss since we does not use ground-truth enery and pitch labels when evaluating the model on the validation set.
 
 # Notes
 
 ## Implementation Issues
 
 There are several differences between my implementation and the paper.
-- The paper includes punctuations in the transcripts. However, MFA discards puntuations by default and I haven't found a way to solve it.
+- The paper includes punctuations in the transcripts. However, MFA discards puntuations by default and I haven't found a way to solve it. During inference, I replace all puntuations with the ``sp`` (short-pause) phone labels.
 - Following [xcmyz's implementation](https://github.com/xcmyz/FastSpeech), I use an additional Tacotron-2-styled postnet after the FastSpeech decoder, which is not used in the original paper.
-- The [transformer paper](https://arxiv.org/abs/1706.03762) suggests to use dropout after the input and positional embedding. I haven't try it yet.
+- The [transformer paper](https://arxiv.org/abs/1706.03762) suggests to use dropout after the input and positional embedding. I find that this trick does not make any observable difference so I do not use dropout for potitional embedding.
 - The paper suggest to use L1 loss for mel loss and L2 loss for variance predictor losses. But I find it easier to train the model with L2 mel loss and L1 variance adaptor losses, for unknown reason.
-- The paper suggests that the duration is predicted in logrithmic domain, while in my implementation the duration prediction and loss is computed in linear domain.
-- I use gradient clipping and weigth decay in the training.
+- I use gradient clipping in the training.
+
+Some tips for training this model.
+- You can set the ``hp.acc_steps`` paremeter if you wish to train with a large batchsize on a GPU with limited memory.
+- In my experience, carefully masking out the padded parts in loss computation and in model forward parts can largely improve the performance.
+
+Please inform me if you find any mistake in this repo, or any useful tip to train the FastSpeech2 model.
 
 ## TODO
 - Try difference weights for the loss terms.
 - Evaluate the quality of the synthesized audio over the validation set.
-- Find the difference between the F0 & energy predicted by the variance predictors and the F0 & energy of the synthesized utterance measured by PyWorld Vocoder.
+- Multi-speaker or transfer learning experiment.
 - Implement FastSpeech 2s.
 
 # References

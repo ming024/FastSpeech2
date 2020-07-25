@@ -6,6 +6,7 @@ import pyworld as pw
 import torch
 import audio as Audio
 from utils import get_alignment
+from text import _clean_text
 import hparams as hp
 
 def prepare_align(in_dir):
@@ -14,6 +15,7 @@ def prepare_align(in_dir):
             parts = line.strip().split('|')
             basename = parts[0]
             text = parts[2]
+            text = _clean_text(text, hp.text_cleaners)
             
             with open(os.path.join(in_dir, 'wavs', '{}.txt'.format(basename)), 'w') as f1:
                 f1.write(text)
@@ -25,7 +27,6 @@ def build_from_path(in_dir, out_dir):
     f0_max = energy_max = 0
     f0_min = energy_min = 1000000
     n_frames = 0
-    
     with open(os.path.join(in_dir, 'metadata.csv'), encoding='utf-8') as f:
         for line in f:
             parts = line.strip().split('|')
@@ -52,7 +53,7 @@ def build_from_path(in_dir, out_dir):
             energy_max = max(energy_max, e_max)
             energy_min = min(energy_min, e_min)
             n_frames += n
-
+    
     with open(os.path.join(out_dir, 'stat.txt'), 'w', encoding='utf-8') as f:
         strs = ['Total time: {} hours'.format(n_frames*hp.hop_length/hp.sampling_rate/3600),
                 'Total frames: {}'.format(n_frames),
@@ -63,7 +64,7 @@ def build_from_path(in_dir, out_dir):
         for s in strs:
             print(s)
             f.write(s+'\n')
-
+    
     return [r for r in train if r is not None], [r for r in val if r is not None]
 
 def process_utterance(in_dir, out_dir, basename):
@@ -110,5 +111,5 @@ def process_utterance(in_dir, out_dir, basename):
     # Save spectrogram
     mel_filename = '{}-mel-{}.npy'.format(hp.dataset, basename)
     np.save(os.path.join(out_dir, 'mel', mel_filename), mel_spectrogram.T, allow_pickle=False)
-    
+ 
     return '|'.join([basename, text]), max(f0), min([f for f in f0 if f != 0]), max(energy), min(energy), mel_spectrogram.shape[1]
