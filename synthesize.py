@@ -40,6 +40,8 @@ def get_FastSpeech2(num):
     return model
 
 def synthesize(model, waveglow, melgan, text, sentence, prefix=''):
+    sentence = sentence[:200] # long filename will result in OS Error
+    
     src_len = torch.from_numpy(np.array([text.shape[1]])).to(device)
         
     mel, mel_postnet, log_duration_output, f0_output, energy_output, _, _, mel_len = model(text, src_len)
@@ -70,6 +72,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     sentences = [
+        "Advanced text to speech models such as Fast Speech can synthesize speech significantly faster than previous auto regressive models with comparable quality. The training of Fast Speech model relies on an auto regressive teacher model for duration prediction and knowledge distillation, which can ease the one to many mapping problem in T T S. However, Fast Speech has several disadvantages, 1, the teacher student distillation pipeline is complicated, 2, the duration extracted from the teacher model is not accurate enough, and the target mel spectrograms distilled from teacher model suffer from information loss due to data simplification, both of which limit the voice quality.",
         "Printing, in the only sense with which we are at present concerned, differs from most if not from all the arts and crafts represented in the Exhibition",
         "in being comparatively modern.",
         "For although the Chinese took impressions from wood blocks engraved in relief for centuries before the woodcutters of the Netherlands, by a similar process",

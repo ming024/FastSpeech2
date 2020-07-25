@@ -64,7 +64,10 @@ class Encoder(nn.Module):
         slf_attn_mask = mask.unsqueeze(1).expand(-1, max_len, -1)
 
         # -- Forward
-        enc_output = self.src_word_emb(src_seq) + self.position_enc[:, :max_len, :].expand(batch_size, -1, -1)
+        if not self.training and src_seq.shape[1] > hp.max_seq_len:
+            enc_output = self.src_word_emb(src_seq) + get_sinusoid_encoding_table(src_seq.shape[1], hp.encoder_hidden)[:src_seq.shape[1], :].unsqueeze(0).expand(batch_size, -1, -1).to(src_seq.device)
+        else:
+            enc_output = self.src_word_emb(src_seq) + self.position_enc[:, :max_len, :].expand(batch_size, -1, -1)
 
         for enc_layer in self.layer_stack:
             enc_output, enc_slf_attn = enc_layer(
@@ -110,7 +113,10 @@ class Decoder(nn.Module):
         slf_attn_mask = mask.unsqueeze(1).expand(-1, max_len, -1)
 
         # -- Forward
-        dec_output = enc_seq + self.position_enc[:, :max_len, :].expand(batch_size, -1, -1)
+        if not self.training and enc_seq.shape[1] > hp.max_seq_len:
+            dec_output = enc_seq + get_sinusoid_encoding_table(enc_seq.shape[1], hp.decoder_hidden)[:enc_seq.shape[1], :].unsqueeze(0).expand(batch_size, -1, -1).to(enc_seq.device)
+        else:
+            dec_output = enc_seq + self.position_enc[:, :max_len, :].expand(batch_size, -1, -1)
 
         for dec_layer in self.layer_stack:
             dec_output, dec_slf_attn = dec_layer(
