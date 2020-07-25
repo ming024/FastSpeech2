@@ -38,6 +38,8 @@ to generate any utterances you wish to. The generated utterances will be put in 
 Here is a generated spectrogram of the sentence "Printing, in the only sense with which we are at present concerned, differs from most if not from all the arts and crafts represented in the Exhibition"  
 ![](./synth/LJSpeech/step_300000.png)
 
+For CPU inference please refer to this [colab tutorial](https://colab.research.google.com/drive/1S60pytpB1OcEFrd-SkYyjtBsBHYepRSG?usp=sharing). One has to clone the original repo of [MelGAN](https://github.com/seungwonpark/melgan) instead of using ``torch.hub`` due to the code architecture of MelGAN.
+
 # Training
 
 ## Datasets
