@@ -155,7 +155,6 @@ if __name__ == "__main__":
         vocoder = utils.get_melgan()
     elif hp.vocoder == 'waveglow':
         vocoder = utils.get_waveglow()
-    vocoder.to(device)
         
     # Init directories
     if not os.path.exists(hp.log_path):

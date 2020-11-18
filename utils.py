@@ -37,7 +37,7 @@ def get_alignment(tier):
             end_idx = len(phones)
         else:
             phones.append(p)
-        durations.append(int(e*hp.sampling_rate/hp.hop_length)-int(s*hp.sampling_rate/hp.hop_length))
+        durations.append(int(np.round(e*hp.sampling_rate/hp.hop_length)-np.round(s*hp.sampling_rate/hp.hop_length)))
 
     # Trimming tailing silences
     phones = phones[:end_idx]
@@ -92,7 +92,7 @@ def plot_data(data, titles=None, filename=None):
         ax2.set_ylabel('Energy', color='darkviolet')
         ax2.yaxis.set_label_position('right')
         ax2.tick_params(labelsize='x-small', colors='darkviolet', bottom=False, labelbottom=False, left=False, labelleft=False, right=True, labelright=True)
-    
+        
     plt.savefig(filename, dpi=200)
     plt.close()
 
@@ -113,6 +113,7 @@ def get_waveglow():
     for m in waveglow.modules():
         if 'Conv' in str(type(m)):
             setattr(m, 'padding_mode', 'zeros')
+    waveglow.to(device)
 
     return waveglow
 
@@ -132,6 +133,8 @@ def melgan_infer(mel, melgan, path):
 def get_melgan():
     melgan = torch.hub.load('seungwonpark/melgan', 'melgan')
     melgan.eval()
+    melgan.to(device)
+
     return melgan
 
 def pad_1D(inputs, PAD=0):

@@ -89,10 +89,8 @@ if __name__ == "__main__":
     melgan = waveglow = None
     if hp.vocoder == 'melgan':
         melgan = utils.get_melgan()
-        melgan.to(device)
     elif hp.vocoder == 'waveglow':
         waveglow = utils.get_waveglow()
-        waveglow.to(device)
     
     for sentence in sentences:
         text = preprocess(sentence)

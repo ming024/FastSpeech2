@@ -56,10 +56,8 @@ def main(args):
     # Load vocoder
     if hp.vocoder == 'melgan':
         melgan = utils.get_melgan()
-        melgan.to(device)
     elif hp.vocoder == 'waveglow':
         waveglow = utils.get_waveglow()
-        waveglow.to(device)
 
     # Init logger
     log_path = hp.log_path
