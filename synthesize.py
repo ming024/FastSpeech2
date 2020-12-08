@@ -39,12 +39,12 @@ def get_FastSpeech2(num):
     model.eval()
     return model
 
-def synthesize(model, waveglow, melgan, text, sentence, prefix=''):
+def synthesize(model, waveglow, melgan, text, sentence, prefix='', duration_control=1.0, pitch_control=1.0, energy_control=1.0):
     sentence = sentence[:200] # long filename will result in OS Error
     
     src_len = torch.from_numpy(np.array([text.shape[1]])).to(device)
         
-    mel, mel_postnet, log_duration_output, f0_output, energy_output, _, _, mel_len = model(text, src_len)
+    mel, mel_postnet, log_duration_output, f0_output, energy_output, _, _, mel_len = model(text, src_len, d_control=duration_control, p_control=pitch_control, e_control=energy_control)
     
     mel_torch = mel.transpose(1, 2).detach()
     mel_postnet_torch = mel_postnet.transpose(1, 2).detach()
@@ -69,6 +69,9 @@ if __name__ == "__main__":
     # Test
     parser = argparse.ArgumentParser()
     parser.add_argument('--step', type=int, default=30000)
+    parser.add_argument('--duration_control', type=float, default=1.0)
+    parser.add_argument('--pitch_control', type=float, default=1.0)
+    parser.add_argument('--energy_control', type=float, default=1.0)
     args = parser.parse_args()
     
     sentences = [
@@ -92,6 +95,7 @@ if __name__ == "__main__":
     elif hp.vocoder == 'waveglow':
         waveglow = utils.get_waveglow()
     
-    for sentence in sentences:
-        text = preprocess(sentence)
-        synthesize(model, waveglow, melgan, text, sentence, prefix='step_{}'.format(args.step))
+    with torch.no_grad():
+        for sentence in sentences:
+            text = preprocess(sentence)
+            synthesize(model, waveglow, melgan, text, sentence, 'step_{}'.format(args.step), args.duration_control, args.pitch_control, args.energy_control)

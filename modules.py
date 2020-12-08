@@ -26,18 +26,18 @@ class VarianceAdaptor(nn.Module):
         self.pitch_predictor = VariancePredictor()
         self.energy_predictor = VariancePredictor()
         
-        self.pitch_bins = nn.Parameter(torch.exp(torch.linspace(np.log(hp.f0_min), np.log(hp.f0_max), hp.n_bins-1)))
-        self.energy_bins = nn.Parameter(torch.linspace(hp.energy_min, hp.energy_max, hp.n_bins-1))
+        self.pitch_bins = nn.Parameter(torch.exp(torch.linspace(np.log(hp.f0_min), np.log(hp.f0_max), hp.n_bins-1)), requires_grad=False)
+        self.energy_bins = nn.Parameter(torch.linspace(hp.energy_min, hp.energy_max, hp.n_bins-1), requires_grad=False)
         self.pitch_embedding = nn.Embedding(hp.n_bins, hp.encoder_hidden)
         self.energy_embedding = nn.Embedding(hp.n_bins, hp.encoder_hidden)
     
-    def forward(self, x, src_mask, mel_mask=None, duration_target=None, pitch_target=None, energy_target=None, max_len=None):
+    def forward(self, x, src_mask, mel_mask=None, duration_target=None, pitch_target=None, energy_target=None, max_len=None, d_control=1.0, p_control=1.0, e_control=1.0):
 
         log_duration_prediction = self.duration_predictor(x, src_mask)
         if duration_target is not None:
             x, mel_len = self.length_regulator(x, duration_target, max_len)
         else:
-            duration_rounded = torch.clamp(torch.round(torch.exp(log_duration_prediction)-hp.log_offset), min=0)
+            duration_rounded = torch.clamp((torch.round(torch.exp(log_duration_prediction)-hp.log_offset)*d_control), min=0)
             x, mel_len = self.length_regulator(x, duration_rounded, max_len)
             mel_mask = utils.get_mask_from_lengths(mel_len)
         
@@ -45,12 +45,14 @@ class VarianceAdaptor(nn.Module):
         if pitch_target is not None:
             pitch_embedding = self.pitch_embedding(torch.bucketize(pitch_target, self.pitch_bins))
         else:
+            pitch_prediction = pitch_prediction*p_control
             pitch_embedding = self.pitch_embedding(torch.bucketize(pitch_prediction, self.pitch_bins))
         
         energy_prediction = self.energy_predictor(x, mel_mask)
         if energy_target is not None:
             energy_embedding = self.energy_embedding(torch.bucketize(energy_target, self.energy_bins))
         else:
+            energy_prediction = energy_prediction*e_control
             energy_embedding = self.energy_embedding(torch.bucketize(energy_prediction, self.energy_bins))
         
         x = x + pitch_embedding + energy_embedding
