@@ -132,7 +132,7 @@ Some tips for training this model.
 Please inform me if you find any mistake in this repo, or any useful tip to train the FastSpeech2 model.
 
 ## TODO
-- Try difference weights for the loss terms.
+- Try different weights for the loss terms.
 - Evaluate the quality of the synthesized audio over the validation set.
 - Multi-speaker, voice cloning, or transfer learning experiment.
 - Implement FastSpeech 2s.
