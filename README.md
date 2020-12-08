@@ -37,6 +37,13 @@ Here is a generated spectrogram of the sentence "Printing, in the only sense wit
 ![](./synth/LJSpeech/step_300000.png)
 
 For CPU inference please refer to this [colab tutorial](https://colab.research.google.com/drive/1S60pytpB1OcEFrd-SkYyjtBsBHYepRSG?usp=sharing). One has to clone the original repo of [MelGAN](https://github.com/seungwonpark/melgan) instead of using ``torch.hub`` due to the code architecture of MelGAN.
+## Controllability
+The duration/pitch/energy of the synthesized utterances can be modified by specifying the desired duration/pitch/energy ratio to the predicted values.
+For example, one can increase the speaking rate by 20 % and decrease the volume by 20 % by
+
+```
+python3 synthesis.py --step 300000 --duration_control 0.8 --energy_control 0.8
+```
 
 # Training
 
