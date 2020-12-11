@@ -1,3 +1,8 @@
+import hparams as hp
+import text
+import os
+from scipy.io import wavfile
+from matplotlib import pyplot as plt
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -5,14 +10,10 @@ import numpy as np
 import matplotlib
 import matplotlib
 matplotlib.use("Agg")
-from matplotlib import pyplot as plt
-from scipy.io import wavfile
-import os
 
-import text
-import hparams as hp
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 
 def get_alignment(tier):
     sil_phones = ['sil', 'sp', 'spn']
@@ -37,13 +38,15 @@ def get_alignment(tier):
             end_idx = len(phones)
         else:
             phones.append(p)
-        durations.append(int(np.round(e*hp.sampling_rate/hp.hop_length)-np.round(s*hp.sampling_rate/hp.hop_length)))
+        durations.append(int(np.round(
+            e*hp.sampling_rate/hp.hop_length)-np.round(s*hp.sampling_rate/hp.hop_length)))
 
     # Trimming tailing silences
     phones = phones[:end_idx]
     durations = durations[:end_idx]
-    
+
     return phones, durations, start_time, end_time
+
 
 def process_meta(meta_path):
     with open(meta_path, "r", encoding="utf-8") as f:
@@ -55,9 +58,11 @@ def process_meta(meta_path):
             text.append(t)
         return name, text
 
+
 def get_param_num(model):
     num_param = sum(param.numel() for param in model.parameters())
     return num_param
+
 
 def plot_data(data, titles=None, filename=None):
     fig, axes = plt.subplots(len(data), 1, squeeze=False)
@@ -75,39 +80,46 @@ def plot_data(data, titles=None, filename=None):
         axes[i][0].set_aspect(2.5, adjustable='box')
         axes[i][0].set_ylim(0, hp.n_mel_channels)
         axes[i][0].set_title(titles[i], fontsize='medium')
-        axes[i][0].tick_params(labelsize='x-small', left=False, labelleft=False) 
+        axes[i][0].tick_params(labelsize='x-small',
+                               left=False, labelleft=False)
         axes[i][0].set_anchor('W')
-        
+
         ax1 = add_axis(fig, axes[i][0])
         ax1.plot(pitch, color='tomato')
         ax1.set_xlim(0, spectrogram.shape[1])
         ax1.set_ylim(0, hp.f0_max)
         ax1.set_ylabel('F0', color='tomato')
-        ax1.tick_params(labelsize='x-small', colors='tomato', bottom=False, labelbottom=False)
-        
+        ax1.tick_params(labelsize='x-small', colors='tomato',
+                        bottom=False, labelbottom=False)
+
         ax2 = add_axis(fig, axes[i][0], 1.2)
         ax2.plot(energy, color='darkviolet')
         ax2.set_xlim(0, spectrogram.shape[1])
         ax2.set_ylim(hp.energy_min, hp.energy_max)
         ax2.set_ylabel('Energy', color='darkviolet')
         ax2.yaxis.set_label_position('right')
-        ax2.tick_params(labelsize='x-small', colors='darkviolet', bottom=False, labelbottom=False, left=False, labelleft=False, right=True, labelright=True)
-        
+        ax2.tick_params(labelsize='x-small', colors='darkviolet', bottom=False,
+                        labelbottom=False, left=False, labelleft=False, right=True, labelright=True)
+
     plt.savefig(filename, dpi=200)
     plt.close()
+
 
 def get_mask_from_lengths(lengths, max_len=None):
     batch_size = lengths.shape[0]
     if max_len is None:
         max_len = torch.max(lengths).item()
 
-    ids = torch.arange(0, max_len).unsqueeze(0).expand(batch_size, -1).to(device)
+    ids = torch.arange(0, max_len).unsqueeze(
+        0).expand(batch_size, -1).to(device)
     mask = (ids >= lengths.unsqueeze(1).expand(-1, max_len))
 
     return mask
 
+
 def get_waveglow():
-    waveglow = torch.hub.load('nvidia/DeepLearningExamples:torchhub', 'nvidia_waveglow')
+    waveglow = torch.hub.load(
+        'nvidia/DeepLearningExamples:torchhub', 'nvidia_waveglow')
     waveglow = waveglow.remove_weightnorm(waveglow)
     waveglow.eval()
     for m in waveglow.modules():
@@ -117,6 +129,7 @@ def get_waveglow():
 
     return waveglow
 
+
 def waveglow_infer(mel, waveglow, path):
     with torch.no_grad():
         wav = waveglow.infer(mel, sigma=1.0) * hp.max_wav_value
@@ -124,11 +137,13 @@ def waveglow_infer(mel, waveglow, path):
     wav = wav.astype('int16')
     wavfile.write(path, hp.sampling_rate, wav)
 
+
 def melgan_infer(mel, melgan, path):
     with torch.no_grad():
         wav = melgan.inference(mel).cpu().numpy()
     wav = wav.astype('int16')
     wavfile.write(path, hp.sampling_rate, wav)
+
 
 def get_melgan():
     melgan = torch.hub.load('seungwonpark/melgan', 'melgan')
@@ -136,6 +151,7 @@ def get_melgan():
     melgan.to(device)
 
     return melgan
+
 
 def pad_1D(inputs, PAD=0):
 
@@ -149,6 +165,7 @@ def pad_1D(inputs, PAD=0):
     padded = np.stack([pad_data(x, max_len, PAD) for x in inputs])
 
     return padded
+
 
 def pad_2D(inputs, maxlen=None):
 
@@ -170,6 +187,7 @@ def pad_2D(inputs, maxlen=None):
         output = np.stack([pad(x, max_len) for x in inputs])
 
     return output
+
 
 def pad(input_ele, mel_max_length=None):
     if mel_max_length:

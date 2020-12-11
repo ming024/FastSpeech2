@@ -7,6 +7,7 @@ from transformer.Layers import FFTBlock
 from text.symbols import symbols
 import hparams as hp
 
+
 def get_sinusoid_encoding_table(n_position, d_hid, padding_idx=None):
     ''' Sinusoid position encoding table '''
 
@@ -25,7 +26,7 @@ def get_sinusoid_encoding_table(n_position, d_hid, padding_idx=None):
     if padding_idx is not None:
         # zero vector for padding dimension
         sinusoid_table[padding_idx] = 0.
-    
+
     return torch.FloatTensor(sinusoid_table)
 
 
@@ -48,7 +49,8 @@ class Encoder(nn.Module):
 
         n_position = len_max_seq + 1
 
-        self.src_word_emb = nn.Embedding(n_src_vocab, d_word_vec, padding_idx=Constants.PAD)
+        self.src_word_emb = nn.Embedding(
+            n_src_vocab, d_word_vec, padding_idx=Constants.PAD)
         self.position_enc = nn.Parameter(
             get_sinusoid_encoding_table(n_position, d_word_vec).unsqueeze(0), requires_grad=False)
 
@@ -59,15 +61,17 @@ class Encoder(nn.Module):
 
         enc_slf_attn_list = []
         batch_size, max_len = src_seq.shape[0], src_seq.shape[1]
-        
+
         # -- Prepare masks
         slf_attn_mask = mask.unsqueeze(1).expand(-1, max_len, -1)
 
         # -- Forward
         if not self.training and src_seq.shape[1] > hp.max_seq_len:
-            enc_output = self.src_word_emb(src_seq) + get_sinusoid_encoding_table(src_seq.shape[1], hp.encoder_hidden)[:src_seq.shape[1], :].unsqueeze(0).expand(batch_size, -1, -1).to(src_seq.device)
+            enc_output = self.src_word_emb(src_seq) + get_sinusoid_encoding_table(src_seq.shape[1], hp.encoder_hidden)[
+                :src_seq.shape[1], :].unsqueeze(0).expand(batch_size, -1, -1).to(src_seq.device)
         else:
-            enc_output = self.src_word_emb(src_seq) + self.position_enc[:, :max_len, :].expand(batch_size, -1, -1)
+            enc_output = self.src_word_emb(
+                src_seq) + self.position_enc[:, :max_len, :].expand(batch_size, -1, -1)
 
         for enc_layer in self.layer_stack:
             enc_output, enc_slf_attn = enc_layer(
@@ -114,9 +118,11 @@ class Decoder(nn.Module):
 
         # -- Forward
         if not self.training and enc_seq.shape[1] > hp.max_seq_len:
-            dec_output = enc_seq + get_sinusoid_encoding_table(enc_seq.shape[1], hp.decoder_hidden)[:enc_seq.shape[1], :].unsqueeze(0).expand(batch_size, -1, -1).to(enc_seq.device)
+            dec_output = enc_seq + get_sinusoid_encoding_table(enc_seq.shape[1], hp.decoder_hidden)[
+                :enc_seq.shape[1], :].unsqueeze(0).expand(batch_size, -1, -1).to(enc_seq.device)
         else:
-            dec_output = enc_seq + self.position_enc[:, :max_len, :].expand(batch_size, -1, -1)
+            dec_output = enc_seq + \
+                self.position_enc[:, :max_len, :].expand(batch_size, -1, -1)
 
         for dec_layer in self.layer_stack:
             dec_output, dec_slf_attn = dec_layer(

@@ -4,6 +4,7 @@ from scipy.signal import get_window
 import librosa.util as librosa_util
 import hparams as hp
 
+
 def window_sumsquare(window, n_frames, hop_length=hp.hop_length, win_length=hp.win_length,
                      n_fft=hp.filter_length, dtype=np.float32, norm=None):
     """

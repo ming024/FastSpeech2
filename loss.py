@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import hparams as hp
 
+
 class FastSpeech2Loss(nn.Module):
     """ FastSpeech2 Loss """
 
@@ -15,7 +16,7 @@ class FastSpeech2Loss(nn.Module):
         p_target.requires_grad = False
         e_target.requires_grad = False
         mel_target.requires_grad = False
-        
+
         log_d_predicted = log_d_predicted.masked_select(src_mask)
         log_d_target = log_d_target.masked_select(src_mask)
         p_predicted = p_predicted.masked_select(mel_mask)
@@ -33,5 +34,5 @@ class FastSpeech2Loss(nn.Module):
         d_loss = self.mae_loss(log_d_predicted, log_d_target)
         p_loss = self.mae_loss(p_predicted, p_target)
         e_loss = self.mae_loss(e_predicted, e_target)
-        
+
         return mel_loss, mel_postnet_loss, d_loss, p_loss, e_loss

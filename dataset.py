@@ -15,7 +15,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 class Dataset(Dataset):
     def __init__(self, filename="train.txt", sort=True):
-        self.basename, self.text = process_meta(os.path.join(hparams.preprocessed_path, filename))
+        self.basename, self.text = process_meta(
+            os.path.join(hparams.preprocessed_path, filename))
         self.sort = sort
 
     def __len__(self):
@@ -36,7 +37,7 @@ class Dataset(Dataset):
         energy_path = os.path.join(
             hparams.preprocessed_path, "energy", "{}-energy-{}.npy".format(hparams.dataset, basename))
         energy = np.load(energy_path)
-        
+
         sample = {"id": basename,
                   "text": phone,
                   "mel_target": mel_target,
@@ -63,7 +64,7 @@ class Dataset(Dataset):
         length_mel = np.array(list())
         for mel in mel_targets:
             length_mel = np.append(length_mel, mel.shape[0])
-        
+
         texts = pad_1D(texts)
         Ds = pad_1D(Ds)
         mel_targets = pad_2D(mel_targets)
@@ -80,7 +81,7 @@ class Dataset(Dataset):
                "energy": energies,
                "src_len": length_text,
                "mel_len": length_mel}
-        
+
         return out
 
     def collate_fn(self, batch):
@@ -92,21 +93,24 @@ class Dataset(Dataset):
         cut_list = list()
         for i in range(real_batchsize):
             if self.sort:
-                cut_list.append(index_arr[i*real_batchsize:(i+1)*real_batchsize])
+                cut_list.append(
+                    index_arr[i*real_batchsize:(i+1)*real_batchsize])
             else:
-                cut_list.append(np.arange(i*real_batchsize, (i+1)*real_batchsize))
-        
+                cut_list.append(
+                    np.arange(i*real_batchsize, (i+1)*real_batchsize))
+
         output = list()
         for i in range(real_batchsize):
             output.append(self.reprocess(batch, cut_list[i]))
 
         return output
 
+
 if __name__ == "__main__":
     # Test
     dataset = Dataset('val.txt')
     training_loader = DataLoader(dataset, batch_size=1, shuffle=False, collate_fn=dataset.collate_fn,
-        drop_last=True, num_workers=0)
+                                 drop_last=True, num_workers=0)
     total_step = hparams.epochs * len(training_loader) * hparams.batch_size
 
     cnt = 0

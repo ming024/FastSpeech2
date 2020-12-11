@@ -85,7 +85,7 @@ weight_decay = 0.
 
 
 # Vocoder
-vocoder = 'melgan' # 'waveglow' or 'melgan'
+vocoder = 'melgan'  # 'waveglow' or 'melgan'
 
 
 # Log-scaled duration
