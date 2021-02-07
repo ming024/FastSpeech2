@@ -1,0 +1,100 @@
+TT_story_0001|{h ong1 l ong5 y i4 sh eng1 sp t uo1 m a3 s ii1 z ai4 zh uan2 j iao3 ch u4 ch ong1 ch u1 l e5 t ie2 g uei3 sp}|轰隆一声，托马斯在转角处冲出了铁轨。
+TT_story_0002|{y i4 g u2 k e3 p a4 d e5 ch ou4 w uei4 m i2 m an4 er2 l ai2 sp}|一股可怕的臭味弥漫而来。
+TT_story_0003|{t i2 m u3 z ai4 k u4 z ii5 sh ang4 c eng4 l e5 c eng4 zh an1 m an3 l e5 n i2 t u3 d e5 sh ou3 sp b a3 d i4 t u2 d i4 g ei3 l e5 m i3 l i4 sp}|提姆在裤子上蹭了蹭沾满了泥土的手，把地图递给了米丽。
+TT_story_0004|{n i2 k eng1 l i3 m ian4 j in4 sh iii4 l an4 n i2 sp n u2 n i2 y iou4 f an1 g en1 t ou5 y iou4 d a2 g uen3 sp w uan2 r l e5 b an4 t ian1 c ai2 p a2 q i3 sp}|泥坑里面尽是烂泥，奴尼又翻跟头又打滚，玩儿了半天才爬起。
+TT_story_0005|{p u2 t ao5 y ia2 m u3 y ia1 l i4 k e4 f an1 q i3 sh en1 sp f an1 q i3 sh en1 sh iii2 b a3 x iao2 n iao3 y ia1 d e5 t ou4 b u2 g uo4 q i4 l ai2 sp}|葡萄牙母鸭立刻翻起身，翻起身时把小鸟压得透不过气来。
+TT_story_0006|{x iao2 k ai3 y i1 z ai4 g uang2 ch ang3 sh ang4 h ua2 x ve3 q iao1 sp t a1 y ve4 h ua2 y ve4 k uai4 sp y i4 zh iii2 h ua2 ch u1 l e5 ch eng2 m en2 sp}|小凯伊在广场上滑雪橇，他越滑越快，一直滑出了城门。
+TT_story_0007|{t a1 m en5 m ing2 b ai5 l e5 sp n a4 zh ong1 sh eng1 j iou4 sh iii4 l ai2 z ii4 n ei4 x in1 d e5 x in4 n ian4 sp l ai2 z ii4 y v2 b u2 d uan4 d e5 zh uei1 q iou2 sp}|他们明白了：那钟声就是来自内心的信念、来自于不断的追求。
+TT_story_0008|{y i4 s ii5 sh iii4 sh uo1 sp w uo3 y iao4 ch ong1 p o4 w uan4 l i3 d e5 b o1 l a4 sp q v4 ch uang4 z ao4 y i4 f an1 w uei3 d a4 d e5 sh iii4 y ie4 sp}|意思是说，我要冲破万里的波蜡，去创造一番伟大的事业。
+TT_story_0009|{r en2 m en5 d e5 zh ong2 zh ong3 q ing2 x v4 sp w uang2 w uang3 j iou4 sh iii4 z ii4 w uo3 h e2 ch ao1 w uo3 d e5 p ing2 h eng2 sh ang4 d e5 sh iii1 t iao2 sp}|人们的种种情绪，往往就是自我和超我的平衡上的失调。
+TT_story_0010|{h ua1 w ua4 z ii5 x vn4 s u4 j ian2 q i3 n ao4 zh ong1 f ei1 h uei2 j ia1 sp n ing2 j in3 l uo2 s ii1 x in1 sh ang2 q i3 y in1 y ve4 l ai5 sp}|花袜子迅速捡起闹钟飞回家，拧紧螺丝欣赏起音乐来。
+TT_story_0011|{k e3 b u2 sh iii4 b ie2 r en5 b u4 g ei3 t a1 t ie1 t ie1 zh iii3 o5 sp sh iii4 y in1 w uei4 t ie1 zh iii3 g en1 b en3 t ie1 b u2 zh u4 sp}|可不是别人不给她贴贴纸哦，是因为贴纸根本贴不住。
+TT_story_0012|{zh ang1 y v2 q v4 n ao2 k a1 c a1 k a1 c a1 w u3 zh e5 d a4 q ian2 z ii5 d e5 p ang2 x ie4 sp f an1 g e5 g en1 t ou5 sp d ie1 j in4 sh a1 z ii5 l i3 sp}|章鱼去挠喀嚓喀嚓舞着大钳子的螃蟹，翻个跟头，跌进沙子里。
+TT_story_0013|{t a1 d uo1 d uo5 s uo1 s uo1 d e5 z ou3 zh e5 sp y i4 t ou2 j in1 h uang2 j van3 q v1 d e5 t ou2 f a4 sp s uei2 y i4 d e5 p i1 s an4 z ai4 j ian1 sh ang4 sp}|她哆哆嗦嗦地走着，一头金黄卷曲的头发，随意地披散在肩上。
+TT_story_0014|{y iong4 ch e1 y vn4 b a5 sp y i2 d an4 y v4 d ao4 k an2 k e3 b u4 p ing2 d e5 l u4 sp h uei4 j iang1 sh en2 x iang4 d ian1 b o1 h uai4 d e5 sp}|用车运吧，一旦遇到坎坷不平的路，会将神像颠簸坏的。
+TT_story_0015|{b a1 b a1 b u4 l ai2 t e4 t uo1 zh e5 ai4 l i4 s ii1 sp r ang4 b a1 b a1 l i4 b o1 z ai4 t a1 sh en1 sh ang4 s a2 sh uang3 sh en1 f en3 sp}|巴巴布莱特托着爱丽丝，让巴巴利波在她身上撒爽身粉。
+TT_story_0016|{z ai4 m ian4 b ao1 d ian4 l i3 sp w u1 y ia1 m a1 m a5 f u4 z e2 d a2 s ao3 d ian4 l i3 h e2 zh ao1 h u5 k e4 r en5 sp}|在面包店里，乌鸦妈妈负责打扫店里和招呼客人。
+TT_story_0017|{p ao2 z ii5 y i4 j ia1 zh eng4 z ai4 s en1 l in2 l i3 s an4 b u4 sp x iao3 p ao2 z ii5 h uan1 k uai4 d e5 d ao4 ch u4 b eng4 b eng4 t iao4 t iao4 sp}|狍子一家正在森林里散步，小狍子欢快地到处蹦蹦跳跳。
+TT_story_0018|{k e3 sh iii4 y ia1 z ii5 b a3 t ang1 sh ao2 b ao4 d e5 j in2 j in3 d e5 sp s ong1 sh u3 sh iii3 ch u1 q van2 b u4 d e5 l i4 q i5 p ing1 m ing4 l a5 sp}|可是鸭子把汤勺抱得紧紧的，松鼠使出全部的力气拼命拉。
+TT_story_0019|{sh iii4 f ei1 ch ang3 zh ong1 m ai4 y v2 m ai4 d ai1 m ai4 ch iii1 sp en1 y van4 r en2 j ian1 sh ao3 sh iii4 sh ao3 f ei1 sh ao3 x in1 sp}|是非场中卖愚卖呆卖痴，恩怨人间少是少非少心。
+TT_story_0020|{c ong2 q ian2 q ing1 p en2 d a4 y v3 r u2 t ian2 b u3 k ong4 q ve1 sp x ian4 z ai4 ai4 sh ang4 l e5 n i3 f ang3 f u2 sh iii4 q ing2 t ian1 sp}|从前倾盆大雨如填补空缺，现在爱上了你仿佛是晴天。
+TT_story_0021|{x iao3 sh u4 x iong2 y iong2 g an3 d e5 t ing2 t ing3 x iong1 sp w uo3 b u4 zh uen2 n i3 q i1 f u5 x iao3 t u4 z ii5 sp}|小树熊勇敢地挺挺胸：“我不准你欺负小兔子！”
+TT_story_0022|{w uo3 z uo2 m o5 y iao4 n uo2 d ao4 b u3 p iao4 n a4 l i3 y iou2 d ian3 r k uen4 n an5 sp}|我琢磨要挪到补票那里有点儿困难。
+TT_story_0023|{g en1 l i3 h uai2 l in2 l ian2 x i4 x ia4 sp g an2 j in3 ch u1 j ie2 g ou4 b iao3 sp n i3 m en5 zh eng3 t u2 t a1 zh eng2 b iao3 sp}|跟李怀林联系下，赶紧出结构表，你们整图他整表。
+TT_story_0024|{sh en4 zh iii4 l iang4 y i1 f u5 d ou1 y iou3 k uen4 n an5 sp j i2 sh iii3 e4 y v2 y i3 j ing1 x ve2 h uei4 l e5 z ou3 sh eng2 s uo3 sp}|甚至晾衣服都有困难，即使鳄鱼已经学会了走绳索。
+TT_story_0025|{y ve1 s e4 sh ou1 j i2 d e5 x iao3 sh iii2 t ou5 sp j iou4 y iong4 zh ei4 k uai4 r q i2 m iao4 d e5 sh ou3 p a4 b ao1 d e5 h ao3 h ao1 d e5 sp}|约瑟收集的小石头，就用这块儿奇妙的手帕包得好好的。
+TT_story_0026|{g u1 n iang5 d a3 k ai1 l e5 g uan1 g ai4 sp sh a4 n a4 j ian1 sp s uo2 y iou3 d e5 d ong1 x i5 h uei1 f u4 l e5 y van2 zh uang4 sp}|姑娘打开了棺盖，霎那间，所有的东西恢复了原状。
+TT_story_0027|{g ou3 zh ang1 zh e5 d a4 z uei3 ch ong4 w uo3 j iao4 sp q i4 ch e1 sh ua1 d e5 y i4 sh eng1 c ong2 w uo3 sh en1 b ian1 c a1 g uo4 sp}|狗张着大嘴冲我叫，汽车“刷”地一声从我身边擦过。
+TT_story_0028|{d a4 j ie3 sp x ia4 c ii4 n i2 m ai2 l iang3 g e5 g ua1 sp an2 k e3 j iou4 b u4 g ei3 s ong4 l ou5 sp}|大姐，下次你买两个瓜，俺可就不给送喽！
+TT_story_0029|{ch u2 f ei1 n i3 d ai4 w uo3 q v4 f u4 j in4 h ao3 w uan2 r d e5 d i4 f ang5 w uan2 r w uan2 r sp h ao3 b u5 sp}|除非你带我去附近好玩儿的地方玩儿玩儿，好不？
+TT_story_0030|{l iang2 w u3 d i4 h ao4 f o2 sp z ai4 zh uang1 sh iii4 s ii4 y van4 d e5 sh iii2 h ou4 sp r ang4 zh ang1 s eng1 y iao2 z uo4 b i4 h ua4 sp}|梁武帝好佛，在装饰寺院的时候，让张僧繇作壁画。
+TT_story_0031|{m i3 l i4 y ia1 d i1 s ang3 m en2 sp y iong4 sh uang1 sh ou3 b a1 k ai1 y i2 c u4 h ou4 h ou4 d e5 y ie4 z ii5 sp}|米丽压低嗓门，用双手扒开一簇厚厚的叶子。
+TT_story_0032|{y ve4 l iang5 j ie3 j ie5 sh eng1 sh ang4 l e5 t ian1 k ong1 sp x ing1 x ing5 m ei4 m ei5 y ie3 d ou1 ch u1 l ai5 l e5 sp}|月亮姐姐升上了天空，星星妹妹也都出来了。
+TT_story_0033|{sh a1 y v2 x iao4 x iao5 r ao4 zh e5 y v2 w uang3 zh uan4 l e5 y i4 q van1 y iou4 y i4 q van1 sp}|鲨鱼笑笑绕着渔网转了一圈又一圈。
+TT_story_0034|{en4 sp w uo2 k en3 d ing4 t a1 h uei4 b ao4 b ao5 w uo3 sp q iou1 q iou1 ch ou1 q i4 zh e5 sh uo1 sp}|“嗯，我肯定她会抱抱我。”秋秋抽泣着说。
+TT_story_0035|{t uo2 n iao3 y ie2 x iang3 x iang4 l ao3 y ing1 y i2 y iang4 w uei1 f eng1 sp}|鸵鸟也想像老鹰一样威风。
+TT_story_0036|{t a1 j iou4 x iang4 t u2 f ei3 t ou2 z ii5 y i2 y iang4 d a4 d an3 sp l u2 m ang3 sp}|她就像土匪头子一样大胆、鲁莽。
+TT_story_0037|{a4 sp m ao2 m ao5 ch ou2 b ian4 ch eng2 l e5 y i4 zh iii1 p iao4 l iang5 d e5 h u2 d ie2 sp}|啊！毛毛愁变成了一只漂亮的蝴蝶。
+TT_story_0038|{y in1 zh ong4 k an1 sh uo1 sp b ai3 s uei4 l ao3 w uen1 p an1 k u1 zh iii1 sp}|殷仲堪说：“百岁老翁攀枯枝。”
+TT_story_0039|{w uo3 m a1 q ve4 sh iii2 l ao3 b i1 w uo3 sp f an2 f an2 f an2 sp}|我妈确实老逼我，烦烦烦！
+TT_story_0040|{o4 sp d i4 d a4 z ai4 n a2 r w uo3 d ou1 b u4 zh iii1 d ao4 sp j iong3 sp}|哦，地大在哪儿我都不知道，囧。
+TT_story_0041|{s u1 sh an1 d u1 zh e5 z uei3 b ao4 y van4 sp t a1 sh uo1 x in1 x ve1 z ii5 b a3 t a1 d e5 j iao3 n ong4 d e5 h ao3 t eng2 sp}|苏珊嘟着嘴抱怨，她说新靴子把她的脚弄得好疼。
+TT_story_0042|{l in2 j v5 a1 j ian4 w u2 y van2 w u2 g u4 d a2 w uo3 sp ai4 b ai3 j ia4 z ii5 d e5 x iao2 j iou2 m ei3 y i2 k an4 d ao4 w uo3 j iou4 z uo4 g uei2 l ian3 sp}|邻居阿健无缘无故打我，爱摆架子的小久美一看到我就做鬼脸。
+TT_story_0043|{ch ang2 z ai4 w u2 d ao3 z a2 zh iii4 sh ang4 f a1 b iao3 w uen2 zh ang1 d e5 ou1 n a4 sp l ao2 w u1 b o2 n v3 sh iii4 d eng4 zh e5 y ian3 j ing5 zh iii2 y iao2 t ou2 sp}|常在舞蹈杂志上发表文章的欧娜•劳乌伯女士瞪着眼睛直摇头。
+TT_story_0044|{y ing1 g e2 er3 z uo4 w uei2 y i2 z uo4 d iao1 x iang4 l i4 z ai4 n a4 l i3 sp y ie2 t i3 y ian4 d ao4 l e5 zh ei4 zh ong3 b ei1 c an3 sp}|英格尔作为一座雕像立在那里，也体验到了这种悲惨。
+TT_story_0045|{l u3 x i1 g ong1 d e2 zh iii1 zh ei4 g e5 x iao1 x i5 sp b ian4 p ai4 d a4 f u1 zh an2 x i3 d ai4 zh e5 n iou2 y iang2 j iou3 sh iii2 q v4 k ao4 l ao2 q i2 j vn1 sp}|鲁僖公得知这个消息，便派大夫展喜带着牛羊酒食去犒劳齐军。
+TT_story_0046|{t ian1 q i4 q ing2 l ang3 sp f eng1 h e2 r iii4 l i4 sp x iao3 x iong2 q ve4 b ai3 w u2 l iao2 l ai4 d e5 p a1 z ai4 z ii4 j ia1 m en2 q ian2 sp}|天气晴朗，风和日丽，小熊却百无聊赖地趴在自家门前。
+TT_story_0047|{ai5 y ia5 sp n i2 h ao3 a5 d ai4 sh u3 sp w uo3 h ai2 y i3 w uei2 n ei4 d ing3 zh ang4 p eng5 sh iii4 ai4 m a3 n e5 sp}|“哎呀！你好啊袋鼠。我还以为那顶帐篷是艾玛呢！”
+TT_story_0048|{d a4 y v3 m ian4 d uei4 h ong2 sh uei3 s ii4 n ve4 sp sh iii2 f en1 y iou1 l v4 sp j ve2 x in1 j ie2 j in4 s uo3 n eng2 sp ch e4 d i3 zh iii4 f u2 h ong2 sh uei3 sp}|大禹面对洪水肆虐，十分忧虑，决心竭尽所能，彻底治服洪水。
+TT_story_0049|{r u2 g uo3 sh iii4 t a1 z ii4 j i3 zh ua1 d ao4 l ie4 w u4 sp t a1 y ie3 b u2 h uei4 t ou1 t ou1 ch iii1 d iao4 sp zh iii3 sh iii4 c ou4 sh ang4 q v4 w uen2 w uen5 sp}|如果是他自己抓到猎物，他也不会偷偷吃掉，只是凑上去闻闻。
+TT_story_0050|{zh ao4 g uo4 c ong2 x iao2 x i3 h uan5 g ong1 d u2 b ing1 sh u1 sp t an2 q i3 x ing2 j vn1 l ie4 zh en4 sp t ao1 t ao1 b u4 j ve2 sp t ou2 t ou2 sh iii4 d ao4 sp}|赵过从小喜欢攻读兵书，谈起行军列阵，滔滔不绝，头头是道。
+TT_story_0051|{m a3 sh ang4 j iou4 y iao4 k ai1 f an4 f an5 l a5 sp b ao3 b ao5 n i2 x iang2 h ao3 zh ong1 w u3 ch iii1 sh en2 m e5 l e5 m a5 sp}|马上就要开饭饭啦，宝宝你想好中午吃什么了吗？
+TT_story_0052|{w u1 l i3 l uan4 z uo4 y i4 t uan2 sp ch ou2 x iao3 y ia1 t ao2 ch u1 l e5 w u1 z ii5 sp z uan1 j in4 g uan4 m u4 l in2 zh ong1 x ing1 x ia4 d e5 x ve2 l i3 sp}|屋里乱作一团，丑小鸭逃出了屋子，钻进灌木林中新下的雪里。
+TT_story_0053|{j i1 ch ang1 y v4 l iao4 zh ou4 w uang2 d e5 t ong3 zh iii4 b u2 h uei4 ch ang2 j iou3 l e5 sp b ian4 s ii4 ch u4 w uang3 l uo2 r en2 zh uen3 b ei4 f a2 zh ou4 sp}|姬昌预料纣王的统治不会长久了，便四处网罗人准备伐纣。
+TT_story_0054|{sh iii4 c ong2 m en5 x ia4 d e5 g an2 j in3 q v4 zh ao3 sp g ong1 l i3 d ao4 ch u4 d ou1 zh ao3 b ian4 l e5 sp y ie3 m ei2 y iou3 y ie4 y in1 d e5 y ing3 z ii5 sp}|侍从们吓得赶紧去找，宫里到处都找遍了，也没有夜莺的影子。
+TT_story_0055|{x ve2 sh iii2 q ian3 b o2 d e5 r en2 w uo3 sh iii2 z ai4 sh iii5 t ing1 b u4 d ong3 n in2 z ai4 sh uo1 sh en2 m e5 sp m o4 m o4 d e5 m ian4 b i4 q v4 sp}|学识浅薄的人我实在是听不懂您在说什么，默默的面壁去。
+TT_story_0056|{sh uo1 zh e5 t a1 c ao1 q i3 y i4 g en1 t ie3 g uen4 sp d uei4 zh e5 e4 m o2 sh ang4 x ia4 h uei1 w u3 zh e5 sp d a3 d e5 t a1 l ian2 l ian2 q iou2 r ao2 sp}|说着他操起一根铁棍，对着恶魔上下挥舞着，打得他连连求饶。
+TT_story_0057|{j i4 z ii3 l ai2 h ou4 sp c ong2 zh ong4 j i1 zh ong1 t iao1 x van3 l e5 y i4 zh iii1 sp k ai1 sh iii3 b i4 m en2 x vn4 j i1 sp}|纪子来后，从众鸡中挑选了一只，开始闭门驯鸡。
+TT_story_0058|{d a4 m u2 zh iii3 l i2 k ai1 q iang2 d ao4 m en5 sp zh iii3 n a2 l e5 y i4 m ei2 j ing1 b i4 y iou4 j i4 x v4 sh ang4 l u4 sp}|大拇指离开强盗们，只拿了一枚金币又继续上路。
+TT_story_0059|{w uei4 l ing2 g ong1 zh iii1 d ao4 t a1 h en2 y iou3 c ai2 x ve2 sp b ing4 d a3 s uan4 p ing4 q ing3 t a1 d ang1 z ii4 j i3 zh ang2 z ii3 k uai3 d e5 l ao3 sh iii1 sp}|卫灵公知道他很有才学，并打算聘请他当自己长子蒯的老师。
+TT_story_0060|{t a1 y iong4 j iao3 j ian1 zh iii1 ch eng1 zh e5 sh en1 t i3 sp b ing3 zh e5 h u1 x i1 sp y i2 d ong4 b u2 d ong4 d e5 x iang4 l i3 m ian5 k uei1 sh iii4 zh e5 sp}|他用脚尖支撑着身体，屏着呼吸，一动不动地向里面窥视着。
+TT_story_0061|{n v2 zh u3 r en2 h en3 k uai4 d e5 b a2 t u3 d ou4 f ang4 z ai4 h uo3 sh ang4 k ao2 q i3 l ai5 sp y iou4 m a2 l i4 d e5 q v4 j i3 y iang2 n ai3 sp}|女主人很快的把土豆放在火上烤起来，又麻利地去挤羊奶。
+TT_story_0062|{ch u1 q v4 w uan2 r l ou5 sp j ie2 k e4 r ang1 r ang5 zh e5 sp ao4 l i4 f u2 h e2 t a1 y i4 q i2 p ao3 d ao4 l e5 w u1 w uai4 sp}|“出去玩儿喽！”杰克嚷嚷着，奥利弗和他一起跑到了屋外。
+TT_story_0063|{k e3 sh iii4 t uo1 b i3 t ou2 y ie3 b u4 h uei2 d e5 f ei1 k uai4 d e5 z ou3 k ai1 l e5 sp zh e4 r ang4 p ang4 z ong2 g uan2 h en3 n a4 m en4 r sp}|可是托比头也不回地飞快地走开了，这让胖总管很纳闷儿。
+TT_story_0064|{m ei2 y iou3 b an4 f a2 g ao3 q ing1 ch u3 l ao3 f u4 r en2 z uei4 p a4 t a1 m en5 d ang1 zh ong1 d e5 n a3 y i2 g e4 sp}|没有办法搞清楚老妇人最怕他们当中的哪一个。
+TT_story_0065|{k uen1 ch ong2 y ve4 d uei4 z ou4 x iang3 l e5 y in1 y ve4 sp d a4 j ia1 g ong4 t ong2 j v3 b ei1 zh u4 f u2 zh e4 d uei4 x in1 r en2 sp}|昆虫乐队奏响了音乐，大家共同举杯祝福这对新人。
+TT_story_0066|{m a1 m a5 y ie3 d u1 d u1 n ang1 n ang1 d e5 sh uo1 sp b ie2 sh ua2 x iao3 c ong1 m ing5 sp ch iii1 f an4 sp k uai4 ch iii1 sp}|妈妈也嘟嘟囔囔地说：“别耍小聪明，吃饭，快吃！”
+TT_story_0067|{h ou2 z ii5 b ei4 ch uei1 p eng3 d e5 p iao1 p iao1 r an2 q i3 l ai2 sp h ao2 b u4 ch iii2 y i2 d e5 g en1 zh e5 h u2 l i5 q v4 q v2 b ao3 sp}|猴子被吹捧得飘飘然起来，毫不迟疑地跟着狐狸去取“宝”。
+TT_story_0068|{d a4 j ia1 d ou1 zh iii1 d ao4 t a1 ai4 c ai2 r u2 m ing4 sp j iou4 s ong4 l e5 t a1 y i2 g e5 ch uo4 h ao4 sp sp sh ou3 c ai2 n u2 sp}|大家都知道他爱财如命，就送了他一个绰号——守财奴。
+TT_story_0069|{sh uo1 zh e5 sp t a1 zh an3 ch iii4 g ao1 f ei1 sp y v3 y i4 r u2 t ong2 sh an4 z ii5 y i4 b an1 d e5 l ve4 g uo4 y iang2 g uang1 sp}|说着，她展翅高飞，羽翼如同扇子一般的掠过阳光。
+TT_story_0070|{s ong4 g ao1 z ong1 sh iii2 q i1 sp z ai3 x iang4 d ing1 w uei4 k ao4 e1 y v2 f eng4 ch eng5 sh en1 d e2 h uang2 d i4 h uan1 x in1 sp}|宋高宗时期，宰相丁谓靠阿谀奉承深得皇帝欢心。
+TT_story_0071|{t a1 y i2 h uei4 r g u3 zh e5 s ai1 b ang1 sp y i2 h uei4 r y iao2 t ou2 h uang4 n ao3 sp x ian3 d e5 f ei1 ch ang2 m ai4 l i4 d e5 y iang4 z ii5 sp}|他一会儿鼓着腮帮，一会儿摇头晃脑，显得非常卖力的样子。
+TT_story_0072|{f u4 q in5 w uen4 t a1 sp w uo3 d e5 er2 z ii5 sp j iang2 j iang3 zh e4 y i4 n ian2 n i3 x ve2 d ao4 d e5 d ong1 x i5 b a5 sp}|父亲问他：“我的儿子，讲讲这一年你学到的东西吧！”
+TT_story_0073|{t ing2 ch e1 ch ang3 y i4 j iao3 d e5 y i2 l iang4 x iao3 ch e1 z ao1 b u4 m ing2 b ao4 zh a4 w u4 s uen3 h uai4 l e5 sp}|停车场一角的一辆小车遭不明爆炸物损坏了。
+TT_story_0074|{y iou4 d iao4 t ou2 x ia4 p o1 d ao4 sp y ian2 zh ong1 j ian1 d ao4 l u4 j ing4 r u4 z uo2 zh uan3 zh uan1 y iong4 d ao4 sp x iang4 n an2 f ang1 x ing2 sh iii3 sp}|右调头下坡道，沿中间道路进入左转专用道，向南方行驶。
+TT_story_0075|{w uo3 d e5 l ao3 t ian1 y ie2 a5 sp s ang1 q i2 k an4 j ian4 n a4 m e5 d uo1 r en2 sp ch uan3 l e5 k ou3 d a4 q i4 sp}|“我的老天爷啊！”桑奇看见那么多人，喘了口大气。
+TT_story_0076|{zh u1 m u3 b ei4 d e5 b ao3 b ei4 y iou4 t iao4 g uo5 y ian2 sh iii2 sp d iao4 j ing4 h ai2 d i3 y i2 g e4 zh ai2 zh ai3 d e5 sh iii2 f eng4 l i3 sp}|珠母贝的宝贝又跳过岩石，掉进海底一个窄窄的石缝里。
+TT_story_0077|{d u4 x i1 m ei2 y iou3 ch a2 j ve2 sp y i2 p i4 g u5 z uo4 sh ang4 q v4 sp b ei4 zh a1 d e5 x ian1 x ve4 zh iii2 l iou2 sp}|杜锡没有察觉，一屁股坐上去，被扎得鲜血直流。
+TT_story_0078|{p ei4 sh ang4 l an2 m ei2 h e2 w uo3 m an2 m an3 d e5 ai4 x ing1 sp d a4 h an1 x iong2 y ing1 y vn3 d ao4 sp en2 sp}|“配上蓝莓和我满满的爱心，”大憨熊应允道，“嗯？”
+TT_story_0079|{ch iii1 m ao1 sh u3 d a4 g e1 q iao1 sh eng1 sh uo1 sp d i4 x iong1 m en5 sp k an4 w uo3 d e5 l i4 h ai5 sp}|吃猫鼠大哥悄声说：“弟兄们，看我的厉害！”
+TT_story_0080|{t i1 n i3 m a1 y ie2 d ei3 y iou1 zh e5 d ian3 r sp m a1 m a5 p a4 n i3 t ai4 y iong4 l i4 w uai3 d ao4 j iao3 sp}|踢你妈也得悠着点儿，妈妈怕你太用力崴到脚。
+TT_story_0081|{t a1 l ia3 z ai4 g ong1 y van2 l i3 z uo4 l e5 y i4 h uei3 r sp ch iii1 l e5 y i2 d ai4 an1 sh u4 p ai2 q iao3 k e5 l i4 sp}|他俩在公园里坐了一会儿，吃了一袋桉树牌巧克力。
+TT_story_0082|{d a4 sh an1 sh ang4 d e5 y ian2 sh iii2 l uo3 l u4 sp sh an1 p o1 sh ang4 c uen4 c ao3 b u4 sh eng1 sp}|大山上的岩石裸露，山坡上寸草不生。
+TT_story_0083|{b a4 b a5 c e4 zh e5 t ou2 t ing1 t ing5 sp l i3 m ian4 y i4 d ian3 r d ong4 j ing4 y ie3 m ei2 y iou3 sp}|爸爸侧着头听听，里面一点儿动静也没有。
+TT_story_0084|{t a1 ch ang2 ch ang2 d u2 sh u1 d ao4 sh en1 y ie4 sp h en3 p i2 j van4 sp ch ang2 d a2 d uen3 r sp}|他常常读书到深夜，很疲倦，常打盹儿。
+TT_story_0085|{sh a2 d ou1 m ei2 g an4 sp ou2 er3 k an4 x ia4 w uen2 zh ang1 sp g ao2 d ian3 r x ve2 x i2 sp}|啥都没干，偶尔看下文章，搞点儿学习。
+TT_story_0086|{x ve2 l e5 j i3 t ian1 sp t a1 z ii4 j i2 g an3 j ve2 y ve4 z ou3 y ve4 b ie4 n iou5 sp}|学了几天，他自己感觉越走越别扭。
+TT_story_0087|{ai1 y iou1 sp t a2 b i3 sh a1 d e5 y i4 k e1 y ia2 ch iii3 s ong1 l e5 sp}|“哎哟！”塔比莎的一颗牙齿松了！
+TT_story_0088|{t a1 q ing1 q ing1 d e5 b a2 x iao3 m ao1 g ei3 zh uai4 ch u1 l ai5 sp sp a2 sp b u2 sh iii4 x iao3 b ao1 sp sh iii4 y i4 zh iii1 ch ou4 y iou4 sp}|他轻轻地把小猫给拽出来……啊？不是小包！是一只臭鼬！
+TT_story_0089|{c ong2 q ian2 sp z ai4 m ang2 m ang2 d e5 d a4 sh a1 m o4 d e5 zh ong1 y iang1 sp y iou3 y i2 z uo4 g u1 l ing1 l ing1 d e5 sh an1 sp}|从前，在茫茫的大沙漠的中央，有一座孤零零的山。
+TT_story_0090|{w uo3 d e5 ao2 ao2 sp b a3 t a1 x ia4 d e5 y i2 b eng4 s an1 ch iii3 sp sh iii1 z ii5 z ii4 k ua1 d ao4 sp}|“我的‘嗷嗷’，把她吓得一蹦三尺。”狮子自夸道。
+TT_story_0091|{j iou4 zh ei4 y iang5 sp r e4 r e4 n ao1 n ao1 d e5 q ing4 zh u4 h uei4 j ie2 sh u4 l e5 sp}|就这样，热热闹闹的庆祝会结束了。
+TT_story_0092|{w uo2 d ei2 x iang3 g e5 b an4 f a3 sp h ao3 h ao1 r j iao4 x vn4 t a1 y i2 x ia4 sp}|我得想个办法，好好儿教训他一下。
+TT_story_0093|{m ei2 sh iii4 r ch u1 q v4 g uang4 g uang5 a5 sp z ai4 j ia1 g an4 m a2 sp}|没事儿出去逛逛啊，在家干嘛？
+TT_story_0094|{l ang2 k uai4 h uo5 d e5 p ao3 d ao4 n ai3 n ai5 j ia1 sp b a2 n ai3 n ai5 t uen1 j in4 d u4 z ii5 sp}|狼快活地跑到奶奶家，把奶奶吞进肚子。
+TT_story_0095|{t a1 j v3 s ang4 d e5 sh uo1 sp m ei2 y iou3 l e5 d i4 t u2 sp k e2 z en3 m e5 zh ao3 j iou4 j iou5 y ia5 sp}|他沮丧地说：“没有了地图，可怎么找舅舅呀？”
+TT_story_0096|{b ao3 ch iii2 l ian2 x i4 j ing1 ch ang2 s ao1 r ao3 z uo4 w uei2 d i4 y i1 r en4 w u4 sp}|保持联系经常骚扰作为第一任务。
+TT_story_0097|{q ie2 z ii5 y i4 t ing3 d a4 d u4 p i2 sp x iao3 c ong1 zh uang4 g e5 d ao4 z ai1 c ong1 sp}|茄子一挺大肚皮，小葱撞个倒栽葱。
+TT_story_0098|{l ao3 l ang2 y i4 b ian1 r d uo1 s uo5 sp y i4 b ian1 r j ve1 q i2 z uei3 b a1 sp}|老狼一边儿哆嗦，一边儿撅起嘴巴。
+TT_story_0099|{m ei2 x iang3 d ao4 ch a4 d ao4 c ong2 l in2 z ii5 l i3 ch u1 l ai5 sp q ve4 t ong1 d ao4 w uan4 zh ang4 sh en1 y van1 sh ang4 d e5 q iao4 b i4 n a4 l i3 sp}|没想到岔道从林子里出来，却通到万丈深渊上的峭壁那里。
+TT_story_0100|{d ang1 r an2 sp m ao1 sh uo1 d e5 d ou1 sh iii4 h uang3 h ua4 sp t a1 y ia1 g en1 r j iou4 m ei2 y iou3 b iao2 j ie3 sp}|当然，猫说的都是谎话，她压根儿就没有表姐。

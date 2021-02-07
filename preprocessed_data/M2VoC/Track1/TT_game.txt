@@ -1,0 +1,100 @@
+TT_game_0001|{h ou4 l ai2 sp sh iii1 f u5 m an4 m an1 ch uan2 sh ou4 w uo2 w u3 y i4 sp sh en1 t i2 y ie3 j iou4 y i4 d ian3 r y i4 d ian3 r h ao2 q i3 l ai5 l a5 sp y ie3 n eng2 x iang4 sh iii1 x iong1 sh iii1 j ie3 m en5 y i2 y iang4 sp y i2 y ve4 j iou4 sh ang4 q v5 l a5 sp}|后来，师父慢慢传授我武艺，身体也就一点儿一点儿好起来啦，也能像师兄师姐们一样，一跃就上去啦。
+TT_game_0002|{zh e4 l i3 s uei1 r an2 j iao4 w u4 g e2 sp d an4 b ai2 r iii4 l i3 zh iii2 y iou3 y vn2 w u4 sp f ang3 f u2 h ai2 sh iii5 sh ao3 l e5 x ie1 sh en2 m e5 sp}|这里虽然叫物格，但白日里只有云雾，仿佛还是少了些什么。
+TT_game_0003|{ei5 sp h u2 d e5 n ei4 t ou2 h ai2 y iou3 y i2 ch u4 x iao2 d ao3 sp}|诶，湖的那头还有一处小岛。
+TT_game_0004|{sh iii1 j ie3 sp n i3 h uei4 x i3 h uan1 zh ei4 zh ong3 y van3 l i2 j iang1 h u2 b i4 sh iii4 y in3 j v1 d e5 sh eng1 h uo2 m a5 sp}|师姐，你会喜欢这种远离江湖避世隐居的生活吗？
+TT_game_0005|{y ie2 x v3 sp d eng2 w uo2 l ao3 l e5 y i3 h ou4 b a5 sp}|也许，等我老了以后吧。
+TT_game_0006|{zh ei4 t iao2 zh u2 j ing4 d ao4 sh iii4 p o1 w uei2 y iou1 j ing4 sp q ing1 f eng1 f u2 m ian4 l ing4 r en2 ch en2 z uei4 sp}|这条竹径倒是颇为幽静，清风拂面令人沉醉。
+TT_game_0007|{k ou3 q i5 b u4 x iao3 n e5 sp sh uo1 d ao4 k e3 y iao4 z uo4 d ao4 y iou5 sp}|口气不小呢，说到可要做到哟。
+TT_game_0008|{w ua4 sp n ei4 z uo4 j ia3 sh an1 sh ang4 y iou3 y i4 zh iii1 h en3 p iao4 l iang5 d e5 x iong2 l u4 ai5 sp}|哇，那座假山上有一只很漂亮的雄鹿哎。
+TT_game_0009|{sh iii1 d i4 sh iii1 d i4 sp n i3 q v4 j iang1 d uei4 m ian4 t ao2 sh u4 x ia4 n ei4 zh u1 y iao4 c ao3 zh ai1 l ai5 sp}|师弟师弟，你去将对面桃树下那株药草摘来。
+TT_game_0010|{en4 sp w uo3 j iou4 sh iii5 n i3 d e5 j ia1 r en2 sp w uo3 h uei4 y i4 zh iii2 p ei2 zh e5 n i3 d e5 sp}|嗯，我就是你的家人，我会一直陪着你的。
+TT_game_0011|{j iou4 sh iii4 c ong2 n ei4 t ian1 k ai1 sh iii3 sp w uo2 b a2 w u3 d ang1 sh an1 d ang1 z uo4 l e5 w uo3 zh en1 zh eng4 d e5 j ia1 sp}|就是从那天开始，我把武当山当作了我真正的家。
+TT_game_0012|{sh iii4 j ian1 y iou3 g e4 zh ong3 g e4 y iang4 d e5 q iao2 sp k e3 sh iii4 t ian1 sh ang4 zh en1 d e5 y iou3 q ve4 q iao2 m a5 sp}|世间有各种各样的桥，可是天上真的有鹊桥吗？
+TT_game_0013|{j iou4 j iao4 w uo3 g e1 g e5 b a5 sp z an2 m en5 y i2 l u4 t ao2 w uang2 sp z ao3 j iou4 sh iii5 g uo4 m ing4 d e5 j iao1 q ing5 l a5 sp}|就叫我哥哥吧，咱们一路逃亡，早就是过命的交情啦。
+TT_game_0014|{sh iii2 zh iii4 j in1 r iii4 sp n i3 m en5 k e3 h ai2 k en3 t ing1 w uo3 y i4 y ian2 sp}|时至今日，你们可还肯听我一言。
+TT_game_0015|{w uo3 sp ai5 sp w uang4 b u2 d iao4 sp y ie3 b u4 g an3 w uang4 d iao4 sp}|我，唉，忘不掉，也不敢忘掉。
+TT_game_0016|{j iou4 sh iii4 n ei4 w uei4 g u1 n iang5 a5 sp g uo3 r an2 h en2 m ei3 n e5 sp}|就是那位姑娘啊，果然很美呢。
+TT_game_0017|{zh iii3 sh iii4 sh en1 sh ang4 d ai4 zh e5 q i1 f en1 y iou1 y v4 sp b a1 f en1 ai1 ch ou2 sp f ang3 f u2 d iou1 sh iii1 l e5 y i2 b u4 f en5 h uen2 p o4 sh iii4 d e5 sp}|只是身上带着七分忧郁，八分哀愁，仿佛丢失了一部分魂魄似的。
+TT_game_0018|{ai5 sp b u4 zh iii1 d ao4 zh ei4 ch ang2 y v3 h ai2 y iao4 x ia4 d uo1 j iou3 sp r u2 g uo3 y i4 zh iii2 b u4 t ing2 g ai1 z en3 m e5 b an4 y ia5 sp}|唉，不知道这场雨还要下多久，如果一直不停该怎么办呀？
+TT_game_0019|{y ian1 h ua1 c uei3 c an4 sp y ing4 r u2 b ai2 zh ou4 sp w uo2 x i3 h uan5 sp}|烟花璀璨，映如白昼，我喜欢。
+TT_game_0020|{n a4 g u4 g ong1 z ii3 sp y ve1 m o1 j iou4 sh iii5 n ei4 sh iii2 h ou5 r l ai2 d e5 sp t a1 z ou3 j in4 f ang2 l i3 d e5 n ei4 t ian1 sp w uo3 y i4 y ian3 j iou4 k an4 ch u1 l ai5 sp t a1 er4 r en2 sh iii4 q ing2 t ou2 y i4 h e2 sp}|那顾公子，约莫就是那时候儿来的，他走进房里的那天，我一眼就看出来，他二人是情投意合。
+TT_game_0021|{x iao3 y i2 sp n i3 t an2 d e5 y ve4 l ian2 zh en1 h ao3 t ing1 sp w uo3 c ong2 l ai2 m ei2 y iou3 t ing1 g uo4 n ei4 y iang5 h ao3 t ing1 d e5 zh en1 sp}|小姨，你弹的月莲真好听，我从来没有听过那样好听的筝。
+TT_game_0022|{d uo1 x ie4 x iao3 g e1 l e5 sp w uo3 z ai4 q v4 w uen4 w uen5 b ie2 r en5 sp}|多谢小哥了，我再去问问别人。
+TT_game_0023|{m o4 r u2 y vn2 y i4 s an4 sp x v1 s ii4 y ve4 p ing2 y van2 sp}|莫如云易散，圩四月平原。
+TT_game_0024|{n in2 b ie2 j i2 sp x ian1 x iou1 x i5 y i2 x ia4 sp w uo3 z ai4 q v4 b ie2 ch u4 w uen4 w uen5 sp}|您别急，先休息一下，我再去别处问问。
+TT_game_0025|{b ao4 q ian4 sp t a1 z ii4 l ian2 z ii4 sh ang1 sp j iao4 g u1 n iang5 h e2 er4 y ie2 k an4 x iao4 h ua5 l a5 sp}|抱歉，她自怜自伤，叫姑娘和二爷看笑话啦。
+TT_game_0026|{r uo4 w uo3 n eng2 z ao3 x ie1 y v4 d ao4 n in2 zh ei4 y iang5 d e5 r en2 j iou4 h ao3 l a5 sp}|若我能早些遇到您这样的人就好啦。
+TT_game_0027|{g ang1 c ai2 y i2 l u4 k uang2 b en1 sp d ou1 m ei2 z ii3 x i4 k an4 l u4 sp ai5 sp zh e4 sh iii5 n a3 r a5 sp}|刚才一路狂奔，都没仔细看路，哎，这是哪儿啊？
+TT_game_0028|{q in2 sh ou4 sp f ang4 k ai1 t a1 sp t a1 h ai2 zh iii3 sh iii4 g e5 h ai2 z ii5 sp}|禽兽，放开她，她还只是个孩子。
+TT_game_0029|{w uo2 zh iii3 n eng2 d iao4 t iao2 y v2 l ai2 z uo4 d ao4 b ang4 sh uei3 x ian1 sp n a2 q v4 g en1 l ao3 t ian1 h uan4 m ing2 r iii4 d e5 b an4 g e5 sh iii2 ch en5 sp h ao3 h ao1 b a3 zh ei4 sh eng1 r iii4 g uo4 w uan2 sp}|我只能钓条鱼来做到傍水先，拿去跟老天换明日的半个时辰，好好把这生日过完。
+TT_game_0030|{r u2 g uo3 b u2 sh iii4 t a1 b a2 n i3 y iou2 y in3 h uei2 l ai5 sp w uo2 y ie2 zh ao3 b u2 d ao4 n i3 y ia5 sp}|如果不是他把你又引回来，我也找不到你呀。
+TT_game_0031|{q iao2 y i4 q iao2 k an4 y i2 k an4 sp w uo3 m en5 zh e4 r sh en2 m e5 d ou1 m ai4 y i4 x ie1 sp b ing1 d ao1 ch ang2 r en4 h e2 x iao2 g u3 sp c ii2 p ing2 p u2 sh an4 h e2 l ian2 p u3 sp}|瞧一瞧看一看，我们这儿什么都卖一些，冰刀长刃和小古，瓷瓶蒲扇和脸谱。
+TT_game_0032|{n i3 b ie2 k an4 zh e5 g uo4 n ian2 sh iii2 r e4 r e5 n ao1 n ao1 d e5 sp p ing2 r iii4 l i3 d e5 g uei1 j v5 sp j i2 sh iii3 g uo4 j ie2 y ie3 b u4 n eng2 h uai4 sp}|你别看着过年时热热闹闹的，平日里的规矩，即使过节也不能坏。
+TT_game_0033|{j in1 n ian2 j ia1 l i3 x in1 t ian1 l e5 x iao3 s uen1 z ii5 sp m en2 q ian2 d ei3 g ua4 d a4 h ong2 d eng1 l ong5 sp}|今年家里新添了小孙子，门前得挂大红灯笼。
+TT_game_0034|{y van2 x i1 t e4 h uei4 sp p ing2 sh iii2 p u1 y i4 j v2 w u3 w uen2 q ian2 sp x ian4 z ai4 l iang3 j v2 zh iii3 y iao4 b a1 w uen2 sp}|袁希特惠，平时扑一局五文钱，现在两局只要八文。
+TT_game_0035|{w uo3 b u2 r en4 d e5 zh ei4 zh ong3 zh iii2 w u4 sp z ong3 zh iii1 sh iii4 y ie2 c ao3 b a5 sp}|我不认得这种植物，总之是野草吧。
+TT_game_0036|{an4 b ian1 l i2 h u2 x in1 b u4 y van3 sp w uo3 r uo4 zh en1 y v4 d ao4 y i4 w uai4 sp g ao1 sh eng1 h u1 j iou4 j iou4 sh iii4 sp sh iii1 x iong1 b u2 b i4 d an1 x in1 sp}|岸边离湖心不远，我若真遇到意外，高声呼救就是，师兄不必担心。
+TT_game_0037|{n eng2 d e2 y i4 s ii1 n uan3 y i4 sp y i3 j ing5 sh iii4 z uei4 d a4 d e5 sh e1 q iou2 l a5 sp}|能得一丝暖意，已经是最大的奢求啦。
+TT_game_0038|{h u1 r u2 y i2 y ie4 ch uen1 f eng1 l ai2 sp q ian1 sh u4 w uan4 sh u4 l i2 h ua1 k ai1 sp}|忽如一夜春风来，千树万树梨花开。
+TT_game_0039|{c ang1 zh ou1 d e5 x ve3 sh iii4 y v3 f eng1 y v3 t ian1 y v3 d i4 j iao1 h e2 z ai4 y i4 q i3 d e5 sp}|沧州的雪是与风与天与地交合在一起的。
+TT_game_0040|{f an3 zh eng4 n i3 zh ei4 c ii4 sh iii4 p ei2 b en3 sh ao4 y ie5 l ai2 sh ang2 x ve3 d e5 sp j iou4 y iao4 z ai4 x ve3 d i4 l i3 sh ang2 x ve3 c ai2 h ao3 n e5 sp b u4 x v2 n i2 d uo3 z ai4 f ang2 z ii5 l i3 sp}|反正你这次是陪本少爷来赏雪的，就要在雪地里赏雪才好呢，不许你躲在房子里。
+TT_game_0041|{zh e4 m e5 d uan3 d e5 sh iii2 j ian1 g an3 d ao4 zh e4 l i3 sp y ie3 s uan4 y iou2 d ian2 r zh ang3 j in4 sp j iou4 j iang3 l i4 n i3 y i4 h u2 j iou3 b a5 sp}|这么短的时间赶到这里，也算有点儿长进，就奖励你一壶酒吧。
+TT_game_0042|{d uei4 y v2 w uo3 l ai2 sh uo1 sp n i2 y ie3 sh iii4 d u2 y i1 w u2 er4 d e5 x iao3 sh iii1 d i4 sp}|对于我来说，你也是独一无二的小师弟。
+TT_game_0043|{j in1 y ie4 sh ou3 s uei4 sp w uo3 b ao1 l e5 n i3 z uei4 x i3 h uan5 d e5 h uen2 d uen5 sp b u4 zh iii1 n i3 n eng2 f ou2 g an3 d e5 h uei2 l ai2 sp h e2 d a4 j ia1 y i4 q i2 sh ou3 y ie4 y ing2 x in1 sp}|今夜守岁，我包了你最喜欢的混沌，不知你能否赶得回来，和大家一起守夜迎新。
+TT_game_0044|{h ei4 sp w uo3 h ai2 m ei2 k ai1 k ou3 sp n in2 j iou4 zh iii1 d ao4 w uo2 y iou3 sh iii4 r l a5 sp}|嘿，我还没开口，您就知道我有事儿啦。
+TT_game_0045|{w uo3 x ian1 s ii4 ch u4 k an4 k an5 sp y iou3 m ei2 y iou3 ch u1 k ou3 h uo4 zh e3 m i4 d ao4 sp}|我先四处看看，有没有出口或者密道。
+TT_game_0046|{g ang1 c ai2 sh iii1 f u5 sh uo1 sp x v3 sh u1 t ong1 j ing1 q i4 sp y i3 q i4 y vn4 l i4 sp k an4 l ai2 sh iii4 x v1 y iao4 y iong4 t a1 l ai2 y in3 ch u1 w uo3 d e5 n ei4 l i4 l e5 sp b u4 r u2 j iang1 j ing1 q i4 y in2 d ao4 w uo3 d e5 n ei4 l i4 f u4 j in4 k an4 k an5 sp}|刚才师傅说，许疏通经气，以气运力，看来是需要用它来引出我的内力了，不如将精气引到我的内力附近看看。
+TT_game_0047|{w uan3 b ei4 b u4 m ing2 b ai5 sp j in3 p ing2 q ing2 y van4 er4 z ii4 sp ai5 sp sh iii2 z ai4 t ai4 g uo4 p iao1 m iao3 sp h ai2 q ing3 x ian1 sh eng5 n eng2 t an2 z ou4 y i4 q v3 sp m ing2 sh iii4 w uan3 b ei4 sp}|晚辈不明白，仅凭情愿二字，唉，实在太过飘渺，还请先生能弹奏一曲，明示晚辈。
+TT_game_0048|{a2 sp r ang4 w uo3 d uei4 n iou2 t an2 q in2 sp ch e4 b u2 sh iii4 w u1 r u2 w uo3 d e5 q in2 m a5 sp}|啊？让我对牛弹琴，彻不是侮辱我的琴吗？
+TT_game_0049|{h eng5 sp n i3 zh ei4 x iao3 y ia1 t ou5 p ian4 z ii5 sp w u4 x ing4 d ao4 sh iii4 b u2 c uo4 sp}|哼，你这小丫头片子，悟性倒是不错。
+TT_game_0050|{w uo3 d ao4 sh iii5 x iang2 q i3 w uo2 y iou3 y i4 b a3 q in2 d e5 q in2 x ian2 y iao4 h uan4 l e5 sp n i3 b ang1 w uo3 q v4 q i1 x ing1 zh en4 sh ang4 d e5 b ai2 x v1 w uen1 n a4 l i3 sp t ao3 y i4 g en1 q in2 x ian2 h uei2 l ai5 b a5 sp}|我倒是想起我有一把琴的琴弦要换了，你帮我去七星镇上的白须翁那里，讨一根琴弦回来吧。
+TT_game_0051|{k e5 k e5 sp n i3 zh ei4 g e5 x iao3 z ii5 sp y ie3 x in1 b u4 x iao3 a5 sp}|咳咳，你这个小子，野心不小啊。
+TT_game_0052|{y i2 d an4 q i4 r uo4 sp h ai2 w uei4 t i2 q iang1 y i3 x ian1 sh u1 l e5 y i2 b an4 r sp}|一旦气弱，还未提枪已先输了一半儿。
+TT_game_0053|{h a5 h a5 sp h ai2 zh en1 sh iii5 sh uo1 c ao2 c ao1 sp c ao2 c ao1 j iou4 d ao4 l a5 sp}|哈哈，还真是说曹操，曹操就到啦。
+TT_game_0054|{d an4 sp y ie3 k e2 y i2 b a3 zh en1 x iang4 g ao4 s u5 l ao3 q ian2 b ei4 b a5 sp h e2 b i4 r ang4 t a1 b ai2 b ai2 w u4 h uei4 n in2 zh e4 m e5 d uo1 n ian2 n e5 sp}|但，也可以把真相告诉老前辈吧，何必让它白白误会您这么多年呢。
+TT_game_0055|{z ai4 t a1 b ei4 zh iii4 ch eng2 y iao4 r en2 zh iii1 q ian2 sp j iou4 y i3 sh en1 s ii3 sp x ian4 z ai4 d e5 t a1 sp y i3 j ing1 m ei2 y iou3 l e5 y i4 sh iii5 sp}|在他被制成药人之前，就已身死，现在的他，已经没有了意识。
+TT_game_0056|{zh ei4 w uei4 d a4 g e1 sp n i3 x iong1 d i4 sh ang1 d e5 zh e4 b an1 y ian2 zh ong4 sp zh eng1 zh iii2 f an3 er2 c uo4 g uo4 l e5 z uei4 h ao3 d e5 j iou4 zh iii4 sh iii2 j i1 sp}|这位大哥，你兄弟伤的这般严重，争执反而错过了最好的救治时机。
+TT_game_0057|{n i3 m en5 zh ei4 x ie1 n ian2 q ing1 r en2 a5 sp k ua1 n i3 m en5 h ai2 b u4 h ao3 sp y ing4 b a3 r en2 j ia5 d e5 k ua1 j iang3 y iou4 t uei1 h uei2 l ai2 sp ai5 sp b u4 h ao3 w uan2 r sp}|你们这些年轻人啊，夸你们还不好，硬把人家的夸奖又推回来。哎，不好玩儿。
+TT_game_0058|{t a1 h u1 x i1 h ai2 h en3 p ing2 w uen3 sp y i2 d ing4 y iou3 b an4 f a5 d e5 sh iii4 b u5 sh iii4 sp}|他呼吸还很平稳，一定有办法的是不是？
+TT_game_0059|{zh iii4 y iao4 r en2 s uo3 y iong4 d e5 c ai2 l iao4 h uei4 x i1 y in3 d u2 sh e2 h e2 x ie1 z ii5 sp w uo3 x v1 y iao4 n i3 j iang1 t a1 m en5 g an2 z ou3 sp y i2 m ian3 d uei4 w uo3 m en5 z ao4 ch eng2 g an1 r ao3 h e2 sh ang1 h ai4 sp}|制药人所用的材料会吸引毒蛇和蝎子，我需要你将他们赶走，以免对我们造成干扰和伤害。
+TT_game_0060|{w uo3 m ei2 zh ua1 d ao4 t ou1 j iou3 z ei2 sp zh iii3 zh ua1 d ao4 l e5 y i2 g e4 ch an2 z uei3 h ou2 r sp}|我没抓到偷酒贼，只抓到了一个馋嘴猴儿。
+TT_game_0061|{zh ei4 p ian4 h ai3 a5 sp p ing2 j ing4 zh ong1 m ai2 c ang2 zh e5 b o1 l an2 sp}|这片海啊，平静中埋藏着波澜。
+TT_game_0062|{h ei4 sp x iang3 b u2 d ao4 n i3 zh e4 m e5 c ong1 m ing5 sp}|嘿，想不到你这么聪明。
+TT_game_0063|{w uo3 r u4 m en2 w uan3 sp j ian4 sh u4 z ii4 r an2 y v3 q ian2 b ei4 m en5 b i3 b u5 d e2 sp p a4 sh iii4 h uei4 ch u1 ch ou3 sp}|我入门晚，剑术自然与前辈们比不得，怕是会出丑。
+TT_game_0064|{x in1 zh ong1 y iou3 j ian4 sp w uan4 w u4 j ie1 k e3 w uei2 j ian4 sp}|心中有剑，万物皆可为剑。
+TT_game_0065|{sh a1 r en2 h e2 x v1 r u2 c ii3 zh e1 zh e1 y ian2 y ian3 sp}|杀人何须如此遮遮掩掩？
+TT_game_0066|{ch u1 f eng2 b ian4 j ing1 ch uen1 r iii4 sp y i4 sh iii2 h ai2 zh en1 b u4 zh iii1 d ao4 q v4 n a2 l i3 t an4 ch uen1 sp zh ei4 w uei4 g u1 n iang5 k e2 y iou3 t uei1 j ian4 zh iii1 ch u4 sp}|初逢汴京春日，一时还真不知道去哪里探春，这位姑娘可有推荐之处。
+TT_game_0067|{k e2 w uo3 zh iii3 n eng2 z ai4 m eng4 l i3 z ai4 j ian4 d ie1 d ie5 l e5 sp}|可我只能在梦里再见爹爹了。
+TT_game_0068|{w uo3 q v4 sh eng1 h uo3 sp d ai1 h uei2 r x i3 w uan2 z ai4 k ao3 g an1 sp j iou4 k e2 y i3 q v4 j ian4 t a1 l a5 sp}|我去生火，待会儿洗完再烤干，就可以去见他啦。
+TT_game_0069|{g ang1 g ang1 g uan1 b ing1 n a4 m e5 d a4 zh en4 zh ang4 sp zh en4 sh ang4 d e5 sh ang1 p u4 k en3 d ing4 z ao2 z ao3 g uan1 l e5 m en2 sp}|刚刚官兵那么大阵仗，镇上的商铺肯定早早关了门。
+TT_game_0070|{l ao2 b an3 sp n in2 r en4 sh iii5 n ei4 w uei4 g u1 n iang5 m a5 sp}|老板，您认识那位姑娘吗？
+TT_game_0071|{h a5 sp w uo3 zh iii1 d ao4 l e5 sp n i3 sh iii4 g u4 y i4 x iang3 t uei1 t a1 j in4 h uo3 k eng1 d uei4 b u2 d uei4 sp}|哈，我知道了，你是故意想推她进火坑对不对。
+TT_game_0072|{y i2 sp zh e4 j iao4 sh eng1 sp t a1 sh iii4 z ai4 x iang4 w uo3 m en5 q iou2 j iou4 sp}|咦？这叫声，他是在向我们求救。
+TT_game_0073|{m i4 sh iii4 sp m i4 sh iii4 b u2 sh iii5 y i2 g e4 w u1 z ii5 m a5 sp z en3 m e5 sh iii1 q ie4 sp}|密室？密室不是一个屋子吗？怎么失窃？
+TT_game_0074|{w uo3 zh iii2 x iang3 y i2 g e4 r en2 h uo2 zh e5 sp b ie2 d e5 sh en2 m e5 sp y i4 d ian3 r d ou1 b u4 x iang2 g uan3 sp}|我只想一个人活着，别的什么，一点儿都不想管。
+TT_game_0075|{w uo3 y ie2 x iang2 y iou3 y i2 r iii4 sp n eng2 q in1 y ian3 j ian4 d ao4 y i2 g e4 t ian1 x ia4 w uei2 g ong1 d e5 d a4 t ong2 sh iii4 j ie4 sp}|我也想有一日，能亲眼见到一个天下为公的大同世界。
+TT_game_0076|{t ian1 x ia4 zh iii4 r ou2 m o4 g uo4 y v2 sh uei3 sp sh uei3 n eng2 y i3 zh iii4 r ou2 sp ch iii2 ch eng2 y v2 t ian1 x ia4 zh iii4 j ian1 sp}|天下至柔莫过于水，水能以至柔，驰骋于天下至坚。
+TT_game_0077|{w uo3 z ii4 z uo4 c ong1 m ing5 sp q ve4 ch a4 d ian2 r b a3 z ii4 j i2 y ie3 d a1 j in4 q v4 sp}|我自作聪明，却差点儿把自己也搭进去。
+TT_game_0078|{w uo3 d e5 sh iii1 f u5 h e2 l iang3 g e5 sh iii1 x iong1 sp t a1 m en5 g ai1 sh a1 sp}|我的师傅和两个师兄，他们该杀？
+TT_game_0079|{d i4 er4 c ii4 j ian4 d ao4 t a1 sh iii4 z ai4 sh ou4 y ian4 sh ang5 sp t a1 b an4 z uo4 w u3 j i1 s ii4 j i1 x ing2 c ii4 sp}|第二次见到他是在寿宴上，他扮作舞姬伺机行刺。
+TT_game_0080|{t a1 d ang1 sh iii2 sh uo1 d e5 h ua4 sp w uo3 y i2 b ei4 z ii5 y ie3 w uang4 b u4 l iao3 sp}|他当时说的话，我一辈子也忘不了。
+TT_game_0081|{l iang3 g e5 r en2 d ou1 y iao4 p ing2 p ing2 an1 an1 sp c ai2 n eng2 y i4 q i3 g uo4 g eng4 d uo1 j ie2 r iii4 sp k an4 g eng4 d uo1 x i1 y iang2 sp}|两个人都要平平安安，才能一起过更多节日，看更多夕阳。
+TT_game_0082|{m ei2 c uo4 r sp l ing2 h u2 sh iii4 t a1 y i4 sh ou3 d ai4 d a4 d e5 sp p ing2 r iii4 l i3 zh ei4 g e5 x iao3 j ia1 h uo5 r sp d iao4 y i4 g en1 j ie2 m ao2 t a1 d ou1 x in1 t eng2 sp r u2 j in1 j ing4 y iao4 q v3 t a1 d e5 x ie3 m a5 sp}|没错儿，灵狐是他一手带大的，平日里这个小家伙儿，掉一根睫毛她都心疼，如今竟要取她的血吗？
+TT_game_0083|{b ie2 b ie2 b ie2 sp w uo3 g ang1 j iou4 l e5 n i3 n i3 j iou4 x iang2 s ii3 sp n a4 w uo2 q i3 b u2 sh iii4 b ai2 f ei4 g ong1 f u5 sp}|别别别，我刚救了你你就想死，那我岂不是白费功夫？
+TT_game_0084|{sh uo1 s an1 r iii4 zh iii1 n ei4 b u4 j i2 q i2 w u2 b ai2 l iang3 y in2 z ii5 s ong4 d ao4 f eng4 h uang2 sh an1 x ia4 sp j iou4 y iao4 l e5 y vn2 er5 d e5 m ing4 sp}|说三日之内不集齐五百两银子送到凤凰山下，就要了云儿的命。
+TT_game_0085|{g ao4 s u5 t a1 m en5 sp j in1 r iii4 w u2 d a4 r en2 z ai4 c ii3 sp j ing1 r ao3 l e5 k e3 sh iii4 s ii3 z uei4 sp}|告诉他们，今日吴大人在此，惊扰了可是死罪。
+TT_game_0086|{x ian4 z ai4 x iang2 q i3 l ai2 sp t a1 j ian3 zh iii2 j iou4 sh iii5 g u4 y i4 l ai4 z ai4 w uo3 d e5 d ian4 l i3 b u4 z ou3 sp}|现在想起来，他简直就是故意赖在我的店里不走。
+TT_game_0087|{b u4 r u2 w uo3 m en5 y ie3 q v4 m ai3 x ie1 d ong1 x i5 sp d eng3 d ao4 l e5 w uan3 sh ang5 zh ao3 g e5 p i4 j ing4 d e5 d i4 f ang5 y i4 q i3 g uan1 x ing1 b a5 sp}|不如我们也去买些东西，等到了晚上找个僻静的地方一起观星吧。
+TT_game_0088|{w uo3 q in1 y ian3 k an4 j ian4 zh ou1 l ao2 b an2 d ian3 x iang1 j i4 b ai4 l ao3 y ie5 sp z uei2 l i3 h ai2 n ian4 n ian4 y iou3 c ii2 sp}|我亲眼看见周老板点香祭拜姥爷，嘴里还念念有词。
+TT_game_0089|{g uai4 b u5 d e2 t a1 y i2 m ei3 y v4 x iang1 z eng4 sp y van2 l ai2 sh iii4 x iang2 p ie3 q ing1 g uan1 x i5 sp}|怪不得他以美玉相赠，原来是想撇清关系。
+TT_game_0090|{x iao3 sh iii1 d i4 y ia5 sp y ian3 x ia4 q ing2 x ing2 sp zh iii3 p a4 j iang1 h u2 zh ong1 r en2 sh ei2 y ie3 w u2 f a3 zh iii4 sh en1 sh iii4 w uai4 l ou5 sp}|小师弟呀，眼下情形，只怕江湖中人谁也无法置身事外喽。
+TT_game_0091|{j ie3 j ie5 h ao3 w uen1 r ou2 sp h ao3 p iao4 l iang5 sp t a1 d e5 p a4 z ii5 y ie3 sh iii5 x iang1 x iang1 d e5 sp}|姐姐好温柔，好漂亮，她的帕子也是香香的。
+TT_game_0092|{w uo2 zh iii3 sh iii4 x iang3 z uo4 y i4 w uan3 y v4 t ou5 g eng1 sp x iao3 g e1 r sp x ing2 g e5 f ang1 b ian4 b a5 sp}|我只是想做一碗芋头羹，小哥儿，行个方便吧。
+TT_game_0093|{b u4 zh iii1 d ao4 j in1 n ian2 sh u1 y iou3 m ei2 y iou3 z uo4 s ong1 h ua1 g ao1 sp m ou3 r en2 y iou4 z uo4 m ei2 z uo4 y v4 t ou5 g eng1 a5 sp}|不知道今年叔有没有做松花糕，某人又做没做芋头羹啊。
+TT_game_0094|{h a5 h a5 sp w uen1 j ie3 j ie5 zh e4 sh iii2 h ou4 d e5 n ai4 x ing4 d ao4 sh iii4 ch u1 q i2 d e5 h ao3 sp}|哈哈，温姐姐这时候的耐性倒是出奇的好。
+TT_game_0095|{en4 sp s uei1 r an2 m ei2 y iou3 t iao2 l iao4 sp y v2 b en3 sh en1 d e5 x ian1 w uei4 r y ing1 g ai1 z u2 g ou4 l a5 sp}|嗯，虽然没有调料，鱼本身的鲜味儿应该足够啦。
+TT_game_0096|{ch eng2 zh ong1 y iou3 n an4 sp w uo3 f u4 t ang1 d ao2 h uo3 y ie3 y i4 b u5 r ong2 c ii2 sp}|城中有难，我赴汤蹈火也义不容辞。
+TT_game_0097|{b u4 b u4 b u4 sp w uo2 zh iii3 sh iii4 h ao4 q i2 n a4 sh u1 t ie1 b a4 l a5 sp}|不不不，我只是好奇那书帖罢啦。
+TT_game_0098|{y iou3 x ie1 r en2 s uei1 g ua3 y ian2 d u2 x ing2 b u4 y v3 q vn2 ch u3 sp d an4 t a1 z ii4 j i3 x in1 zh ong1 h uo4 x v3 b ing4 b u2 sh iii4 w uan2 q van2 an4 d an4 d e5 sp}|有些人虽寡言独行不与群处，但他自己心中或许并不是完全暗淡的。
+TT_game_0099|{ai5 y ia5 sp zh ei4 y iang5 y i4 l ai2 sp b u2 f ei4 ch uei1 h uei1 zh iii1 l i4 j iou4 n eng2 h uo4 d e2 y i4 p i1 w uen3 d ing4 d e5 w u4 z ii1 sp}|哎呀，这样一来，不费吹灰之力就能获得一批稳定的物资。
+TT_game_0100|{c ong2 zh e4 l i3 ch ao2 d uei4 an4 w uang4 sp sh iii4 g e2 an4 w uang4 x iang4 m an3 ch eng2 d eng1 h uo3 sp z ii4 r an2 b u2 sh iii4 y i4 f an1 z ii1 w uei4 sp}|从这里朝对岸望，是隔岸望向满城灯火，自然不是一番滋味。

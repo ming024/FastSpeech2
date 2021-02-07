@@ -1,15 +1,12 @@
 import os
-from data import ljspeech, blizzard2013
+
 import hparams as hp
+from data import m2voc, aishell3
 
 
 def main():
-    in_dir = hp.data_path
-
-    if hp.dataset == "LJSpeech":
-        ljspeech.prepare_align(in_dir)
-    if hp.dataset == "Blizzard2013":
-        blizzard2013.prepare_align(in_dir)
+    m2voc.prepare_align(hp.m2voc_path)
+    aishell3.prepare_align(hp.aishell3_path)
 
 
 if __name__ == "__main__":

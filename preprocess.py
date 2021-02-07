@@ -1,19 +1,17 @@
 import os
-from data import ljspeech, blizzard2013
+
 import hparams as hp
+from data.utils import build_from_path
 
 
-def write_metadata(train, val, out_dir):
-    with open(os.path.join(out_dir, 'train.txt'), 'w', encoding='utf-8') as f:
+def write_metadata(train, out_dir):
+    with open(os.path.join(out_dir, "train.txt"), "w", encoding="utf-8") as f:
         for m in train:
-            f.write(m + '\n')
-    with open(os.path.join(out_dir, 'val.txt'), 'w', encoding='utf-8') as f:
-        for m in val:
-            f.write(m + '\n')
+            f.write(m + "\n")
 
 
 def main():
-    in_dir = hp.data_path
+    in_dir = hp.raw_path
     out_dir = hp.preprocessed_path
     mel_out_dir = os.path.join(out_dir, "mel")
     if not os.path.exists(mel_out_dir):
@@ -28,11 +26,8 @@ def main():
     if not os.path.exists(energy_out_dir):
         os.makedirs(energy_out_dir, exist_ok=True)
 
-    if hp.dataset == "LJSpeech":
-        train, val = ljspeech.build_from_path(in_dir, out_dir)
-    if hp.dataset == "Blizzard2013":
-        train, val = blizzard2013.build_from_path(in_dir, out_dir)
-    write_metadata(train, val, out_dir)
+    train = build_from_path(in_dir, out_dir)
+    write_metadata(train, out_dir)
 
 
 if __name__ == "__main__":

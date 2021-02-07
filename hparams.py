@@ -1,39 +1,42 @@
 import os
 
+
 # Dataset
-dataset = "LJSpeech"
-data_path = "/home/ming/Data/Raw/LJSpeech-1.1"
-#dataset = "Blizzard2013"
-#data_path = "./Blizzard-2013/train/segmented/"
+dataset = "M2VoC"
+aishell3_path = "./AISHELL-3"
+m2voc_path = "./M2VoC"
+
+text_cleaners = []
+language = "zh"
 
 
-# Text
-text_cleaners = ['english_cleaners']
+# Some paths
+raw_path = os.path.join("./raw_data/", dataset)
+preprocessed_path = os.path.join("./preprocessed_data/", dataset)
+checkpoint_path = os.path.join("./ckpt/", dataset)
+synth_path = os.path.join("./synth/", dataset)
+log_path = os.path.join("./log/", dataset)
+test_path = os.path.join("./results/", dataset)
 
 
 # Audio and mel
-### for LJSpeech ###
 sampling_rate = 22050
 filter_length = 1024
 hop_length = 256
 win_length = 1024
-### for Blizzard2013 ###
-#sampling_rate = 16000
-#filter_length = 800
-#hop_length = 200
-#win_length = 800
 
+preemph = 0.0
 max_wav_value = 32768.0
 n_mel_channels = 80
 mel_fmin = 0.0
-mel_fmax = 8000.0
+mel_fmax = None
 
 
 # FastSpeech 2
 encoder_layer = 4
 encoder_head = 2
 encoder_hidden = 256
-decoder_layer = 4
+decoder_layer = 6
 decoder_head = 2
 decoder_hidden = 256
 fft_conv1d_filter_size = 1024
@@ -49,53 +52,55 @@ max_seq_len = 1000
 
 
 # Quantization for F0 and energy
-### for LJSpeech ###
-f0_min = 71.0
-f0_max = 795.8
-energy_min = 0.0
-energy_max = 315.0
-### for Blizzard2013 ###
-#f0_min = 71.0
-#f0_max = 786.7
-#energy_min = 21.23
-#energy_max = 101.02
+f0_min = -3.758
+f0_max = 10.071
+energy_min = -1.684
+energy_max = 6.827
+
+# For plotting F0 curves
+f0_mean = 207.646
+f0_std = 56.274
 
 n_bins = 256
 
 
-# Checkpoints and synthesis path
-preprocessed_path = os.path.join("./preprocessed/", dataset)
-checkpoint_path = os.path.join("./ckpt/", dataset)
-synth_path = os.path.join("./synth/", dataset)
-eval_path = os.path.join("./eval/", dataset)
-log_path = os.path.join("./log/", dataset)
-test_path = "./results"
-
-
 # Optimizer
 batch_size = 16
-epochs = 1000
+epochs = 5000
 n_warm_up_step = 4000
 grad_clip_thresh = 1.0
 acc_steps = 1
 
 betas = (0.9, 0.98)
 eps = 1e-9
-weight_decay = 0.
+weight_decay = 0.0
 
-
-# Vocoder
-vocoder = 'melgan'  # 'waveglow' or 'melgan'
-
+aneal_steps = [300000, 400000, 500000]
+aneal_rate = 0.3
 
 # Log-scaled duration
-log_offset = 1.
+log_offset = 1.0
 
 
 # Save, log and synthesis
-save_step = 10000
+save_step = 50000
 synth_step = 1000
-eval_step = 1000
-eval_size = 256
 log_step = 1000
 clear_Time = 20
+
+
+# Pretrained speaker representations
+d_vec_size = 128
+x_vec_size = 128
+adain_emb_size = 128
+
+
+# Jointly optimized speaker representations
+speaker_emb_size = 128
+
+# GST
+ref_filters = [32, 32, 64, 64, 128, 128]
+ref_gru_hidden = 128
+gst_size = 128
+n_style_token = 10
+n_style_attn_head = 4
