@@ -5,7 +5,7 @@ This project is based on [xcmyz's implementation](https://github.com/xcmyz/FastS
 
 There are several versions of FastSpeech 2.
 This implementation is more similar to [version 1](https://arxiv.org/abs/2006.04558v1), which uses F0 values as the pitch features.
-On the other hand, pitch spectrograms extracted by continuous wavelet transform are used as the pitch features in the [laer versions](https://arxiv.org/abs/2006.04558).
+On the other hand, pitch spectrograms extracted by continuous wavelet transform are used as the pitch features in the [later versions](https://arxiv.org/abs/2006.04558).
 
 ![](./img/model.png)
 
