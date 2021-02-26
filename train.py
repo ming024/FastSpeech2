@@ -1,273 +1,198 @@
+import argparse
+import os
+
 import torch
+import yaml
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
+from tqdm import tqdm
 
-import numpy as np
-import argparse
-import os
-import time
-
-from fastspeech2 import FastSpeech2
-from loss import FastSpeech2Loss
+from utils.model import get_model, get_vocoder, get_param_num
+from utils.tools import to_device, log, synth_one_sample
+from model import FastSpeech2Loss
 from dataset import Dataset
-from optimizer import ScheduledOptim
+
 from evaluate import evaluate
-import hparams as hp
-import utils
-import audio as Audio
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-def main(args):
-    torch.manual_seed(0)
+def main(args, configs):
+    print("Prepare training ...")
 
-    # Get device
-    device = torch.device('cuda'if torch.cuda.is_available()else 'cpu')
+    preprocess_config, model_config, train_config = configs
 
     # Get dataset
-    dataset = Dataset("train.txt")
-    loader = DataLoader(dataset, batch_size=hp.batch_size**2, shuffle=True,
-                        collate_fn=dataset.collate_fn, drop_last=True, num_workers=0)
+    dataset = Dataset(
+        "train.txt", preprocess_config, train_config, sort=True, drop_last=True
+    )
+    batch_size = train_config["optimizer"]["batch_size"]
+    group_size = 4  # Set this larger than 1 to enable sorting in Dataset
+    assert batch_size * group_size < len(dataset)
+    loader = DataLoader(
+        dataset,
+        batch_size=batch_size * group_size,
+        shuffle=True,
+        collate_fn=dataset.collate_fn,
+    )
 
-    # Define model
-    model = nn.DataParallel(FastSpeech2()).to(device)
-    print("Model Has Been Defined")
-    num_param = utils.get_param_num(model)
-    print('Number of FastSpeech2 Parameters:', num_param)
-
-    # Optimizer and loss
-    optimizer = torch.optim.Adam(
-        model.parameters(), betas=hp.betas, eps=hp.eps, weight_decay=hp.weight_decay)
-    scheduled_optim = ScheduledOptim(
-        optimizer, hp.decoder_hidden, hp.n_warm_up_step, args.restore_step)
-    Loss = FastSpeech2Loss().to(device)
-    print("Optimizer and Loss Function Defined.")
-
-    # Load checkpoint if exists
-    checkpoint_path = os.path.join(hp.checkpoint_path)
-    try:
-        checkpoint = torch.load(os.path.join(
-            checkpoint_path, 'checkpoint_{}.pth.tar'.format(args.restore_step)))
-        model.load_state_dict(checkpoint['model'])
-        optimizer.load_state_dict(checkpoint['optimizer'])
-        print("\n---Model Restored at Step {}---\n".format(args.restore_step))
-    except:
-        print("\n---Start New Training---\n")
-        if not os.path.exists(checkpoint_path):
-            os.makedirs(checkpoint_path)
+    # Prepare model
+    model, optimizer = get_model(args, configs, device, train=True)
+    model = nn.DataParallel(model)
+    num_param = get_param_num(model)
+    Loss = FastSpeech2Loss(preprocess_config, model_config).to(device)
+    print("Number of FastSpeech2 Parameters:", num_param)
 
     # Load vocoder
-    if hp.vocoder == 'melgan':
-        melgan = utils.get_melgan()
-    elif hp.vocoder == 'waveglow':
-        waveglow = utils.get_waveglow()
+    vocoder = get_vocoder(model_config, device)
 
     # Init logger
-    log_path = hp.log_path
-    if not os.path.exists(log_path):
-        os.makedirs(log_path)
-        os.makedirs(os.path.join(log_path, 'train'))
-        os.makedirs(os.path.join(log_path, 'validation'))
-    train_logger = SummaryWriter(os.path.join(log_path, 'train'))
-    val_logger = SummaryWriter(os.path.join(log_path, 'validation'))
-
-    # Init synthesis directory
-    synth_path = hp.synth_path
-    if not os.path.exists(synth_path):
-        os.makedirs(synth_path)
-
-    # Define Some Information
-    Time = np.array([])
-    Start = time.perf_counter()
+    for p in train_config["path"].values():
+        os.makedirs(p, exist_ok=True)
+    train_log_path = os.path.join(train_config["path"]["log_path"], "train")
+    val_log_path = os.path.join(train_config["path"]["log_path"], "val")
+    os.makedirs(train_log_path, exist_ok=True)
+    os.makedirs(val_log_path, exist_ok=True)
+    train_logger = SummaryWriter(train_log_path)
+    val_logger = SummaryWriter(val_log_path)
 
     # Training
-    model = model.train()
-    for epoch in range(hp.epochs):
-        # Get Training Loader
-        total_step = hp.epochs * len(loader) * hp.batch_size
+    step = args.restore_step + 1
+    epoch = 1
+    grad_acc_step = train_config["optimizer"]["grad_acc_step"]
+    grad_clip_thresh = train_config["optimizer"]["grad_clip_thresh"]
+    total_step = train_config["step"]["total_step"]
+    log_step = train_config["step"]["log_step"]
+    save_step = train_config["step"]["save_step"]
+    synth_step = train_config["step"]["synth_step"]
+    val_step = train_config["step"]["val_step"]
 
-        for i, batchs in enumerate(loader):
-            for j, data_of_batch in enumerate(batchs):
-                start_time = time.perf_counter()
+    outer_bar = tqdm(total=total_step, desc="Training", position=0)
+    outer_bar.n = args.restore_step
+    outer_bar.update()
 
-                current_step = i*hp.batch_size + j + args.restore_step + \
-                    epoch*len(loader)*hp.batch_size + 1
-
-                # Get Data
-                text = torch.from_numpy(
-                    data_of_batch["text"]).long().to(device)
-                mel_target = torch.from_numpy(
-                    data_of_batch["mel_target"]).float().to(device)
-                D = torch.from_numpy(data_of_batch["D"]).long().to(device)
-                log_D = torch.from_numpy(
-                    data_of_batch["log_D"]).float().to(device)
-                f0 = torch.from_numpy(data_of_batch["f0"]).float().to(device)
-                energy = torch.from_numpy(
-                    data_of_batch["energy"]).float().to(device)
-                src_len = torch.from_numpy(
-                    data_of_batch["src_len"]).long().to(device)
-                mel_len = torch.from_numpy(
-                    data_of_batch["mel_len"]).long().to(device)
-                max_src_len = np.max(data_of_batch["src_len"]).astype(np.int32)
-                max_mel_len = np.max(data_of_batch["mel_len"]).astype(np.int32)
+    while True:
+        inner_bar = tqdm(total=len(loader), desc="Epoch {}".format(epoch), position=1)
+        for batchs in loader:
+            for batch in batchs:
+                batch = to_device(batch, device)
 
                 # Forward
-                mel_output, mel_postnet_output, log_duration_output, f0_output, energy_output, src_mask, mel_mask, _ = model(
-                    text, src_len, mel_len, D, f0, energy, max_src_len, max_mel_len)
+                output = model(*(batch[2:]))
 
                 # Cal Loss
-                mel_loss, mel_postnet_loss, d_loss, f_loss, e_loss = Loss(
-                    log_duration_output, log_D, f0_output, f0, energy_output, energy, mel_output, mel_postnet_output, mel_target, ~src_mask, ~mel_mask)
-                total_loss = mel_loss + mel_postnet_loss + d_loss + f_loss + e_loss
-
-                # Logger
-                t_l = total_loss.item()
-                m_l = mel_loss.item()
-                m_p_l = mel_postnet_loss.item()
-                d_l = d_loss.item()
-                f_l = f_loss.item()
-                e_l = e_loss.item()
-                with open(os.path.join(log_path, "total_loss.txt"), "a") as f_total_loss:
-                    f_total_loss.write(str(t_l)+"\n")
-                with open(os.path.join(log_path, "mel_loss.txt"), "a") as f_mel_loss:
-                    f_mel_loss.write(str(m_l)+"\n")
-                with open(os.path.join(log_path, "mel_postnet_loss.txt"), "a") as f_mel_postnet_loss:
-                    f_mel_postnet_loss.write(str(m_p_l)+"\n")
-                with open(os.path.join(log_path, "duration_loss.txt"), "a") as f_d_loss:
-                    f_d_loss.write(str(d_l)+"\n")
-                with open(os.path.join(log_path, "f0_loss.txt"), "a") as f_f_loss:
-                    f_f_loss.write(str(f_l)+"\n")
-                with open(os.path.join(log_path, "energy_loss.txt"), "a") as f_e_loss:
-                    f_e_loss.write(str(e_l)+"\n")
+                losses = Loss(batch, output)
+                total_loss = losses[0]
 
                 # Backward
-                total_loss = total_loss / hp.acc_steps
+                total_loss = total_loss / grad_acc_step
                 total_loss.backward()
-                if current_step % hp.acc_steps != 0:
-                    continue
+                if step % grad_acc_step == 0:
+                    # Clipping gradients to avoid gradient explosion
+                    nn.utils.clip_grad_norm_(model.parameters(), grad_clip_thresh)
 
-                # Clipping gradients to avoid gradient explosion
-                nn.utils.clip_grad_norm_(
-                    model.parameters(), hp.grad_clip_thresh)
+                    # Update weights
+                    optimizer.step_and_update_lr()
+                    optimizer.zero_grad()
 
-                # Update weights
-                scheduled_optim.step_and_update_lr()
-                scheduled_optim.zero_grad()
+                if step % log_step == 0:
+                    losses = [l.item() for l in losses]
+                    message1 = "Step {}/{}, ".format(step, total_step)
+                    message2 = "Total Loss: {:.4f}, Mel Loss: {:.4f}, Mel PostNet Loss: {:.4f}, Pitch Loss: {:.4f}, Energy Loss: {:.4f}, Duration Loss: {:.4f}".format(
+                        *losses
+                    )
 
-                # Print
-                if current_step % hp.log_step == 0:
-                    Now = time.perf_counter()
+                    with open(os.path.join(train_log_path, "log.txt"), "a") as f:
+                        f.write(message1 + message2 + "\n")
 
-                    str1 = "Epoch [{}/{}], Step [{}/{}]:".format(
-                        epoch+1, hp.epochs, current_step, total_step)
-                    str2 = "Total Loss: {:.4f}, Mel Loss: {:.4f}, Mel PostNet Loss: {:.4f}, Duration Loss: {:.4f}, F0 Loss: {:.4f}, Energy Loss: {:.4f};".format(
-                        t_l, m_l, m_p_l, d_l, f_l, e_l)
-                    str3 = "Time Used: {:.3f}s, Estimated Time Remaining: {:.3f}s.".format(
-                        (Now-Start), (total_step-current_step)*np.mean(Time))
+                    outer_bar.write(message1 + message2)
 
-                    print("\n" + str1)
-                    print(str2)
-                    print(str3)
+                    log(train_logger, step, losses=losses)
 
-                    with open(os.path.join(log_path, "log.txt"), "a") as f_log:
-                        f_log.write(str1 + "\n")
-                        f_log.write(str2 + "\n")
-                        f_log.write(str3 + "\n")
-                        f_log.write("\n")
+                if step % synth_step == 0:
+                    fig, wav_reconstruction, wav_prediction, tag = synth_one_sample(
+                        batch,
+                        output,
+                        vocoder,
+                        model_config,
+                        preprocess_config,
+                    )
+                    log(
+                        train_logger,
+                        fig=fig,
+                        tag="Training/step_{}_{}".format(step, tag),
+                    )
+                    sampling_rate = preprocess_config["preprocessing"]["audio"][
+                        "sampling_rate"
+                    ]
+                    log(
+                        train_logger,
+                        audio=wav_reconstruction,
+                        sampling_rate=sampling_rate,
+                        tag="Training/step_{}_{}_reconstructed".format(step, tag),
+                    )
+                    log(
+                        train_logger,
+                        audio=wav_prediction,
+                        sampling_rate=sampling_rate,
+                        tag="Training/step_{}_{}_synthesized".format(step, tag),
+                    )
 
-                    train_logger.add_scalar(
-                        'Loss/total_loss', t_l, current_step)
-                    train_logger.add_scalar('Loss/mel_loss', m_l, current_step)
-                    train_logger.add_scalar(
-                        'Loss/mel_postnet_loss', m_p_l, current_step)
-                    train_logger.add_scalar(
-                        'Loss/duration_loss', d_l, current_step)
-                    train_logger.add_scalar('Loss/F0_loss', f_l, current_step)
-                    train_logger.add_scalar(
-                        'Loss/energy_loss', e_l, current_step)
-
-                if current_step % hp.save_step == 0:
-                    torch.save({'model': model.state_dict(), 'optimizer': optimizer.state_dict(
-                    )}, os.path.join(checkpoint_path, 'checkpoint_{}.pth.tar'.format(current_step)))
-                    print("save model at step {} ...".format(current_step))
-
-                if current_step % hp.synth_step == 0:
-                    length = mel_len[0].item()
-                    mel_target_torch = mel_target[0, :length].detach(
-                    ).unsqueeze(0).transpose(1, 2)
-                    mel_target = mel_target[0, :length].detach(
-                    ).cpu().transpose(0, 1)
-                    mel_torch = mel_output[0, :length].detach(
-                    ).unsqueeze(0).transpose(1, 2)
-                    mel = mel_output[0, :length].detach().cpu().transpose(0, 1)
-                    mel_postnet_torch = mel_postnet_output[0, :length].detach(
-                    ).unsqueeze(0).transpose(1, 2)
-                    mel_postnet = mel_postnet_output[0, :length].detach(
-                    ).cpu().transpose(0, 1)
-                    Audio.tools.inv_mel_spec(mel, os.path.join(
-                        synth_path, "step_{}_griffin_lim.wav".format(current_step)))
-                    Audio.tools.inv_mel_spec(mel_postnet, os.path.join(
-                        synth_path, "step_{}_postnet_griffin_lim.wav".format(current_step)))
-
-                    if hp.vocoder == 'melgan':
-                        utils.melgan_infer(mel_torch, melgan, os.path.join(
-                            hp.synth_path, 'step_{}_{}.wav'.format(current_step, hp.vocoder)))
-                        utils.melgan_infer(mel_postnet_torch, melgan, os.path.join(
-                            hp.synth_path, 'step_{}_postnet_{}.wav'.format(current_step, hp.vocoder)))
-                        utils.melgan_infer(mel_target_torch, melgan, os.path.join(
-                            hp.synth_path, 'step_{}_ground-truth_{}.wav'.format(current_step, hp.vocoder)))
-                    elif hp.vocoder == 'waveglow':
-                        utils.waveglow_infer(mel_torch, waveglow, os.path.join(
-                            hp.synth_path, 'step_{}_{}.wav'.format(current_step, hp.vocoder)))
-                        utils.waveglow_infer(mel_postnet_torch, waveglow, os.path.join(
-                            hp.synth_path, 'step_{}_postnet_{}.wav'.format(current_step, hp.vocoder)))
-                        utils.waveglow_infer(mel_target_torch, waveglow, os.path.join(
-                            hp.synth_path, 'step_{}_ground-truth_{}.wav'.format(current_step, hp.vocoder)))
-
-                    f0 = f0[0, :length].detach().cpu().numpy()
-                    energy = energy[0, :length].detach().cpu().numpy()
-                    f0_output = f0_output[0, :length].detach().cpu().numpy()
-                    energy_output = energy_output[0,
-                                                  :length].detach().cpu().numpy()
-
-                    utils.plot_data([(mel_postnet.numpy(), f0_output, energy_output), (mel_target.numpy(), f0, energy)],
-                                    ['Synthetized Spectrogram', 'Ground-Truth Spectrogram'], filename=os.path.join(synth_path, 'step_{}.png'.format(current_step)))
-
-                if current_step % hp.eval_step == 0:
+                if step % val_step == 0:
                     model.eval()
-                    with torch.no_grad():
-                        d_l, f_l, e_l, m_l, m_p_l = evaluate(
-                            model, current_step)
-                        t_l = d_l + f_l + e_l + m_l + m_p_l
-
-                        val_logger.add_scalar(
-                            'Loss/total_loss', t_l, current_step)
-                        val_logger.add_scalar(
-                            'Loss/mel_loss', m_l, current_step)
-                        val_logger.add_scalar(
-                            'Loss/mel_postnet_loss', m_p_l, current_step)
-                        val_logger.add_scalar(
-                            'Loss/duration_loss', d_l, current_step)
-                        val_logger.add_scalar(
-                            'Loss/F0_loss', f_l, current_step)
-                        val_logger.add_scalar(
-                            'Loss/energy_loss', e_l, current_step)
+                    message = evaluate(model, step, configs, val_logger, vocoder)
+                    with open(os.path.join(val_log_path, "log.txt"), "a") as f:
+                        f.write(message + "\n")
+                    outer_bar.write(message)
 
                     model.train()
 
-                end_time = time.perf_counter()
-                Time = np.append(Time, end_time - start_time)
-                if len(Time) == hp.clear_Time:
-                    temp_value = np.mean(Time)
-                    Time = np.delete(
-                        Time, [i for i in range(len(Time))], axis=None)
-                    Time = np.append(Time, temp_value)
+                if step % save_step == 0:
+                    torch.save(
+                        {
+                            "model": model.module.state_dict(),
+                            "optimizer": optimizer._optimizer.state_dict(),
+                        },
+                        os.path.join(
+                            train_config["path"]["ckpt_path"],
+                            "{}.pth.tar".format(step),
+                        ),
+                    )
+
+                if step == total_step:
+                    quit()
+                step += 1
+                outer_bar.update(1)
+
+            inner_bar.update(1)
+        epoch += 1
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
-    parser.add_argument('--restore_step', type=int, default=0)
+    parser.add_argument("--restore_step", type=int, default=0)
+    parser.add_argument(
+        "-p",
+        "--preprocess_config",
+        type=str,
+        required=True,
+        help="path to preprocess.yaml",
+    )
+    parser.add_argument(
+        "-m", "--model_config", type=str, required=True, help="path to model.yaml"
+    )
+    parser.add_argument(
+        "-t", "--train_config", type=str, required=True, help="path to train.yaml"
+    )
     args = parser.parse_args()
 
-    main(args)
+    # Read Config
+    preprocess_config = yaml.load(
+        open(args.preprocess_config, "r"), Loader=yaml.FullLoader
+    )
+    model_config = yaml.load(open(args.model_config, "r"), Loader=yaml.FullLoader)
+    train_config = yaml.load(open(args.train_config, "r"), Loader=yaml.FullLoader)
+    configs = (preprocess_config, model_config, train_config)
+
+    main(args, configs)

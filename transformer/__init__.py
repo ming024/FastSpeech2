@@ -1,5 +1,2 @@
-import transformer.Constants
-import transformer.Modules
-import transformer.Layers
-import transformer.SubLayers
-import transformer.Models
+from .Models import Encoder, Decoder
+from .Layers import PostNet

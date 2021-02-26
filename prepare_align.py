@@ -1,16 +1,23 @@
-import os
-from data import ljspeech, blizzard2013
-import hparams as hp
+import argparse
+
+import yaml
+
+from preprocessor import ljspeech, aishell3, libritts
 
 
-def main():
-    in_dir = hp.data_path
-
-    if hp.dataset == "LJSpeech":
-        ljspeech.prepare_align(in_dir)
-    if hp.dataset == "Blizzard2013":
-        blizzard2013.prepare_align(in_dir)
+def main(config):
+    if "LJSpeech" in config["dataset"]:
+        ljspeech.prepare_align(config)
+    if "AISHELL3" in config["dataset"]:
+        aishell3.prepare_align(config)
+    if "LibriTTS" in config["dataset"]:
+        libritts.prepare_align(config)
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("config", type=str, help="path to preprocess.yaml")
+    args = parser.parse_args()
+
+    config = yaml.load(open(args.config, "r"), Loader=yaml.FullLoader)
+    main(config)

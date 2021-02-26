@@ -1,12 +1,17 @@
-numpy == 1.19.0
-torch == 1.6.0
-tgt == 1.4.4
-scipy == 1.5.0
-pyworld == 0.2.10
-librosa == 0.7.2
-numba == 0.48
-matplotlib == 3.2.2
-unidecode == 1.1.1
-inflect == 4.1.0
 g2p-en == 2.1.0
-tensorboard== 2.2.2
+inflect == 4.1.0
+librosa == 0.7.2
+matplotlib == 3.2.2
+numba == 0.48
+numpy == 1.19.0
+pypinyin==0.39.0
+pyworld == 0.2.10
+PyYAML==5.4.1
+scikit-learn==0.23.2
+scipy == 1.5.0
+soundfile==0.10.3.post1
+tensorboard == 2.2.2
+tgt == 1.4.4
+torch == 1.7.0
+tqdm==4.46.1
+unidecode == 1.1.1

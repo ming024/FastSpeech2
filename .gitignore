@@ -111,11 +111,8 @@ __pycache__
 montreal-forced-aligner/
 
 # data, checkpoint, and models
-preprocessed/
-ckpt/
-results/
-synth/
-log/
-eval/
-waveglow/pretrained_model/*
-
+raw_data/
+output/
+*.npy
+TextGrid/
+speakers.json
