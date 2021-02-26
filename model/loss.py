@@ -13,7 +13,6 @@ class FastSpeech2Loss(nn.Module):
         self.energy_feature_level = preprocess_config["preprocessing"]["energy"][
             "feature"
         ]
-        self.max_seq_len = model_config["max_seq_len"]
         self.mse_loss = nn.MSELoss()
         self.mae_loss = nn.L1Loss()
 
@@ -41,7 +40,8 @@ class FastSpeech2Loss(nn.Module):
         src_masks = ~src_masks
         mel_masks = ~mel_masks
         log_duration_targets = torch.log(duration_targets.float() + 1)
-        mel_targets = mel_targets[:, : self.max_seq_len, :]
+        mel_targets = mel_targets[:, : mel_masks.shape[1], :]
+        mel_masks = mel_masks[:, :mel_masks.shape[1]]
 
         log_duration_targets.requires_grad = False
         pitch_targets.requires_grad = False

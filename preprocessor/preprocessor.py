@@ -209,7 +209,10 @@ class Preprocessor:
             # Phoneme-level average
             pos = 0
             for i, d in enumerate(duration):
-                pitch[i] = np.mean(pitch[pos : pos + d])
+                if d > 0:
+                    pitch[i] = np.mean(pitch[pos : pos + d])
+                else:
+                    pitch[i] = 0
                 pos += d
             pitch = pitch[: len(duration)]
 
@@ -217,7 +220,10 @@ class Preprocessor:
             # Phoneme-level average
             pos = 0
             for i, d in enumerate(duration):
-                energy[i] = np.mean(energy[pos : pos + d])
+                if d > 0:
+                    energy[i] = np.mean(energy[pos : pos + d])
+                else:
+                    energy[i] = 0
                 pos += d
             energy = energy[: len(duration)]
 
