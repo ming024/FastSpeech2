@@ -140,3 +140,15 @@ Please inform me if you find any mistakes in this repo, or any useful tips to tr
 - [xcmyz's FastSpeech implementation](https://github.com/xcmyz/FastSpeech)
 - [TensorSpeech's FastSpeech 2 implementation](https://github.com/TensorSpeech/TensorflowTTS)
 - [rishikksh20's FastSpeech 2 implementation](https://github.com/rishikksh20/FastSpeech2)
+
+# Citation
+```
+@misc{chien2021investigating,
+  title={Investigating on Incorporating Pretrained and Learnable Speaker Representations for Multi-Speaker Multi-Style Text-to-Speech}, 
+  author={Chung-Ming Chien and Jheng-Hao Lin and Chien-yu Huang and Po-chun Hsu and Hung-yi Lee},
+  year={2021},
+  eprint={2103.04088},
+  archivePrefix={arXiv},
+  primaryClass={eess.AS}
+}
+```
