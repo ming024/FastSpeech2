@@ -1,6 +1,16 @@
 # FastSpeech 2 for ICASSP 2021 M2VoC challenge
 
 ## Citing Us
+```
+@misc{chien2021investigating,
+  title={Investigating on Incorporating Pretrained and Learnable Speaker Representations for Multi-Speaker Multi-Style Text-to-Speech}, 
+  author={Chung-Ming Chien and Jheng-Hao Lin and Chien-yu Huang and Po-chun Hsu and Hung-yi Lee},
+  year={2021},
+  eprint={2103.04088},
+  archivePrefix={arXiv},
+  primaryClass={eess.AS}
+}
+```
 
 ## Audio Samples
 Audio samples submitted to ICASSP 2021 M2VoC challenge can be found [here](https://ming024.github.io/M2VoC/).  
