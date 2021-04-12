@@ -1,7 +1,7 @@
 path:
-  ckpt_path: "./output/ckpt/LJSpeech"
-  log_path: "./output/log/LJSpeech"
-  result_path: "./output/result/LJSpeech"
+  ckpt_path: "/content/drive/MyDrive/Speech/TTS/ckpt/LJSpeech"
+  log_path: "/content/drive/MyDrive/Speech/TTS/log/LJSpeech"
+  result_path: "/content/drive/MyDrive/Speech/TTS/result/LJSpeech"
 optimizer:
   batch_size: 16
   betas: [0.9, 0.98]
@@ -17,4 +17,4 @@ step:
   log_step: 100
   synth_step: 1000
   val_step: 1000
-  save_step: 100000
+  save_step: 50000
