@@ -66,7 +66,7 @@ def preprocess_arabic(text, preprocess_config):
     phones = ''
     for word in text.split(' '):
         if word in punctuation:
-          phones+=word 
+          phones+=" "+word+ " " 
         elif len(word.strip()) > 0:
           phones+=phonetise(word)[0]
         
