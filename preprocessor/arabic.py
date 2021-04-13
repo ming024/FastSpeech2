@@ -22,7 +22,7 @@ def prepare_align(config):
             text = parts[1]
             text = _clean_text(text, cleaners)
 
-            wav_path = os.path.join(in_dir, "wavs", "{}.wav".format(base_name))
+            wav_path = os.path.join(in_dir, "wav", "{}.wav".format(base_name))
             if os.path.exists(wav_path):
                 os.makedirs(os.path.join(out_dir, speaker), exist_ok=True)
                 wav, _ = librosa.load(wav_path, sampling_rate)
