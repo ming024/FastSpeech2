@@ -1,4 +1,4 @@
-dataset: "LJSpeech"
+dataset: "Arabic"
 
 path:
   corpus_path: "/content/arabic-speech-corpus"

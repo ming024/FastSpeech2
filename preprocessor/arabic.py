@@ -19,7 +19,7 @@ def prepare_align(config):
         for line in tqdm(f):
             parts = line.strip().split("|")
             base_name = parts[0]
-            text = parts[2]
+            text = parts[1]
             text = _clean_text(text, cleaners)
 
             wav_path = os.path.join(in_dir, "wavs", "{}.wav".format(base_name))
