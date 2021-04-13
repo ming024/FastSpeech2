@@ -160,7 +160,7 @@ class Preprocessor:
         )
 
         # Get alignments
-        textgrid = tgt.io.read_textgrid(tg_path)
+        textgrid = tgt.io.read_textgrid(tg_path, encoding='utf-8-sig')
         phone, duration, start, end = self.get_alignment(
             textgrid.get_tier_by_name("phones")
         )
