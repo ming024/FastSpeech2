@@ -32,6 +32,7 @@ def read_lexicon(lex_path):
 
 def preprocess_english(text, preprocess_config):
     text = text.rstrip(punctuation)
+    print(text)
     lexicon = read_lexicon(preprocess_config["path"]["lexicon_path"])
 
     g2p = G2p()
@@ -58,14 +59,18 @@ def preprocess_english(text, preprocess_config):
     return np.array(sequence)
 
 def preprocess_arabic(text, preprocess_config):
+
     text = text.rstrip(punctuation)
+    print(text)
     text = buckwalter.untrans(text)
     phones = ''
     for word in text.split(' '):
-        if len(word.strip()) > 0:
-            phones+=phonetise(word)[0]
+        if word in punctuation:
+          phones+=word 
+        elif len(word.strip()) > 0:
+          phones+=phonetise(word)[0]
+        
     phones = "{" + "}{".join(phones.split(' ')) + "}"
-    phones = re.sub(r"\{[^\w\s]?\}", "{sp}", phones)
     phones = phones.replace("}{", " ")
 
     print("Raw Text Sequence: {}".format(text))
