@@ -58,15 +58,15 @@ def preprocess_english(text, preprocess_config):
 
     return np.array(sequence)
 
-def preprocess_arabic(text, preprocess_config):
+def preprocess_arabic(text, preprocess_config, bw = False):
 
     text = text.rstrip(punctuation)
-    print(text)
-    text = buckwalter.untrans(text)
+    if bw:
+        text = buckwalter.untrans(text)
     phones = ''
     for word in text.split(' '):
         if word in punctuation:
-          phones+=" "+word+ " " 
+          pass 
         elif len(word.strip()) > 0:
           phones+=phonetise(word)[0]
         
@@ -164,6 +164,14 @@ if __name__ == "__main__":
         default=0,
         help="speaker ID for multi-speaker synthesis, for single-sentence mode only",
     )
+
+    parser.add_argument(
+        "--bw",
+        type=bool,
+        default=True,
+        help="whether the input in buckwalter format",
+    )
+
     parser.add_argument(
         "-p",
         "--preprocess_config",
@@ -234,7 +242,7 @@ if __name__ == "__main__":
         elif preprocess_config["preprocessing"]["text"]["language"] == "zh":
             texts = np.array([preprocess_mandarin(args.text, preprocess_config)])
         elif preprocess_config["preprocessing"]["text"]["language"] == "ar":
-            texts = np.array([preprocess_arabic(args.text, preprocess_config)])
+            texts = np.array([preprocess_arabic(args.text, preprocess_config, bw = args.bw)])
         text_lens = np.array([len(texts[0])])
         batchs = [(ids, raw_texts, speakers, texts, text_lens, max(text_lens))]
 
