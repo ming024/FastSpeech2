@@ -1,4 +1,6 @@
 g2p-en == 2.1.0
+lang-trans
+arabic-pronounce
 inflect == 4.1.0
 librosa == 0.7.2
 matplotlib == 3.2.2

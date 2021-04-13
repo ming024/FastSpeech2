@@ -9,8 +9,8 @@ path:
 preprocessing:
   val_size: 20
   text:
-    text_cleaners: ["english_cleaners"]
-    language: "en"
+    text_cleaners: []
+    language: "ar"
   audio:
     sampling_rate: 22050
     max_wav_value: 32768.0
