@@ -68,9 +68,9 @@ def main(args, configs):
     synth_step = train_config["step"]["synth_step"]
     val_step = train_config["step"]["val_step"]
 
-    outer_bar = tqdm(total=total_step, desc="Training", position=0)
-    outer_bar.n = args.restore_step
-    outer_bar.update()
+    # outer_bar = tqdm(total=total_step, desc="Training", position=0)
+    # outer_bar.n = args.restore_step
+    # outer_bar.update()
 
     while True:
         inner_bar = tqdm(total=len(loader), desc="Epoch {}".format(epoch), position=1)
@@ -106,7 +106,7 @@ def main(args, configs):
                     with open(os.path.join(train_log_path, "log.txt"), "a") as f:
                         f.write(message1 + message2 + "\n")
 
-                    outer_bar.write(message1 + message2)
+                    # outer_bar.write(message1 + message2)
 
                     log(train_logger, step, losses=losses)
 
@@ -144,7 +144,7 @@ def main(args, configs):
                     message = evaluate(model, step, configs, val_logger, vocoder)
                     with open(os.path.join(val_log_path, "log.txt"), "a") as f:
                         f.write(message + "\n")
-                    outer_bar.write(message)
+                    # outer_bar.write(message)
 
                     model.train()
 
@@ -163,7 +163,7 @@ def main(args, configs):
                 if step == total_step:
                     quit()
                 step += 1
-                outer_bar.update(1)
+                # outer_bar.update(1)
 
             inner_bar.update(1)
         epoch += 1
