@@ -7,7 +7,7 @@ path:
   preprocessed_path: "/content/preprocessed_data/Arabic"
 
 preprocessing:
-  val_size: 100
+  val_size: 20
   text:
     text_cleaners: []
     language: "ar"

@@ -1,7 +1,7 @@
 path:
-  ckpt_path: "/content/drive/MyDrive/Speech/TTS/ckpt/Arabicv3"
-  log_path: "/content/drive/MyDrive/Speech/TTS/log/Arabicv3"
-  result_path: "/content/drive/MyDrive/Speech/TTS/result/Arabicv3"
+  ckpt_path: "/content/drive/MyDrive/Speech/TTS/ckpt/Arabicv4"
+  log_path: "/content/drive/MyDrive/Speech/TTS/log/Arabicv4"
+  result_path: "/content/drive/MyDrive/Speech/TTS/result/Arabicv4"
 optimizer:
   batch_size: 32
   betas: [0.9, 0.98]
@@ -16,5 +16,5 @@ step:
   total_step: 900000
   log_step: 1000
   synth_step: 1000
-  val_step: 1000
+  val_step: 10000
   save_step: 50000
