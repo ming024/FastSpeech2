@@ -1,9 +1,9 @@
 path:
-  ckpt_path: "/content/drive/MyDrive/Speech/TTS/ckpt/Arabicv4"
-  log_path: "/content/drive/MyDrive/Speech/TTS/log/Arabicv4"
-  result_path: "/content/drive/MyDrive/Speech/TTS/result/Arabicv4"
+  ckpt_path: "/content/drive/MyDrive/Speech/TTS/ckpt/tmp"
+  log_path: "/content/drive/MyDrive/Speech/TTS/log/tmp"
+  result_path: "/content/drive/MyDrive/Speech/TTS/result/tmp"
 optimizer:
-  batch_size: 32
+  batch_size: 1
   betas: [0.9, 0.98]
   eps: 0.000000001
   weight_decay: 0.0

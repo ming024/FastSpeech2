@@ -7,6 +7,8 @@ The default is a set of ASCII characters that works well for English or text tha
 
 from text import cmudict, pinyin
 
+#TO_DO maybe change the pad symbol because 
+# it appears in bw ?
 _pad = "_"
 _punctuation = "!'(),.:;? "
 _special = "-"
@@ -20,13 +22,14 @@ ara = ['yy', "ii1'", 'S', 'Z', "I0'", 'ii0', 'p', 'i0', 'hh', 'uu0', 'aa', 'UU0'
 _ara = ["@" + s for s in ara]
 
 # Export all symbols:
+#TO_DO
 symbols = (
     [_pad]
     + list(_special)
     + list(_punctuation)
-    + list(_letters)
-    + _arpabet
-    + _pinyin
+    # + list(_letters)
+    # + _arpabet
+    # + _pinyin
     + _silences
     + _ara
 )

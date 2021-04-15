@@ -76,6 +76,7 @@ def preprocess_arabic(text, preprocess_config, bw = False):
     print("Raw Text Sequence: {}".format(text))
     print("Phoneme Sequence: {}".format(phones))
     sequence = np.array(
+        #TO_DO
         text_to_sequence(
             phones, preprocess_config["preprocessing"]["text"]["text_cleaners"]
         )
@@ -103,6 +104,7 @@ def preprocess_mandarin(text, preprocess_config):
     print("Raw Text Sequence: {}".format(text))
     print("Phoneme Sequence: {}".format(phones))
     sequence = np.array(
+        #TO_DO
         text_to_sequence(
             phones, preprocess_config["preprocessing"]["text"]["text_cleaners"]
         )
