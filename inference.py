@@ -137,8 +137,8 @@ def synthesize(model, step, configs, vocoder, batchs, control_values):
             )
 
 
-def infer(text, bw = True, pitch_control = 1.0, energy_control = 1.0, duration_control = 1.0):
-    restore_step = 'model'
+def infer(text, restore_step = 'model', bw = True, pitch_control = 1.0, energy_control = 1.0, duration_control = 1.0):
+    
     # Read Config
     preprocess_config = yaml.load(
         open("config/Arabic/preprocess.yaml", "r"), Loader=yaml.FullLoader
