@@ -33,6 +33,22 @@ def get_model(args, configs, device, train=False):
     model.requires_grad_ = False
     return model
 
+def get_model_inference(restore_step, configs, device, train=False):
+    (preprocess_config, model_config, train_config) = configs
+
+    model = FastSpeech2(preprocess_config, model_config).to(device)
+    if restore_step:
+        ckpt_path = os.path.join(
+            train_config["path"]["ckpt_path"],
+            "{}.pth.tar".format(restore_step),
+        )
+        ckpt = torch.load(ckpt_path)
+        model.load_state_dict(ckpt["model"])
+
+    model.eval()
+    model.requires_grad_ = False
+    return model
+
 
 def get_param_num(model):
     num_param = sum(param.numel() for param in model.parameters())
