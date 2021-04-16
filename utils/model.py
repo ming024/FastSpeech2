@@ -41,7 +41,8 @@ def get_model_inference(configs, device, train=False):
     model = FastSpeech2(preprocess_config, model_config).to(device)
     url = 'https://drive.google.com/uc?id=1J7ZP_q-6mryXUhZ-8j9-RIItz2nJGOIX'
     ckpt_path = 'model.pth.tar'
-    gdown.download(url, ckpt_path, quiet=False) 
+    if not os.path.exists(ckpt_path):
+        gdown.download(url, ckpt_path, quiet=False) 
     ckpt = torch.load(ckpt_path)
     model.load_state_dict(ckpt["model"])
 
