@@ -148,7 +148,7 @@ def infer(text, restore_step = 'model', bw = True, pitch_control = 1.0, energy_c
     configs = (preprocess_config, model_config, train_config)
 
     # Get model
-    model = get_model_inference(restore_step, configs, device, train=False)
+    model = get_model_inference(configs, device, train=False)
 
     # Load vocoder
     vocoder = get_vocoder(model_config, device)
