@@ -5,7 +5,7 @@ path:
   lexicon_path: "lexicon/librispeech-lexicon.txt"
   raw_path: "/content/raw_data/Arabic"
   preprocessed_path: "/content/preprocessed_data/Arabic"
-  json_path: "/content/drive/MyDrive/Speech/"
+  stats_path: "/content/drive/MyDrive/Speech/"
 
 preprocessing:
   val_size: 2
