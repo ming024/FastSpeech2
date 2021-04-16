@@ -7,8 +7,7 @@ The default is a set of ASCII characters that works well for English or text tha
 
 from text import cmudict, pinyin
 
-#TO_DO maybe change the pad symbol because 
-# it appears in bw ?
+#TO_DO maybe change the pad
 _pad = "_"
 _punctuation = "!'(),.:;? "
 _special = "-"
@@ -27,9 +26,9 @@ symbols = (
     [_pad]
     + list(_special)
     + list(_punctuation)
-    # + list(_letters)
-    # + _arpabet
-    # + _pinyin
+    + list(_letters)
+    + _arpabet
+    + _pinyin
     + _silences
     + _ara
 )
