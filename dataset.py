@@ -38,43 +38,50 @@ class Dataset(Dataset):
                     "{}-mel-{}.npy".format(hp.dataset, basename),
                 )
                 mel_target = np.load(mel_path)
+                # print("mel loaded")
                 D_path = os.path.join(
                     hp.preprocessed_path,
                     "alignment",
                     "{}-ali-{}.npy".format(hp.dataset, basename),
                 )
                 D = np.load(D_path)
+                # print("alignment loaded")
                 f0_path = os.path.join(
                     hp.preprocessed_path,
                     "f0",
                     "{}-f0-{}.npy".format(hp.dataset, basename),
                 )
                 f0 = np.load(f0_path)
+                # print("f0 loaded")
                 energy_path = os.path.join(
                     hp.preprocessed_path,
                     "energy",
                     "{}-energy-{}.npy".format(hp.dataset, basename),
                 )
                 energy = np.load(energy_path)
+                # print("energy loaded")
 
-                x_vec_path = os.path.join(
-                    hp.preprocessed_path,
-                    "x_vec",
-                    "{}-xvector-{}.npy".format(hp.dataset, basename),
-                )
-                x_vec = np.load(x_vec_path)
-                d_vec_path = os.path.join(
-                    hp.preprocessed_path,
-                    "d_vec",
-                    "{}-dvector-{}.npy".format(hp.dataset, basename),
-                )
-                d_vec = np.load(d_vec_path)
+                # x_vec_path = os.path.join(
+                #     hp.preprocessed_path,
+                #     "x_vec",
+                #     "{}-xvector-{}.npy".format(hp.dataset, basename),
+                # )
+                # x_vec = np.load(x_vec_path)
+                x_vec = np.empty(0)
+                # d_vec_path = os.path.join(
+                #     hp.preprocessed_path,
+                #     "d_vec",
+                #     "{}-dvector-{}.npy".format(hp.dataset, basename),
+                # )
+                # d_vec = np.load(d_vec_path)
+                d_vec = np.empty(0)
                 adain_emb_path = os.path.join(
                     hp.preprocessed_path,
-                    "adain_emb",
+                    "adain",
                     "{}-adain-{}.npy".format(hp.dataset, basename),
                 )
                 adain_emb = np.load(adain_emb_path)
+                # print("adain loaded")
                 sample = {
                     "id": basename,
                     "speaker": speaker_id,
@@ -88,7 +95,7 @@ class Dataset(Dataset):
                     "adain": adain_emb,
                 }
                 break
-            except:
+            except FileNotFoundError as e:
                 idx = (idx + 1) % self.__len__()
 
         return sample

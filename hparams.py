@@ -1,19 +1,29 @@
 import os
 
-
-# Dataset
-dataset = "M2VoC"
-aishell3_path = "./AISHELL-3"
+# Dataset (of targets, used in training)
+# dataset = "LibriTTS"
+# aishell3_path = "/root/data/LibriTTS/train-clean-100"
+# dataset = "Youtube"
+# aishell3_path = "/root/data/clean"
+# dataset = "OwnDataset"
+# aishell3_path = "/root/data/own_voice_dataset"
+dataset = "TrumpObama"
+aishell3_path = "/root/data/clean_tts"
 m2voc_path = "./M2VoC"
 
+# target_dataset = "OwnDataset"
+target_dataset = "TrumpObama"
+
 text_cleaners = []
-language = "zh"
+language = "en"
 
 
 # Some paths
 raw_path = os.path.join("./raw_data/", dataset)
+# raw_path = "/root/data/own_voice_dataset"
 preprocessed_path = os.path.join("./preprocessed_data/", dataset)
-checkpoint_path = os.path.join("./ckpt/", dataset)
+# checkpoint_path = os.path.join("./ckpt/", dataset)
+checkpoint_path = "./ckpt/LibriTTS"
 synth_path = os.path.join("./synth/", dataset)
 log_path = os.path.join("./log/", dataset)
 test_path = os.path.join("./results/", dataset)
@@ -52,21 +62,20 @@ max_seq_len = 1000
 
 
 # Quantization for F0 and energy
-f0_min = -3.758
-f0_max = 10.071
-energy_min = -1.684
-energy_max = 6.827
+f0_min = -1.753521
+f0_max = 10.756593
+energy_min = -1.2463
+energy_max = 10.87624
 
 # For plotting F0 curves
-f0_mean = 207.646
-f0_std = 56.274
-
+f0_mean = 166.933017
+f0_std = 62.0074
 n_bins = 256
 
 
 # Optimizer
 batch_size = 16
-epochs = 5000
+epochs = 400
 n_warm_up_step = 4000
 grad_clip_thresh = 1.0
 acc_steps = 1
@@ -85,7 +94,7 @@ log_offset = 1.0
 # Save, log and synthesis
 save_step = 50000
 synth_step = 1000
-log_step = 1000
+log_step = 50
 clear_Time = 20
 
 

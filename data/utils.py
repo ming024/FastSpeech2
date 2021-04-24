@@ -23,6 +23,7 @@ def build_from_path(in_dir, out_dir):
     energy_scaler = StandardScaler()
 
     speakers = {}
+    # for Training
     for i, speaker in enumerate(os.listdir(in_dir)):
         speakers[speaker] = i
         for wav_name in os.listdir(os.path.join(in_dir, speaker)):
@@ -33,8 +34,13 @@ def build_from_path(in_dir, out_dir):
             tg_path = os.path.join(
                 out_dir, "TextGrid", speaker, "{}.TextGrid".format(basename)
             )
+            # print(tg_path)
             if os.path.exists(tg_path):
-                ret = process_utterance(in_dir, out_dir, speaker, basename)
+                try:
+                    ret = process_utterance(in_dir, out_dir, speaker, basename)
+                except Exception as e:
+                    print(in_dir, basename)
+                    continue
                 if ret is None:
                     continue
                 else:
@@ -62,9 +68,46 @@ def build_from_path(in_dir, out_dir):
         os.path.join(out_dir, "energy"), energy_mean, energy_std
     )
 
+    # for Validation
+    # for i, speaker in enumerate(os.listdir(in_dir)):
+    #     speakers[speaker] = i
+    #     for wav_name in os.listdir(os.path.join(in_dir, speaker)):
+    #         if ".wav" not in wav_name:
+    #             continue
+
+    #         basename = wav_name[:-4]
+    #         # Read and trim wav files
+    #         wav_path = os.path.join(in_dir, speaker, "{}.wav".format(basename))
+    #         wav, _ = librosa.load(wav_path)
+    #         wav = wav.astype(
+    #             np.float32
+    #         )
+
+    #         # Compute mel-scale spectrogram and energy
+    #         mel_spectrogram, energy = Audio.tools.get_mel_from_wav(wav)
+    #         mel_spectrogram = mel_spectrogram.numpy().astype(np.float32)
+    #         energy = energy.numpy().astype(np.float32)
+    #         if mel_spectrogram.shape[1] >= hp.max_seq_len:
+    #             continue
+
+
+    #         # Save spectrogram
+    #         mel_filename = "{}-mel-{}-{}.npy".format(hp.dataset, speaker, basename)
+    #         np.save(
+    #             os.path.join(out_dir, "mel", mel_filename),
+    #             mel_spectrogram.T,
+    #             allow_pickle=False,
+    #         )
+
+    #         if index % 100 == 0:
+    #             print("Done %d" % index)
+    #         index = index + 1
+
+
     with open(os.path.join(out_dir, "speakers.json"), "w") as f:
         f.write(json.dumps(speakers))
 
+    # For Training #
     with open(os.path.join(out_dir, "stat.txt"), "w", encoding="utf-8") as f:
         strs = [
             "Total time: {} hours".format(
@@ -86,6 +129,7 @@ def build_from_path(in_dir, out_dir):
     out = [r for r in out if r is not None]
 
     return out
+    ###
 
 
 def process_utterance(in_dir, out_dir, speaker, basename):
@@ -119,6 +163,7 @@ def process_utterance(in_dir, out_dir, speaker, basename):
 
     # perform linear interpolation
     nonzero_ids = np.where(f0 != 0)[0]
+    # nonzero_ids = nonzero_ids if len(nonzero_ids) > 1 else np.concatenate((nonzero_ids, nonzero_ids))
     interp_fn = interp1d(
         nonzero_ids,
         f0[nonzero_ids],

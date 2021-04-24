@@ -5,7 +5,7 @@ from data import m2voc, aishell3
 
 
 def main():
-    m2voc.prepare_align(hp.m2voc_path)
+    # m2voc.prepare_align(hp.m2voc_path)
     aishell3.prepare_align(hp.aishell3_path)
 
 
