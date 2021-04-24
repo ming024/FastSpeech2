@@ -180,7 +180,7 @@ def synthesize(
         x_vec=x_vec,
         adain=adain,
         speaker=speakers,
-        use_gst=args.gst,
+        use_gst=gst is not None,
         gst=gst,
     )
 
