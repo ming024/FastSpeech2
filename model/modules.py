@@ -38,7 +38,7 @@ class VarianceAdaptor(nn.Module):
     """ Variance Adaptor """
 
     def __init__(self):
-        super(VarianceAdaptor, self).__init__()
+        super().__init__()
         self.duration_predictor = VariancePredictor()
         self.length_regulator = LengthRegulator()
         self.pitch_predictor = VariancePredictor()
@@ -118,7 +118,7 @@ class LengthRegulator(nn.Module):
     """ Length Regulator """
 
     def __init__(self):
-        super(LengthRegulator, self).__init__()
+        super().__init__()
 
     # def LR(self, x, duration, max_len):
     #     batch_size = x.shape[0]
@@ -172,7 +172,7 @@ class VariancePredictor(nn.Module):
     """ Duration, Pitch and Energy Predictor """
 
     def __init__(self):
-        super(VariancePredictor, self).__init__()
+        super().__init__()
 
         self.input_size = hp.encoder_hidden
         self.filter_size = hp.variance_predictor_filter_size
@@ -250,7 +250,7 @@ class Conv(nn.Module):
         :param bias: boolean. if True, bias is included.
         :param w_init: str. weight inits with xavier initialization.
         """
-        super(Conv, self).__init__()
+        super().__init__()
 
         self.conv = nn.Conv1d(
             in_channels,
@@ -277,7 +277,7 @@ class ReferenceEncoder(nn.Module):
     """
 
     def __init__(self):
-        super(ReferenceEncoder, self).__init__()
+        super().__init__()
         self.filter_size = [1] + hp.ref_filters
         self.dropout = hp.encoder_dropout
         self.conv = nn.Sequential(
@@ -397,7 +397,7 @@ class Conv2d(nn.Module):
         :param bias: boolean. if True, bias is included.
         :param w_init: str. weight inits with xavier initialization.
         """
-        super(Conv2d, self).__init__()
+        super().__init__()
 
         self.conv = nn.Conv2d(
             in_channels,
