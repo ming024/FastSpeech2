@@ -7,6 +7,9 @@ import torch.nn as nn
 import numpy as np
 import torch.nn.functional as F
 
+from torch import bucketize as f0_bucketize
+from torch import bucketize as energy_bucketize
+
 import utils
 import hparams as hp
 from transformer.SubLayers import MultiHeadAttention
@@ -68,23 +71,23 @@ class VarianceAdaptor(nn.Module):
         pitch_prediction = self.pitch_predictor(x, src_mask)
         if pitch_target is not None:
             pitch_embedding = self.pitch_embedding(
-                torch.bucketize(pitch_target, self.pitch_bins)
+                f0_bucketize(pitch_target, self.pitch_bins)
             )
         else:
             pitch_prediction = pitch_prediction
             pitch_embedding = self.pitch_embedding(
-                torch.bucketize(pitch_prediction, self.pitch_bins)
+                f0_bucketize(pitch_prediction, self.pitch_bins)
             )
 
         energy_prediction = self.energy_predictor(x, src_mask)
         if energy_target is not None:
             energy_embedding = self.energy_embedding(
-                torch.bucketize(energy_target, self.energy_bins)
+                energy_bucketize(energy_target, self.energy_bins)
             )
         else:
             energy_prediction = energy_prediction
             energy_embedding = self.energy_embedding(
-                torch.bucketize(energy_prediction, self.energy_bins)
+                energy_bucketize(energy_prediction, self.energy_bins)
             )
 
         x = x + pitch_embedding + energy_embedding
