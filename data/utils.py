@@ -81,7 +81,9 @@ def build_from_path(in_dir, out_dir, sampling_rate):
             "Min energy": energy_min,
             "Max energy": energy_max,
         }
-        f.write(json.dumps(stat))
+        f.write(json.dumps(
+            {str(k): str(v) for k, v in stat.items()}
+        ))
 
     random.shuffle(out)
     with open(os.path.join(out_dir, "train.txt"), "w", encoding="utf-8") as f:
