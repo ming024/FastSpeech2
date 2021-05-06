@@ -15,7 +15,8 @@ import audio as Audio
 
 def build_from_path(in_dir, out_dir, sampling_rate):
     index = 1
-    out = list()
+    train_out = list()
+    dev_out = list()
     n_frames = 0
     f0_scaler = StandardScaler()
     energy_scaler = StandardScaler()
@@ -43,7 +44,9 @@ def build_from_path(in_dir, out_dir, sampling_rate):
                 else:
                     info, f0, energy, f_max, f_min, e_max, e_min, n = ret
                 if subdir == "train":
-                    out.append(info)
+                    train_out.append(info)
+                else:
+                    dev_out.append(info)
 
                 if index % 100 == 0:
                     print("Done %d" % index)
@@ -69,7 +72,6 @@ def build_from_path(in_dir, out_dir, sampling_rate):
     with open(os.path.join(out_dir, "speakers.json"), "w") as f:
         f.write(json.dumps(speakers))
 
-    # For Training #
     with open(os.path.join(out_dir, "stat.txt"), "w", encoding="utf-8") as f:
         stat = {
             "Total time hours": n_frames * hp.hop_length / sampling_rate / 3600,
@@ -85,9 +87,13 @@ def build_from_path(in_dir, out_dir, sampling_rate):
             {str(k): str(v) for k, v in stat.items()}
         ))
 
-    random.shuffle(out)
+    random.shuffle(train_out)
     with open(os.path.join(out_dir, "train.txt"), "w", encoding="utf-8") as f:
-        for r in out:
+        for r in train_out:
+            if r is not None:
+                print(r, file=f)
+    with open(os.path.join(out_dir, "dev.txt"), "w", encoding="utf-8") as f:
+        for r in dev_out:
             if r is not None:
                 print(r, file=f)
 

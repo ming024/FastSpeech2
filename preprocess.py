@@ -5,12 +5,6 @@ from hparams import sampling_rate
 import shutil
 
 
-def write_metadata(meta, path):
-    with open(path, "w", encoding="utf-8") as f:
-        for m in meta:
-            print(m, file=f)
-
-
 def move_textgrids(path, textgrid):
     for spk in os.listdir(textgrid):
         spk_dir = os.path.join(textgrid, spk)
@@ -47,8 +41,7 @@ def process(path, target_path):
     os.makedirs(os.path.join(path_preprocessed, "alignment"), exist_ok=True)
     os.makedirs(os.path.join(path_preprocessed, "f0"), exist_ok=True)
     os.makedirs(os.path.join(path_preprocessed, "energy"), exist_ok=True)
-    meta = build_from_path(path, path_preprocessed, sampling_rate=sampling_rate)
-    write_metadata(meta, os.path.join(path_preprocessed, "train.txt"))
+    build_from_path(path, path_preprocessed, sampling_rate=sampling_rate)
 
 
 def main(path, target_path, textgrid):
