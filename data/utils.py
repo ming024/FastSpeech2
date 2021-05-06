@@ -3,19 +3,17 @@ import random
 import json
 
 import tgt
-import torch
 import librosa
 import numpy as np
 import pyworld as pw
 from scipy.interpolate import interp1d
 from sklearn.preprocessing import StandardScaler
-
-import audio as Audio
 import hparams as hp
 
+import audio as Audio
 
-def build_from_path(in_dir, out_dir):
-    print("Processing Data ...")
+
+def build_from_path(in_dir, out_dir, sampling_rate):
     index = 1
     out = list()
     n_frames = 0
@@ -24,38 +22,38 @@ def build_from_path(in_dir, out_dir):
 
     speakers = {}
     # for Training
-    for i, speaker in enumerate(os.listdir(in_dir)):
-        speakers[speaker] = i
-        for wav_name in os.listdir(os.path.join(in_dir, speaker)):
-            if ".wav" not in wav_name:
-                continue
+    for subdir in ["train", "dev"]:
+        in_subdir = os.path.join(in_dir, subdir)
+        for i, speaker in enumerate(os.listdir(in_subdir)):
+            if subdir == "train":
+                speakers[speaker] = i
 
-            basename = wav_name[:-4]
-            tg_path = os.path.join(
-                out_dir, "TextGrid", speaker, "{}.TextGrid".format(basename)
-            )
-            # print(tg_path)
-            if os.path.exists(tg_path):
+            for wav_name in os.listdir(os.path.join(in_subdir, speaker)):
+                if ".wav" not in wav_name:
+                    continue
+
+                basename = wav_name[:-4]
                 try:
-                    ret = process_utterance(in_dir, out_dir, speaker, basename)
+                    ret = process_utterance(in_subdir, out_dir, speaker, basename, sampling_rate)
                 except Exception as e:
-                    print(in_dir, basename)
+                    print(e, in_subdir, basename)
                     continue
                 if ret is None:
                     continue
                 else:
                     info, f0, energy, f_max, f_min, e_max, e_min, n = ret
-                out.append(info)
+                if subdir == "train":
+                    out.append(info)
 
-            if index % 100 == 0:
-                print("Done %d" % index)
-            index = index + 1
+                if index % 100 == 0:
+                    print("Done %d" % index)
+                index = index + 1
 
-            if len(f0) > 0 and len(energy) > 0:
-                f0_scaler.partial_fit(f0.reshape((-1, 1)))
-                energy_scaler.partial_fit(energy.reshape((-1, 1)))
+                if len(f0) > 0 and len(energy) > 0 and subdir == "train":
+                    f0_scaler.partial_fit(f0.reshape((-1, 1)))
+                    energy_scaler.partial_fit(energy.reshape((-1, 1)))
 
-            n_frames += n
+                n_frames += n
 
     f0_mean = f0_scaler.mean_[0]
     f0_std = f0_scaler.scale_[0]
@@ -68,94 +66,54 @@ def build_from_path(in_dir, out_dir):
         os.path.join(out_dir, "energy"), energy_mean, energy_std
     )
 
-    # for Validation
-    # for i, speaker in enumerate(os.listdir(in_dir)):
-    #     speakers[speaker] = i
-    #     for wav_name in os.listdir(os.path.join(in_dir, speaker)):
-    #         if ".wav" not in wav_name:
-    #             continue
-
-    #         basename = wav_name[:-4]
-    #         # Read and trim wav files
-    #         wav_path = os.path.join(in_dir, speaker, "{}.wav".format(basename))
-    #         wav, _ = librosa.load(wav_path)
-    #         wav = wav.astype(
-    #             np.float32
-    #         )
-
-    #         # Compute mel-scale spectrogram and energy
-    #         mel_spectrogram, energy = Audio.tools.get_mel_from_wav(wav)
-    #         mel_spectrogram = mel_spectrogram.numpy().astype(np.float32)
-    #         energy = energy.numpy().astype(np.float32)
-    #         if mel_spectrogram.shape[1] >= hp.max_seq_len:
-    #             continue
-
-
-    #         # Save spectrogram
-    #         mel_filename = "{}-mel-{}-{}.npy".format(hp.dataset, speaker, basename)
-    #         np.save(
-    #             os.path.join(out_dir, "mel", mel_filename),
-    #             mel_spectrogram.T,
-    #             allow_pickle=False,
-    #         )
-
-    #         if index % 100 == 0:
-    #             print("Done %d" % index)
-    #         index = index + 1
-
-
     with open(os.path.join(out_dir, "speakers.json"), "w") as f:
         f.write(json.dumps(speakers))
 
     # For Training #
     with open(os.path.join(out_dir, "stat.txt"), "w", encoding="utf-8") as f:
-        strs = [
-            "Total time: {} hours".format(
-                n_frames * hp.hop_length / hp.sampling_rate / 3600
-            ),
-            "Total frames: {}".format(n_frames),
-            "Mean F0: {}".format(f0_mean),
-            "Stdev F0: {}".format(f0_std),
-            "Min F0: {}".format(f0_min),
-            "Max F0: {}".format(f0_max),
-            "Min energy: {}".format(energy_min),
-            "Max energy: {}".format(energy_max),
-        ]
-        for s in strs:
-            print(s)
-            f.write(s + "\n")
+        stat = {
+            "Total time hours": n_frames * hp.hop_length / sampling_rate / 3600,
+            "Total frames": n_frames,
+            "Mean F0": f0_mean,
+            "Stdev F0": f0_std,
+            "Min F0": f0_min,
+            "Max F0": f0_max,
+            "Min energy": energy_min,
+            "Max energy": energy_max,
+        }
+        f.write(json.dumps(stat))
 
     random.shuffle(out)
-    out = [r for r in out if r is not None]
+    with open(os.path.join(out_dir, "train.txt"), "w", encoding="utf-8") as f:
+        for r in out:
+            if r is not None:
+                print(r, file=f)
 
-    return out
-    ###
 
-
-def process_utterance(in_dir, out_dir, speaker, basename):
+def process_utterance(in_dir, out_dir, speaker, basename, sampling_rate):
     wav_path = os.path.join(in_dir, speaker, "{}.wav".format(basename))
-    tg_path = os.path.join(out_dir, "TextGrid", speaker, "{}.TextGrid".format(basename))
+    tg_path = os.path.join(in_dir, speaker, "{}.TextGrid".format(basename))
 
     # Get alignments
     textgrid = tgt.io.read_textgrid(tg_path)
-    phone, duration, start, end = get_alignment(textgrid.get_tier_by_name("phones"))
+    phone, duration, start, end = get_alignment(textgrid.get_tier_by_name("phones"), sampling_rate)
     text = "{" + " ".join(phone) + "}"
     if start >= end:
         return None
 
     # Read and trim wav files
-    wav, _ = librosa.load(wav_path)
-    wav = wav[int(hp.sampling_rate * start) : int(hp.sampling_rate * end)].astype(
+    wav, _ = librosa.load(wav_path, sr=sampling_rate)
+    wav = wav[int(sampling_rate * start): int(sampling_rate * end)].astype(
         np.float32
     )
 
     # Compute fundamental frequency
     f0, t = pw.dio(
         wav.astype(np.float64),
-        hp.sampling_rate,
-        frame_period=hp.hop_length / hp.sampling_rate * 1000,
+        sampling_rate,
+        frame_period=hp.hop_length / sampling_rate * 1000,
     )
-    f0 = pw.stonemask(wav.astype(np.float64), f0, t, hp.sampling_rate)
+    f0 = pw.stonemask(wav.astype(np.float64), f0, t, sampling_rate)
 
     f0 = f0[: sum(duration)]
     if np.all(f0 == 0):
@@ -224,7 +182,7 @@ def process_utterance(in_dir, out_dir, speaker, basename):
     )
 
 
-def get_alignment(tier):
+def get_alignment(tier, sampling_rate):
     sil_phones = ["sil", "sp", "spn"]
 
     phones = []
@@ -251,8 +209,8 @@ def get_alignment(tier):
             phones.append(p)
         durations.append(
             int(
-                np.round(e * hp.sampling_rate / hp.hop_length)
-                - np.round(s * hp.sampling_rate / hp.hop_length)
+                np.round(e * sampling_rate / hp.hop_length)
+                - np.round(s * sampling_rate / hp.hop_length)
             )
         )
 
