@@ -1,6 +1,7 @@
 import math
 import os
 import json
+import librosa
 
 import torch
 import numpy as np
@@ -12,6 +13,37 @@ from utils import pad_1D, pad_2D
 from text import text_to_sequence
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
+class PrepareAlignDataset(Dataset):
+    def __init__(self, datafolder, audio_ext, text_ext):
+        self.filepathes = []
+        for speaker in os.listdir(datafolder):
+            os.makedirs(os.path.join(hp.raw_path, speaker), exist_ok=True)
+            for d_path, _, f_names in os.walk(os.path.join(datafolder, speaker)):
+                for filename in f_names:
+                    if filename[-len(audio_ext):] != audio_ext:
+                        continue
+                    basename = filename[:-len(audio_ext)]
+                    wav_path = os.path.join(d_path, f"{basename}{audio_ext}")
+                    text_path = os.path.join(d_path, f"{basename}{text_ext}")
+                    with open(text_path) as f:
+                        text = f.readline().strip("\n")
+
+                    self.filepathes.append((wav_path, text, speaker, basename))
+
+    def __len__(self):
+        return len(self.filepathes)
+
+    def __getitem__(self, index):
+        wav_path, text, speaker, basename = self.filepathes[index]
+        wav, _ = librosa.load(wav_path, hp.sampling_rate)
+        wav = (wav / max(abs(wav)) * hp.max_wav_value).astype(np.int16)
+
+        return (
+            os.path.join(hp.raw_path, speaker, "{}.wav".format(basename)), wav,
+            os.path.join(hp.raw_path, speaker, "{}.lab".format(basename)), text,
+        )
 
 
 class Dataset(Dataset):
