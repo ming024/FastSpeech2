@@ -3,6 +3,7 @@ import os
 from data.utils import build_from_path
 from hparams import sampling_rate
 import shutil
+from adain import gen_adain
 
 
 def move_textgrids(path, textgrid):
@@ -35,29 +36,30 @@ def train_test_split(dataset, target_dataset):
 
 
 def process(path, target_path):
-    suffix = "preprocessed"
-    path_preprocessed = os.path.join(target_path, suffix)
-    os.makedirs(os.path.join(path_preprocessed, "mel"), exist_ok=True)
-    os.makedirs(os.path.join(path_preprocessed, "alignment"), exist_ok=True)
-    os.makedirs(os.path.join(path_preprocessed, "f0"), exist_ok=True)
-    os.makedirs(os.path.join(path_preprocessed, "energy"), exist_ok=True)
-    build_from_path(path, path_preprocessed, sampling_rate=sampling_rate)
+    os.makedirs(os.path.join(target_path, "mel"), exist_ok=True)
+    os.makedirs(os.path.join(target_path, "alignment"), exist_ok=True)
+    os.makedirs(os.path.join(target_path, "f0"), exist_ok=True)
+    os.makedirs(os.path.join(target_path, "energy"), exist_ok=True)
+    build_from_path(path, target_path, sampling_rate=sampling_rate)
 
 
 def main(path, target_path, textgrid):
-    if textgrid:
-        print("Moving textgrids")
-        move_textgrids(path, textgrid)
+    # if textgrid:
+    #     print("Moving textgrids")
+    #     move_textgrids(path, textgrid)
     # print("Splitting to train/dev")
     # train_test_split(path, target_path)
-    print("Preprocessing")
-    process(path, target_path)
+    # print("Preprocessing")
+    # process(target_path, os.path.join(target_path, "preprocessed"))
+    gen_adain(path + '/train', target_path + '/adain')
+    gen_adain(path + '/dev', target_path + '/adain')
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--path", type=str, required=True)
-    parser.add_argument("--target_path", type=str, required=True)
-    parser.add_argument("--textgrid", type=str, required=False)
+    parser.add_argument("--path", type=str, required=True,
+                        help="source dataset: train/dev->speaker_id->wav+lab+(optional)textgrid")
+    parser.add_argument("--target_path", type=str, required=True, help="path to save preprocessed data")
+    parser.add_argument("--textgrid", type=str, required=False, help="directory with textgrid files")
     args = parser.parse_args()
     main(args.path, args.target_path, args.textgrid)
