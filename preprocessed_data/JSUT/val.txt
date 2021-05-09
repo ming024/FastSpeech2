@@ -1,0 +1,512 @@
+BASIC5000_1907|JSUT|{y a m a y a m a w a sp a o i s o r a o h a i k e e n i sp a k a k u i r o z u i t e i r u}|silB
+BASIC5000_0793|JSUT|{o r e e n o m o o sh i a g e y o o m o g o z a i m a s e N}|silB
+TRAVEL1000_0984|JSUT|{z e N b u d e sp s a N d o r u g o j u q s e N t o d e s u}|silB
+BASIC5000_0702|JSUT|{sh i g a i ky o k u b a N n i hy a k u j u u s a N n o sp y o N hy a k u h a ch i j u u r o k u u n i s e N y o N hy a k u s a N j u u g o d e s u}|silB
+BASIC5000_4979|JSUT|{s o n o k u n i d e w a sp n i q p o N s e e h i N o h a i s e k i s u r u u N d o o g a o k o q t e i t a}|silB
+ONOMATOPEE300_109|JSUT|{ch i k a k u n i y u u m e e n a h a i ky o g a a q t a k a r a h a j i m e t e i q t e m i r u k o t o n i sh i t a sp h a i q t a h a r u k a n i k a r a d a g a n a N d a k a z o k u z o k u sh i t a w a}|silB
+BASIC5000_4931|JSUT|{t o ts u z e N n o k a r e n o f u h o o w a sp w a t a sh i o o d o r o k a s e t a}|silB
+BASIC5000_4371|JSUT|{n i t a m a k i r o t o n i sh i j i k i m o N g a i d a i m a ch i t o n o k o o s a t e N k a r a s u k o sh i h o k u s e e h o o k o o n i h a i q t a t o k o r o n i a r u}|silB
+BASIC5000_4656|JSUT|{k o N n a N k i w a m a r u s a gy o o d e a q t a}|silB
+BASIC5000_1348|JSUT|{k i k u t o k o r o n i y o r u t o sp k a r e w a m u r a d e w a h i t o k a d o n o j i N b u ts u d a s o o d a}|silB
+BASIC5000_0814|JSUT|{d o o r u g a ts u u sh i N p u r o t o k o r u n o k o o s e e o k a e r u k o t o w a sp i t o sh i t e i n a k a q t a t o i u k o t o n i sp ch u u i s u b e k i d e a r u}|silB
+BASIC5000_0535|JSUT|{y u u k i o u sh i n a w a n a i d e sp d o N d o N k a k i ts u z u k e n a s a i}|silB
+ONOMATOPEE300_272|JSUT|{y o q p o d o ts u k a r e t a n o k a sp s u u s u u t o y a s u r a k a n a n e i k i o t a t e t e i r u}|silB
+TRAVEL1000_0587|JSUT|{h o t e r u m a d e n o m o q t o m o i k i y a s u i m i ch i o g o z o N j i d e s u k a}|silB
+REPEAT500_set2_061|JSUT|{p o i N t o g a a d o k a r a sp s u m o o r u f o w a a d o m a d e k o n a s e r u sp s o o g o o ry o k u g a t a k a i y u u t i r i t i i p u r e e y a a d e a r u}|silB
+UT-PARAPHRASE-sent265-phrase2|JSUT|{sh i k a sh i sp by o o h e N g a n o o n o o k u n i a r u h o d o sp sh u j u ts u n i t o m o n a u n o o n o h e N k e e g a h a g e sh i k u sp g o s a g a o o k i k u n a q t e i t a}|silB
+TRAVEL1000_0759|JSUT|{g o z e N ch u u n i sp p a a m a n e N t o n o y o y a k u w a d e k i m a s u k a}|silB
+BASIC5000_3550|JSUT|{k a N t a N n i ts u m u y o o n i m i s e r u t a m e sp s a i sh o n o k o m a s u u g a s u k u n a k u ch i i s a k u m a t o m a q t e i r u m o n o g a o o i}|silB
+BASIC5000_3002|JSUT|{s a r a n i k a r e w a sp k e e z a i r i r o N n i k a N s u r u r o N b u N o h a q py o o sh i sp t e ts u d o o n o f u s e ts u g a sp sh a k a i k a i h a ts u n i ts u n a g a r u t o r i k i s e ts u sh i t a}|silB
+BASIC5000_3386|JSUT|{n o ch i n i k a r e w a k o n o k o o s e k i d e sp k u N n i t o o z u i h o o sh o o o j u y o sp s a r a n i k o o g a k u h a k a s e n o g a k u i m o sh u t o k u sh i t a}|silB
+BASIC5000_0424|JSUT|{k o o h o o n o t e k i w a sp g e N j o o sp a k u m a d e t a i r o o t a ts u d a k e n o s o N z a i}|silB
+BASIC5000_2671|JSUT|{sh u n o o k a i d a N n o k o t o w a sp s e k a i j u u d e h o o e e s a r e r u y o t e e d a}|silB
+BASIC5000_2354|JSUT|{o m o ch a n o k i sh a w a sp h e y a n o n a k a o g u r u g u r u h a sh i q t a}|silB
+BASIC5000_4511|JSUT|{k o n o s a k i w a k u d a r i z a k a n a n o d e sp j i t e N sh a o k o g u n o g a r a k u n i n a r u y o}|silB
+TRAVEL1000_0584|JSUT|{k o r e o h i f u n i ts u k e n a i y o o n i ch u u i sh i t e k u d a s a i}|silB
+BASIC5000_3755|JSUT|{h i t o b i t o g a n i ch i j o o t e k i n i t a b e r u n i ch i j o o sh o k u n o k o N d a t e w a sp t a b e r u h i t o n o k e N k o o o m a z u d a i i ch i n i k a N g a e t e t a t e r u b e k i d e a r u sp t o sh i t e k i s a r e r u y o o n i n a q t e k i t e i r u}|silB
+TRAVEL1000_0472|JSUT|{g o g o n i j i s a N j u u y o N p u N n i t a q t e sp r a s u b e g a s u n i w a sp y o k u a s a k u j i g o j u q p u N n i ts u k u r e q sh a g a a r i m a s u}|silB
+BASIC5000_4507|JSUT|{t o o ky o o t o o n a g a r e r u a s a sh i o u N g a n i k a k a r u h a sh i n o k a t e g o r i}|silB
+BASIC5000_4105|JSUT|{t a k e d a sh i n o m e ts u b o o g o w a sp k a i o ry o o y u u sh i t a t o k u g a w a sh i k a r a sp j i ry o o a N d o o sp u k e r u}|silB
+BASIC5000_0356|JSUT|{z u i b u N n a g a i a i d a sp o m e n i k a k a r i m a s e N d e sh i t a}|silB
+BASIC5000_4528|JSUT|{d e g a r a sh i n o o ch a d e m o e e y o o h o o f u d e ts u k a i m i ch i g a a r i m a s u}|silB
+TRAVEL1000_0609|JSUT|{k o k o n o t o o r i n o k o t o d e s u k a sp ts u g i n o t o o r i d e s u k a}|silB
+BASIC5000_4362|JSUT|{s o n o ky o k u t o ch i k a r a w a y u s o o o m a k a s e r u t o h i j o o n i y u u k o o d e a r i sp b u k i y a hy o o r o o n o u N p a N k a r a sp g u N g a k u t a i n o d a i t a i k o sp t a i h o o n o k e N i N m a d e h a b a h i r o k u m o ch i i r a r e t a}|silB
+BASIC5000_1687|JSUT|{j o o k i b o i r a a w a sp b a k u h a ts u s u r u k a n o o s e e g a a r u}|silB
+UT-PARAPHRASE-sent301-phrase1|JSUT|{n a r u h o d o sp e g a j i k o o n o a i s a ts u n i n a r u}|silB
+BASIC5000_4758|JSUT|{a r a k a t a n o j i q k e N d o o g u w a t o t o n o q t e k i t a}|silB
+BASIC5000_3968|JSUT|{i q p a N n i sp s e z o k u sh u g i t e k i d e sp k o j i N sh u g i t e k i d e sp g o o r i sh u g i t e k i n a k e e k o o o m o ts u}|silB
+REPEAT500_set5_073|JSUT|{j o o i N g i i N t o sh i t e sp b a a N w e r u w a sp k a r i f o r u n i a sh u u n o sp r e N p o o k a ny u u n i s a N s e e sh i t a}|silB
+BASIC5000_0904|JSUT|{k i q p u u r i b a d e k a w a n a k e r e b a n a r i m a s e N}|silB
+BASIC5000_4011|JSUT|{h a n a n o k a t a ch i m o t a i r a n i h i r o g a r u m o n o k a r a sp h o s o n a g a i ts u ts u j o o n i n a r u m o n o m a d e h e N i n i t o m u}|silB
+BASIC5000_2067|JSUT|{y u m e n i k a k e t e i r u o m o n a k o t o w a sp sh u b i i q k a N s e e d e a r u}|silB
+BASIC5000_4976|JSUT|{s o n o sh i N b u N w a sp k a r e n o h a N z a i e n o k a k a r i a i o sh u ch o o sh i t a}|silB
+BASIC5000_4588|JSUT|{ky o o w a m a ch i n i m a q t a ky u u ry o o b i d a sp g o o s e e n a sh o k u j i o t a n o sh i m o o}|silB
+TRAVEL1000_0397|JSUT|{a m e r i k a k o k u n a i b i N w a sp s u b e t e k i N e N s e k i d e s u}|silB
+REPEAT500_set3_046|JSUT|{f o o my u r a k a a w a sp ts u u j o o sp o o p u N h o i i r u d e sp sh i N g u r u sh i i t a a d e a r u}|silB
+BASIC5000_3689|JSUT|{t a t a k a i n o n a k a d e k i N n i k u m a N w a sp k u r o g o k e k u m o n o n o r o i o k a i j o s u r u g a sp k i N n i k u m a N w a sp m a s a y o sh i ch o o j i N n o i m e e j i o k u ts u g a e s u y u b i o r i sp m a s u k u h a g i n a d o u r a w a z a o r a N p a ts u}|silB
+BASIC5000_2600|JSUT|{j o o n e ts u w a n e N r e e t o t o m o n i y o w a k u n a r u g a sp sh u u k a N w a sp n e N r e e t o t o m o n i ts u y o k u n a r u}|silB
+LOANWORD128_117|JSUT|{b u e r a sh u n i q a y a m a w a sp b o s u n i a h e r u ts e g o b i n a ch u u o o b u n i a r u y a m a d e a r u}|silB
+REPEAT500_set1_088|JSUT|{s o k o n i w a sp hy a k u d o r u s a ts u t o sp a m e r i k a n i k o i t o i u sp m i j i k a i m e q s e e j i d a k e d a q t a}|silB
+VOICEACTRESS100_030|JSUT|{b o o g o o r i b u u ts u w a sp hy o o m e N n i h a r a r e t a sp g o m u s e e n o u s u i m a k u d e d e k i t e i r u}|silB
+BASIC5000_1054|JSUT|{o t o n a n o sh i h a i n i t a i sh i sp k a r e r a w a k o n o y o o n a sh o o ky o k u t e k i n a h a N k o o n o sh i k a t a o s u r u n o d e a r u}|silB
+BASIC5000_1345|JSUT|{k i k o e r u o t o w a sp t o k e e n o k a ch i k a ch i t o i u o t o d a k e d a q t a}|silB
+TRAVEL1000_0703|JSUT|{g o o k e e k i N g a k u g a m a ch i g a q t e i r u y o o d e s u y o}|silB
+TRAVEL1000_0147|JSUT|{k a m e r a w a sp a z u k e n a k e r e b a n a r i m a s e N k a}|silB
+BASIC5000_2590|JSUT|{sh i t e N o d a s u n a d o t o i u k a N g a e o sp k a r e w a d o k o d e o m o i ts u i t a n o d a r o o k a}|silB
+LOANWORD128_035|JSUT|{u s o b a k a r i ts u k u k a r e w a sp m i N n a k a r a h a b u r a r e t e i r u}|silB
+BASIC5000_0305|JSUT|{sh u u d a N s e e k a ts u o i t o n a m u d o o b u ts u w a s u b e t e sp j o o h o o o k o o k a N sh i t a r i sp ch i ts u j o a r u sh u u d a N o i j i s u r u t a m e sp n a N r a k a n o d e N t a ts u h o o h o o o m o q t e i r u}|silB
+BASIC5000_3605|JSUT|{n e ts u o k u w a e t e n o b a s u t o sp u b u g e g u r a i n o h o s o s a m a d e n o b a s u k o t o g a d e k i sp s o r e o sp n a N j u u n i m o k a s a n e t e ts u k u r u k a b e w a sp k o o t e ts u o m o sh i n o g u k a t a s a n i n a r u}|silB
+TRAVEL1000_0361|JSUT|{h o t e r u ch o k u ts u u n o d e N w a g a sp a s o k o n i a r i m a s u}|silB
+BASIC5000_4954|JSUT|{w a t a sh i w a r e e s e e d e i y o o t o sh i t a g a sp t o o t o o k a N n i N b u k u r o n o i t o g u ch i g a k i r e t a}|silB
+BASIC5000_2479|JSUT|{z e e m u sh o w a sh o t o k u z e e n o d a ts u z e e n i m e o h i k a r a s e t e i m a s u}|silB
+BASIC5000_1369|JSUT|{t a sh o o n o o k u r e o k o o ry o sh i t e o k u n o g a h i ts u y o o d a}|silB
+BASIC5000_2568|JSUT|{n a i t e y o i n o k a sp w a r a q t e y o i n o k a w a k a r a n a i}|silB
+BASIC5000_2557|JSUT|{sh i n u h o o g a k u ts u j o k u o u k e r u y o r i m o m a sh i d a}|silB
+BASIC5000_3608|JSUT|{sh u u r a k u n o ch i i s a n a sh a d a g a sp i m a n i ts u t a w a r u y u i sh o k a r a sp e N m u s u b i y a a N z a N n a d o n o g o r i y a k u g a a r u t o s a r e r u}|silB
+BASIC5000_0930|JSUT|{ts u ch i sp h i sp ts u k i n o sp g o z e N j u u j i h a N k a r a sp g o g o y o j i m a d e k a i k a N}|silB
+UT-PARAPHRASE-sent089-phrase2|JSUT|{sh a ch o o w a s u z u k i sh i g a k e N n i N s u r u}|silB
+BASIC5000_4442|JSUT|{b u q k u r e q t o n o k i j u ts u d e w a sp r e e o N y o r i m o h a r u k a n i o N n a n o g o o o n i y a s u sh o o j o}|silB
+UT-PARAPHRASE-sent011-phrase2|JSUT|{k o n o ch i g a i w a sp n a n i o i m i s u r u n o k a sp o m o w a z u k a N g a e k o N d e sh i m a u}|silB
+UT-PARAPHRASE-sent241-phrase1|JSUT|{t a n o k a i k a k u t o n o k a N k e e d e sp t e N p o o h a y a m e r u b e k i d a t o n o g i r o N m o a r u}|silB
+BASIC5000_3747|JSUT|{sh i n a n o g a w a k a k o o sh u u h e N n o n i i g a t a k a i g a N d e w a sp k a i g a N sh i N sh o k u g a k e N ch o d e a r u}|silB
+BASIC5000_3952|JSUT|{m i z u k a r a n o y u e ts u n o t a m e d a k e n i sp t o r i k o o g o o m o N s u r u n a d o sp h i j o o n i j a a k u n a s e e sh i ts u n o m o ch i n u sh i}|silB
+TRAVEL1000_0751|JSUT|{r o i s u s a N sp o a i d e k i t e u r e sh i i d e s u}|silB
+BASIC5000_1088|JSUT|{r i z u m u w a k e e k a i d e t e N p o w a h a y a k u sp s o n o ky o k u w a sp w a k a m o n o n i k o n o m a r e t e i r u}|silB
+BASIC5000_0052|JSUT|{k e e k a k u o t a t e r u k o t o t o sp s o r e o j i q k o o s u r u k o t o w a sp b e ts u m o N d a i d e s u}|silB
+BASIC5000_2840|JSUT|{w e i t o r e s u w a sp ky a k u t a ch i n i ky u u j i s u r u n o n i sp s e w a sh i k u u g o k i m a w a q t a}|silB
+BASIC5000_0967|JSUT|{s e e r e e g a a r u h o o n o u e n i k u d a q t e sp s o n o u e n i t o d o m a r a r e r u n o g a m i e t a n a r a sp s o n o h o o k o s o sp s e e r e e n i y o q t e sp b a p u t e s u m a o s a z u k e r u h o o d e a r u}|silB
+BASIC5000_0045|JSUT|{z e N p o o n i a r u sp a n o s a i N g a y o m e m a s u k a}|silB
+BASIC5000_0954|JSUT|{ts u m e o k a m u k u s e o t o m e n a k e r e b a i k e n a i}|silB
+TRAVEL1000_0293|JSUT|{m o sh i sp ky o o o o f u k u n o k i q p u o k a q t a r a sp k a e r i w a d o n o y o o n i sh i t e b a s u n i n o r i m a s u k a}|silB
+BASIC5000_0138|JSUT|{i q ch i d a N k e ts u sh i t e sp n a n i k a a t a r a sh i i k o t o o y a r o o j a n a i k a}|silB
+TRAVEL1000_0678|JSUT|{w a t a sh i n o n i m o ts u w a sp k o N b e a a b e r u t o n i n o q t e sp d e t e k i m a s e N d e sh i t a}|silB
+BASIC5000_2971|JSUT|{d o r e e s e e d o g a h i g o o h o o t o n a q t e k a r a sp i q s e e k i i j o o n i n a r u}|silB
+BASIC5000_0505|JSUT|{a r i s u w a sp n a n i k a k o k o r o n o sh i k o r i g a t o k e r u n o o k a N j i t a}|silB
+REPEAT500_set3_032|JSUT|{k i i ky o k u g a h a q sh i N s u r u sp ny u u s u n e q t o w a a k u m e e o k a N sh i t a t a i t o r u n o sp ny u u s u b a N g u m i n o n a k a d e w a sp r e gy u r a a h o o s o o g a sp m o q t o m o o o i}|silB
+BASIC5000_1894|JSUT|{sh o o gy o o t e r e b i w a sp k o o k o k u n o k o o k a t e k i n a sh u d a N d e a r u}|silB
+BASIC5000_0036|JSUT|{ny u u i N k a N j a w a sp i sh a n i m a s u i o ch u u sh a s a r e t e sp s u g u n i n e m u r i n i o ch i t a}|silB
+REPEAT500_set5_067|JSUT|{d e q d o k i i w a sp t a i p u r a i t a a y a sp k o N py u u t a n o k i i b o o d o n i o k e r u sp t o k u sh u n a sh u u sh o k u k i i d e a r u}|silB
+BASIC5000_2474|JSUT|{i m a k a r a k a n o j o g a a n a t a n o o s e w a o sh i m a s u}|silB
+UT-PARAPHRASE-sent014-phrase2|JSUT|{d a k a r a h e N t o o n i w a sp sh o o s a i n a i t o n o s e ts u m e e o k i t a i sh i t e i r u}|silB
+BASIC5000_2729|JSUT|{j i g e N b a k u d a N g a d a i o N ky o o t o t o m o n i b a k u h a ts u sh i t a}|silB
+UT-PARAPHRASE-sent028-phrase1|JSUT|{y o m i a g e t e m o r a u t o k i n o h a ts u o N g a k i k i t o r i n i k u k u sp k i ch o o n i h i t o k u r o o}|silB
+BASIC5000_0742|JSUT|{a y a m a q t e sp k i m i n o t e g a m i o k a i f u u sh i t a k o t o o y u r u sh i t e k u d a s a i}|silB
+TRAVEL1000_0925|JSUT|{k o n o ch i i s a i k o z u ts u m i o o k u r i t a i n o d e s u g a}|silB
+UT-PARAPHRASE-sent157-phrase2|JSUT|{u r a w a g a o k o sh i t a f u u a ts u n i m a k e r u k a n o y o o n i sp n i i g a t a w a f u t a ts u n o o o N g o o r u o k i r o k u sh i t a}|silB
+BASIC5000_0572|JSUT|{h a b a r o f u s u k u sh i g a sp ky o k u t o o r o sh i a d e d a i t o k a i n o h i t o ts u d e s u}|silB
+BASIC5000_0905|JSUT|{s u i s o k u g a m a ch i g a q t e i n a k e r e b a sp k a r e w a y o N j u q s a i d a}|silB
+BASIC5000_4599|JSUT|{y u k i g a sh i N sh i N t o f u r i ts u m o r i sp k i t a g u n i n o h a r u w a m a d a t o o i}|silB
+BASIC5000_0627|JSUT|{a s a h a y a k u h i t o o h o o m o N s u r u n o w a sp r e e g i n i h a N s u r u}|silB
+BASIC5000_3904|JSUT|{s a i k e N j o o t o n i o k e r u sp i g i n a k i sh o o d a k u n a d o}|silB
+BASIC5000_0993|JSUT|{ch u u g o k u d e w a sp b i w a sp k e N k o o t o k i r i h a n a sh i t e k a N g a e r a r e r u k o t o w a n a k a q t a}|silB
+REPEAT500_set4_099|JSUT|{d e by u u w e e t o w a sp s u u p a a b a N t a m u ky u u d e w a n a k u sp f e z a a ky u u d a q t a}|silB
+BASIC5000_2464|JSUT|{k o z u ts u m i w a h a ch i g a ts u j u u sh i ch i n i ch i n i r o N d o N n i t o o ch a k u n o y o t e e d e s u}|silB
+BASIC5000_0316|JSUT|{d o o k i g a h a g e sh i k u n a r u k o t o g a sp y o k u a r i m a s u}|silB
+BASIC5000_2525|JSUT|{k o k o N o t o o sh i t e sp k a r e w a m a t a t o n a i y u u k a N n a o t o k o d a}|silB
+PRECEDENT130_044|JSUT|{e n u k u r i p u t o sh a n o k a b u sh i k i o sp k a r i i r e k i N g a k u s o o t o o b u N t a N p o n i t e e ky o o s u r u k o t o t o s u r u}|silB
+BASIC5000_4939|JSUT|{a t a t a k a i t e N k o o n o t o k i w a sp h a q k a N s a y o o g a t a i o N n o ch o o s e ts u o s u r u j o o d e sp y a k u d a ts u}|silB
+VOICEACTRESS100_011|JSUT|{k e e my o o sh a d a ts u n a n a r e e sh o N k a r a sp j o o ch o k a N a f u r e r u k a t a r i m a d e sp h a b a h i r o i hy o o g e N ry o k u o m o ts u}|silB
+TRAVEL1000_0173|JSUT|{y o o r e e o j u u b u N n i r e N sh u u sh i t e i r e b a sp m o N d a i w a n a i h a z u d e s u}|silB
+BASIC5000_2863|JSUT|{n a k a m a t a ch i g a sp w a t a sh i n i y a b o o o h a t a s u y o o sp h a g e m a sh i t e k u r e t a}|silB
+TRAVEL1000_0007|JSUT|{b o o r u w a n a g e t e m o y o i sh i sp m o q t e h a sh i q t e m o y o i n o d e s u}|silB
+BASIC5000_0455|JSUT|{t o o m o r o k o sh i w a sp g a q sh u u k o k u n o j u u y o o n a n o o s a k u m o ts u d a}|silB
+BASIC5000_4907|JSUT|{k a r e w a sp ch i m i ts u n i t a t e t a k e e k a k u o j i q k o o sh i t a}|silB
+BASIC5000_3767|JSUT|{s o n o b a a i w a k o t a e o sh i r a n a i s e k i g u ch i n i m i m i u ch i o sh i t e sp e N s o o g o n i k a i t o o sh a g a k a i t o o sp s e k i g u ch i g a a q t e i r u k o t o o ts u g e r u p a t a a N g a a r u}|silB
+BASIC5000_4827|JSUT|{n a m e k u j i n i w a sp y u u sh i n o k u b e ts u w a n a i}|silB
+BASIC5000_1302|JSUT|{g e N z a i h e e sh a w a sp n i q p o N z e N k o k u n i sp h i j o o n i y o k u s o sh i k i s a r e t a sp n i hy a k u n o h a N b a i t e N o m o q t e i m a s u}|silB
+BASIC5000_0613|JSUT|{g e ts u y o o m a d e n i sp k o n o sh i g o t o o o e t e k u d a s a i}|silB
+BASIC5000_3163|JSUT|{k o n o b u i n o b a a i sp n i o i n o m o t o o o o k u f u k u m u a s e g a d a s a r e r u b a a i m o a r u t a m e sp j i b u N n o t a i sh u u o k i n i s u r u h i t o g a o o i}|silB
+BASIC5000_3125|JSUT|{ny u u sh o j i d o o g a j i b u N n o ch i k a r a d e sh u t a i t e k i n i sh o o r a i o k i r i h i r a k e r u y o o n a sh i e N g a m o t o m e r a r e t e i r u}|silB
+BASIC5000_3316|JSUT|{s e z o k u o k i r a i sp o o z o k u n o m i b u N o s u t e t e sp g i N y u u sh i j i N t o sh i t e sh o k o k u o h o o r o o sh i t e i t a}|silB
+BASIC5000_3422|JSUT|{sh i ky u u h i N g a t o d o k o o r u k o t o g a o o k u sp s o n o b a a i w a sp f u k u y a k u ts u s u r a j i b u N t a ch i d e ts u k u r i d a s a n e b a n a r a n a i}|silB
+BASIC5000_1149|JSUT|{s a d a k o w a n i sh i n i sh i z u N d e y u k u t a i y o o o m i t e sp m e k u r a n i n a q t a}|silB
+BASIC5000_2288|JSUT|{o r e sp k o n o k e N n i k a N sh i t e sp n o o t a q ch i n a N d e}|silB
+BASIC5000_0661|JSUT|{h o sh i u r a n a i n i y o r u t o sp k a n o j o t o b o k u w a sp a m a r i a i sh o o g a y o k u n a i y o o d a}|silB
+BASIC5000_1039|JSUT|{e e s e e n o n a k a n i w a sp b a k u h a ts u sh i t a m o n o y a sp sh o o t o ts u sh i t a m o n o m o a r u}|silB
+UT-PARAPHRASE-sent308-phrase2|JSUT|{k a n i n a d o n o gy o k a i r u i n o h o k a sp j a g a i m o y a sp m e r o N n a d o n o n o o s a N b u ts u m o sp k i s e ts u n i o o j i t e h a N b a i s u r u}|silB
+BASIC5000_1732|JSUT|{k e e w a sp s o n o t o i n i g i k u r i t o s a s e r a r e t a g a sp a t a m a o n a N d e m o n a i t o i i t a s o o n i y o k o n i f u r u}|silB
+BASIC5000_0577|JSUT|{k o ky a k u n i t a i s u r u k a N y u u n o d e N w a g a sp t e r e m a a k e t i N g u b u n o sh u y o o gy o o m u d e a r u}|silB
+BASIC5000_1504|JSUT|{p e i r u e r u w a sp a r u k o o r u g a N y u u ry o u n o s u k u n a i b i i r u d a}|silB
+BASIC5000_3602|JSUT|{j i b u N n i t o q t e m o q t o m o t a i s e ts u n a m o n o o k o o sh u u n o m e N z e N n i r o sh u ts u sh i sp s e N b o o s a s e t e sp t o o t a ts u f u k a n o o n a m a d e n o sh o o s a N o u k e r u k o t o}|silB
+VOICEACTRESS100_062|JSUT|{g u r e q g u w a sp m i sh i sh i q p i sh u u sp a b a d i i N n i a r u sp o q d o f e r o o z u b o ch i n i m a i s o o s a r e r u k o t o n i n a q t a}|silB
+ONOMATOPEE300_032|JSUT|{d a i i ch i sh i b o o n o g o o k a k u h a q py o o o m i r u t o k i w a sp d o k i d o k i sh i m a sh i t a}|silB
+BASIC5000_0878|JSUT|{g a N k o n i n a r a z u sp h i t o t o n a k a y o k u s u r u k o t o d e s u}|silB
+REPEAT500_set3_089|JSUT|{g e N z a i w a sp b a q h a o m o ch i i f u t o sh i t a sp h a a p u sh i k o o d o n o s a q ky o k u k a t o sh i t e sp k i o k u s a r e t e i r u}|silB
+TRAVEL1000_0909|JSUT|{s o n o k a n o o s e e o sp k e N t o o sh i t e m i r u b e k i d e sh o o}|silB
+BASIC5000_1271|JSUT|{m o h a y a s e k a i t a i s e N w a n a i m o n o t o k a k u sh i N s u r u}|silB
+ONOMATOPEE300_242|JSUT|{h i t o n i k a k u r e t e i d o o s u r u n o w a sp n o s o r i n o s o r i t o o t o o t a t e z u n i i d o o sh i n a k e r e b a n a r a n a i n o d a q t a}|silB
+UT-PARAPHRASE-sent249-phrase1|JSUT|{s o s e N k a r a u k e ts u i d e k i t a m o n o o sp w a r e w a r e n o s e d a i d e t a y a s u w a k e n i w a i k a n a i}|silB
+BASIC5000_1898|JSUT|{k o o k o k u n o m o k u t e k i w a sp s e e h i N n o n a o sp sh o o h i sh a n i f u ky u u s a s e r u k o t o n i a r u}|silB
+REPEAT500_set2_090|JSUT|{s e N t o o f u k u w a sp ry o o u d e o r o sh u ts u sh i sp ry o o ky a k u g a sp a N d a a s u u ts u d e o o w a r e t e i r u}|silB
+COUNTERSUFFIX26_01|JSUT|{h i t o ts u sp f u t a ts u sp m i q ts u sp y o q ts u sp i ts u ts u sp m u q ts u sp n a n a ts u sp y a q ts u sp k o k o n o ts u sp t o o sp i k u ts u}|silB
+ONOMATOPEE300_248|JSUT|{s o n o ch o o k o k u o m o q t a t o k i n i sp z u q sh i r i t o sh i t a o m o s a o k a N j i t a}|silB
+ONOMATOPEE300_210|JSUT|{n a n i g a h a i q t e i r u n o k a w a k a r a n a i g a sp k o n o t a m a g o y a k i w a sp n a z e k a m o ch i m o ch i sh i t a sh o k u k a N o sh i t e i r u n o d a}|silB
+BASIC5000_2462|JSUT|{d e m u k a e n i k i t e k u d a s a q t e a r i g a t o o}|silB
+BASIC5000_4475|JSUT|{s u r u t o sp k o N ky u u k u k a r a k a sp s e e k a ts u n o t a m e n i sp g o o sh i n o m i b u N o j o o t o s u r u y o o n i n a q t a}|silB
+UT-PARAPHRASE-sent274-phrase1|JSUT|{y o r i t e a ts u i k a N g o g a d e k i r u y o o n i n a r u n o w a n o z o m a sh i i k o t o d a}|silB
+BASIC5000_2973|JSUT|{h i k a r i g a e n o n a k a n i w a e g a k a r e t e i n a i sp o o k i n a m a d o k a r a s a sh i k o N d e i m a s u}|silB
+BASIC5000_0266|JSUT|{m i j i k a i t e g a m i d e m o i i k a r a sp k i q t o k a i t e n e}|silB
+TRAVEL1000_0857|JSUT|{d o o n a n o k a n a t o sp k a N g a e t e i t a k o t o g a a r u n o d e s u g a}|silB
+BASIC5000_4679|JSUT|{k a r e n o k a N ky o o g a u r a m e sh i i}|silB
+TRAVEL1000_0788|JSUT|{m a s u t a a k a a d o d e sh i h a r a e m a s u k a}|silB
+BASIC5000_0569|JSUT|{y u q k u r i d e m o sp ch a k u j i ts u n i y a q t e y u k e b a sp sh o o b u n i w a k a ts u}|silB
+BASIC5000_0256|JSUT|{h a sh i d e s o n o sh i m a e w a t a r e r u y o o n i n a q t e i r u}|silB
+TRAVEL1000_0715|JSUT|{ch u u o o e k i m a d e w a sp d o r e k u r a i j i k a N g a k a k a r i m a s u k a}|silB
+BASIC5000_3445|JSUT|{i q p o o d e sp b u k u N o sh o o s a N sh i sp o o k o o k i z o k u n o g o o s e e n a s e e k a ts u y a e e y o sp sh i y a o N g a k u y a ch o o k o k u n a d o n o g e e j u ts u n o t a k a m i n i sp m e g u m a r e t a h i t o w a t a ch i e r u}|silB
+BASIC5000_2439|JSUT|{s u i t o o n i w a h o t o N d o m i z u g a n o k o q t e i n a i}|silB
+REPEAT500_set3_050|JSUT|{f i i r u d o m a a k e t i N g u w a sp r e k i sh i t e k i n i w a sp i q p o o ts u u k o o n o k o my u n i k e e sh o N ts u u r u t o sh i t e sp k a N g a e r a r e t e k i t a}|silB
+ONOMATOPEE300_163|JSUT|{k i N j o d e ny a N ny a N t o n e k o t a ch i n o sh u u k a i g a o k o n a w a r e t e i r u}|silB
+BASIC5000_3864|JSUT|{t o o j o o s u r u s a i w a sp m o n o g a t a r i g a i ch i j i t e e sh i sh i sp g a m e N n o n a k a n o d o k o k a k a r a t o b i r a o a k e t e t o o j o o sh i sp t o b i r a o ts u k u r u t o k i w a sp ch e e N s o o n o y o o n a m o n o d e a k e r u k o t o g a a r u}|silB
+BASIC5000_0970|JSUT|{h a q py o o w a sp s a N j u q p u N i n a i n i s e e g e N sh i t e k u d a s a i}|silB
+BASIC5000_0063|JSUT|{my u u j i k a r u w a sp m i n a k a q t a n o d e s u k a}|silB
+LOANWORD128_062|JSUT|{d o r e g a k u a d i z o k u n o m o n o k a s a d a k a d e w a n a i}|silB
+BASIC5000_2427|JSUT|{sh i N b o o sh i n a k e r e b a s e e k o o s u r u k o t o w a d e k i n a i}|silB
+BASIC5000_3171|JSUT|{n e j i o k i ts u k u sh i m e r u t o sp h o t o N d o b i b u r a a t o w a k a k a r a n a i g a sp h a g e sh i i s o o h o o g a y o o ky u u s a r e r u s a i n i sp o N t e e g a y u r a g u n o o f u s e g u k o t o g a d e k i r u}|silB
+UT-PARAPHRASE-sent095-phrase2|JSUT|{k e e z a i n i w a k u w a sh i k u n a i sp e N j i n i a n o t a r o o}|silB
+TRAVEL1000_0729|JSUT|{s a i sh o n i g a i k o k u j i N g a k u s e e n o o r i e N t e e sh o N n o s u k e j u u r u g a a r i m a s u}|silB
+VOICEACTRESS100_017|JSUT|{t a d a sh i sp gy a N b u r u i z o N sh o o n o ny u u i N ch i ry o o o i q t e i r u by o o i N w a sp w a z u k a d e a r u}|silB
+VOICEACTRESS100_026|JSUT|{g e N z a i sp ny u u j a a j i i sh u u sp m u u a z u t a u N n i s u N d e i r u}|silB
+BASIC5000_4567|JSUT|{s o n o j o s e e w a sp b o k u n i t o q t e e g a o g a t o t e m o s u t e k i n a h i t o d a q t a}|silB
+BASIC5000_4671|JSUT|{ch i ch i b u w a k a ts u t e sp s a N m a y u d e s a k a e t a}|silB
+BASIC5000_1935|JSUT|{s a i sh i N n o s a N k a g e ts u d e sp j u N r i e k i g a sp k a k o s a i k o o k i r o k u t o n a q t e i m a s u}|silB
+BASIC5000_1109|JSUT|{h e N z u ts u u g a o k o q t a t o k i n i t a i sh o s u r u d a k e d e w a n a k u sp f u d a N n o s e e k a ts u n o n a k a d e sp h e N z u ts u u o n a r u b e k u f u s e i d e i k u n o m o sp d a i j i n a k o t o d e s u}|silB
+BASIC5000_4069|JSUT|{s u b e t e n o g e N ky o o t a r u r o k u n o s a y a t o k e q ch a k u o ts u k e r u t a m e n i sp k a w a n i ky o o ry o k u s u r u}|silB
+TRAVEL1000_0141|JSUT|{s u g u n i d a r e k a n i s o r e o t a sh i k a m e s a s e m a s u}|silB
+BASIC5000_4689|JSUT|{sh i i t e k i n a m i k a t a o s a k e r u b e k i d a}|silB
+UT-PARAPHRASE-sent107-phrase1|JSUT|{t a r a z a r u t e N o h a N s e e sh i t e sp r a i n e N n i k i s u}|silB
+REPEAT500_set5_033|JSUT|{g e e n o o p u r o d a k u sh o N sp a my u u z u n o g u r u u p u k i gy o o}|silB
+TRAVEL1000_0396|JSUT|{a n a t a w a sp o h a i o d o o r i n i i m a s u}|silB
+BASIC5000_1766|JSUT|{y o h o d o j u u y o o n a y o o m u k i d e y a q t e k i t a k o t o g a sp k a r e n o k a o i r o d e w a k a q t a}|silB
+BASIC5000_2028|JSUT|{m o o sh i w a k e n a i N d a k e d o sp a n a t a g a k a sh i t e k u d a s a q t a h o N g a sp m i ts u k a r a n a i n o y o}|silB
+BASIC5000_1230|JSUT|{f u k e N w a sp f u r a N s u y a sp n i q p o N n o gy o o s e e k u i k i d e a r u}|silB
+REPEAT500_set4_043|JSUT|{h a a d e e s u g a sp p e r u s e p o n e e n i k o i o sh i t a n o w a sp a p u r o d i i t e e n o sp s a k u ry a k u d e a r u t o s a r e t e i r u}|silB
+BASIC5000_1765|JSUT|{k a s a o m o q t e k u r u h i ts u y o o w a n a k a q t a n o n i}|silB
+BASIC5000_2472|JSUT|{i m a a m a r i o k a n e g a n a k u t e k o m a q t e i r u n o d e sp s o N n a g o o k a n a sh o k u j i w a d e k i n a i}|silB
+UT-PARAPHRASE-sent041-phrase2|JSUT|{o k a r a p a u d a a w a sp t o N k a ts u o a g e r u t o k i n i k a k e r u sp p a N k o n o y o o n a m o n o}|silB
+UT-PARAPHRASE-sent284-phrase2|JSUT|{s u p i i d o d a u N s u r u t o k i n o m u d a n a e n e r u g i i o y u a ts u n i t a k u w a e sp h a q sh i N y a sp k a s o k u n a d o sp o o k i n a sh u ts u ry o k u g a h i ts u y o o n a t o k i n i ts u k a i m a s u}|silB
+BASIC5000_0824|JSUT|{s u w a q t e m i r u t o sp s o n o i s u g a k o k o ch i y o i n o g a w a k a q t a}|silB
+BASIC5000_0739|JSUT|{s e N sh o o k o k u w a sp h a i s e N k o k u n i k o o w a j o o k e N o sh i r e e sh i t a}|silB
+PRECEDENT130_029|JSUT|{sh i b a i s e k i h o k e N n o j i z e N n i N t e e sp o y o b i i g i m o o sh i t a t e n i o i t e h i t e e s a r e t a}|silB
+UT-PARAPHRASE-sent136-phrase2|JSUT|{o n a j i a r u i t a r i sp b i i r u o n o m u N d e m o sp o N n a r a sh i k u sh i t o y a k a n i k o o d o o s u r u y o o n i n a r u d e sh o}|silB
+TRAVEL1000_0686|JSUT|{s u t e e k i d i n a a o o n e g a i sh i m a s u}|silB
+TRAVEL1000_0101|JSUT|{d o o m o a r i g a t o o g o z a i m a sh i t a}|silB
+BASIC5000_3385|JSUT|{i n u n e k o sh i N g a k u j u k u o k e e e e sh i t e d a i s e e k o o o o s a m e sp sh i s a N k a t o sh i t e m a ch i n o m e e sh i n o z a n i o s a m a r u}|silB
+BASIC5000_3557|JSUT|{b a r u k o n i i n i r o j i i n a g a t o o j o o sh i sp h a k u sh a k u n i t e g a m i o w a t a s o o t o s u r u g a sp s o k o n i b a r u t o r o g a y a q t e k i t e sp t e n i a r u k a m i w a n a n i k a o t a d a s u}|silB
+BASIC5000_2845|JSUT|{y u u sh o k u n i sp i i t o k o r o o sh i q t e i r u N d e s u y o}|silB
+REPEAT500_set4_012|JSUT|{k o o z o o w a sp h a g a n e s e e n o t a N i ts u a a ch i d e sp ky o o ky a k u w a sp i sh i ts u m i d e a r u}|silB
+BASIC5000_4438|JSUT|{a k a m a N b o o m e n o k i N e N gy o r u i n o y o o n i sp hy o o s o o b u b u N o t o o b u o u e n i sh i t e t a d a y o q t e i r u g a sp s o r e i g a i n i w a h o t o N d o s e e t a i g a k a i m e e s a r e t e i n a i}|silB
+BASIC5000_3903|JSUT|{k o k o d e sp d e N ry o k u k a i r o n i d a i hy o o s a r e r u sp s e e g e N h a k o o ry u u k a i r o n i k a g i q t a u e d e sp g u t a i t e k i n i sp y u u k o o d e N ry o k u o s a N sh u ts u s u r u k o t o t o s u r u}|silB
+BASIC5000_4719|JSUT|{k a m i o ch i j i m a r a s e r u h e a s u t a i r u g a ry u u k o o sh i t e i r u}|silB
+BASIC5000_4456|JSUT|{h i t a ch i k i N z o k u g a g o k u sh o o ry o o n o s e e s a N o ts u z u k e t e i r u g a sp s e e s a N s a r e t a t a m a k o o w a sp sh i t e e s a r e t a n i h o N t o o n o t o o k o o n i n o m i h a i f u s a r e sp i q p a N n i w a ry u u ts u u sh i n a i}|silB
+BASIC5000_2418|JSUT|{sh o k u y o k u g a ky u u n i g e N t a i s u r u n o w a by o o k i n o ch o o k o o d e a r u k o t o g a a r u}|silB
+TRAVEL1000_0073|JSUT|{s o k o n i o i t e o i t e i t a d a k e m a s u k a}|silB
+BASIC5000_4699|JSUT|{s a n a e s a N n o s a i n o o n i sp sh i q t o sh i n a i d o o gy o o sh a w a i n a i d a r o o}|silB
+BASIC5000_1385|JSUT|{f u y u y a s u m i w a d o n o y o o n i s u g o sh i m a sh i t a k a}|silB
+BASIC5000_3336|JSUT|{d a N s o o n a i n o d a N y a k u m o m u s e e g e N n i n a r u t a m e sp r i r o o d o s u r u k o t o n a sh i n i t a m a o u ch i ts u z u k e r u k o t o g a d e k i r u}|silB
+UT-PARAPHRASE-sent314-phrase2|JSUT|{by o o i N o k e e e e s u r u i sh i w a sp k a N j a n o ch i ry o o n i sh u u ch u u d e k i sp m i k a e r i n i sp t e s u u ry o o o h a r a u sh i k u m i d a}|silB
+TRAVEL1000_0643|JSUT|{m o q t o ch i k a k u k a r a m i s e t e i t a d a k e m a s u k a}|silB
+BASIC5000_2251|JSUT|{m a d o g a r a s u g a w a r e t e i t a n o d e sp s o n o h e y a o sp a t a t a k a k u sh i t e o k e n a k a q t a}|silB
+TRAVEL1000_0852|JSUT|{ky a k u n o y o o b o o n i sp k a n o o n a k a g i r i a w a s e r u y o o n i d o ry o k u sh i t e i m a s u}|silB
+BASIC5000_4052|JSUT|{i q p a N n i w a g o N gy o o n o s a i n i d o ky o o y a sh i N g o N o y o m i m a ch i g a e t a r i sp z a ts u n e N y a j a n e N g a sh o o j i t a s a i n o sp y u r u sh i o k o u t a m e n i t o n a e r a r e r u}|silB
+UT-PARAPHRASE-sent160-phrase2|JSUT|{y a s a sh i k u t a i s u r u t o a i s o y o k u k o o d o o s u r u g a sp i j i w a r u o s u r u t o s o q p o o m u i t e sh i m a u}|silB
+BASIC5000_3317|JSUT|{t a t o e b a sp h i t o n o h a n o d a N m e N w a sp s o t o g a w a k a r a e n a m e r u sh i ts u sp z o o g e sh i ts u sp sh i z u i t o sp w a n o y o o n i n a r a N d e o r i sp e n a m e r u sh i ts u g a i r i k u N d e sp k e e s e e s a r e t e i r u w a k e d e w a n a i}|silB
+REPEAT500_set2_054|JSUT|{y u u f u k u n a ny u u y o o k a a t a ch i w a sp g u r e e b u s e N d o sp k e e b a j o o y a sp sh i i p u sh e q d o b e i sp k e e b a j o o n a d o n i ts u d o i sp u m i z o i n o k o o ky u u r e s u t o r a N y a sp h o t e r u o r i y o o sh i t a}|silB
+BASIC5000_2080|JSUT|{m o ch i a w a s e g a t a r i n a k e r e b a sp k o k o w a w a t a sh i g a h a r a i m a s u y o}|silB
+TRAVEL1000_0556|JSUT|{z e r o o d a i a r u sh i t e sp o p e r e e t a a o y o N d e k u d a s a i}|silB
+BASIC5000_4399|JSUT|{s e i n o t e e a N n i ch o o r o o w a h a N t a i s u r u g a sp k o k u o o w a k i k i i r e sp n e ts u by o o w a y a g a t e sh i z u m a r u}|silB
+BASIC5000_1081|JSUT|{g o o u ts u k o t o g a sp w a t a sh i n o y u i i ts u n o t a n o sh i m i d a}|silB
+COUNTERSUFFIX26_25|JSUT|{i ch i j i sp n i j i sp s a N j i sp y o j i sp g o j i sp r o k u j i sp sh i ch i j i sp h a ch i j i sp k u j i sp j u u j i sp n a N j i}|silB
+BASIC5000_4716|JSUT|{k a r e n o b o k u sh i N g u s u t a i r u w a sp k e m o n o n o y o o d a t o hy o o s a r e t e i r u}|silB
+VOICEACTRESS100_080|JSUT|{k a s u k a n i k i k o e t e k u r u s e N ky u u hy a k u s a N j u u i ch i n e N b a N n o s a N b i k a g a sp sh i d a i n i o o k i k u n a q t e i k u}|silB
+BASIC5000_1696|JSUT|{s o o k o o m a i r u d e sp ry o o k i N g a k a s a N s a r e m a s u k a}|silB
+BASIC5000_4245|JSUT|{k a o k u n o sh i k i ch i n a i n i w a sp t o ch i sh i N o m a ts u r u h o k o r a o t a t e sp k o k u m o ts u y a sp k o o sh i N ry o o o s o d a t e r u k a t e e s a i e N m o a r u}|silB
+BASIC5000_2956|JSUT|{y u m i g a k i t a t o k i sp w a t a sh i w a t e r e b i o m i t e i t a}|silB
+BASIC5000_4027|JSUT|{ts u u j o o sp k a N s o o sh i t a k i t a i t o sh i t e sp ch i q s o g a m o ch i i r a r e r u}|silB
+BASIC5000_3641|JSUT|{h i j o o n i i ry o k u g a t a k a k u sp t e k i o j i m e N n i t a t a k i ts u k e r u s a i n i h a q s e e s u r u sh o o g e k i h a d e sp sh u u i n i i r u h o k a n o t e k i o k e ch i r a s u k o t o g a k a n o o}|silB
+REPEAT500_set2_023|JSUT|{n a N s e e b u w o o r e N w a sp b e i a a m a N f a a m u z u t o sp f i q ts u j e r a r u d o n o ch i k u d e sp k o o s e e s a r e r u}|silB
+BASIC5000_3184|JSUT|{o o d e a r u m i z u k a r a g a b u q p o o o o m o N j i sp d o o b u ts u n o g i s e e o h e r a s u k o t o sp y a k u s o o o s o n a e t a r i sp k i o u e r u n a d o n o ts u t o m e n i h a g e m u k o t o n a d o o sh i r u sh i t e i r u}|silB
+BASIC5000_4151|JSUT|{s o n o g o sp t e r a d a y a j i k e N d e m u s u k o g a sh i N d a k o t o o sh i r i sp j i j i N}|silB
+UT-PARAPHRASE-sent023-phrase2|JSUT|{i w a k i w a sp n i q p o N d e w a m e z u r a sh i k u sp ts u y a t o ts u y o s a o k a n e s o n a e t a b a r e r i i n a d a g a sp sh a k u t i n o o d o r i d e m o sp k a N ky a k u n o k o k o r o o s u i k o m u y o o n a sp i y o o n a m a ry o k u o h a q k i sh i t a}|silB
+UT-PARAPHRASE-sent180-phrase2|JSUT|{h o N sh o w a k o o sh i t a sh i t e N o a t a k a m o k u i o u ts u k a n o y o o n i sp r e k i sh i n o n a g a r e n o z u i sh o n i u ch i k o N d e ky o o ch o o s u r u}|silB
+BASIC5000_0548|JSUT|{g a q k a r i sh i t a k o t o n i w a sp k a r e w a s u d e n i sh u q p a ts u sh i t e sh i m a q t e i t a}|silB
+BASIC5000_2576|JSUT|{r o i w a sp g a a r u f u r e N d o k a r a d e N w a g a a r u t o u r e sh i s o o d a}|silB
+ONOMATOPEE300_137|JSUT|{j i k a N g a n a k a q t a n o d e sp s a s a q t o k a r u k u sh o k u j i o s u m a s e t a}|silB
+BASIC5000_0434|JSUT|{m e g a n e o k a k e r e b a sp k i m i n o sh i ry o k u w a ky o o s e e s a r e r u d a r o o}|silB
+BASIC5000_4666|JSUT|{t o n a r i n o ky a k u n o t e N i N n i t a i s u r u t a i d o o m i t e n i g a r u}|silB
+TRAVEL1000_0114|JSUT|{w a t a sh i t a ch i n o s e k i w a sp s e k u sh o N n a n a n o j u u n i r e ts u d e s u}|silB
+BASIC5000_3986|JSUT|{sh u k u s e e k a i y a sp u N d o o b u n o b o o ky o d e sh i i t a g e r a r e r u s e e t o t a ch i}|silB
+BASIC5000_0023|JSUT|{m u k o o n i t a q t e i r u o N n a n o k o w a sp m e a r i i d e s u}|silB
+UT-PARAPHRASE-sent290-phrase1|JSUT|{k o n o h i n i sh i t e m o sp o m o o m o sh i i r i z u m u n i n o q t e e N e N t o r a q p u o k u r i d a s u a m u r o o m i t e sp b o o z e N t o t a ch i ts u k u sh i t e i r u w a k a m o n o n o s u g a t a g a m e n i ts u i t a}|silB
+TRAVEL1000_0515|JSUT|{j u sh i N h i t o b a r a i n o d e N w a n o ry o o k i N w a sp t a k a i d e s u k a}|silB
+BASIC5000_2106|JSUT|{h o N j o o n i w a b i my o o n a j o o h o o g a f u k u m a r e t e o r i sp k i b u N o g a i s u r u k o t o g a a r u k a m o sh i r e n a i}|silB
+BASIC5000_4819|JSUT|{o n a j i k o r o sp ch u u t o o d e p e r u sh a t e e k o k u g a b o q k o o sh i t a}|silB
+TRAVEL1000_0548|JSUT|{k a e r u h i n o m a e n o b a N n i sp k o n o k a e r i n o k i q p u n i a r u sp d e N w a b a N g o o n i d e N w a sh i t e sp y o y a k u sh i t e k u d a s a i}|silB
+TRAVEL1000_0806|JSUT|{sh i ch i g a ts u j u u g o n i ch i n o r o s a N j e r u s u k a r a s o r u t o r e e k u sh i t i i n o y o y a k u o sh i t a i n o d e s u g a}|silB
+BASIC5000_2931|JSUT|{a s u n o i m a g o r o sp k i m i w a n a n i o sh i t e i r u d a r o o}|silB
+BASIC5000_0202|JSUT|{m e q s e e j i g a n a z e k a m o j i k a k e sh i t e i t a n o d e sp sh u u f u k u sh i t e y o m i m a sh i t a}|silB
+BASIC5000_4858|JSUT|{sh o o i ch i w a sp m a q s a o n i n a q t a}|silB
+BASIC5000_1590|JSUT|{b i j i N n o ts u m a o m o q t a m o n o w a sp m e g a f u t a ts u d e w a t a r i n a i}|silB
+TRAVEL1000_0058|JSUT|{s o sh i t e sp s a i g o n o w a sp y o r u n o j u u j i s a N j u q p u N d e s u}|silB
+BASIC5000_4257|JSUT|{m o n o g a t a r i j o o w a o m o n i t e e s a ts u y a m i h a r i sp d e N r e e n a d o n o y a k u w a r i o n i n a u}|silB
+TRAVEL1000_0425|JSUT|{k o k o n i sh o m e e sh i t e i t a d a k e m a s u k a}|silB
+BASIC5000_4402|JSUT|{sh u ry o o y o o d e w a n a k u sp a i g a N k e N t o sh i t e s a k u sh u ts u s a r e t a}|silB
+BASIC5000_4220|JSUT|{w a N g a N s e N s o o o h a j i m e sp o o s u t o r a r i a k a i g u N k a N t e e n o s a N k a s u r u s a k u s e N y a e N sh u u n i z u i h a N sh i t e i r u}|silB
+BASIC5000_3839|JSUT|{s u k e a d o r u n o sh i t a n i ts u k i k e N sh u u n i i s o sh i m u m o sp k o t o a r u g o t o n i k o sh i o n u k a s u k u s e g a a r i sp s e N ry o k u n i w a h o d o t o o i}|silB
+BASIC5000_4253|JSUT|{m u k a sh i sp sh i N k a k u s a i b o o g a k o o g o o s e e s e e n o r a N s o o o t o r i k o m i sp sh o o k a n i sh i q p a i sh i t a t o k a N g a e r a r e t e i r u}|silB
+REPEAT500_set1_081|JSUT|{m o o i i d e e N g a N p e k i ch i i k i n o j o o b u w a sp p u r a a s a a t o p u r a w i h a a N j i i N i s e k i e ts u n a g a r u sp t a i g a w a s a N d o o n i ts u z u i t e i r u}|silB
+BASIC5000_1353|JSUT|{n e q ky o o t e k i n a k a N ky a k u g a sp ky o o g i j o o n i n a d a r e k o N d a}|silB
+UT-PARAPHRASE-sent020-phrase2|JSUT|{n a g a r e o k a e t a n o w a sp m a i d o n o k o t o n a g a r a sp y a t o o n o sh i q p a i t o b u N r e ts u d e a r u}|silB
+BASIC5000_1161|JSUT|{s a i w a i t a d a sh i q t e sp s u g o k u k a w a i i N j a n a i}|silB
+BASIC5000_1579|JSUT|{m o t o s o o r i d a i j i N n o s u z u k i sh i g a sp i i N k a i n o g i ch o o n i n a r u d a r o o}|silB
+BASIC5000_0503|JSUT|{ky o o t e e g a m u s u b a r e r u k a n o o s e e w a sp k i w a m e t e s u k u n a i}|silB
+BASIC5000_0816|JSUT|{t a o r e t a k i g a j a m a n i n a q t e sp w a t a sh i w a k u r u m a o sh a k o k a r a d a s e n a k a q t a}|silB
+BASIC5000_2449|JSUT|{z e N g a k u s e e w a m i N n a t o sh o k a N n i h a i r u k o t o g a d e k i r u}|silB
+BASIC5000_4461|JSUT|{o t o k o w a sp t a k o a g e w a k o d o m o j i d a i n i u d e n i o b o e g a a q t a k o t o o m u s u k o n i j i m a N sh i sp m a z u j i b u N g a t o sp t a k o o a g e r u}|silB
+BASIC5000_0484|JSUT|{a p o r o j u u i ch i g o o g a g e ts u m e N ch a k u r i k u n i s e e k o o sh i t a t o i u ny u u s u g a h a i q t a}|silB
+UT-PARAPHRASE-sent201-phrase2|JSUT|{m i s e n i a k a r i o n a k u s u n a}|silB
+BASIC5000_1630|JSUT|{k o o k o o s e e n o n a k a n i w a sp h o N y a o b u r a ts u i t e sp m a N g a o y o m u m o n o m o o o i}|silB
+TRAVEL1000_0602|JSUT|{j i k a N w a sp k a b e n i k e e j i sh i t e a r i m a s u}|silB
+BASIC5000_2763|JSUT|{g o h e N j i o s a sh i a g e r u m a e n i sp y o k u k a N g a e m a sh o o}|silB
+BASIC5000_4713|JSUT|{w a g a m i n o f u k o o o u r e e r u}|silB
+BASIC5000_1321|JSUT|{h i k a N r o N g a y u u s e e n a n o d a k a r a sp k e e e e sh a w a s o n o k e e k a k u o d a N n e N s u r u d a r o o}|silB
+BASIC5000_1403|JSUT|{n i k a g e ts u n i i ch i d o sp m e e t a a o k e N s a sh i m a s u}|silB
+BASIC5000_3806|JSUT|{b a r e N t a i N d e e n i w a sp r i ch i g i n i ch o k o n o o k a e sh i o sh i t e k u r e r u t o u w a s a s a r e r u}|silB
+TRAVEL1000_0913|JSUT|{s u m i m a s e N g a sp k o p i i k i g a k o sh o o sh i t e i m a s u}|silB
+BASIC5000_4123|JSUT|{b a k u h a ts u n o sh o o g e k i d e h i q k u r i g a e q t a z e n i g a t a n o m e n o m a e n i w a sp s a k i h o d o b a k u h a ts u sh i t a h a z u n o r u p a N g a h o N n i N g a a r a w a r e r u}|silB
+UT-PARAPHRASE-sent100-phrase1|JSUT|{k o r e m o k a q t a a d e sp u q s u r a n a m a e o h o q t e i k u}|silB
+UT-PARAPHRASE-sent093-phrase1|JSUT|{t o k u t e e n o i d e N sh i n o d a N p e N o sp t a N j i k a N d e t a i ry o o n i f u k u s e e s u r u g i j u ts u}|silB
+BASIC5000_4563|JSUT|{k a N k i n o t a m e n i sp k a b e n i ch i i s a i k a z a a n a o a k e m a sh i t a}|silB
+BASIC5000_1303|JSUT|{sh u f u g a y o k a o j u u b u N m o t e r u y o o n i n a q t a n o m o sp d e N k a s e e h i N n o t a m a m o n o d e a r u}|silB
+BASIC5000_2355|JSUT|{o y a o y a sp sh o k u j i n o t o ch u u n i s e k i o t a ts u t o w a sp m a n a a n i h a N sh i m a s u n e}|silB
+TRAVEL1000_0514|JSUT|{i sh i k a w a d e N k i n o h a N b a i s e k i n i N sh a d e sp w a t a sh i d o m o n o sp sh i N s e e h i N n o g o sh o o k a i o sh i t a i t o o m o i m a s u}|silB
+TRAVEL1000_0902|JSUT|{s u t e e k i o ch u u m o N s a r e m a s e N d e sh i t a k a}|silB
+BASIC5000_0273|JSUT|{g o k a i o h e r a s u t a m e n i w a sp w a t a sh i t a ch i w a sp j o o z u n i i sh i n o s o ts u u o h a k a r u g i j u ts u o sp m i n i ts u k e n a k e r e b a n a r a n a i}|silB
+LOANWORD128_027|JSUT|{y u u j i N n i j u u n e N b u r i n i a q t a r a sp s u k o sh i d e b u q t e i t a}|silB
+BASIC5000_3106|JSUT|{f e m i n a r u sh i s u t o n a i k i k a t a o t e e sh o o sh i sp s o o g o o sh o k u n i t e N z o k u sh i t a}|silB
+BASIC5000_1917|JSUT|{ch u u sh o o k i gy o o w a i k i n o k o r u t a m e n i sp j i q t o t a e t e i k a n a k e r e b a n a r i m a s e N}|silB
+BASIC5000_0886|JSUT|{z u u t a i b a k a r i o o k i i k a r a sp k e N k a ky o o s o o d a g a sp j i q s a i k e N k a y o w a i d a r o}|silB
+TRAVEL1000_0250|JSUT|{o s u w a r i n i n a q t e i t a d a k e m a s u k a}|silB
+ONOMATOPEE300_052|JSUT|{n i w a o h o q t e i t a r a sp k o z e n i g a z a k u z a k u t o d e t e k i t a}|silB
+TRAVEL1000_0501|JSUT|{s o n o k a n o o s e e o k e N t o o sh i t e m i r u b e k i d e s u}|silB
+BASIC5000_1016|JSUT|{m o d a N j a z u n i n a n i o m o t o m e t e k i k e b a i i n o k a w a k a r u t o sp w a t a sh i w a s o r e o a j i w a e r u y o o n i n a q t a}|silB
+UT-PARAPHRASE-sent141-phrase1|JSUT|{ry o o r i d e w a sp ts u u j o o k o sh i t e ts u k a u g a sp o s o r u o s o r u k o s u m a e n o k a sh i j e e o k u ch i n i sh i t e m i t a}|silB
+BASIC5000_2164|JSUT|{k i ts u n e w a sp t a n o d o N n a d o o b u ts u y o r i m o sp z u r u i t o i u k o t o d a}|silB
+REPEAT500_set5_022|JSUT|{k o n o t o k i n i sp f u y u u t a i r i k u p u r u b a m a n i a r u sp ch u u r i ts u k o k u sp by u e r u b a g a sp a r u j o o h o o s u j i k a r a sp b a q sh u sh o o g u N n o sh o k e e t o sp z e N o o j o sp a a sh e n o j i g a i o h a q py o o}|silB
+BASIC5000_2044|JSUT|{k i m i m i z u k a r a g a k a i g i n i sh u q s e k i s u b e k i d e a q t a n o d a}|silB
+BASIC5000_1172|JSUT|{sh i k o o g a z u i b u N ts u i t e i r u t o o m o i m a s u g a}|silB
+LOANWORD128_076|JSUT|{r a z u y a a sh i ch i i t o w a n a N d a r o o}|silB
+BASIC5000_3856|JSUT|{i k u ts u k a n o ch i i k i d e w a sp sh i n a i sh i k u n i a t a i s u r u t o sh i g a n a k u sp k i s o j i ch i t a i g a ch o o s o N d a q t a}|silB
+BASIC5000_2003|JSUT|{k i r i s u t o w a sp o o k u n o k i s e k i o o k o n a q t a t o sh i N j i r a r e t e i r u}|silB
+BASIC5000_4487|JSUT|{t o k u n i sp d o r a i p o i N t o n i y o r u sp d o o h a N g a n o hy o o k a g a t a k a i}|silB
+BASIC5000_1440|JSUT|{k o o e N sh a w a sp j i b u N n o d a i g a k u j i d a i n o o m o i d e o k u w a sh i k u h a n a sh i t a}|silB
+LOANWORD128_094|JSUT|{n a N k a sh i t a m o N z o k u w a sp t a t o o N o o k o k u o t a t e t a}|silB
+BASIC5000_1538|JSUT|{m i ry o k u w a m i r u m e o u ts u g a sp sh i N k a w a t a m a sh i i o k a ch i t o r u}|silB
+BASIC5000_4343|JSUT|{s o n o n a k a y o r i sh o o j i t a y u e sp t a d a r e h i o m a ts u r i k o o}|silB
+BASIC5000_0243|JSUT|{b e N sh o o d a i sp k i q ch i r i m i m i s o r o e t e h a r a w a N k a i}|silB
+BASIC5000_4391|JSUT|{ts u k i b i t o n i f u N sh i t a d o k i N ch a N t o t o m o n i u n a g i d o N o g o ch i s o o n i n a r u g a sp s a N sh o o k u N g a s a N sh o o o f u r i k a k e t a s a i n i k u sh a m i o sh i t a hy o o sh i n i sp i s u k a r a k o r o g e o ch i t e h e N s o o g a b a r e t e sh i m a q t a}|silB
+BASIC5000_0287|JSUT|{t o r i n o y o o n i o m o i n o m a m a n i s o r a o t o b i t a i t o i u y o k u b o o g a sp h i k o o k i n o h a ts u m e e n i ts u n a g a q t a}|silB
+ONOMATOPEE300_269|JSUT|{t e e b u r u m a n a a o sh i r a n a i n o d e sp w a t a sh i w a s u u p u o z u z u u q t o o t o o t a t e t e n o N d e sh i m a i m a sh i t a}|silB
+BASIC5000_4012|JSUT|{b u k i w a ry o o k o b u sh i n i h a m e t a n a q k u r u d e sp b o k u s a ts u sh i t a s a ts u j i N o n i t a ch i n o o N ry o o g a y a d o q t e i r u}|silB
+TRAVEL1000_0304|JSUT|{d a i s a N sh a n i u q t a e r a r e t a b a a i n o sp t a i j i N h o k e N m o a r i m a s u}|silB
+VOICEACTRESS100_099|JSUT|{d e by u u w e e t o w a sp s u u p a a b a N t a m u ky u u d e w a n a k u sp f e z a a ky u u d a q t a}|silB
+BASIC5000_2976|JSUT|{n a r u h o d o k a r e w a ts u y o sh i s o q ky u u t o o sh u d a g a sp y o k u a r e r u}|silB
+ONOMATOPEE300_029|JSUT|{t a ch i ts u k u sh i t e i t a o o o t o k o w a sp k o n e k o n o k u b i n e q k o o m u N z u t o ts u k a m u t o sp s o n o m a m a f u t o k o r o n i i r e t e a r u i t e i q t a}|silB
+REPEAT500_set3_076|JSUT|{d i o ny u u s o s u n o sp ch o o a i o u k e r u sp o i n e u s u o o t o sp h i sp a r u t a i a a n o a i d a n i sp k a r i y u d o o N n o o o j o t o sh i t e sp s e e o u k e t a}|silB
+VOICEACTRESS100_087|JSUT|{f u k u o k a d a i e e h o o k u s u d e w a n a k u sp ch o o ky o r i h o o n o h o ky o o o m e z a sh i t e i t a sp o o s a k a k i N t e ts u b a f a r o o z u k a r a sp o f a a o u k e t e ny u u d a N}|silB
+BASIC5000_2826|JSUT|{k a i m e N w a sp m i z u o ky u u sh u u sh i m a s u n o d e sp s u i s a i e n o g u o b o k a sh i t a r i s u r u t o k i n i b e N r i d e s u}|silB
+BASIC5000_0752|JSUT|{s a u j i a r a b i a w a sp s e k i y u n i h i j o o n i m e g u m a r e t e i r u}|silB
+BASIC5000_0007|JSUT|{ky o k a sh o g a n a k e r e b a k o k o e w a i r e n a i}|silB
+BASIC5000_1775|JSUT|{y o k i k o t o b a y o r i sp y o k i o k o n a i n o h o o g a m a s a r u}|silB
+BASIC5000_2735|JSUT|{k i m o ch i d a k e a s e q t e sh i m a q t e sp z e N z e N k o o d o o g a t o m o n a w a n a i}|silB
+UT-PARAPHRASE-sent085-phrase2|JSUT|{e N d o o k a r a n o ch i k a r a m i z u o a b i t a o t o k o sh u u n o k a r a d a k a r a w a sp k a s u k a n i y u g e m o a g a q t a}|silB
+BASIC5000_4266|JSUT|{t e e d e N a ts u t o k u s e e n o y o o s e ts u k i w a sp o m o n i h a N j i d o o a a k u y o o s e ts u n i ts u k a w a r e t e i r u}|silB
+BASIC5000_0099|JSUT|{u w a y a k u n i h a N t a i s u r u k o t o w a sp k a r e m o y u u k i n o a r u o t o k o d a}|silB
+BASIC5000_4873|JSUT|{b u q ch a k e m e g u N d e h o sh i i}|silB
+BASIC5000_3425|JSUT|{d o o k u ts u n o n a k a n i w a d o w a a f u t a ch i g a s u m i ts u k i sp ch i k a n o n a k a k a r a t a n o sh i g e n a o t o g a h i b i k u}|silB
+BASIC5000_2594|JSUT|{sh i N j u o s a g a sh i t a i t o o m o u m o n o w a sp f u k a k u m o g u r a n a k e r e b a n a r a n u}|silB
+UT-PARAPHRASE-sent281-phrase2|JSUT|{d o o r o o h a sh i r u k u r u m a o sp h a N b e ts u d e k i r u}|silB
+ONOMATOPEE300_133|JSUT|{d o r a m a o m i t e i r u t o sp o m o u y o o n i k o t o g a s u s u m a n a i n o d e sp i r a i r a sh i t e k u r u}|silB
+UT-PARAPHRASE-sent037-phrase1|JSUT|{u r i m o n o w a sp f u y u n o k i b i sh i i sh i z e N t o sp j i m o t o n o sh i N s e N n a k a i s a N b u ts u}|silB
+BASIC5000_3263|JSUT|{k o r e w a sp j i z e N n o m o N sh i N d e m o i sh i n i sh i d o o s a r e r u g a sp k a r a d a n o f u t a N o h e r a s u t o t o m o n i sp k a i f u k u o h a y a m e r u t a m e d e a r u}|silB
+BASIC5000_3651|JSUT|{k o o i q t a ky o o g i w a sp s e N s o o d e n o h a q t e N o m o t o m e r u k o q k a n i t o q t e w a k i ch o o d e a r i sp m a t a sp s o r e g a k a q k o k u n o m a a t i a r u ky o o k a n o i sh i z u e t o m o n a q t a}|silB
+REPEAT500_set1_045|JSUT|{b e e z a a j i t e N sh a d o o y a sp my u u r e N r u u t o n i sh i t a g a q t a sp s a i k u r i N g u ts u a a w a sp p e e t a a s u h a a g e N o sp k e e y u s u r u}|silB
+BASIC5000_2074|JSUT|{r e p o o t o w a sp k o N g e ts u n o m a ts u j i ts u m a d e n i t e e sh u ts u sh i t e k u d a s a i}|silB
+TRAVEL1000_0901|JSUT|{k o n o m a ch i n o ch i z u g a h o sh i i n o d e s u g a}|silB
+BASIC5000_1480|JSUT|{s o o o N g a h i d o k a q t a n o d e sp b e i r i i ky o o j u w a sp j i b u N n o k o e o t o o s u k o t o g a d e k i n a k a q t a}|silB
+BASIC5000_3472|JSUT|{h o N ky o ch i g a k o o g e k i n i a u t o sp k e e h o o g a h a q s e r a r e r u}|silB
+BASIC5000_4889|JSUT|{b o k u w a sp ch i r a k a q t e i r u i e w a g a m a N d e k i r u g a sp f u k e ts u n a i e w a k i r a i d a}|silB
+BASIC5000_2336|JSUT|{o t a s u k e i t a d a i t e sp h o N t o o n i a r i g a t o o g o z a i m a s u}|silB
+BASIC5000_2842|JSUT|{ch o o sh u w a sp s o n o k a sh u n i s e e d a i n a h a k u sh u o o k u q t a}|silB
+BASIC5000_4725|JSUT|{f u k a s u k o t o d e sp y a s a i h o N r a i n o u m a m i g a h i k i t a ts u}|silB
+BASIC5000_1059|JSUT|{n a n i o sh i t e y o i k a w a k a r a n a k a q t a n o d e sp k a r e n i j o g e N o m o t o m e t a}|silB
+BASIC5000_0671|JSUT|{y o m i t a i t o o m o u h o N o sp d o r e d e m o o t o r i k u d a s a i}|silB
+BASIC5000_0780|JSUT|{ky o d a i n a t a N k a a g a sp ts u i n i i m a sh i g a t a sh u q k o o sh i t a}|silB
+BASIC5000_2115|JSUT|{k o q p u o i k u ts u k a m o q t e k i t e k u d a s a i}|silB
+BASIC5000_3076|JSUT|{h i r o k u sh i r a r e t e i r u j o o h o o y a ch i sh i k i sp w i k i p e d i a n i o k e r u h o o sh i N y a k a N sh u u sp j o o sh i k i t e k i n a k a N k a k u n i s o m u k u h e N sh u u g a a r e b a sp i r o N n a h i t o g a sp s o n o h e N sh u u o sh u u s e e sh i t a r i sp h i t e e sh i t a r i sh i m a s u}|silB
+BASIC5000_1742|JSUT|{d o k u r i ts u sh i t e sp j i b u N n o ch i k a r a o t a m e sh i t a r a d o o d e s u k a}|silB
+BASIC5000_3208|JSUT|{h o s u j i k a N w a t o o j i ts u n o t e N k i y a sp k a z e n o g u a i n i y o q t e h a N d a N s u r u}|silB
+UT-PARAPHRASE-sent162-phrase2|JSUT|{u w a n e o o u n i w a sp gy o o s e k i n a d o d e a r a t a n a z a i ry o o g a h i ts u y o o t o i e s o o d a}|silB
+BASIC5000_0697|JSUT|{i sh i w a t a k a n a a m i o h a q k e N s a r e t a b a a i sp h i s a N b o o sh i n o t a m e sp i sh i w a t a n o b u b u N o m i z u n i n u r a sh i t e sp b i n i i r u b u k u r o n i ts u ts u m i sp a N z e N o k a k u h o sh i t e k u d a s a i}|silB
+BASIC5000_0095|JSUT|{k e e z a i g a k u n o h o N o sp g o s a ts u r o N d o N n i ch u u m o N sh i t a}|silB
+REPEAT500_set1_015|JSUT|{i q p o o d e sp gy o gy o o t o sh o o gy o o d e sp ry a n e s u k o o w a h a N e e sh i t e i t a}|silB
+BASIC5000_4583|JSUT|{m i n i n a n i k a o k i r u t o sp z e N s e n o i N n e N o m o ch i d a s u h i t o g a i r u}|silB
+REPEAT500_set5_025|JSUT|{s o n o hy o o hy o o t o sh i t a h i t o g a r a g a sp r o o ny a k u n a N ny o n i sh i t a w a r e t e i r u}|silB
+VOICEACTRESS100_045|JSUT|{b e e z a a j i t e N sh a d o o y a sp my u u r e N r u u t o n i sh i t a g a q t a sp s a i k u r i N g u ts u a a w a sp p e e t a a s u h a a g e N o sp k e e y u s u r u}|silB
+BASIC5000_2278|JSUT|{sh i ts u m o N n i t a i sh i t e w a sp sh i N s e ts u n i k o t a e t e k u d a s a q t a}|silB
+BASIC5000_1455|JSUT|{g a k u ch o o w a sp s e e t o t a ch i n i sp ts u g i n o t o o r i n i k o o e N sh i t a}|silB
+BASIC5000_2744|JSUT|{k a i g a N n o h i sh o ch i w a sp t a t o e b a sp ny u u b o o t o g a s o o d a g a sp n a ts u n i w a h i j o o n i k o N z a ts u s u r u}|silB
+BASIC5000_3156|JSUT|{g a N k o n a o j i i s a N d a g a sp m a g o m u s u m e n o k a t o r i n i w a a m a i}|silB
+UT-PARAPHRASE-sent094-phrase1|JSUT|{y o m o y a t o o m o u h e N k a g a sp i t o m o k a N t a N n i o k o r u m o n o d e a r u}|silB
+BASIC5000_0383|JSUT|{b e ts u n o d a N r a k u d e sp k a r e w a k o N m a o h i t o ts u i r e t a}|silB
+UT-PARAPHRASE-sent252-phrase2|JSUT|{n i q p o N w a s u d e n i y o i t a i o o o sh i t e k i t e i r u g a sp t e N p o o a g e r u k o t o g a t a i s e ts u d a}|silB
+BASIC5000_2415|JSUT|{ky o o k o g a d o k o n i s u N d e i r u n o k a s e e k a k u n i h a sh i r i m a s e N g a sp s a N n o m i y a n o h o o d e s u}|silB
+BASIC5000_4469|JSUT|{f u k a i m o r i n o n a k a o sp h i t o r i g o t o o ts u b u y a k i n a g a r a sp sh i t a m u k i g a ch i n i a t e d o n a k u s a N p o s u r u w a k a m o n o g a i r u}|silB
+REPEAT500_set5_045|JSUT|{b e e z a a j i t e N sh a d o o y a sp my u u r e N r u u t o n i sh i t a g a q t a sp s a i k u r i N g u ts u a a w a sp p e e t a a s u h a a g e N o sp k e e y u s u r u}|silB
+BASIC5000_0437|JSUT|{m a k o t o n i s u m i m a s e N g a sp w a t a sh i n o t a m e n i b e N g o sh i t e i t a d a k e m a s e N k a}|silB
+TRAVEL1000_0966|JSUT|{t a k u sh i i n i a i n o r i sh i m a sh o o k a}|silB
+BASIC5000_1003|JSUT|{m o e r u g o m i t o m o e n a i g o m i n o k u b e ts u m o sp y o k u w a k a r a n a i y o n e}|silB
+REPEAT500_set5_057|JSUT|{k o n o j e sh i i y a k u d e s u t e i m o s u w a sp e m i i sh o o n i n o m i n e e t o s a r e t a k o t o m o a r u}|silB
+TRAVEL1000_0318|JSUT|{a sh i t a n o g o g o sp a i t e i r u j i k a N w a a r i m a s u k a}|silB
+BASIC5000_2679|JSUT|{ch i k i N w a t a b e r a r e n a i sp t o i u k e d o sp t a N n a r u k u w a z u g i r a i j a n a i n o}|silB
+BASIC5000_1397|JSUT|{ry o o t e N b i N n i k a k e y o o t a q t e sp s o o w a i k i m a s e N y o}|silB
+BASIC5000_3013|JSUT|{m i h o s o o d o o r o n i ts u i t e w a t e e g i w a a i m a i d e a r u g a sp o o m u n e s o q k o o i g a i n o b u b u N t o n a r u d e a r o o}|silB
+BASIC5000_0639|JSUT|{s u r a s u r a i e r u y o o n i n a r u m a d e sp k o n o b u N o a N k i sh i n a s a i}|silB
+BASIC5000_3251|JSUT|{n i h o N g o n i e e g o o m a z e r u g a sp s u p e i N g o o ts u k a u b a m e N w a n a k a q t a}|silB
+TRAVEL1000_0421|JSUT|{a n o s a i N d o o r i n i i q t e k u d a s a i}|silB
+BASIC5000_3070|JSUT|{f u j i N n i t a n o m a r e sp y u i g o N j o o o s a k u s e e s u r u}|silB
+BASIC5000_1928|JSUT|{k i s e e k a N w a g a s u s u N d e sp s e r u f u s a a b i s u n o g a s o r i N ky u u y u w a sp n e d a N g a s u k o sh i y a s u k u n a q t a}|silB
+BASIC5000_0206|JSUT|{a r u i t e i k u n o sp s o r e t o m o sp b a s u d e i k u n o}|silB
+BASIC5000_1286|JSUT|{o y a k a s e N s e e g a k o d o m o n i d o k u sh o n o t a n o sh i m i o sp j u u b u N n i w a k a r a s e n a k e r e b a n a r a n a i}|silB
+BASIC5000_2339|JSUT|{i ch i z o k u g a k u r o o sh i t e ts u m i a g e t e k i t a m o n o o sp o m a e w a i q sh u N d e sp h o g o n i s u r u ts u m o r i k a}|silB
+BASIC5000_4554|JSUT|{ch a k u sh u ts u n o o o j i y a sp s a i k o o i n o k o o z o k u d a N sh i n o k o t o o sp sh i N n o o t o y o b u}|silB
+BASIC5000_0966|JSUT|{sh a k u y o o g o g a m a q t a k u n a i t o i u g e N g o w a sp o s o r a k u n a i d e a r o o}|silB
+BASIC5000_3262|JSUT|{sh i k a sh i sp j i ts u w a n u i g u r u m i n a d o n o k a w a i i m o n o g a s u k i d e sp k a w a i i m o n o n i a k o g a r e r u k i m o ch i k a r a sp j o s e e a i d o r u n o f a N d e m o a r u}|silB
+BASIC5000_0298|JSUT|{y a m i n o n a k a d e sp k a r o o j i t e f u t a r i n o h i t o k a g e g a m i w a k e r a r e t a}|silB
+BASIC5000_4314|JSUT|{j u N i ch i r o o w a t a k a m e o h o o j u u sh i sp n i s a k a z u k i k o o m a d e n o s e t e sh i m a u t o i u f u k a k u o t o q t e o r i sp ry o o sh a n o r i k i ry o o n o s a g a sp ny o j i ts u n i a r a w a r e t a ky o k u m e N n i n a q t e i t a}|silB
+UT-PARAPHRASE-sent127-phrase1|JSUT|{n i q p o N n o k a b u k a w a s o o j i t e h a N p a ts u}|silB
+BASIC5000_0978|JSUT|{o k a o g a m i e r u y o o n i sp m o q t o ch i k a k u n i o i d e k u d a s a i}|silB
+PRECEDENT130_119|JSUT|{s e e ky u u g e N i N a sp n a i sh i u n i ts u i t e a r a s o u k o t o o sp a k i r a k a n i sh i n a i}|silB
+BASIC5000_1294|JSUT|{i r o i r o t o t a s u k e t e k u d a s a q t e sp w a t a sh i t a ch i w a sp k i m i n i t o t e m o k a N sh a sh i t e i m a s u}|silB
+BASIC5000_4284|JSUT|{y u u ts u b a s a j i N d e N sh o o n o k e N ky u u n i sp y o s e e o s a s a g e t e i r u}|silB
+TRAVEL1000_0801|JSUT|{n o r i k a e n o h i k o o k i n o g e e t o o sp k a k a r i i N k a m o n i t a a d e y o k u t a sh i k a m e t e k a r a i d o o sh i m a sh o o}|silB
+BASIC5000_2202|JSUT|{d a b i N ch i w a t a n o h i t o y o r i m o sp s e N k e N n o a k a r i g a a q t a}|silB
+UT-PARAPHRASE-sent277-phrase2|JSUT|{sh i k a sh i sp k o o k a i s u r u k o t o g a f u t a ts u a r u}|silB
+BASIC5000_2240|JSUT|{n i ch i b o ts u w a sp k o t o b a d e w a hy o o g e N d e k i n a i h o d o u ts u k u sh i k a q t a}|silB
+BASIC5000_2379|JSUT|{e d o g a a sp d o g a w a sp o o k u n o g a k a t a ch i y o r i m o k o o u N d e a q t a}|silB
+BASIC5000_3036|JSUT|{ky u u sh i ts u s e z u sp t o s o o o o k a s u k o t o m o n a i g a sp b u r e e k i sh i s u t e m u n o sh i i r u t o o n o g o m u r u i n i t a i sh i t e sp k o o g e k i s e e g a t a k a i}|silB
+PRECEDENT130_124|JSUT|{sh o o k o o y o b i b e N r o N n o z e N sh u sh i n i y o r i m i t o m e r u}|silB
+REPEAT500_set3_096|JSUT|{p e N sh i r u b e n i a sh u u sp p i q ts u b a a g u n o sp a r e g e e n i i k o o k o o o s o ts u gy o o sh i sp k a r i f o r u n i a d a i g a k u sp b a a k u r e e k o o n i ny u u g a k u}|silB
+TRAVEL1000_0858|JSUT|{b a s u k e q t o b o o r u n i b o o r u o i r e r u t o sp n a N t e N n i n a r i m a s u k a}|silB
+BASIC5000_0397|JSUT|{p a i p u o k u w a e t a s o n o sh i N sh i w a sp y u u m e e n a hy o o r o N k a d e s u}|silB
+UT-PARAPHRASE-sent187-phrase1|JSUT|{s e e r e e sh i n i n a r e b a k e N o t o o s a z u sp k a s u m i g a s e k i t o j i k a n i s e q sh o o s u r u k i k a i g a f u e r u}|silB
+BASIC5000_4887|JSUT|{m a i t o sh i s e k a i d e d o r e h o d o n o h i t o g a g a sh i sh i t e i r u k a sp sh i q t e i m a s u k a}|silB
+BASIC5000_2257|JSUT|{n i j u u ch i i m u g a t o o n a m e N t o n i sh u ts u j o o sh i t a}|silB
+BASIC5000_1723|JSUT|{k o o s e N w a sp p u r i z u m u n i y o q t e sp n a n a sh o k u n i b u N k a i s a r e r u}|silB
+TRAVEL1000_0431|JSUT|{s e k i g a t o m a r a n a k u t e sp h a n a m i z u g a d e m a s u}|silB
+TRAVEL1000_0375|JSUT|{sh i o t o k o sh o o o m a w a sh i t e i t a d a k e m a s u k a}|silB
+TRAVEL1000_0807|JSUT|{b u u s u w a s u b e t e sp k o N y a w a y o y a k u z u m i d e s u}|silB
+REPEAT500_set1_069|JSUT|{b u r u u r i q j i s a N my a k u n o g e N ry u u k a r a sp r i q ch i m o N d o m a d e sp o o k u n o h a y a s e y a f u ch i g a sp ts u r i y a ky u u ry u u k u d a r i o t a n o sh i m a s e t e k u r e r u}|silB
+REPEAT500_set2_027|JSUT|{ch o o i k i n i a q t a sp m i ts u n e s a N h a N w a sp n a g a o k a h a N n i sp b e e hy a q py o o o o k u q t a k o t o d e y u u m e e}|silB
+BASIC5000_3990|JSUT|{m a p a q ch i o n i k u m u e N j e r u g a sp b u k i n o i ch i b u o h a N s e e f u g e r i r a n i w a t a sh i t a k o t o g a sp s e e f u g u N n i m o r e t e i t a n o d a}|silB
+BASIC5000_3127|JSUT|{t e e d e N sp n i w a sp j o o b a d e N r e e n i y o r u sp j i t e N sh a n i y o r u sp j i t e N sh a sp n a d o n o sh u r u i g a a r u}|silB
+BASIC5000_4993|JSUT|{i a N ry o k o o o sp a sh i t a n i h i k a e r u}|silB
+TRAVEL1000_0162|JSUT|{y o r u n i a r a q t e sp a s a n i sp k a a r i N g u a i r o N o sh i y o o sh i m a s u}|silB
+BASIC5000_2347|JSUT|{s a N by a k u j u u h a ch i g o o sh i ts u n o o ky a k u s a N n i sp m o q t e i q t e a g e n a s a i}|silB
+REPEAT500_set3_069|JSUT|{b u r u u r i q j i s a N my a k u n o g e N ry u u k a r a sp r i q ch i m o N d o m a d e sp o o k u n o h a y a s e y a f u ch i g a sp ts u r i y a ky u u ry u u k u d a r i o t a n o sh i m a s e t e k u r e r u}|silB
+BASIC5000_4180|JSUT|{s o r e y u e sp t e N t o o m e e n o s e e ry o k u w a ky o o d a i d e a r u g a sp s o sh i k i t o sh i t e n o z e N t a i n o t o o s e e g a sp a m a r i t o r e t e i n a i t a m e sp t e N t o o m e e k a N k e e sh a w a sp u r e i o d a i t e i r u}|silB
+BASIC5000_1311|JSUT|{o y a t o sh i t e sp m a k o t o n i n a s a k e n a i j o o t a i n i a r i m a sh i t a}|silB
+BASIC5000_1358|JSUT|{ch u u s e e n o i N g u r a N d o d e w a sp m a ch i t o i u m a ch i n o s u b e t e g a sp t o k i n i w a sp i ch i d o n i g o hy a k u n i N m o n o s e N sh u g a sp t o k u t e e n o ky u u j i ts u n i f u q t o b o o r u o sh i t e i t a n o d e s u}|silB
+TRAVEL1000_0011|JSUT|{h a i sp sh i b a r a k u o m a ch i k u d a s a i}|silB
+BASIC5000_0952|JSUT|{d e i r i g u ch i w a sp a k e t a m a m a n i n a q t e i t a}|silB
+BASIC5000_2132|JSUT|{m u j o o k e N n i sp a n a t a w a s o n o s u i q ch i n i s a w a r a n a k e r e b a n a r a n a i}|silB
+BASIC5000_0873|JSUT|{k o g a t a sh a n o b u u m u w a o w a r o o t o sh i t e i r u}|silB
+LOANWORD128_006|JSUT|{a k i j i k a N g a a r u n o d e y o t e e n o j i k a N m a d e j i k a N ts u b u sh i n o t a m e k a f e q t a}|silB
+UT-PARAPHRASE-sent091-phrase1|JSUT|{sh o k a i sp sh i q s a k u k a r a s e N s e e o y u r u sh i t a i y a n a m u u d o o f u k i t o b a s u i ch i d a n i sp ch i i m u w a i k i o i z u i t a}|silB
+BASIC5000_0295|JSUT|{k u s a k u s a s u r u k o t o b a q k a r i d a k e d o sp k i o t o r i n a o sh i t e g a N b a q t e i k i m a sh o o}|silB
+UT-PARAPHRASE-sent158-phrase1|JSUT|{y o m o y a sp z a i m u sh o o g a s a k u n i o b o r e t e t a ch i o o j o o s u r u k o t o w a n a i d a r o o g a}|silB
+BASIC5000_0414|JSUT|{o y a s u m i w a sp a q t o y u u m a n i o w a q t e sh i m a q t a}|silB
+BASIC5000_0070|JSUT|{b u N s e k i n i o i t e w a sp k u r u ts u n i y o q t e s a i sh o n i b u N s e k i s a r e t a sp k e N i t e k i k o o d o o n o r u i k e e n i o q t e i r u b u b u N g a o o k i i}|silB
+UT-PARAPHRASE-sent229-phrase1|JSUT|{sh i k a sh i sp k e e z a i g a i sh u k u s u r u n o n i m i o m a k a s e r u n o w a sp t e r o n i k u q s u r u k o t o n i n a r u}|silB
+BASIC5000_0014|JSUT|{z a N k o k u t o i u k o t o w a sp k a r e n o s e e sh i ts u n i w a n a i k o t o d a}|silB
+TRAVEL1000_0416|JSUT|{g e N k i N d e w a sp t e e b u r u n o u e n i g e N k i N o o k i m a s u}|silB
+ONOMATOPEE300_005|JSUT|{u s o g a b a r e s o o n i n a r i sp h i y a a s e g a t a r a a q t o t a r e t a}|silB
+BASIC5000_0448|JSUT|{y a w a k i n o z e ts u e N s a r e t a h e y a sp o y o b i y o i h i i t a a w a sp s a u n a n o t a m e n o z e q t a i h i ts u y o o d e a r u}|silB
+BASIC5000_0055|JSUT|{m i ts u b a ch i w a sp n i o i n o s a N p u r u o s u n i m o ch i k a e r u k o t o n i y o q t e sp sh o k u ry o o n o a r i k a o ts u t a e r u}|silB
+BASIC5000_3381|JSUT|{m a i k a i r i s u n a a k a r a n o t o o k o o t o s a r e t e i r u s e N ry u u o y o m u g a sp t o o k o o sh a n o n a m a e t o o n o sh o o k a i g a s a r e r u k o t o w a h o t o N d o n a k u sp j i q s a i n i t o o k o o s a r e t a m o n o k a d o o k a w a sp u t a g a w a sh i i m o n o t o n a q t e i r u}|silB
+BASIC5000_4698|JSUT|{t a o r u o ts u m e t a i m i z u d e sh i m e sh i t e sp g a k u n o t a o r u t o t o r i k a e t e y a r u}|silB
+TRAVEL1000_0606|JSUT|{s e e b u ts u g a k u w a sp d o n o s e N s e e n o k u r a s u o r i sh u u s u r e b a y o i d e sh o o k a}|silB
+BASIC5000_2806|JSUT|{r i r o N w a r i n i k a n a q t e i t a k e r e d o m o sp k a r e w a n a q t o k u sh i n a k a q t a}|silB
+UT-PARAPHRASE-sent218-phrase2|JSUT|{t a b i n o a sh i n o ts u k a r e o y a w a r a g e r u t a m e n i m o t e b a n a s e n a i n o d e a r u}|silB
+BASIC5000_1930|JSUT|{y a sh o k u n i sp i N s u t a N t o r a a m e N o t a b e t a}|silB
+UT-PARAPHRASE-sent082-phrase1|JSUT|{o o k u n o s u g u r e t a a j i o sp t a y a s u k o t o n a k u ts u t a e t a i t o n o o m o i k a r a d a}|silB
+REPEAT500_set3_047|JSUT|{d o o j i ts u a s a n i sp o o s a k a n a N b a d e sp sh u q p a ts u s e r e m o n i i g a k a i s a i s a r e sp e e gy o o u N t e N n i sp j u u t o o s a r e t a}|silB
+BASIC5000_2809|JSUT|{n e b o o w a ch i k o k u n o i i w a k e n i w a n a r a n a i t o i u k o t o o sp o b o e t e o k i n a s a i}|silB
+TRAVEL1000_0883|JSUT|{ch i k a i u ch i n i sp m a t a g o i q sh o d e k i r e b a y o i n o d e s u g a}|silB
+TRAVEL1000_0976|JSUT|{s u m i m a s e N g a sp k e s a w a a k i j i k a N g a a r i m a s e N}|silB
+BASIC5000_3715|JSUT|{sh i o sp i j o o n i sh o k u z a i n i a j i g a sh i m i r u n o o b o o g a i s u r u t a m e sp sh i o y o r i a t o n i i r e r u}|silB
+ONOMATOPEE300_185|JSUT|{n a q t o k u d e k i t e i n a i n o k a sp k o g o e d e g o ny o g o ny o t o k u ch i g o m o q t e i r u}|silB
+BASIC5000_0092|JSUT|{b o o t o w a sp h i r o b a k a r a ky o o s e e t e k i n i h a i j o s a r e t a}|silB
+BASIC5000_4601|JSUT|{ry o o sh a n o a r a s o i w a h i b a n a ch i r u h a g e sh i i m o n o t o n a q t a g a sp o t a g a i k e g a w a n a k a q t a}|silB
+REPEAT500_set4_026|JSUT|{g e N z a i sp ny u u j a a j i i sh u u sp m u u a z u t a u N n i s u N d e i r u}|silB
+BASIC5000_2602|JSUT|{sh i ch o o n o k a z o k u w a sp i ch i n i ch i j u u ky o o h a k u d e N w a n i n a y a m a s a r e t a}|silB
+UT-PARAPHRASE-sent062-phrase1|JSUT|{n a i m o n o o n e d a r u n o d e w a n a k u sp i q sh o o k e N m e e i k i n o k o r u sh u d a N o k a N g a e t e i k e b a sp i k u r a d e m o h o o h o o w a a r u}|silB
+BASIC5000_0392|JSUT|{p a j a m a s u g a t a n o b u r a i a N g a sp g o z e N ch u u sp i e d e d o k u sh o sh i t e i r u}|silB
+BASIC5000_0139|JSUT|{ky o o sh u k u d e s u g a sp n i g a ts u n i j u u sh i ch i n i ch i n o y a k u s o k u o sp ky a N s e r u s a s e t e k u d a s a i}|silB
+BASIC5000_2792|JSUT|{s a i z e N o ts u k u s u k o t o w a sp y o i k o t o d e a r u}|silB
+TRAVEL1000_0016|JSUT|{k o r e r a n o s u u j i o d a i a r u sh i m a s u}|silB
+BASIC5000_3774|JSUT|{sh i k a sh i sp z e N s e e j i w a s o r e o m o m a k i k a e s u ky o o r e ts u n a ky a k u ry o k u o h o k o q t e i t a}|silB
+BASIC5000_2244|JSUT|{i k o o t o t o d o m a r o o t o sp a n a t a n o j i y u u d a}|silB
+BASIC5000_1239|JSUT|{ts u i ky u u s a r e t e sp ts u i sp m i e s u i t a u s o o ts u i t e sh i m a q t a}|silB
+BASIC5000_2290|JSUT|{t a n i N n o k o t o n i w a k u ch i d a sh i sh i n a i y o o sp k a r e n i ts u t a e t e k u r e}|silB
+COUNTERSUFFIX26_22|JSUT|{i q s e k i sp n i s e k i sp s a N s e k i sp y o N s e k i sp g o s e k i sp r o k u s e k i sp n a n a s e k i sp h a q s e k i sp ky u u s e k i sp j u q s e k i sp n a N s e k i}|silB
+TRAVEL1000_0569|JSUT|{k o n o k i k a i n o ts u k a i k a t a o o sh i e t e k u d a s a i m a s u k a}|silB
+BASIC5000_0686|JSUT|{g o ky o o ry o k u n i t a i sh i sp a r a k a j i m e sp o r e e o m o o sh i a g e m a s u}|silB
+ONOMATOPEE300_201|JSUT|{m u s u k o g a o n e sh o o sh i t e sp f u t o N g a g u q sh o r i n u r e t e sh i m a q t a}|silB
+REPEAT500_set1_070|JSUT|{b o o h a N w a sp i i s u t o m a N r a sp gy a N g u n o s u p i i k u i i j i i n o a g a r i k a r a sp w a i r o o t o q t e i t a t o m o u w a s a s a r e t a}|silB
+BASIC5000_2982|JSUT|{r o o d o o sh a k a i ky u u n i w a sp k e e i o h a r a u b e k i d e a r u}|silB
+ONOMATOPEE300_074|JSUT|{ry o k a N n i h a i r u t o sp h o d o n a k u sh i t e o k a m i g a sp sh i z u sh i z u t o s u g a t a o a r a w a sh i t a}|silB
+TRAVEL1000_0603|JSUT|{s e e h i N n o h i N sh i ts u w a sp g e N z a i g o sh i y o o n o m o n o t o o n a j i d e s u}|silB
+PRECEDENT130_117|JSUT|{h o N k e N ky u u sh o k u s e N t a a n o g a i y o o w a sp i k a n o t o o r i d e a r u}|silB
+BASIC5000_3022|JSUT|{sh u w a z u r u k a b u n o sh i N i o s a g u r u b e k u sp t a N sh i N sp sh a N b a r a f u r o o t o e s o o s a n i m u k a u}|silB
+TRAVEL1000_0346|JSUT|{n a m a b i i r u d e s u k a sp b i N b i i r u d e s u k a}|silB
+BASIC5000_4087|JSUT|{k a k o n i ch i ch i o y a g a s e i sh i r o o t a ch i o n i g a s u t a m e n i sp b a s a a j i n o ch i k a r a o k a r i sp my u u k a s u n o t a i g u N n i t o q k o o}|silB
+BASIC5000_1859|JSUT|{ry o o k e N t a ch i w a sp s o n o k i ts u n e o o i k a k e t e i r u}|silB
+UT-PARAPHRASE-sent103-phrase2|JSUT|{k a r e w a sp g e N s a k u o y o N d e sp j i d a i o k u r e t o w a o m o w a n a k a q t a}|silB
+BASIC5000_3355|JSUT|{m a t a sp t e r a i h a i d e o o k i n a m o n o w a sp s a ts u b a N n o h a b a o h a k a r u}|silB
+BASIC5000_4503|JSUT|{u r a y a m a sh i i h o d o n o o ch i ts u k i b u r i d e a q t a}|silB
+BASIC5000_2785|JSUT|{y o r u n e m u r e n a k u t e sp k a r e w a h i r o o sh i t e sp k a o i r o g a w a r u k a q t a}|silB
+ONOMATOPEE300_156|JSUT|{t a i f u u g a k i t e i t a n o d e sp i e n o s o t o d e w a k a z e g a g o o g o o t o f u k i a r e t e i t e sp t o t e m o hy o o n i d e r a r e n a k a q t a}|silB
+LOANWORD128_088|JSUT|{d u u N j o o w a sp d u u N n i a r u ch u u s e e n o y o o s a i d e a r u}|silB
+BASIC5000_2197|JSUT|{r o o h i s u r u h i t o o m a m o r u t a m e n i k e N y a k u s u r u h i t o n i z e e k i N o k a k e r u n o w a sp k e N m e e n a k o t o d e w a n a i sh i sp k e q ky o k u w a sp t a m e n i n a r a n a i n o d e a r u}|silB
+TRAVEL1000_0690|JSUT|{s o ch i r a e w a sp d o n o y o o n i i k e b a y o i d e sh o o k a}|silB
+BASIC5000_3233|JSUT|{n a o sp sh i ch i y a sp t o N y a n o t a t e m o n o sp n a i s o o w a t o o j i n o s u t a i r u n o m a m a h o z o N s a r e t e o r i sp d e p a a t o b u b u N n o g o o k a s a t o t a i sh o o t e k i n i sh i q s o d e a r u}|silB
+BASIC5000_1727|JSUT|{s o o k a i n i sh u q s e k i sh i sp d e e t a t e N s o o n o sh i N g i j u ts u o sh i r u k o t o g a d e k i m a sh i t a}|silB
+BASIC5000_3124|JSUT|{g e N z a i d e w a k o o ky u u n a i m e e j i w a f u q sh i k i s a r e sp i ch i b u n o k o o g a k u p a q k e e j i ts u a a w a n o k o sh i t e i r u m o n o n o sp i q p a N t e k i n a p a q k e e j i ts u a a t o n a q t e i r u}|silB
+BASIC5000_0276|JSUT|{gy o o k a i n o k e N z e N n a s e e ch o o n o t a m e n i sp k o o s e e n a ky o o s o o g a k a k u h o s a r e r u h i ts u y o o g a a r u}|silB
+BASIC5000_4973|JSUT|{t a b a k o d e k e m u q t a k u u k i o h e y a k a r a d a sh i t e sp sh i N s e N n a k u u k i o i r e t e ch o o d a i}|silB
+BASIC5000_3499|JSUT|{i ch i m i g a k a i sh a d e ry o o r i o k o n o m u k o t o g a b a r e r u k o t o g a sp r o s e N t e N k a N n i n a r i sp ry o o r i n i sh i t a sh i m u k o t o n o j u u y o o s e e o i m i s u r u k o t o g a o o k i k u n a q t a}|silB
+BASIC5000_3241|JSUT|{s u m i r e n o sh i n o g e N i N t o n a q t a k a s e e o u r a m u t o t o m o n i sp j i b u N o s e m e t e i r u}|silB
+TRAVEL1000_0122|JSUT|{d o k o n i i k e b a sp sh i b a i n o k i q p u g a t e n i h a i r i m a s u k a}|silB
+BASIC5000_3406|JSUT|{s e k a N d o m u u N n i o i t e m o sp m a a z u r e i n i y o r u e e ky o o o k a N z e N n i f u s e g e t e i n a i t a m e k a sp y a m a i o w a z u r a u m o n o g a s u k u n a k u n a i}|silB
+BASIC5000_2746|JSUT|{a s a g a a k e r u t o sp k a r e r a w a k a N p a N n i d e t e i t a}|silB
+TRAVEL1000_0248|JSUT|{k i k a k u b u n o d i i N sh i t o h a n a sh i t a i n o d e s u g a}|silB
+BASIC5000_0130|JSUT|{h o o g e k i w a sp m a s u m a s u h a g e sh i k u n a q t e k i t a n o d e sp w a t a sh i t a ch i sp h a sh i q t e ch i k a sh i ts u n i o r i t e i q t a n o y o}|silB
+REPEAT500_set5_076|JSUT|{d i o ny u u s o s u n o sp ch o o a i o u k e r u sp o i n e u s u o o t o sp h i sp a r u t a i a a n o a i d a n i sp k a r i y u d o o N n o o o j o t o sh i t e sp s e e o u k e t a}|silB
+TRAVEL1000_0218|JSUT|{sh u u m a ts u w a sp k o k o n i o r i m a s e N n o d e}|silB
+BASIC5000_1316|JSUT|{o k o k o r o z u k a i n i a ts u k u o r e e m o o sh i a g e m a s u}|silB
+TRAVEL1000_0311|JSUT|{d o r e k u r a i m a t a n a k e r e b a n a r i m a s e N k a}|silB
+BASIC5000_1800|JSUT|{t e q k o o s e e s a N w a sp n i n e N r e N z o k u sh i t e sp s a i k o o o k i r o k u sh i t a}|silB
+BASIC5000_2566|JSUT|{y a m u d o k o r o k a sp a r a sh i w a i q s o o h a g e sh i k u n a q t a}|silB
+BASIC5000_3761|JSUT|{t a N j o o s e k i n o k i g e N n i w a sp s e N s e e j u ts u y a ch i i k i s e ts u n a d o n o sh o s e ts u g a a r u g a sp m e e k a k u n i b u N sh o t o sh i t e n o k o q t e i r u m o n o n i s o r e z o r e n o s e e sh o g a a r u}|silB
+BASIC5000_4381|JSUT|{sh i k a sh i s a i g o m a d e s o r e o s e m e r u k o t o w a n a k a q t a}|silB
+BASIC5000_0759|JSUT|{ky o o k a sh o o t o j i t e w a t a sh i n o i u k o t o o k i k i n a s a i}|silB
+BASIC5000_3457|JSUT|{w a t a sh i w a m u r a n i i r u t o k i sp k a r e n o n u s u m i n o t e sh i t a n i n a q t a k o t o g a a q t a t a m e n i sp w a t a sh i g a d a m a q t e t o e t a ch i s a q t a k o t o o k a r e w a f u N g a i sh i t e i r u r a sh i k a q t a}|silB
+BASIC5000_2191|JSUT|{sh a k u n e ts u n o t a i y o o d e sp k a r a d a g a k o g e r u h o d o d a q t a}|silB
+UT-PARAPHRASE-sent097-phrase2|JSUT|{sh i k a sh i sp n a k u s u w a k e n i w a i k a n a i}|silB
+BASIC5000_1253|JSUT|{m a i ts u k i n o sh u u ny u u n o i ch i b u o sp ch o ch i k u s u r e b a s o N w a n a i}|silB
+BASIC5000_4417|JSUT|{h i t o r i d e w a i r e n a i o N z a r o o z u n i h a i r u t a m e sp n a k a b a g o o i N n i sp k o o o o N z a r o o z u n i s a s o u}|silB
+BASIC5000_2791|JSUT|{a N n a i j i N w a sp w a t a sh i t a ch i n i sp h o t e r u n o b a sh o o sp m a ch i g a e t e o sh i e t a}|silB
+BASIC5000_1254|JSUT|{n i k u t a i t o s e e sh i N t o w a s o o s e e j i d e a r i sp k a m i n o m i g a d o ch i r a g a d o ch i r a n a n o k a o sh i q t e i r u}|silB
+BASIC5000_4747|JSUT|{k a r e w a n i k u r a sh i i h o d o sp s a i n o o n i m e g u m a r e t e i r u}|silB
+BASIC5000_3866|JSUT|{k o n o m e N n o h i N sh i ts u w a t a k a k u sp k o o ky u u f u t o N n a d o n i sh i y o o s a r e t e i r u}|silB
+UT-PARAPHRASE-sent004-phrase2|JSUT|{d o o sh o w a sp h a N z a i n o d o o k i n a d o o sp sh i r a b e t e i r u}|silB

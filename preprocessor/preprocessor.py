@@ -169,7 +169,7 @@ class Preprocessor:
             return None
 
         # Read and trim wav files
-        wav, _ = librosa.load(wav_path)
+        wav, _ = librosa.load(wav_path,sr=22050)
         wav = wav[
             int(self.sampling_rate * start) : int(self.sampling_rate * end)
         ].astype(np.float32)
@@ -251,7 +251,7 @@ class Preprocessor:
         )
 
     def get_alignment(self, tier):
-        sil_phones = ["sil", "sp", "spn"]
+        sil_phones = ["sil", "sp", "spn", 'silB', 'silE', '']
 
         phones = []
         durations = []
@@ -275,7 +275,7 @@ class Preprocessor:
                 end_idx = len(phones)
             else:
                 # For silent phones
-                phones.append(p)
+                phones.append('sp')
 
             durations.append(
                 int(
@@ -287,7 +287,7 @@ class Preprocessor:
         # Trim tailing silences
         phones = phones[:end_idx]
         durations = durations[:end_idx]
-
+        assert len(phones) == len(durations)
         return phones, durations, start_time, end_time
 
     def remove_outlier(self, values):

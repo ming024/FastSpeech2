@@ -66,7 +66,8 @@ def convert_to_ascii(text):
 
 def basic_cleaners(text):
     '''Basic pipeline that lowercases and collapses whitespace without transliteration.'''
-    text = lowercase(text)
+    print("!"*20)
+    print(text)
     text = collapse_whitespace(text)
     return text
 

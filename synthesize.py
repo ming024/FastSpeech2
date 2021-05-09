@@ -12,7 +12,7 @@ from pypinyin import pinyin, Style
 from utils.model import get_model, get_vocoder
 from utils.tools import to_device, synth_samples
 from dataset import TextDataset
-from text import text_to_sequence
+from text import text_to_sequence, symbols
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -199,6 +199,7 @@ if __name__ == "__main__":
             batch_size=8,
             collate_fn=dataset.collate_fn,
         )
+    symbol_to_id = {s: i for i, s in enumerate(symbols)}
     if args.mode == "single":
         ids = raw_texts = [args.text[:100]]
         speakers = np.array([args.speaker_id])
@@ -206,7 +207,10 @@ if __name__ == "__main__":
             texts = np.array([preprocess_english(args.text, preprocess_config)])
         elif preprocess_config["preprocessing"]["text"]["language"] == "zh":
             texts = np.array([preprocess_mandarin(args.text, preprocess_config)])
+        elif preprocess_config["preprocessing"]["text"]["language"] == "ja":
+            texts = np.array([[symbol_to_id[t] for t in args.text.replace("{", "").replace("}", "").split()]])
         text_lens = np.array([len(texts[0])])
+        print(text_lens)
         batchs = [(ids, raw_texts, speakers, texts, text_lens, max(text_lens))]
 
     control_values = args.pitch_control, args.energy_control, args.duration_control
