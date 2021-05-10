@@ -1,4 +1,19 @@
-# FastSpeech 2 - PyTorch Implementation
+# FastSpeech2 JSUT implementation (Scroll down for original readme)
+change jsut path in retrieve_transcripts.py to where your jsut folder is 
+```
+pipenv --python 3
+pipenv install
+unzip hifigan/generator_universal.pth.tar.zip
+unzip preprocessed_data/JSUT/TextGrid.zip
+mkdir raw_data/JSUT/JSUT
+cp path/to/JSUT/*/wavs/*.wav raw_data/JSUT/JSUT
+python retrieve_transcripts.py
+python3 preprocess.py config/JSUT/preprocess.yaml #this may take some time
+python train.py -p config/JSUT/preprocess.yaml -m config/JSUT/model.yaml -t config/JSUT/train.yaml
+```
+
+
+#FastSpeech 2 - PyTorch Implementation
 
 This is a PyTorch implementation of Microsoft's text-to-speech system [**FastSpeech 2: Fast and High-Quality End-to-End Text to Speech**](https://arxiv.org/abs/2006.04558v1). 
 This project is based on [xcmyz's implementation](https://github.com/xcmyz/FastSpeech) of FastSpeech. Feel free to use/modify the code.
