@@ -10,8 +10,7 @@ def move_textgrids(path, textgrid):
     for spk in os.listdir(textgrid):
         spk_dir = os.path.join(textgrid, spk)
         for fn in os.listdir(spk_dir):
-            shutil.copy(os.path.join(spk_dir, fn), os.path.join(path, spk, fn))
-            # shutil.move(os.path.join(spk_dir, fn), os.path.join(path, spk, fn))
+            shutil.copy(os.path.join(spk_dir, fn), os.path.join(path, spk, fn.replace('-', '_')))
 
 
 def train_test_split(dataset, target_dataset):
@@ -43,16 +42,18 @@ def process(path, target_path):
     build_from_path(path, target_path, sampling_rate=sampling_rate)
 
 
-def main(path, target_path, textgrid):
-    # if textgrid:
-    #     print("Moving textgrids")
-    #     move_textgrids(path, textgrid)
-    # print("Splitting to train/dev")
-    # train_test_split(path, target_path)
-    # print("Preprocessing")
-    # process(target_path, os.path.join(target_path, "preprocessed"))
-    gen_adain(path + '/train', target_path + '/adain')
-    gen_adain(path + '/dev', target_path + '/adain')
+def main(path, target_path, textgrid, need_adains):
+    if textgrid:
+        print("Moving textgrids")
+        move_textgrids(path, textgrid)
+    print("Splitting to train/dev")
+    train_test_split(path, target_path)
+    print("Preprocessing")
+    process(target_path, os.path.join(target_path, "preprocessed"))
+    if need_adains:
+        print("Creating adain embeddings")
+        gen_adain(path + '/train', target_path + '/adain')
+        gen_adain(path + '/dev', target_path + '/adain')
 
 
 if __name__ == "__main__":
@@ -61,5 +62,6 @@ if __name__ == "__main__":
                         help="source dataset: train/dev->speaker_id->wav+lab+(optional)textgrid")
     parser.add_argument("--target_path", type=str, required=True, help="path to save preprocessed data")
     parser.add_argument("--textgrid", type=str, required=False, help="directory with textgrid files")
+    parser.add_argument("--adain", type=bool, required=False, help="create adain embeddings")
     args = parser.parse_args()
-    main(args.path, args.target_path, args.textgrid)
+    main(args.path, args.target_path, args.textgrid, args.adain)
