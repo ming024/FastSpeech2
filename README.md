@@ -13,7 +13,7 @@ python train.py -p config/JSUT/preprocess.yaml -m config/JSUT/model.yaml -t conf
 ```
 
 
-#FastSpeech 2 - PyTorch Implementation
+# FastSpeech 2 - PyTorch Implementation
 
 This is a PyTorch implementation of Microsoft's text-to-speech system [**FastSpeech 2: Fast and High-Quality End-to-End Text to Speech**](https://arxiv.org/abs/2006.04558v1). 
 This project is based on [xcmyz's implementation](https://github.com/xcmyz/FastSpeech) of FastSpeech. Feel free to use/modify the code.
