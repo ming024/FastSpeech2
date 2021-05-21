@@ -9,4 +9,4 @@ for transcript in transcript_files:
     for line in lines:
         filename, text = line.split(':')
         with open('raw_data/JSUT/JSUT/' + filename + '.lab', mode='w') as f:
-            f.write(text.strip('\n')
+            f.write(text.strip('\n'))
