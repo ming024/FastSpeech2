@@ -11,7 +11,13 @@ python retrieve_transcripts.py
 python3 preprocess.py config/JSUT/preprocess.yaml #this may take some time
 python train.py -p config/JSUT/preprocess.yaml -m config/JSUT/model.yaml -t config/JSUT/train.yaml
 ```
+# Synthesize Japanese
+grapheme input is not currently supported. You have to prepare phoneme sequence to synthesize
 
+Synthesis Example
+```
+python3 synthesize.py --text "t o o m o r o k o sh i w a sp g a q sh u u k o k u n o j u u y o o n a n o o s a k u m o ts u d a" --restore_step 60000 --mode single -p config/JSUT/preprocess.yaml -m config/JSUT/model.yaml -t config/JSUT/train.yaml
+```
 
 # FastSpeech 2 - PyTorch Implementation
 
