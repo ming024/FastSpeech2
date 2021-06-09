@@ -1,4 +1,8 @@
 # FastSpeech2 JSUT implementation (Scroll down for original readme)
+## How To setup and start training
+### Download JSUT
+JSUT is available [here](https://sites.google.com/site/shinnosuketakamichi/publication/jsut)
+### setup enviornmet and do preprocessing and training
 change jsut path in retrieve_transcripts.py to where your jsut folder is 
 ```
 pipenv --python 3
@@ -11,7 +15,7 @@ python retrieve_transcripts.py
 python3 preprocess.py config/JSUT/preprocess.yaml #this may take some time
 python train.py -p config/JSUT/preprocess.yaml -m config/JSUT/model.yaml -t config/JSUT/train.yaml
 ```
-# Synthesize Japanese
+## Synthesize Japanese
 grapheme input is not currently supported. You have to prepare phoneme sequence to synthesize
 
 Synthesis Example
