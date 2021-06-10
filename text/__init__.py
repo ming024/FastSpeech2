@@ -64,7 +64,7 @@ def _clean_text(text, cleaner_names):
 
 
 def _symbols_to_sequence(symbols):
-    return [_symbol_to_id[s] for s in symbols if _should_keep_symbol(s)]
+    return [_symbol_to_id[s] for s in symbols.split() if _should_keep_symbol(s)]
 
 
 def _arpabet_to_sequence(text):
