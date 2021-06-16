@@ -2,6 +2,7 @@ import argparse
 import os
 
 import torch
+from torch.nn.parallel.data_parallel import data_parallel
 import yaml
 import torch.nn as nn
 from torch.utils.data import DataLoader
@@ -9,7 +10,7 @@ from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
 from utils.model import get_model, get_vocoder, get_param_num
-from utils.tools import to_device, log, synth_one_sample
+from utils.tools import to_device, log, synth_one_sample, plot_alignment_to_numpy
 from model import FastSpeech2Loss
 from dataset import Dataset
 
@@ -41,7 +42,8 @@ def main(args, configs):
 
     # Prepare model
     model, optimizer = get_model(args, configs, device, train=True)
-    model = nn.DataParallel(model)
+    if train_config['dataparallel']:
+        model = nn.DataParallel(model)
     num_param = get_param_num(model)
     Loss = FastSpeech2Loss(preprocess_config, model_config).to(device)
     print("Number of FastSpeech2 Parameters:", num_param)
@@ -70,6 +72,8 @@ def main(args, configs):
     synth_step = train_config["step"]["synth_step"]
     val_step = train_config["step"]["val_step"]
 
+    use_jdit = model_config['jdit']['use_jdit']
+
     outer_bar = tqdm(total=total_step, desc="Training", position=0)
     outer_bar.n = args.restore_step
     outer_bar.update()
@@ -83,10 +87,15 @@ def main(args, configs):
                 # Forward
                 output = model(*(batch[2:]))
 
-                # Cal Loss
-                losses = Loss(batch, output)
-                total_loss = losses[0]
-
+                # Cal Losson
+                if use_jdit:
+                    losses = Loss(batch, output[:-2])
+                    alignment = batch[-1]
+                    total_loss = losses[0]
+                    total_loss += nn.MSELoss()(output[-2],batch[6])
+                else:
+                    losses = Loss(batch, output)
+                    total_loss = losses[0]
                 # Backward
                 total_loss = total_loss / grad_acc_step
                 total_loss.backward()
@@ -113,6 +122,13 @@ def main(args, configs):
                     log(train_logger, step, losses=losses)
 
                 if step % synth_step == 0:
+                    if use_jdit:
+                        train_logger.add_image(
+                            "alignment",
+                            plot_alignment_to_numpy(alignment[0].data.cpu().numpy().T),
+                            step, 
+                            dataformats='HWC'
+                        )
                     fig, wav_reconstruction, wav_prediction, tag = synth_one_sample(
                         batch,
                         output,
@@ -151,9 +167,13 @@ def main(args, configs):
                     model.train()
 
                 if step % save_step == 0:
+                    if train_config['dataparallel']:
+                        state_dict = model.module.state_dict()
+                    else:
+                        state_dict = model.state_dict()
                     torch.save(
                         {
-                            "model": model.module.state_dict(),
+                            "model": state_dict,
                             "optimizer": optimizer._optimizer.state_dict(),
                         },
                         os.path.join(

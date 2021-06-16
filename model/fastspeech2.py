@@ -8,6 +8,7 @@ import torch.nn.functional as F
 from transformer import Encoder, Decoder, PostNet
 from .modules import VarianceAdaptor
 from utils.tools import get_mask_from_lengths
+from .jdit import JDIT
 
 
 class FastSpeech2(nn.Module):
@@ -24,6 +25,9 @@ class FastSpeech2(nn.Module):
             model_config["transformer"]["decoder_hidden"],
             preprocess_config["preprocessing"]["mel"]["n_mel_channels"],
         )
+        self.use_jdit = model_config["jdit"]["use_jdit"]
+        if self.use_jdit:
+            self.jdit = JDIT(model_config=model_config,preprocess_config=preprocess_config)
         self.postnet = PostNet()
 
         self.speaker_emb = None
@@ -64,6 +68,8 @@ class FastSpeech2(nn.Module):
         )
 
         output = self.encoder(texts, src_masks)
+        if self.use_jdit:
+            mel_jdit, gate_outputs, alignments = self.jdit(output, mels, src_lens)
 
         if self.speaker_emb is not None:
             output = output + self.speaker_emb(speakers).unsqueeze(1).expand(
@@ -96,15 +102,31 @@ class FastSpeech2(nn.Module):
 
         postnet_output = self.postnet(output) + output
 
-        return (
-            output,
-            postnet_output,
-            p_predictions,
-            e_predictions,
-            log_d_predictions,
-            d_rounded,
-            src_masks,
-            mel_masks,
-            src_lens,
-            mel_lens,
-        )
+        if self.use_jdit:
+            return (
+                output,
+                postnet_output,
+                p_predictions,
+                e_predictions,
+                log_d_predictions,
+                d_rounded,
+                src_masks,
+                mel_masks,
+                src_lens,
+                mel_lens,
+                mel_jdit,
+                alignments
+            )
+        else:
+            return (
+                output,
+                postnet_output,
+                p_predictions,
+                e_predictions,
+                log_d_predictions,
+                d_rounded,
+                src_masks,
+                mel_masks,
+                src_lens,
+                mel_lens
+            )
