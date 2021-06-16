@@ -20,6 +20,9 @@ variance_embedding:
   energy_quantization: "linear" # support 'linear' or 'log', 'log' is allowed only if the energy values are not normalized during preprocessing
   n_bins: 256
 
+jdit:
+  use_jdit: False
+  prenet_hidden: 256
 # gst:
 #   use_gst: False
 #   conv_filters: [32, 32, 64, 64, 128, 128]
