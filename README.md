@@ -7,8 +7,8 @@ change jsut path in retrieve_transcripts.py to where your jsut folder is
 ```
 pipenv --python 3
 pipenv install
-unzip hifigan/generator_universal.pth.tar.zip
-unzip preprocessed_data/JSUT/TextGrid.zip
+unzip hifigan/generator_universal.pth.tar.zip -d hifigan/
+unzip preprocessed_data/JSUT/TextGrid.zip -d preprocessed_data/JSUT
 mkdir -p raw_data/JSUT/JSUT
 cp path/to/JSUT/*/wavs/*.wav raw_data/JSUT/JSUT
 python retrieve_transcripts.py
