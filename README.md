@@ -10,7 +10,7 @@ pipenv install
 unzip hifigan/generator_universal.pth.tar.zip -d hifigan/
 unzip preprocessed_data/JSUT/TextGrid.zip -d preprocessed_data/JSUT
 mkdir -p raw_data/JSUT/JSUT
-cp path/to/JSUT/*/wavs/*.wav raw_data/JSUT/JSUT
+cp path/to/JSUT/*/wav/*.wav raw_data/JSUT/JSUT
 python retrieve_transcripts.py
 python3 preprocess.py config/JSUT/preprocess.yaml #this may take some time
 python train.py -p config/JSUT/preprocess.yaml -m config/JSUT/model.yaml -t config/JSUT/train.yaml
