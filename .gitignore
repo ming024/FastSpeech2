@@ -111,11 +111,7 @@ __pycache__
 montreal-forced-aligner/
 
 # data, checkpoint, and models
-preprocessed/
 ckpt/
-results/
-synth/
-log/
-eval/
-waveglow/pretrained_model/*
-
+preprocessed_data/M2VoC/adain_emb
+preprocessed_data/M2VoC/d_vec
+preprocessed_data/M2VoC/x_vec
