@@ -10,6 +10,7 @@ On the other hand, pitch spectrograms extracted by continuous wavelet transform 
 ![](./img/model.png)
 
 # Updates
+- 2021/7/8: Release the checkpoint and audio samples of a multi-speaker English TTS model trained on LibriTTS
 - 2021/2/26: Support English and Mandarin TTS
 - 2021/2/26: Support multi-speaker TTS (AISHELL-3 and LibriTTS)
 - 2021/2/26: Support MelGAN and HiFi-GAN vocoder
@@ -27,7 +28,7 @@ pip3 install -r requirements.txt
 
 ## Inference
 
-You have to download the [pretrained models](https://drive.google.com/drive/folders/1DOhZGlTLMbbAAFZmZGDdc77kz1PloS7F?usp=sharing) and put them in ``output/ckpt/LJSpeech/`` or ``output/ckpt/AISHELL3``.
+You have to download the [pretrained models](https://drive.google.com/drive/folders/1DOhZGlTLMbbAAFZmZGDdc77kz1PloS7F?usp=sharing) and put them in ``output/ckpt/LJSpeech/``,  ``output/ckpt/AISHELL3``, or ``output/ckpt/LibriTTS/``.
 
 For English single-speaker TTS, run
 ```
@@ -36,7 +37,12 @@ python3 synthesize.py --text "YOUR_DESIRED_TEXT" --restore_step 900000 --mode si
 
 For Mandarin multi-speaker TTS, try
 ```
-python3 synthesize.py --text "大家好" --speaker_id SPEAKER_ID --restore_step 900000 --mode single -p config/LJSpeech/preprocess.yaml -m config/LJSpeech/model.yaml -t config/LJSpeech/train.yaml
+python3 synthesize.py --text "大家好" --speaker_id SPEAKER_ID --restore_step 600000 --mode single -p config/AISHELL3/preprocess.yaml -m config/AISHELL3/model.yaml -t config/AISHELL3/train.yaml
+```
+
+For English multi-speaker TTS, run
+```
+python3 synthesize.py --text "YOUR_DESIRED_TEXT"  --speaker_id SPEAKER_ID --restore_step 800000 --mode single -p config/LibriTTS/preprocess.yaml -m config/LibriTTS/model.yaml -t config/LibriTTS/train.yaml
 ```
 
 The generated utterances will be put in ``output/result/``.
@@ -81,7 +87,7 @@ python3 prepare_align.py config/LJSpeech/preprocess.yaml
 for some preparations.
 
 As described in the paper, [Montreal Forced Aligner](https://montreal-forced-aligner.readthedocs.io/en/latest/) (MFA) is used to obtain the alignments between the utterances and the phoneme sequences.
-Alignments for the LJSpeech and AISHELL-3 datasets are provided [here](https://drive.google.com/drive/folders/1DBRkALpPd6FL9gjHMmMEdHODmkgNIIK4?usp=sharing).
+Alignments of the supported datasets are provided [here](https://drive.google.com/drive/folders/1DBRkALpPd6FL9gjHMmMEdHODmkgNIIK4?usp=sharing).
 You have to unzip the files in ``preprocessed_data/LJSpeech/TextGrid/``.
 
 After that, run the preprocessing script by
@@ -129,7 +135,7 @@ The loss curves, synthesized mel-spectrograms, and audios are shown.
 
 # Implementation Issues
 
-- Following [xcmyz's implementation](https://github.com/xcmyz/FastSpeech), I use an additional Tacotron-2-styled Postnet after the decoder, which is not used in the original paper.
+- Following [xcmyz's implementation](https://github.com/xcmyz/FastSpeech), I use an additional Tacotron-2-styled Post-Net after the decoder, which is not used in the original FastSpeech 2.
 - Gradient clipping is used in the training.
 - In my experience, using phoneme-level pitch and energy prediction instead of frame-level prediction results in much better prosody, and normalizing the pitch and energy features also helps. Please refer to ``config/README.md`` for more details.
 
@@ -143,12 +149,13 @@ Please inform me if you find any mistakes in this repo, or any useful tips to tr
 
 # Citation
 ```
-@misc{chien2021investigating,
+@INPROCEEDINGS{chien2021investigating,
+  author={Chien, Chung-Ming and Lin, Jheng-Hao and Huang, Chien-yu and Hsu, Po-chun and Lee, Hung-yi},
+  booktitle={ICASSP 2021 - 2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, 
   title={Investigating on Incorporating Pretrained and Learnable Speaker Representations for Multi-Speaker Multi-Style Text-to-Speech}, 
-  author={Chung-Ming Chien and Jheng-Hao Lin and Chien-yu Huang and Po-chun Hsu and Hung-yi Lee},
   year={2021},
-  eprint={2103.04088},
-  archivePrefix={arXiv},
-  primaryClass={eess.AS}
-}
+  volume={},
+  number={},
+  pages={8588-8592},
+  doi={10.1109/ICASSP39728.2021.9413880}}
 ```

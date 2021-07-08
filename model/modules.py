@@ -15,7 +15,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 class VarianceAdaptor(nn.Module):
-    """ Variance Adaptor """
+    """Variance Adaptor"""
 
     def __init__(self, preprocess_config, model_config):
         super(VarianceAdaptor, self).__init__()
@@ -159,7 +159,7 @@ class VarianceAdaptor(nn.Module):
 
 
 class LengthRegulator(nn.Module):
-    """ Length Regulator """
+    """Length Regulator"""
 
     def __init__(self):
         super(LengthRegulator, self).__init__()
@@ -195,7 +195,7 @@ class LengthRegulator(nn.Module):
 
 
 class VariancePredictor(nn.Module):
-    """ Duration, Pitch and Energy Predictor """
+    """Duration, Pitch and Energy Predictor"""
 
     def __init__(self, model_config):
         super(VariancePredictor, self).__init__()
