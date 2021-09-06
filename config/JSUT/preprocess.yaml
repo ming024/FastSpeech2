@@ -28,3 +28,5 @@ preprocessing:
   energy:
     feature: "phoneme_level" # support 'phoneme_level' or 'frame_level'
     normalization: True
+  accent:
+    use_accent: True

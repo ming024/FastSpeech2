@@ -1,8 +1,11 @@
 import glob
 import pandas as pd
+import os
 # %%
-transcript_files = glob.glob("/home/nakata/jsut_ver1.1_original/**/transcript_utf8.txt")
+transcript_files = glob.glob("/home/wataru/Documents/speech/jsut_ver1.1/*/transcript_utf8.txt")
 # %%
+if not os.path.exists("raw_data/JSUT/JSUT"):
+    os.makedirs("raw_data/JSUT/JSUT")
 for transcript in transcript_files:
     with open(transcript, mode='r') as f:
         lines = f.readlines()

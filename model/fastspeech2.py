@@ -26,8 +26,11 @@ class FastSpeech2(nn.Module):
             preprocess_config["preprocessing"]["mel"]["n_mel_channels"],
         )
         self.use_jdit = model_config["jdit"]["use_jdit"]
+        self.use_accent= preprocess_config["accent"]["use_accent"]
         if self.use_jdit:
             self.jdit = JDIT(model_config=model_config,preprocess_config=preprocess_config)
+            
+
         self.postnet = PostNet()
 
         self.speaker_emb = None
@@ -59,6 +62,7 @@ class FastSpeech2(nn.Module):
         p_control=1.0,
         e_control=1.0,
         d_control=1.0,
+        accents=None,
     ):
         src_masks = get_mask_from_lengths(src_lens, max_src_len)
         mel_masks = (
@@ -67,7 +71,7 @@ class FastSpeech2(nn.Module):
             else None
         )
 
-        output = self.encoder(texts, src_masks)
+        output = self.encoder(texts, src_masks,accents=accents)
         if self.use_jdit:
             mel_jdit, gate_outputs, alignments = self.jdit(output, mels, src_lens)
 

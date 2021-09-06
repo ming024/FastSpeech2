@@ -24,6 +24,9 @@ def main(args, configs):
 
     preprocess_config, model_config, train_config = configs
 
+    # use accent info?
+    use_accent = preprocess_config['preprocessing']["accent"]["use_accent"]
+
     # Get dataset
     dataset = Dataset(
         "train.txt", preprocess_config, train_config, sort=True, drop_last=True
@@ -85,7 +88,11 @@ def main(args, configs):
                 batch = to_device(batch, device)
 
                 # Forward
-                output = model(*(batch[2:]))
+                if use_accent:
+                    output = model(*(batch[2:-1]),accents=batch[-1])
+                else:
+                    output = model(*(batch[2:]))
+
 
                 # Cal Losson
                 if use_jdit:
