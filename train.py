@@ -89,7 +89,9 @@ def main(args, configs):
 
                 # Forward
                 if use_accent:
-                    output = model(*(batch[2:-1]),accents=batch[-1])
+                    accents = batch[-1]
+                    batch = batch[:-1]
+                    output = model(*(batch[2:]),accents=accents)
                 else:
                     output = model(*(batch[2:]))
 

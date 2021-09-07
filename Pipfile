@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 tensorboard = "*"
+pylint = "*"
 
 [packages]
 g2p-en = "==2.1.0"
@@ -27,6 +28,7 @@ Unidecode = "==1.1.1"
 ipykernel = "*"
 torch-tb-profiler = "*"
 pillow = "*"
+pyopenjtalk = "*"
 
 [requires]
 python_version = "3.8"

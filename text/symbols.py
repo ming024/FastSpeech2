@@ -12,7 +12,7 @@ _punctuation = "!'(),.:;? "
 _special = "-"
 _letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 _silences = ["@sp", "@spn", "@sil"]
-_japanese = ['ky','sp', 'sh', 'ch', 'ts', 'ry', 'ny', 'by', 'hy', 'gy', 'kw', 'gw', 'kj', 'gj', 'my', 'py','dy']
+_japanese = ['ky','sp', 'sh', 'ch', 'ts','ty', 'ry', 'ny', 'by', 'hy', 'gy', 'kw', 'gw', 'kj', 'gj', 'my', 'py','dy']
 # Prepend "@" to ARPAbet symbols to ensure uniqueness (some are the same as uppercase letters):
 _arpabet = ["@" + s for s in cmudict.valid_symbols]
 _pinyin = ["@" + s for s in pinyin.valid_symbols]

@@ -5,22 +5,24 @@ JSUT is available [here](https://sites.google.com/site/shinnosuketakamichi/publi
 ### setup enviornmet and do preprocessing and training
 change jsut path in retrieve_transcripts.py to where your jsut folder is 
 ```
+git submodule update --init
 pipenv --python 3
 pipenv install
 unzip hifigan/generator_universal.pth.tar.zip -d hifigan/
-unzip preprocessed_data/JSUT/TextGrid.zip -d preprocessed_data/JSUT
+
 mkdir -p raw_data/JSUT/JSUT
 cp path/to/JSUT/*/wav/*.wav raw_data/JSUT/JSUT
 python retrieve_transcripts.py
+python prepare_tg_accent.py jsut-lab/ preprocessed_data/JSUT/ JSUT
 python3 preprocess.py config/JSUT/preprocess.yaml #this may take some time
 python train.py -p config/JSUT/preprocess.yaml -m config/JSUT/model.yaml -t config/JSUT/train.yaml
 ```
 ## Synthesize Japanese
-grapheme input is not currently supported. You have to prepare phoneme sequence to synthesize
-
 Synthesis Example
 ```
-python3 synthesize.py --text "t o o m o r o k o sh i w a sp g a q sh u u k o k u n o j u u y o o n a n o o s a k u m o ts u d a" --restore_step 60000 --mode single -p config/JSUT/preprocess.yaml -m config/JSUT/model.yaml -t config/JSUT/train.yaml
+python3 synthesize.py --text "音声合成、たのちい" --speak
+er_id 0 --restore_step 20000 --mode single -p config/JSUT/preprocess.yaml -m config/JSUT/model.yaml -t config/JSUT/train.y
+aml
 ```
 
 # FastSpeech 2 - PyTorch Implementation

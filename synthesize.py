@@ -13,6 +13,9 @@ from utils.model import get_model, get_vocoder
 from utils.tools import to_device, synth_samples
 from dataset import TextDataset
 from text import text_to_sequence, symbols
+import pyopenjtalk
+from prepare_tg_accent import pp_symbols
+from convert_label import openjtalk2julius
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -83,20 +86,33 @@ def preprocess_mandarin(text, preprocess_config):
 
     return np.array(sequence)
 
+def preprocess_japanese(text:str):
+    fullcontext_labels = pyopenjtalk.extract_fullcontext(text)
+    phonemes , accents = pp_symbols(fullcontext_labels)
+    phonemes = [openjtalk2julius(p) for p in phonemes if p != '']
+    return phonemes, accents
+
+
 
 def synthesize(model, step, configs, vocoder, batchs, control_values):
     preprocess_config, model_config, train_config = configs
     pitch_control, energy_control, duration_control = control_values
 
+    use_accent = preprocess_config["preprocessing"]["accent"]["use_accent"]
     for batch in batchs:
         batch = to_device(batch, device)
+        accents = None
+        if use_accent:
+            accents = batch[-1]
+            batch = batch[:-1]
         with torch.no_grad():
             # Forward
             output = model(
                 *(batch[2:]),
                 p_control=pitch_control,
                 e_control=energy_control,
-                d_control=duration_control
+                d_control=duration_control,
+                accents=accents
             )
             synth_samples(
                 batch,
@@ -200,6 +216,8 @@ if __name__ == "__main__":
             collate_fn=dataset.collate_fn,
         )
     symbol_to_id = {s: i for i, s in enumerate(symbols)}
+    accent_to_id = {'0':0, '[':1, ']':2, '#':3}
+
     if args.mode == "single":
         ids = raw_texts = [args.text[:100]]
         speakers = np.array([args.speaker_id])
@@ -208,10 +226,17 @@ if __name__ == "__main__":
         elif preprocess_config["preprocessing"]["text"]["language"] == "zh":
             texts = np.array([preprocess_mandarin(args.text, preprocess_config)])
         elif preprocess_config["preprocessing"]["text"]["language"] == "ja":
-            texts = np.array([[symbol_to_id[t] for t in args.text.replace("{", "").replace("}", "").split()]])
+            phonemes, accents = preprocess_japanese(args.text)
+            print(phonemes,accents)
+            texts = np.array([[symbol_to_id[t] for t in phonemes]])
+            if preprocess_config["preprocessing"]["accent"]["use_accent"]:
+                accents = np.array([[accent_to_id[a] for a in accents]])
+            else:
+                accents = None
+
         text_lens = np.array([len(texts[0])])
         print(text_lens)
-        batchs = [(ids, raw_texts, speakers, texts, text_lens, max(text_lens))]
+        batchs = [(ids, raw_texts, speakers, texts, text_lens, max(text_lens),accents)]
 
     control_values = args.pitch_control, args.energy_control, args.duration_control
 

@@ -84,7 +84,7 @@ class Encoder(nn.Module):
 
         # -- Forward
         if not self.training and src_seq.shape[1] > self.max_seq_len:
-            if accents is not None
+            if accents is not None:
                 enc_output = self.src_word_emb(src_seq) + self.src_accent_emb(accents) + get_sinusoid_encoding_table(
                 src_seq.shape[1], self.d_model
                 )[: src_seq.shape[1], :].unsqueeze(0).expand(batch_size, -1, -1).to(

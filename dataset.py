@@ -192,6 +192,9 @@ class TextDataset(Dataset):
         ) as f:
             self.speaker_map = json.load(f)
 
+        self.use_accent = preprocess_config["preprocessing"]["accent"]["use_accent"]
+        self.accent_to_id = {'0':0, '[':1, ']':2, '#':3}
+
     def __len__(self):
         return len(self.text)
 
@@ -201,8 +204,14 @@ class TextDataset(Dataset):
         speaker_id = self.speaker_map[speaker]
         raw_text = self.raw_text[idx]
         phone = np.array(text_to_sequence(self.text[idx], self.cleaners))
+        accent = None
+        if self.use_accent:
+            with open(os.path.join(self.preprocessed_path, "accent",basename+ '.accent')) as f:
+                accent = f.read()
+            accent = [self.accent_to_id[t] for t in accent]
+            accent = np.array(accent[:len(phone)])
 
-        return (basename, speaker_id, phone, raw_text)
+        return (basename, speaker_id, phone, raw_text,accent)
 
     def process_meta(self, filename):
         with open(filename, "r", encoding="utf-8") as f:
@@ -224,10 +233,13 @@ class TextDataset(Dataset):
         texts = [d[2] for d in data]
         raw_texts = [d[3] for d in data]
         text_lens = np.array([text.shape[0] for text in texts])
+        if self.use_accent:
+            accents = [d[4] for d in data]
 
         texts = pad_1D(texts)
+        accents = pad_1D(accents)
 
-        return ids, raw_texts, speakers, texts, text_lens, max(text_lens)
+        return ids, raw_texts, speakers, texts, text_lens, max(text_lens), accents
 
 
 if __name__ == "__main__":

@@ -43,12 +43,14 @@ def evaluate(model, step, configs, logger=None, vocoder=None):
             with torch.no_grad():
                 # Forward
                 if use_accent:
-                    output = model(*(batch[2:-1]),accents=batch[-1])
+                    accents = batch[-1]
+                    batch = batch[:-1]
+                    output = model(*(batch[2:]),accents=accents)
                 else:
                     output = model(*(batch[2:]))
+                losses = Loss(batch, output)
 
                 # Cal Loss
-                losses = Loss(batch, output)
 
                 for i in range(len(losses)):
                     loss_sums[i] += losses[i].item() * len(batch[0])

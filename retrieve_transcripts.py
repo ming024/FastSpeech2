@@ -2,7 +2,7 @@ import glob
 import pandas as pd
 import os
 # %%
-transcript_files = glob.glob("/home/wataru/Documents/speech/jsut_ver1.1/*/transcript_utf8.txt")
+transcript_files = glob.glob("/media/ssd/corpus/jsut_ver1.1/*/transcript_utf8.txt")
 # %%
 if not os.path.exists("raw_data/JSUT/JSUT"):
     os.makedirs("raw_data/JSUT/JSUT")

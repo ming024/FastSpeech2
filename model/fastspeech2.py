@@ -26,7 +26,7 @@ class FastSpeech2(nn.Module):
             preprocess_config["preprocessing"]["mel"]["n_mel_channels"],
         )
         self.use_jdit = model_config["jdit"]["use_jdit"]
-        self.use_accent= preprocess_config["accent"]["use_accent"]
+        self.use_accent= preprocess_config["preprocessing"]["accent"]["use_accent"]
         if self.use_jdit:
             self.jdit = JDIT(model_config=model_config,preprocess_config=preprocess_config)
             
