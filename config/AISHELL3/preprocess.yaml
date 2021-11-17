@@ -11,6 +11,8 @@ preprocessing:
   text:
     text_cleaners: []
     language: "zh"
+    use_spe_features: False
+    spe_feature_dim: 36
   audio:
     sampling_rate: 22050
     max_wav_value: 32768.0
@@ -28,3 +30,6 @@ preprocessing:
   energy:
     feature: "phoneme_level" # support 'phoneme_level' or 'frame_level'
     normalization: True
+  speaker:
+    embedding: "none" # support 'deep-speaker' or 'none'
+    pretrained_path: ""

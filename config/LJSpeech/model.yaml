@@ -9,16 +9,22 @@ transformer:
   conv_kernel_size: [9, 1]
   encoder_dropout: 0.2
   decoder_dropout: 0.2
+  spe_features: false
+  spe_feature_dim: 36
+  depthwise_convolutions: False
 
 variance_predictor:
   filter_size: 256
   kernel_size: 3
   dropout: 0.5
+  use_energy_predictor: True
 
 variance_embedding:
   pitch_quantization: "linear" # support 'linear' or 'log', 'log' is allowed only if the pitch values are not normalized during preprocessing
   energy_quantization: "linear" # support 'linear' or 'log', 'log' is allowed only if the energy values are not normalized during preprocessing
   n_bins: 256
+
+use_postnet: True
 
 # gst:
 #   use_gst: False
@@ -28,7 +34,12 @@ variance_embedding:
 #   n_style_token: 10
 #   attn_head: 4
 
-multi_speaker: False
+multi_speaker:
+  use_multi_speaker: False
+  embedding_type: "one-hot" # support 'one-hot', 'vector'
+  locations:
+    variance_adaptor: False
+    encoder: False
 
 max_seq_len: 1000
 

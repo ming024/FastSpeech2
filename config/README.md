@@ -1,10 +1,11 @@
 # Config
 Here are the config files used to train the single/multi-speaker TTS models.
-4 different configurations are given:
+5 different configurations are given:
 - LJSpeech: suggested configuration for LJSpeech dataset.
 - LibriTTS: suggested configuration for LibriTTS dataset.
 - AISHELL3: suggested configuration for AISHELL-3 dataset.
 - LJSpeech_paper: closed to the setting proposed in the original FastSpeech 2 paper.
+- YourLanguage: A generic configuration intended to have values replaced for supporting a new language.
 
 Some important hyper-parameters are explained here.
 
@@ -17,6 +18,9 @@ Some important hyper-parameters are explained here.
   However, in our experiments, we find that using phoneme-level features makes the prosody of the synthesized utterances more natural.
 - **pitch.normalization & energy.normalization**: to normalize the pitch and energy values or not. 
   The original paper did not normalize these values.
+- **text.use_spe_features**: This will attempt to convert your input text into a sequence of multihot phonological feature vectors which are then cached. This is for normalizing input space dimensions in pre-training/fine-tuning pipelines.
+- **text.spe_feature_dim**: Sets the size of phonological feature vectors
+- **speaker.embedding & speaker.pretrained_path**: If set to 'deep-speaker', then a path to a [pretrained deep-speaker model](https://drive.google.com/drive/folders/18h2bmsAWrqoUMsh_FQHDDxp7ioGpcNBa) must be used. This will generate a speaker embedding for each input file and then cache an averaged speaker vector for each speaker. It is an alternative to the one-hot speaker embedding system which requires no pre-processing.
 
 ## train.yaml
 - **optimizer.grad_acc_step**: the number of batches of gradient accumulation before updating the model parameters and call optimizer.zero_grad(), which is useful if you wish to train the model with a large batch size but you do not have sufficient GPU memory.
@@ -27,3 +31,8 @@ Some important hyper-parameters are explained here.
 - **variance_embedding.pitch_quantization**: when the pitch values are normalized as specified in ``preprocess.yaml``, it is not valid to use log-scale quantization bins as proposed in the original paper, so we use linear-scaled bins instead. 
 - **multi_speaker**: to apply a speaker embedding table to enable multi-speaker TTS or not.
 - **vocoder.speaker**: should be set to 'universal' if any dataset other than LJSpeech is used.
+- **transformer.spe_features & transformer.spe_feature_dim**: Sets whether using multi-hot phonological feature vectors as inputs and their size.
+- **transformer.depthwise_convolutions**: uses depthwise separable convolutions as discussed in Luo et. al. 2021 LightSpeech paper.
+- **variance_predictor.use_energy_predictor**: sets whether energy predictor is used or not.
+- **use_postnet**: whether to use residual postnet or not.
+- **multi_speaker**: whether to use multi-speaker data. If 'one-hot', no preprocessing is required, if 'vector', then preprocess.yaml must be configured to create deep-speaker vectors for each speaker. Currently the speaker embeddings are summed with the output of the encoder, but future work should allow for a speaker variance adaptor architecture.
