@@ -46,7 +46,7 @@ max_seq_len: 1000
 vocoder:
   model: "HiFi-GAN" # support 'HiFi-GAN', 'MelGAN'
   speaker:
-    "LJSpeech" # support  'LJSpeech', 'universal'
+    "universal" # support  'LJSpeech', 'universal'
     # AP NOTE: If you are wanting to use your own checkpoints
     #          Edit the get_vocoder method in in utils/model.py
     #          To point to your checkpoint.
