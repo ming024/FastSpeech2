@@ -4,11 +4,11 @@ import numpy as np
 
 import transformer.Constants as Constants
 from .Layers import FFTBlock
-from text.symbols import symbols
+from text.symbols import CHARS
 
 
 def get_sinusoid_encoding_table(n_position, d_hid, padding_idx=None):
-    """ Sinusoid position encoding table """
+    """Sinusoid position encoding table"""
 
     def cal_angle(position, hid_idx):
         return position / np.power(10000, 2 * (hid_idx // 2) / d_hid)
@@ -31,13 +31,13 @@ def get_sinusoid_encoding_table(n_position, d_hid, padding_idx=None):
 
 
 class Encoder(nn.Module):
-    """ Encoder """
+    """Encoder"""
 
     def __init__(self, config):
         super(Encoder, self).__init__()
 
         n_position = config["max_seq_len"] + 1
-        n_src_vocab = len(symbols) + 1
+        n_src_vocab = len(CHARS) + 1
         d_word_vec = config["transformer"]["encoder_hidden"]
         n_layers = config["transformer"]["encoder_layer"]
         n_head = config["transformer"]["encoder_head"]
@@ -48,14 +48,27 @@ class Encoder(nn.Module):
         d_model = config["transformer"]["encoder_hidden"]
         d_inner = config["transformer"]["conv_filter_size"]
         kernel_size = config["transformer"]["conv_kernel_size"]
+        if "enc_kernel_sizes" in config["transformer"]:
+            kernel_sizes = [[x] for x in config["transformer"]["enc_kernel_sizes"]]
+        else:
+            kernel_sizes = [
+                kernel_size for _ in range(config["transformer"]["encoder_layer"])
+            ]
         dropout = config["transformer"]["encoder_dropout"]
+
+        self.use_sep_features = config["transformer"]["spe_features"]
+        self.depthwise = config["transformer"]["depthwise_convolutions"]
 
         self.max_seq_len = config["max_seq_len"]
         self.d_model = d_model
-
-        self.src_word_emb = nn.Embedding(
-            n_src_vocab, d_word_vec, padding_idx=Constants.PAD
-        )
+        if config["transformer"]["spe_features"]:
+            self.src_word_emb = nn.Linear(
+                config["transformer"]["spe_feature_dim"], d_word_vec, bias=False
+            )
+        else:
+            self.src_word_emb = nn.Embedding(
+                n_src_vocab, d_word_vec, padding_idx=Constants.PAD
+            )
         self.position_enc = nn.Parameter(
             get_sinusoid_encoding_table(n_position, d_word_vec).unsqueeze(0),
             requires_grad=False,
@@ -64,9 +77,16 @@ class Encoder(nn.Module):
         self.layer_stack = nn.ModuleList(
             [
                 FFTBlock(
-                    d_model, n_head, d_k, d_v, d_inner, kernel_size, dropout=dropout
+                    d_model,
+                    n_head,
+                    d_k,
+                    d_v,
+                    d_inner,
+                    kernel_sizes[i],
+                    dropout=dropout,
+                    depthwise=self.depthwise,
                 )
-                for _ in range(n_layers)
+                for i, _ in enumerate(range(n_layers))
             ]
         )
 
@@ -79,6 +99,8 @@ class Encoder(nn.Module):
         slf_attn_mask = mask.unsqueeze(1).expand(-1, max_len, -1)
 
         # -- Forward
+        if self.use_sep_features:
+            src_seq = src_seq.float()
         if not self.training and src_seq.shape[1] > self.max_seq_len:
             enc_output = self.src_word_emb(src_seq) + get_sinusoid_encoding_table(
                 src_seq.shape[1], self.d_model
@@ -101,7 +123,7 @@ class Encoder(nn.Module):
 
 
 class Decoder(nn.Module):
-    """ Decoder """
+    """Decoder"""
 
     def __init__(self, config):
         super(Decoder, self).__init__()
@@ -117,8 +139,14 @@ class Decoder(nn.Module):
         d_model = config["transformer"]["decoder_hidden"]
         d_inner = config["transformer"]["conv_filter_size"]
         kernel_size = config["transformer"]["conv_kernel_size"]
+        if "dec_kernel_sizes" in config["transformer"]:
+            kernel_sizes = [[x] for x in config["transformer"]["dec_kernel_sizes"]]
+        else:
+            kernel_sizes = [
+                kernel_size for _ in range(config["transformer"]["decoder_layer"])
+            ]
         dropout = config["transformer"]["decoder_dropout"]
-
+        self.depthwise = config["transformer"]["depthwise_convolutions"]
         self.max_seq_len = config["max_seq_len"]
         self.d_model = d_model
 
@@ -130,9 +158,16 @@ class Decoder(nn.Module):
         self.layer_stack = nn.ModuleList(
             [
                 FFTBlock(
-                    d_model, n_head, d_k, d_v, d_inner, kernel_size, dropout=dropout
+                    d_model,
+                    n_head,
+                    d_k,
+                    d_v,
+                    d_inner,
+                    kernel_sizes[i],
+                    dropout=dropout,
+                    depthwise=self.depthwise,
                 )
-                for _ in range(n_layers)
+                for i, _ in enumerate(range(n_layers))
             ]
         )
 

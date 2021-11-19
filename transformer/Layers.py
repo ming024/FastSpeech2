@@ -5,18 +5,33 @@ import torch.nn as nn
 import numpy as np
 from torch.nn import functional as F
 
-from .SubLayers import MultiHeadAttention, PositionwiseFeedForward
+from .SubLayers import DepthwiseFeedForward, MultiHeadAttention, PositionwiseFeedForward
 
 
 class FFTBlock(torch.nn.Module):
     """FFT Block"""
 
-    def __init__(self, d_model, n_head, d_k, d_v, d_inner, kernel_size, dropout=0.1):
+    def __init__(
+        self,
+        d_model,
+        n_head,
+        d_k,
+        d_v,
+        d_inner,
+        kernel_size,
+        dropout=0.1,
+        depthwise=False,
+    ):
         super(FFTBlock, self).__init__()
         self.slf_attn = MultiHeadAttention(n_head, d_model, d_k, d_v, dropout=dropout)
-        self.pos_ffn = PositionwiseFeedForward(
-            d_model, d_inner, kernel_size, dropout=dropout
-        )
+        if depthwise:
+            self.pos_ffn = DepthwiseFeedForward(
+                d_model, d_inner, kernel_size, dropout=dropout
+            )
+        else:
+            self.pos_ffn = PositionwiseFeedForward(
+                d_model, d_inner, kernel_size, dropout=dropout
+            )
 
     def forward(self, enc_input, mask=None, slf_attn_mask=None):
         enc_output, enc_slf_attn = self.slf_attn(

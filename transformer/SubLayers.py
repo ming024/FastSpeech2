@@ -5,8 +5,36 @@ import numpy as np
 from .Modules import ScaledDotProductAttention
 
 
+class SepConv1d(nn.Module):
+    def __init__(
+        self,
+        in_channels,
+        out_channels,
+        kernel_size,
+        stride=1,
+        padding=0,
+        dilation=1,
+    ):
+        super(SepConv1d, self).__init__()
+        self.depthwise = nn.Conv1d(
+            in_channels,
+            in_channels,
+            kernel_size=kernel_size,
+            stride=stride,
+            padding=padding,
+            dilation=dilation,
+            groups=in_channels,
+        )
+        self.pointwise = nn.Conv1d(in_channels, out_channels, kernel_size=1)
+
+    def forward(self, x):
+        x = self.depthwise(x)
+        x = self.pointwise(x)
+        return x
+
+
 class MultiHeadAttention(nn.Module):
-    """ Multi-Head Attention module """
+    """Multi-Head Attention module"""
 
     def __init__(self, n_head, d_model, d_k, d_v, dropout=0.1):
         super().__init__()
@@ -57,8 +85,47 @@ class MultiHeadAttention(nn.Module):
         return output, attn
 
 
+class DepthwiseFeedForward(nn.Module):
+    """A two-feed-forward-layer module"""
+
+    def __init__(self, d_in, d_hid, kernel_size, dropout=0.1):
+        super().__init__()
+
+        w_1_depth = nn.Conv1d(
+            d_in,
+            d_in,
+            kernel_size=kernel_size[0],
+            padding=(kernel_size[0] - 1) // 2,
+            groups=d_in,
+        )
+        w_1_point = nn.Conv1d(d_in, d_hid, kernel_size=1)
+        self.w_1_depthwise = nn.Sequential(w_1_depth, w_1_point)
+
+        w_2_depth = nn.Conv1d(
+            d_hid,
+            d_hid,
+            kernel_size=1,
+            padding=0,
+            groups=d_hid,
+        )
+        w_2_point = nn.Conv1d(d_hid, d_in, kernel_size=1)
+        self.w_2_depthwise = nn.Sequential(w_2_depth, w_2_point)
+        self.layer_norm = nn.LayerNorm(d_in)
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, x):
+        residual = x
+        output = x.transpose(1, 2)
+        output = self.w_2_depthwise(F.relu(self.w_1_depthwise(output)))
+        output = output.transpose(1, 2)
+        output = self.dropout(output)
+        output = self.layer_norm(output + residual)
+
+        return output
+
+
 class PositionwiseFeedForward(nn.Module):
-    """ A two-feed-forward-layer module """
+    """A two-feed-forward-layer module"""
 
     def __init__(self, d_in, d_hid, kernel_size, dropout=0.1):
         super().__init__()
@@ -71,6 +138,7 @@ class PositionwiseFeedForward(nn.Module):
             kernel_size=kernel_size[0],
             padding=(kernel_size[0] - 1) // 2,
         )
+
         # position-wise
         self.w_2 = nn.Conv1d(
             d_hid,
