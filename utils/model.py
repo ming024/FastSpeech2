@@ -12,12 +12,13 @@ def get_model(args, configs, device, train=False):
     (preprocess_config, model_config, train_config) = configs
 
     model = FastSpeech2(preprocess_config, model_config).to(device)
+
     if args.restore_step:
         ckpt_path = os.path.join(
             train_config["path"]["ckpt_path"],
             "{}.pth.tar".format(args.restore_step),
         )
-        ckpt = torch.load(ckpt_path)
+        ckpt = torch.load(ckpt_path, map_location=device)
         model.load_state_dict(ckpt["model"])
 
     if train:
@@ -62,7 +63,22 @@ def get_vocoder(config, device):
         if speaker == "LJSpeech":
             ckpt = torch.load("hifigan/generator_LJSpeech.pth.tar")
         elif speaker == "universal":
-            ckpt = torch.load("hifigan/generator_universal.pth.tar")
+            ckpt = torch.load(
+                "hifigan/generator_universal.pth.tar", map_location=device
+            )
+        elif speaker == "harvey":
+            ckpt = torch.load(
+                "/home/aip000/tts/models/hifi-gan/models/Mohawk_v2/g_02760000"
+            )
+        elif speaker == "am":
+            ckpt = torch.load(
+                "/home/aip000/tts/models/hifi-gan/models/Mohawk_Finetune_Am/g_02775000"
+            )
+        elif speaker == "ap-gitksan":
+            ckpt = torch.load(
+                "/home/aip000/tts/models/hifi-gan/models/Gitksan_Finetune_Ap/g_02765000",
+                map_location=torch.device("cpu"),
+            )
         vocoder.load_state_dict(ckpt["generator"])
         vocoder.eval()
         vocoder.remove_weight_norm()
@@ -72,6 +88,8 @@ def get_vocoder(config, device):
 
 
 def vocoder_infer(mels, vocoder, model_config, preprocess_config, lengths=None):
+    # mels (1, 80, 111) normal
+    # mels small (1, 80, 5)
     name = model_config["vocoder"]["model"]
     with torch.no_grad():
         if name == "MelGAN":

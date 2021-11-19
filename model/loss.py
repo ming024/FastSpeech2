@@ -1,9 +1,12 @@
 import torch
 import torch.nn as nn
 
+import numpy as np
+from utils.tools import create_phone_batch
+
 
 class FastSpeech2Loss(nn.Module):
-    """ FastSpeech2 Loss """
+    """FastSpeech2 Loss"""
 
     def __init__(self, preprocess_config, model_config):
         super(FastSpeech2Loss, self).__init__()
@@ -13,6 +16,7 @@ class FastSpeech2Loss(nn.Module):
         self.energy_feature_level = preprocess_config["preprocessing"]["energy"][
             "feature"
         ]
+        self.use_energy = model_config["variance_predictor"]["use_energy_predictor"]
         self.mse_loss = nn.MSELoss()
         self.mae_loss = nn.L1Loss()
 
@@ -24,7 +28,7 @@ class FastSpeech2Loss(nn.Module):
             pitch_targets,
             energy_targets,
             duration_targets,
-        ) = inputs[6:]
+        ) = inputs[7:]
         (
             mel_predictions,
             postnet_mel_predictions,
@@ -41,7 +45,7 @@ class FastSpeech2Loss(nn.Module):
         mel_masks = ~mel_masks
         log_duration_targets = torch.log(duration_targets.float() + 1)
         mel_targets = mel_targets[:, : mel_masks.shape[1], :]
-        mel_masks = mel_masks[:, :mel_masks.shape[1]]
+        mel_masks = mel_masks[:, : mel_masks.shape[1]]
 
         log_duration_targets.requires_grad = False
         pitch_targets.requires_grad = False
@@ -55,10 +59,10 @@ class FastSpeech2Loss(nn.Module):
             pitch_predictions = pitch_predictions.masked_select(mel_masks)
             pitch_targets = pitch_targets.masked_select(mel_masks)
 
-        if self.energy_feature_level == "phoneme_level":
+        if self.use_energy and self.energy_feature_level == "phoneme_level":
             energy_predictions = energy_predictions.masked_select(src_masks)
             energy_targets = energy_targets.masked_select(src_masks)
-        if self.energy_feature_level == "frame_level":
+        if self.use_energy and self.energy_feature_level == "frame_level":
             energy_predictions = energy_predictions.masked_select(mel_masks)
             energy_targets = energy_targets.masked_select(mel_masks)
 
@@ -75,7 +79,12 @@ class FastSpeech2Loss(nn.Module):
         postnet_mel_loss = self.mae_loss(postnet_mel_predictions, mel_targets)
 
         pitch_loss = self.mse_loss(pitch_predictions, pitch_targets)
-        energy_loss = self.mse_loss(energy_predictions, energy_targets)
+
+        if self.use_energy:
+            energy_loss = self.mse_loss(energy_predictions, energy_targets)
+        else:
+            energy_loss = torch.tensor(0.0)
+
         duration_loss = self.mse_loss(log_duration_predictions, log_duration_targets)
 
         total_loss = (

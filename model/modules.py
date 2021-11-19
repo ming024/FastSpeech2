@@ -22,7 +22,18 @@ class VarianceAdaptor(nn.Module):
         self.duration_predictor = VariancePredictor(model_config)
         self.length_regulator = LengthRegulator()
         self.pitch_predictor = VariancePredictor(model_config)
-        self.energy_predictor = VariancePredictor(model_config)
+        if (
+            model_config["multi_speaker"]["use_multi_speaker"]
+            and model_config["multi_speaker"]["locations"]["variance_adaptor"]
+        ):
+            self.speaker_predictor = VariancePredictor(
+                model_config
+            )  # TODO: this does not work yet!
+        self.use_energy_predictor = model_config["variance_predictor"][
+            "use_energy_predictor"
+        ]
+        if self.use_energy_predictor:
+            self.energy_predictor = VariancePredictor(model_config)
 
         self.pitch_feature_level = preprocess_config["preprocessing"]["pitch"][
             "feature"
@@ -43,7 +54,8 @@ class VarianceAdaptor(nn.Module):
         ) as f:
             stats = json.load(f)
             pitch_min, pitch_max = stats["pitch"][:2]
-            energy_min, energy_max = stats["energy"][:2]
+            if self.use_energy_predictor:
+                energy_min, energy_max = stats["energy"][:2]
 
         if pitch_quantization == "log":
             self.pitch_bins = nn.Parameter(
@@ -57,25 +69,30 @@ class VarianceAdaptor(nn.Module):
                 torch.linspace(pitch_min, pitch_max, n_bins - 1),
                 requires_grad=False,
             )
-        if energy_quantization == "log":
-            self.energy_bins = nn.Parameter(
-                torch.exp(
-                    torch.linspace(np.log(energy_min), np.log(energy_max), n_bins - 1)
-                ),
-                requires_grad=False,
-            )
-        else:
-            self.energy_bins = nn.Parameter(
-                torch.linspace(energy_min, energy_max, n_bins - 1),
-                requires_grad=False,
-            )
+
+        if self.use_energy_predictor:
+            if energy_quantization == "log":
+                self.energy_bins = nn.Parameter(
+                    torch.exp(
+                        torch.linspace(
+                            np.log(energy_min), np.log(energy_max), n_bins - 1
+                        )
+                    ),
+                    requires_grad=False,
+                )
+            else:
+                self.energy_bins = nn.Parameter(
+                    torch.linspace(energy_min, energy_max, n_bins - 1),
+                    requires_grad=False,
+                )
 
         self.pitch_embedding = nn.Embedding(
             n_bins, model_config["transformer"]["encoder_hidden"]
         )
-        self.energy_embedding = nn.Embedding(
-            n_bins, model_config["transformer"]["encoder_hidden"]
-        )
+        if self.use_energy_predictor:
+            self.energy_embedding = nn.Embedding(
+                n_bins, model_config["transformer"]["encoder_hidden"]
+            )
 
     def get_pitch_embedding(self, x, target, mask, control):
         prediction = self.pitch_predictor(x, mask)
@@ -111,19 +128,22 @@ class VarianceAdaptor(nn.Module):
         p_control=1.0,
         e_control=1.0,
         d_control=1.0,
+        speakers=None,
+        spk_control=0,
     ):
-
+        # x = (b, t, k)
         log_duration_prediction = self.duration_predictor(x, src_mask)
         if self.pitch_feature_level == "phoneme_level":
             pitch_prediction, pitch_embedding = self.get_pitch_embedding(
                 x, pitch_target, src_mask, p_control
             )
             x = x + pitch_embedding
-        if self.energy_feature_level == "phoneme_level":
-            energy_prediction, energy_embedding = self.get_energy_embedding(
-                x, energy_target, src_mask, e_control
-            )
-            x = x + energy_embedding
+        if self.use_energy_predictor:
+            if self.energy_feature_level == "phoneme_level":
+                energy_prediction, energy_embedding = self.get_energy_embedding(
+                    x, energy_target, src_mask, p_control
+                )
+                x = x + energy_embedding
 
         if duration_target is not None:
             x, mel_len = self.length_regulator(x, duration_target, max_len)
@@ -141,21 +161,32 @@ class VarianceAdaptor(nn.Module):
                 x, pitch_target, mel_mask, p_control
             )
             x = x + pitch_embedding
-        if self.energy_feature_level == "frame_level":
-            energy_prediction, energy_embedding = self.get_energy_embedding(
-                x, energy_target, mel_mask, p_control
+        if self.use_energy_predictor:
+            if self.energy_feature_level == "frame_level":
+                energy_prediction, energy_embedding = self.get_energy_embedding(
+                    x, energy_target, mel_mask, p_control
+                )
+                x = x + energy_embedding
+        if self.use_energy_predictor:
+            return (
+                x,
+                pitch_prediction,
+                energy_prediction,
+                log_duration_prediction,
+                duration_rounded,
+                mel_len,
+                mel_mask,
             )
-            x = x + energy_embedding
-
-        return (
-            x,
-            pitch_prediction,
-            energy_prediction,
-            log_duration_prediction,
-            duration_rounded,
-            mel_len,
-            mel_mask,
-        )
+        else:
+            return (
+                x,
+                pitch_prediction,
+                None,
+                log_duration_prediction,
+                duration_rounded,
+                mel_len,
+                mel_mask,
+            )
 
 
 class LengthRegulator(nn.Module):
@@ -205,6 +236,7 @@ class VariancePredictor(nn.Module):
         self.kernel = model_config["variance_predictor"]["kernel_size"]
         self.conv_output_size = model_config["variance_predictor"]["filter_size"]
         self.dropout = model_config["variance_predictor"]["dropout"]
+        self.depthwise = model_config["transformer"]["depthwise_convolutions"]
 
         self.conv_layer = nn.Sequential(
             OrderedDict(
@@ -216,6 +248,7 @@ class VariancePredictor(nn.Module):
                             self.filter_size,
                             kernel_size=self.kernel,
                             padding=(self.kernel - 1) // 2,
+                            depthwise=self.depthwise,
                         ),
                     ),
                     ("relu_1", nn.ReLU()),
@@ -228,6 +261,7 @@ class VariancePredictor(nn.Module):
                             self.filter_size,
                             kernel_size=self.kernel,
                             padding=1,
+                            depthwise=self.depthwise,
                         ),
                     ),
                     ("relu_2", nn.ReLU()),
@@ -265,6 +299,7 @@ class Conv(nn.Module):
         dilation=1,
         bias=True,
         w_init="linear",
+        depthwise=False,
     ):
         """
         :param in_channels: dimension of input
@@ -277,16 +312,29 @@ class Conv(nn.Module):
         :param w_init: str. weight inits with xavier initialization.
         """
         super(Conv, self).__init__()
-
-        self.conv = nn.Conv1d(
-            in_channels,
-            out_channels,
-            kernel_size=kernel_size,
-            stride=stride,
-            padding=padding,
-            dilation=dilation,
-            bias=bias,
-        )
+        if depthwise:
+            depth = nn.Conv1d(
+                in_channels,
+                in_channels,
+                kernel_size=kernel_size,
+                stride=stride,
+                padding=padding,
+                dilation=dilation,
+                bias=bias,
+                groups=in_channels,
+            )
+            point = nn.Conv1d(in_channels, out_channels, kernel_size=1)
+            self.conv = nn.Sequential(depth, point)
+        else:
+            self.conv = nn.Conv1d(
+                in_channels,
+                out_channels,
+                kernel_size=kernel_size,
+                stride=stride,
+                padding=padding,
+                dilation=dilation,
+                bias=bias,
+            )
 
     def forward(self, x):
         x = x.contiguous().transpose(1, 2)

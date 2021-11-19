@@ -6,20 +6,37 @@ import torch.nn.functional as F
 import numpy as np
 import matplotlib
 from scipy.io import wavfile
-from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt, use
 
+from spe_classifier.utils import FEAT_LABELS
 
 matplotlib.use("Agg")
-
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
+def create_phone_batch(batch):
+    durations = batch[4].cpu().numpy()
+    mels = batch[1].cpu().numpy()
+    phone_utts = []
+    for i, dur in enumerate(durations):
+        d0 = 0
+        phones = []
+        for j, d1 in enumerate(dur):
+            d1 += d0
+            phone = mels[i][d0:d1]
+            phones.append(phone)
+            d0 = d1
+        phone_utts.append(phones)
+    return phone_utts
+
+
 def to_device(data, device):
-    if len(data) == 12:
+    if len(data) == 13:
         (
             ids,
             raw_texts,
+            languages,
             speakers,
             texts,
             src_lens,
@@ -31,19 +48,19 @@ def to_device(data, device):
             energies,
             durations,
         ) = data
-
+        languages = torch.from_numpy(languages).long().to(device)
         speakers = torch.from_numpy(speakers).long().to(device)
         texts = torch.from_numpy(texts).long().to(device)
         src_lens = torch.from_numpy(src_lens).to(device)
         mels = torch.from_numpy(mels).float().to(device)
         mel_lens = torch.from_numpy(mel_lens).to(device)
         pitches = torch.from_numpy(pitches).float().to(device)
-        energies = torch.from_numpy(energies).to(device)
         durations = torch.from_numpy(durations).long().to(device)
-
+        energies = torch.from_numpy(energies).to(device)
         return (
             ids,
             raw_texts,
+            languages,
             speakers,
             texts,
             src_lens,
@@ -55,27 +72,38 @@ def to_device(data, device):
             energies,
             durations,
         )
+    if len(data) == 7:
+        (ids, raw_texts, languages, speakers, texts, src_lens, max_src_len) = data
 
-    if len(data) == 6:
-        (ids, raw_texts, speakers, texts, src_lens, max_src_len) = data
-
+        languages = torch.from_numpy(languages).long().to(device)
         speakers = torch.from_numpy(speakers).long().to(device)
         texts = torch.from_numpy(texts).long().to(device)
         src_lens = torch.from_numpy(src_lens).to(device)
 
-        return (ids, raw_texts, speakers, texts, src_lens, max_src_len)
+        return (ids, raw_texts, languages, speakers, texts, src_lens, max_src_len)
 
 
 def log(
-    logger, step=None, losses=None, fig=None, audio=None, sampling_rate=22050, tag=""
+    logger,
+    step=None,
+    losses=None,
+    fig=None,
+    audio=None,
+    sampling_rate=22050,
+    tag="",
+    use_spe=False,
+    use_energy=False,
 ):
     if losses is not None:
         logger.add_scalar("Loss/total_loss", losses[0], step)
         logger.add_scalar("Loss/mel_loss", losses[1], step)
         logger.add_scalar("Loss/mel_postnet_loss", losses[2], step)
         logger.add_scalar("Loss/pitch_loss", losses[3], step)
-        logger.add_scalar("Loss/energy_loss", losses[4], step)
+        if use_energy:
+            logger.add_scalar("Loss/energy_loss", losses[4], step)
         logger.add_scalar("Loss/duration_loss", losses[5], step)
+        if use_spe:
+            logger.add_scalar("Loss/spe_loss", losses[5], step)
 
     if fig is not None:
         logger.add_figure(tag, fig)
@@ -107,30 +135,29 @@ def expand(values, durations):
 
 
 def synth_one_sample(targets, predictions, vocoder, model_config, preprocess_config):
-
     basename = targets[0][0]
     src_len = predictions[8][0].item()
     mel_len = predictions[9][0].item()
-    mel_target = targets[6][0, :mel_len].detach().transpose(0, 1)
+    mel_target = targets[7][0, :mel_len].detach().transpose(0, 1)
     mel_prediction = predictions[1][0, :mel_len].detach().transpose(0, 1)
-    duration = targets[11][0, :src_len].detach().cpu().numpy()
+    duration = targets[12][0, :src_len].detach().cpu().numpy()
+
     if preprocess_config["preprocessing"]["pitch"]["feature"] == "phoneme_level":
-        pitch = targets[9][0, :src_len].detach().cpu().numpy()
+        pitch = targets[10][0, :src_len].detach().cpu().numpy()
         pitch = expand(pitch, duration)
     else:
-        pitch = targets[9][0, :mel_len].detach().cpu().numpy()
+        pitch = targets[10][0, :mel_len].detach().cpu().numpy()
+
     if preprocess_config["preprocessing"]["energy"]["feature"] == "phoneme_level":
-        energy = targets[10][0, :src_len].detach().cpu().numpy()
+        energy = targets[11][0, :src_len].detach().cpu().numpy()
         energy = expand(energy, duration)
     else:
-        energy = targets[10][0, :mel_len].detach().cpu().numpy()
-
+        energy = targets[11][0, :mel_len].detach().cpu().numpy()
     with open(
         os.path.join(preprocess_config["path"]["preprocessed_path"], "stats.json")
     ) as f:
         stats = json.load(f)
         stats = stats["pitch"] + stats["energy"][:2]
-
     fig = plot_mel(
         [
             (mel_prediction.cpu().numpy(), pitch, energy),
@@ -161,8 +188,30 @@ def synth_one_sample(targets, predictions, vocoder, model_config, preprocess_con
     return fig, wav_reconstruction, wav_prediction, basename
 
 
-def synth_samples(targets, predictions, vocoder, model_config, preprocess_config, path):
+def create_spe_stats_fig(accuracy, save_figure=False):
+    x = np.arange(len(FEAT_LABELS))
+    width = 0.35
+    fig, ax = plt.subplots()
+    rects1 = ax.bar(x, accuracy, width, label="Acc %")
+    # rects2 = ax.bar(x - width/2, recall, width, label='Recall %')
+    # rects3 = ax.bar(x + width/2, precision, width, label='Precision %')
+    ax.set_title("SPE Classifier Accuracy")
+    ax.set_xticks(x)
+    ax.set_xticklabels(FEAT_LABELS)
+    ax.legend()
 
+    # ax.bar_label(rects1, padding=3)
+    # ax.bar_label(rects2, padding=3)
+    # ax.bar_label(rects3, padding=3)
+    plt.gcf().subplots_adjust(bottom=0.45)
+    fig.tight_layout()
+    plt.xticks(rotation=45)
+    if save_figure:
+        plt.savefig("feature_accuracy.pdf")
+    return fig
+
+
+def synth_samples(targets, predictions, vocoder, model_config, preprocess_config, path):
     basenames = targets[0]
     for i in range(len(predictions[0])):
         basename = basenames[i]
@@ -180,13 +229,11 @@ def synth_samples(targets, predictions, vocoder, model_config, preprocess_config
             energy = expand(energy, duration)
         else:
             energy = predictions[3][i, :mel_len].detach().cpu().numpy()
-
         with open(
             os.path.join(preprocess_config["path"]["preprocessed_path"], "stats.json")
         ) as f:
             stats = json.load(f)
             stats = stats["pitch"] + stats["energy"][:2]
-
         fig = plot_mel(
             [
                 (mel_prediction.cpu().numpy(), pitch, energy),
@@ -214,6 +261,7 @@ def plot_mel(data, stats, titles):
     fig, axes = plt.subplots(len(data), 1, squeeze=False)
     if titles is None:
         titles = [None for i in range(len(data))]
+
     pitch_min, pitch_max, pitch_mean, pitch_std, energy_min, energy_max = stats
     pitch_min = pitch_min * pitch_std + pitch_mean
     pitch_max = pitch_max * pitch_std + pitch_mean
@@ -241,7 +289,6 @@ def plot_mel(data, stats, titles):
         ax1.tick_params(
             labelsize="x-small", colors="tomato", bottom=False, labelbottom=False
         )
-
         ax2 = add_axis(fig, axes[i][0])
         ax2.plot(energy, color="darkviolet")
         ax2.set_xlim(0, mel.shape[1])
@@ -271,6 +318,17 @@ def pad_1D(inputs, PAD=0):
 
     max_len = max((len(x) for x in inputs))
     padded = np.stack([pad_data(x, max_len, PAD) for x in inputs])
+
+    return padded
+
+
+def pad_SPE_D(inputs, dim):
+    def pad_data(x, length):
+        zeros = np.zeros((length - x.shape[0], dim), dtype=int)
+        return np.concatenate((x, zeros))
+
+    max_len = max((len(x) for x in inputs))
+    padded = np.stack([pad_data(x, max_len) for x in inputs])
 
     return padded
 
