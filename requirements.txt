@@ -1,9 +1,13 @@
+epitran==1.9
+g2p==0.5.20211029
 g2p-en == 2.1.0
 inflect == 4.1.0
 librosa == 0.7.2
 matplotlib == 3.2.2
+nltk==3.5
 numba == 0.48
 numpy == 1.19.0
+panphon==0.19
 pypinyin==0.39.0
 pyworld == 0.2.10
 PyYAML==5.4.1
