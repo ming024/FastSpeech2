@@ -22,10 +22,15 @@ def main(args, configs):
     print("Prepare training ...")
 
     preprocess_config, model_config, train_config = configs
-
+    use_energy = model_config["variance_predictor"]["use_energy_predictor"]
     # Get dataset
+    if "train_file" in train_config["path"] and train_config["path"]["train_file"]:
+        train_file = train_config["path"]["train_file"]
+    else:
+        train_file = "train.txt"
+
     dataset = Dataset(
-        "train.txt", preprocess_config, train_config, sort=True, drop_last=True
+        train_file, preprocess_config, train_config, sort=True, drop_last=True
     )
     batch_size = train_config["optimizer"]["batch_size"]
     group_size = 4  # Set this larger than 1 to enable sorting in Dataset
@@ -40,6 +45,14 @@ def main(args, configs):
     # Prepare model
     model, optimizer = get_model(args, configs, device, train=True)
     model = nn.DataParallel(model)
+
+    # Load spe classifier if used
+    spe_classifier = None
+    if train_config["path"]["spe_classifier_ckpt"]:
+        from spe_classifier.inference import get_model as get_spe_classifier
+
+        spe_classifier = get_spe_classifier(train_config["path"]["spe_classifier_ckpt"])
+
     num_param = get_param_num(model)
     Loss = FastSpeech2Loss(preprocess_config, model_config).to(device)
     print("Number of FastSpeech2 Parameters:", num_param)
@@ -48,8 +61,9 @@ def main(args, configs):
     vocoder = get_vocoder(model_config, device)
 
     # Init logger
-    for p in train_config["path"].values():
-        os.makedirs(p, exist_ok=True)
+    for k, p in train_config["path"].items():
+        if k not in ["train_file", "spe_classifier_ckpt", "val_file"]:
+            os.makedirs(p, exist_ok=True)
     train_log_path = os.path.join(train_config["path"]["log_path"], "train")
     val_log_path = os.path.join(train_config["path"]["log_path"], "val")
     os.makedirs(train_log_path, exist_ok=True)
@@ -77,7 +91,7 @@ def main(args, configs):
         for batchs in loader:
             for batch in batchs:
                 batch = to_device(batch, device)
-
+                # breakpoint() # mels 7, durs -1 (12)
                 # Forward
                 output = model(*(batch[2:]))
 
@@ -99,16 +113,35 @@ def main(args, configs):
                 if step % log_step == 0:
                     losses = [l.item() for l in losses]
                     message1 = "Step {}/{}, ".format(step, total_step)
-                    message2 = "Total Loss: {:.4f}, Mel Loss: {:.4f}, Mel PostNet Loss: {:.4f}, Pitch Loss: {:.4f}, Energy Loss: {:.4f}, Duration Loss: {:.4f}".format(
-                        *losses
-                    )
-
+                    if model_config["variance_predictor"]["use_energy_predictor"]:
+                        if model_config["use_spe_loss"]:
+                            message2 = "Total Loss: {:.4f}, Mel Loss: {:.4f}, Mel PostNet Loss: {:.4f}, Pitch Loss: {:.4f}, Energy Loss: {:.4f}, Duration Loss: {:.4f}, SPE Loss: {:.4f}".format(
+                                *losses
+                            )
+                        else:
+                            message2 = "Total Loss: {:.4f}, Mel Loss: {:.4f}, Mel PostNet Loss: {:.4f}, Pitch Loss: {:.4f}, Duration Loss: {:.4f}".format(
+                                *losses
+                            )
+                    elif model_config["use_spe_loss"]:
+                        message2 = "Total Loss: {:.4f}, Mel Loss: {:.4f}, Mel PostNet Loss: {:.4f}, Pitch Loss: {:.4f}, Duration Loss: {:.4f}, SPE Loss: {:.4f}".format(
+                            *losses
+                        )
+                    else:
+                        message2 = "Total Loss: {:.4f}, Mel Loss: {:.4f}, Mel PostNet Loss: {:.4f}, Pitch Loss: {:.4f}, Duration Loss: {:.4f}".format(
+                            *losses
+                        )
                     with open(os.path.join(train_log_path, "log.txt"), "a") as f:
                         f.write(message1 + message2 + "\n")
 
                     outer_bar.write(message1 + message2)
 
-                    log(train_logger, step, losses=losses)
+                    log(
+                        train_logger,
+                        step,
+                        losses=losses,
+                        use_energy=use_energy,
+                        use_spe=model_config["use_spe_loss"],
+                    )
 
                 if step % synth_step == 0:
                     fig, wav_reconstruction, wav_prediction, tag = synth_one_sample(
@@ -122,6 +155,7 @@ def main(args, configs):
                         train_logger,
                         fig=fig,
                         tag="Training/step_{}_{}".format(step, tag),
+                        use_energy=use_energy,
                     )
                     sampling_rate = preprocess_config["preprocessing"]["audio"][
                         "sampling_rate"
@@ -131,17 +165,27 @@ def main(args, configs):
                         audio=wav_reconstruction,
                         sampling_rate=sampling_rate,
                         tag="Training/step_{}_{}_reconstructed".format(step, tag),
+                        use_energy=use_energy,
                     )
                     log(
                         train_logger,
                         audio=wav_prediction,
                         sampling_rate=sampling_rate,
                         tag="Training/step_{}_{}_synthesized".format(step, tag),
+                        use_energy=use_energy,
                     )
 
                 if step % val_step == 0:
                     model.eval()
-                    message = evaluate(model, step, configs, val_logger, vocoder)
+                    message = evaluate(
+                        model,
+                        step,
+                        configs,
+                        val_logger,
+                        vocoder,
+                        spe_classifier=spe_classifier,
+                    )
+
                     with open(os.path.join(val_log_path, "log.txt"), "a") as f:
                         f.write(message + "\n")
                     outer_bar.write(message)
@@ -173,26 +217,42 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--restore_step", type=int, default=0)
     parser.add_argument(
+        "-q", "--quick_config", type=str, required=False, help="config slug"
+    )
+    parser.add_argument(
         "-p",
         "--preprocess_config",
         type=str,
-        required=True,
+        required=False,
         help="path to preprocess.yaml",
     )
     parser.add_argument(
-        "-m", "--model_config", type=str, required=True, help="path to model.yaml"
+        "-m", "--model_config", type=str, required=False, help="path to model.yaml"
     )
     parser.add_argument(
-        "-t", "--train_config", type=str, required=True, help="path to train.yaml"
+        "-t", "--train_config", type=str, required=False, help="path to train.yaml"
     )
     args = parser.parse_args()
 
-    # Read Config
-    preprocess_config = yaml.load(
-        open(args.preprocess_config, "r"), Loader=yaml.FullLoader
-    )
-    model_config = yaml.load(open(args.model_config, "r"), Loader=yaml.FullLoader)
-    train_config = yaml.load(open(args.train_config, "r"), Loader=yaml.FullLoader)
+    if args.quick_config:
+        # Read Config
+        preprocess_config = yaml.load(
+            open(f"config/{args.quick_config}/preprocess.yaml", "r"),
+            Loader=yaml.FullLoader,
+        )
+        model_config = yaml.load(
+            open(f"config/{args.quick_config}/model.yaml", "r"), Loader=yaml.FullLoader
+        )
+        train_config = yaml.load(
+            open(f"config/{args.quick_config}/train.yaml", "r"), Loader=yaml.FullLoader
+        )
+    else:
+        # Read Config
+        preprocess_config = yaml.load(
+            open(args.preprocess_config, "r"), Loader=yaml.FullLoader
+        )
+        model_config = yaml.load(open(args.model_config, "r"), Loader=yaml.FullLoader)
+        train_config = yaml.load(open(args.train_config, "r"), Loader=yaml.FullLoader)
     configs = (preprocess_config, model_config, train_config)
 
     main(args, configs)

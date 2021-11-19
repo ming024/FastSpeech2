@@ -1,18 +1,22 @@
+import os
 import re
 import argparse
 from string import punctuation
+import json
 
 import torch
 import yaml
 import numpy as np
 from torch.utils.data import DataLoader
 from g2p_en import G2p
+from g2p import make_g2p
 from pypinyin import pinyin, Style
 
 from utils.model import get_model, get_vocoder
 from utils.tools import to_device, synth_samples
 from dataset import TextDataset
 from text import text_to_sequence
+from text.symbols import MAPPINGS, TOKENIZERS
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -30,6 +34,7 @@ def read_lexicon(lex_path):
 
 
 def preprocess_english(text, preprocess_config):
+
     text = text.rstrip(punctuation)
     lexicon = read_lexicon(preprocess_config["path"]["lexicon_path"])
 
@@ -47,9 +52,12 @@ def preprocess_english(text, preprocess_config):
 
     print("Raw Text Sequence: {}".format(text))
     print("Phoneme Sequence: {}".format(phones))
+
     sequence = np.array(
         text_to_sequence(
-            phones, preprocess_config["preprocessing"]["text"]["text_cleaners"]
+            phones,
+            preprocess_config["preprocessing"]["text"]["use_spe_features"],
+            "eng",
         )
     )
 
@@ -77,17 +85,51 @@ def preprocess_mandarin(text, preprocess_config):
     print("Phoneme Sequence: {}".format(phones))
     sequence = np.array(
         text_to_sequence(
-            phones, preprocess_config["preprocessing"]["text"]["text_cleaners"]
+            phones,
+            preprocess_config["preprocessing"]["text"]["use_spe_features"],
+            preprocess_config["preprocessing"]["text"]["language"],
         )
     )
 
     return np.array(sequence)
 
 
+def preprocess(text, preprocess_config, lang):
+    preprocessed_path = preprocess_config["path"]["preprocessed_path"]
+    with open(os.path.join(preprocessed_path, "languages.json")) as f:
+        language_map = json.load(f)
+    language_map = {v: k for k, v in language_map.items()}
+    lang = language_map[lang]
+    # lexicon = read_lexicon(preprocess_config["path"]["lexicon_path"]) #TODO: pick the right lexicon!
+    lexicon = read_lexicon("./lexicon/moh-lexicon.txt")
+    words = re.split(r"([,;.\-\?\!\s+])", text)
+    g2p_norm = MAPPINGS[lang]["norm"]
+    g2p = MAPPINGS[lang]["ipa"]
+    phones = []
+    for w in words:
+        w = g2p_norm(w.lower()).output_string
+        if w in lexicon:
+            phones += lexicon[w]
+        else:
+            phones += TOKENIZERS[lang].tokenize(g2p(w).output_string)
+    phones = "{" + "}{".join(phones) + "}"
+    phones = re.sub(r"\{[^\w\s]?\}", "{sp}", phones)
+    phones = phones.replace("}{", " ")
+    print("Raw Text Sequence: {}".format(text))
+    print("Phoneme Sequence: {}".format(phones))
+    sequence = np.array(
+        text_to_sequence(
+            phones,
+            preprocess_config["preprocessing"]["text"]["use_spe_features"],
+            lang,
+        )
+    )
+    return np.array(sequence)
+
+
 def synthesize(model, step, configs, vocoder, batchs, control_values):
     preprocess_config, model_config, train_config = configs
     pitch_control, energy_control, duration_control = control_values
-
     for batch in batchs:
         batch = to_device(batch, device)
         with torch.no_grad():
@@ -96,7 +138,7 @@ def synthesize(model, step, configs, vocoder, batchs, control_values):
                 *(batch[2:]),
                 p_control=pitch_control,
                 e_control=energy_control,
-                d_control=duration_control
+                d_control=duration_control,
             )
             synth_samples(
                 batch,
@@ -138,17 +180,26 @@ if __name__ == "__main__":
         help="speaker ID for multi-speaker synthesis, for single-sentence mode only",
     )
     parser.add_argument(
+        "--language_id",
+        type=int,
+        default=0,
+        help="language ID for multi-lingual synthesis, for single-sentence mode only",
+    )
+    parser.add_argument(
+        "-q", "--quick_config", type=str, required=False, help="config slug"
+    )
+    parser.add_argument(
         "-p",
         "--preprocess_config",
         type=str,
-        required=True,
+        required=False,
         help="path to preprocess.yaml",
     )
     parser.add_argument(
-        "-m", "--model_config", type=str, required=True, help="path to model.yaml"
+        "-m", "--model_config", type=str, required=False, help="path to model.yaml"
     )
     parser.add_argument(
-        "-t", "--train_config", type=str, required=True, help="path to train.yaml"
+        "-t", "--train_config", type=str, required=False, help="path to train.yaml"
     )
     parser.add_argument(
         "--pitch_control",
@@ -169,7 +220,6 @@ if __name__ == "__main__":
         help="control the speed of the whole utterance, larger value for slower speaking rate",
     )
     args = parser.parse_args()
-
     # Check source texts
     if args.mode == "batch":
         assert args.source is not None and args.text is None
@@ -177,11 +227,25 @@ if __name__ == "__main__":
         assert args.source is None and args.text is not None
 
     # Read Config
-    preprocess_config = yaml.load(
-        open(args.preprocess_config, "r"), Loader=yaml.FullLoader
-    )
-    model_config = yaml.load(open(args.model_config, "r"), Loader=yaml.FullLoader)
-    train_config = yaml.load(open(args.train_config, "r"), Loader=yaml.FullLoader)
+    if args.quick_config:
+        # Read Config
+        preprocess_config = yaml.load(
+            open(f"config/{args.quick_config}/preprocess.yaml", "r"),
+            Loader=yaml.FullLoader,
+        )
+        model_config = yaml.load(
+            open(f"config/{args.quick_config}/model.yaml", "r"), Loader=yaml.FullLoader
+        )
+        train_config = yaml.load(
+            open(f"config/{args.quick_config}/train.yaml", "r"), Loader=yaml.FullLoader
+        )
+    else:
+        # Read Config
+        preprocess_config = yaml.load(
+            open(args.preprocess_config, "r"), Loader=yaml.FullLoader
+        )
+        model_config = yaml.load(open(args.model_config, "r"), Loader=yaml.FullLoader)
+        train_config = yaml.load(open(args.train_config, "r"), Loader=yaml.FullLoader)
     configs = (preprocess_config, model_config, train_config)
 
     # Get model
@@ -202,12 +266,29 @@ if __name__ == "__main__":
     if args.mode == "single":
         ids = raw_texts = [args.text[:100]]
         speakers = np.array([args.speaker_id])
-        if preprocess_config["preprocessing"]["text"]["language"] == "en":
+        languages = np.array([args.language_id])
+        preprocessed_path = preprocess_config["path"]["preprocessed_path"]
+        with open(os.path.join(preprocessed_path, "languages.json")) as f:
+            language_map = json.load(f)
+        language_map = {v: k for k, v in language_map.items()}
+        lang = language_map[args.language_id]
+        if lang == "eng":
             texts = np.array([preprocess_english(args.text, preprocess_config)])
-        elif preprocess_config["preprocessing"]["text"]["language"] == "zh":
+        elif lang == "zh":
             texts = np.array([preprocess_mandarin(args.text, preprocess_config)])
+        else:
+            texts = np.array(
+                [preprocess(args.text, preprocess_config, args.language_id)]
+            )
+        # TODO: replace this in config, confirmed this hparam is only used here, and so for languages other than en and zh, this is unnecessary
+        # elif preprocess_config["preprocessing"]["text"]["language"] == "moh":
+        #     texts = np.array([preprocess_mohawk(args.text, preprocess_config)])
+        # elif preprocess_config["preprocessing"]["text"]["language"] == "git":
+        #     texts = np.array([preprocess_gitksan(args.text, preprocess_config)])
         text_lens = np.array([len(texts[0])])
-        batchs = [(ids, raw_texts, speakers, texts, text_lens, max(text_lens))]
+        batchs = [
+            (ids, raw_texts, languages, speakers, texts, text_lens, max(text_lens))
+        ]
 
     control_values = args.pitch_control, args.energy_control, args.duration_control
 

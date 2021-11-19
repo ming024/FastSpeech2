@@ -1,6 +1,8 @@
 import os
 import random
 import json
+from collections import defaultdict
+from text import text_to_sequence
 
 import tgt
 import librosa
@@ -11,6 +13,7 @@ from sklearn.preprocessing import StandardScaler
 from tqdm import tqdm
 
 import audio as Audio
+from features import get_features
 
 
 class Preprocessor:
@@ -50,44 +53,94 @@ class Preprocessor:
             config["preprocessing"]["mel"]["mel_fmax"],
         )
 
-    def build_from_path(self):
-        os.makedirs((os.path.join(self.out_dir, "mel")), exist_ok=True)
-        os.makedirs((os.path.join(self.out_dir, "pitch")), exist_ok=True)
-        os.makedirs((os.path.join(self.out_dir, "energy")), exist_ok=True)
-        os.makedirs((os.path.join(self.out_dir, "duration")), exist_ok=True)
+    def build_from_path(self, feats_only=False):
+        if not feats_only:
+            os.makedirs((os.path.join(self.out_dir, "mel")), exist_ok=True)
+            os.makedirs((os.path.join(self.out_dir, "pitch")), exist_ok=True)
+            os.makedirs((os.path.join(self.out_dir, "energy")), exist_ok=True)
+            os.makedirs((os.path.join(self.out_dir, "duration")), exist_ok=True)
+        os.makedirs((os.path.join(self.out_dir, "feature")), exist_ok=True)
 
         print("Processing Data ...")
         out = list()
         n_frames = 0
         pitch_scaler = StandardScaler()
         energy_scaler = StandardScaler()
-
+        raw_speaker_embs = {}
+        raw_speaker_counts = defaultdict(int)
         # Compute pitch, energy, duration, and mel-spectrogram
         speakers = {}
-        for i, speaker in enumerate(tqdm(os.listdir(self.in_dir))):
-            speakers[speaker] = i
-            for wav_name in os.listdir(os.path.join(self.in_dir, speaker)):
-                if ".wav" not in wav_name:
-                    continue
+        languages = {}
+        if (
+            not feats_only
+            and "speaker" in self.config["preprocessing"]
+            and self.config["preprocessing"]["speaker"]["embedding"] == "deep-speaker"
+        ):
+            from deep_speaker.conv_models import DeepSpeakerModel
+            from deep_speaker.audio import read_mfcc
+            from deep_speaker.batcher import sample_from_mfcc
+            from deep_speaker.constants import NUM_FRAMES, SAMPLE_RATE
 
-                basename = wav_name.split(".")[0]
-                tg_path = os.path.join(
-                    self.out_dir, "TextGrid", speaker, "{}.TextGrid".format(basename)
-                )
-                if os.path.exists(tg_path):
-                    ret = self.process_utterance(speaker, basename)
-                    if ret is None:
+            spk_model = DeepSpeakerModel()
+            spk_model.m.load_weights(
+                self.config["preprocessing"]["speaker"]["pretrained_path"], by_name=True
+            )
+
+        for l, language in enumerate(tqdm(os.listdir(self.in_dir))):
+            for speaker in tqdm(os.listdir(os.path.join(self.in_dir, language))):
+                raw_speaker_embs[speaker] = np.zeros(512)
+                speakers[speaker] = len(speakers)
+                languages[language] = l
+                for wav_name in tqdm(
+                    os.listdir(os.path.join(self.in_dir, language, speaker))
+                ):
+                    if ".wav" not in wav_name:
                         continue
-                    else:
-                        info, pitch, energy, n = ret
-                    out.append(info)
+                    basename = wav_name.split(".")[0]
+                    tg_path = os.path.join(
+                        self.out_dir,
+                        "TextGrid",
+                        language,
+                        speaker,
+                        "{}.TextGrid".format(basename),
+                    )
+                    if os.path.exists(tg_path):
+                        ret = self.process_utterance(
+                            language, speaker, basename, feats_only
+                        )
+                        if (
+                            not feats_only
+                            and "speaker" in self.config["preprocessing"]
+                            and self.config["preprocessing"]["speaker"]["embedding"]
+                            == "deep-speaker"
+                        ):
+                            mfcc = sample_from_mfcc(
+                                read_mfcc(
+                                    os.path.join(
+                                        self.in_dir, language, speaker, wav_name
+                                    ),
+                                    SAMPLE_RATE,
+                                ),
+                                NUM_FRAMES,
+                            )
+                            speaker_embedding = spk_model.m.predict(
+                                np.expand_dims(mfcc, axis=0)
+                            )
+                            raw_speaker_embs[speaker] += speaker_embedding[0]
+                            raw_speaker_counts[speaker] += 1
+                        if ret is None or feats_only:
+                            continue
+                        else:
+                            info, pitch, energy, n = ret
+                        out.append(info)
+                    if feats_only:
+                        return
+                    if len(pitch) > 0:
+                        pitch_scaler.partial_fit(pitch.reshape((-1, 1)))
+                    if len(energy) > 0:
+                        energy_scaler.partial_fit(energy.reshape((-1, 1)))
 
-                if len(pitch) > 0:
-                    pitch_scaler.partial_fit(pitch.reshape((-1, 1)))
-                if len(energy) > 0:
-                    energy_scaler.partial_fit(energy.reshape((-1, 1)))
-
-                n_frames += n
+                    n_frames += n
 
         print("Computing statistic quantities ...")
         # Perform normalization if necessary
@@ -115,6 +168,14 @@ class Preprocessor:
         # Save files
         with open(os.path.join(self.out_dir, "speakers.json"), "w") as f:
             f.write(json.dumps(speakers))
+
+        with open(os.path.join(self.out_dir, "languages.json"), "w") as f:
+            f.write(json.dumps(languages))
+
+        for spk, spk_embs in raw_speaker_embs.items():
+            if raw_speaker_counts[spk]:
+                with open(os.path.join(self.out_dir, f"speaker-{spk}.npy"), "wb") as f:
+                    np.save(f, (spk_embs / raw_speaker_counts[spk]))
 
         with open(os.path.join(self.out_dir, "stats.json"), "w") as f:
             stats = {
@@ -152,11 +213,15 @@ class Preprocessor:
 
         return out
 
-    def process_utterance(self, speaker, basename):
-        wav_path = os.path.join(self.in_dir, speaker, "{}.wav".format(basename))
-        text_path = os.path.join(self.in_dir, speaker, "{}.lab".format(basename))
+    def process_utterance(self, language, speaker, basename, feats_only=False):
+        wav_path = os.path.join(
+            self.in_dir, language, speaker, "{}.wav".format(basename)
+        )
+        text_path = os.path.join(
+            self.in_dir, language, speaker, "{}.lab".format(basename)
+        )
         tg_path = os.path.join(
-            self.out_dir, "TextGrid", speaker, "{}.TextGrid".format(basename)
+            self.out_dir, "TextGrid", language, speaker, "{}.TextGrid".format(basename)
         )
 
         # Get alignments
@@ -165,6 +230,16 @@ class Preprocessor:
             textgrid.get_tier_by_name("phones")
         )
         text = "{" + " ".join(phone) + "}"
+        feats = text_to_sequence(
+            text, self.config["preprocessing"]["text"]["use_spe_features"], language
+        )
+        feat_filename = "{}-{}-feat-{}.npy".format(language, speaker, basename)
+        np.save(
+            os.path.join(self.out_dir, "feature", feat_filename),
+            feats,
+        )
+        if feats_only:
+            return
         if start >= end:
             return None
 
@@ -228,23 +303,23 @@ class Preprocessor:
             energy = energy[: len(duration)]
 
         # Save files
-        dur_filename = "{}-duration-{}.npy".format(speaker, basename)
+        dur_filename = "{}-{}-duration-{}.npy".format(language, speaker, basename)
         np.save(os.path.join(self.out_dir, "duration", dur_filename), duration)
 
-        pitch_filename = "{}-pitch-{}.npy".format(speaker, basename)
+        pitch_filename = "{}-{}-pitch-{}.npy".format(language, speaker, basename)
         np.save(os.path.join(self.out_dir, "pitch", pitch_filename), pitch)
 
-        energy_filename = "{}-energy-{}.npy".format(speaker, basename)
+        energy_filename = "{}-{}-energy-{}.npy".format(language, speaker, basename)
         np.save(os.path.join(self.out_dir, "energy", energy_filename), energy)
 
-        mel_filename = "{}-mel-{}.npy".format(speaker, basename)
+        mel_filename = "{}-{}-mel-{}.npy".format(language, speaker, basename)
         np.save(
             os.path.join(self.out_dir, "mel", mel_filename),
             mel_spectrogram.T,
         )
 
         return (
-            "|".join([basename, speaker, text, raw_text]),
+            "|".join([basename, language, speaker, text, raw_text]),
             self.remove_outlier(pitch),
             self.remove_outlier(energy),
             mel_spectrogram.shape[1],
