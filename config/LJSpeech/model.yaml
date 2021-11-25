@@ -26,6 +26,8 @@ variance_embedding:
 
 use_postnet: True
 
+use_spe_loss: False
+
 # gst:
 #   use_gst: False
 #   conv_filters: [32, 32, 64, 64, 128, 128]
