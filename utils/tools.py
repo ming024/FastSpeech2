@@ -8,8 +8,6 @@ import matplotlib
 from scipy.io import wavfile
 from matplotlib import pyplot as plt, use
 
-from spe_classifier.utils import FEAT_LABELS
-
 matplotlib.use("Agg")
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -189,6 +187,7 @@ def synth_one_sample(targets, predictions, vocoder, model_config, preprocess_con
 
 
 def create_spe_stats_fig(accuracy, save_figure=False):
+    from spe_classifier.utils import FEAT_LABELS
     x = np.arange(len(FEAT_LABELS))
     width = 0.35
     fig, ax = plt.subplots()

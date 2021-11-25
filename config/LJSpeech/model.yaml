@@ -41,6 +41,8 @@ multi_speaker:
     variance_adaptor: False
     encoder: False
 
+multilingual: False
+
 max_seq_len: 1000
 
 vocoder:

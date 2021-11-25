@@ -1,4 +1,5 @@
 path:
+  spe_classifier_ckpt: ""
   ckpt_path: "./output/ckpt/LJSpeech"
   log_path: "./output/log/LJSpeech"
   result_path: "./output/result/LJSpeech"

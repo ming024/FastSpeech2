@@ -18,12 +18,6 @@ from utils.tools import (
 )
 from model import FastSpeech2Loss
 from dataset import Dataset
-from spe_classifier.utils import (
-    calculate_stats,
-    FEAT_LABELS,
-    two_bit_to_spe,
-    spe_to_two_bit,
-)
 
 from text import text_to_sequence, sequence_to_text
 
@@ -59,7 +53,7 @@ def evaluate(
         collate_fn=dataset.collate_fn,
     )
     if train_config["path"]["spe_classifier_ckpt"]:
-        from spe_classifier.utils import collect_frames, pad_2D
+        from spe_classifier.utils import collect_frames, pad_2D, FEAT_LABELS, two_bit_to_spe
 
     # Get loss function
     Loss = FastSpeech2Loss(preprocess_config, model_config).to(device)

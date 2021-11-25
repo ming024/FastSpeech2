@@ -1,4 +1,5 @@
 path:
+  spe_classifier_ckpt: ""
   ckpt_path: "./output/ckpt/YourLanguage" # change this
   log_path: "./output/log/YourLanguage" # change this
   result_path: "./output/result/YourLanguage" # change this

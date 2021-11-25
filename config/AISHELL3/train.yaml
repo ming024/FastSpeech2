@@ -1,4 +1,5 @@
 path:
+  spe_classifier_ckpt: ""
   ckpt_path: "./output/ckpt/AISHELL3"
   log_path: "./output/log/AISHELL3"
   result_path: "./output/result/AISHELL3"

@@ -49,7 +49,7 @@ def main(args, configs):
     # Load spe classifier if used
     spe_classifier = None
     if train_config["path"]["spe_classifier_ckpt"]:
-        from spe_classifier.inference import get_model as get_spe_classifier
+        from .inference import get_model as get_spe_classifier
 
         spe_classifier = get_spe_classifier(train_config["path"]["spe_classifier_ckpt"])
 
