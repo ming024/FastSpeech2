@@ -1,0 +1,35 @@
+dataset: "Harvey30mFork" # change this
+
+path:
+  corpus_path: "/home/aip000/tts/corpora/Speech/Mohawk/tts_speech_corpus_harvey_v2.2" # change this
+  lexicon_path: "/home/aip000/tts/code/FastSpeech2_moh_spe/lexicon/moh-lexicon.txt" # change this
+  raw_path: "/home/aip000/tts/code/FastSpeech2_moh_spe/harvey_data" # change this
+  preprocessed_path: "/home/aip000/tts/code/FastSpeech2_moh_spe/preprocessed_data/Harvey-30m" # change this
+
+preprocessing:
+  val_size: 58
+  text:
+    text_cleaners: ["mohawk_cleaners"] # change this add method to text/cleaners.py
+    language: "moh" # change this
+    use_spe_features: True
+    spe_feature_dim: 36
+  audio:
+    sampling_rate: 22050
+    max_wav_value: 32768.0
+  stft:
+    filter_length: 1024
+    hop_length: 256
+    win_length: 1024
+  mel:
+    n_mel_channels: 80
+    mel_fmin: 0
+    mel_fmax: 8000 # please set to 8000 for HiFi-GAN vocoder, set to null for MelGAN vocoder
+  pitch:
+    feature: "phoneme_level" # support 'phoneme_level' or 'frame_level'
+    normalization: True
+  energy:
+    feature: "phoneme_level" # support 'phoneme_level' or 'frame_level'
+    normalization: True
+  speaker:
+    embedding: "none" # support 'deep-speaker' or 'none'
+    pretrained_path: ""

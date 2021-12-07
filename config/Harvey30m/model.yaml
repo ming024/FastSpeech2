@@ -11,7 +11,7 @@ transformer:
   decoder_dropout: 0.2
   spe_features: true
   spe_feature_dim: 36
-  depthwise_convolutions: False
+  depthwise_convolutions: True
 
 variance_predictor:
   filter_size: 256
