@@ -15,7 +15,20 @@ from dataset import Dataset
 
 from evaluate import evaluate
 
+
+import aim
+import numpy as np
+import PIL
+
+import matplotlib.pyplot as plt
+import plotly
+import plotly.plotly as py
+import plotly.tools as tls
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+def fig_to_img(fig):
+    return PIL.Image.frombytes('RGB',fig.canvas.get_width_height(),fig.canvas.tostring_rgb())
 
 
 def main(args, configs):
@@ -72,6 +85,11 @@ def main(args, configs):
     outer_bar.n = args.restore_step
     outer_bar.update()
 
+
+    aim_run  = aim.Run(experiemnt = "FS2")
+    aim_run["train_config"] = train_config
+    aim_run["preprocess_config"] = preprocess_config
+
     while True:
         inner_bar = tqdm(total=len(loader), desc="Epoch {}".format(epoch), position=1)
         for batchs in loader:
@@ -87,6 +105,9 @@ def main(args, configs):
 
                 # Backward
                 total_loss = total_loss / grad_acc_step
+
+
+
                 total_loss.backward()
                 if step % grad_acc_step == 0:
                     # Clipping gradients to avoid gradient explosion
@@ -97,11 +118,23 @@ def main(args, configs):
                     optimizer.zero_grad()
 
                 if step % log_step == 0:
+
+                    total_loss,mel_loss, postnet_mel_loss,pitch_loss,energy_loss,duration_loss = losses
+
+                    aim.track(total_loss.item() , name = "Loss", context = {'type':'total_loss'})
+                    aim.track(mel_loss.item() , name = "Loss", context = {'type':'mel_loss'})
+                    aim.track(postnet_mel_loss.item() , name = "Loss", context = {'type':'postnet_mel_loss'})
+                    aim.track(energy_loss.item() , name = "Loss", context = {'type':'pitch_loss'})
+                    aim.track(duration_loss.item() , name = "Loss", context = {'type':'duration_loss'})
+
                     losses = [l.item() for l in losses]
+
                     message1 = "Step {}/{}, ".format(step, total_step)
                     message2 = "Total Loss: {:.4f}, Mel Loss: {:.4f}, Mel PostNet Loss: {:.4f}, Pitch Loss: {:.4f}, Energy Loss: {:.4f}, Duration Loss: {:.4f}".format(
                         *losses
                     )
+
+                    aim.track(aim.Text(message1 + message2 + "\n"), name = 'log_out')
 
                     with open(os.path.join(train_log_path, "log.txt"), "a") as f:
                         f.write(message1 + message2 + "\n")
@@ -118,26 +151,35 @@ def main(args, configs):
                         model_config,
                         preprocess_config,
                     )
-                    log(
-                        train_logger,
-                        fig=fig,
-                        tag="Training/step_{}_{}".format(step, tag),
-                    )
-                    sampling_rate = preprocess_config["preprocessing"]["audio"][
-                        "sampling_rate"
-                    ]
-                    log(
-                        train_logger,
-                        audio=wav_reconstruction,
-                        sampling_rate=sampling_rate,
-                        tag="Training/step_{}_{}_reconstructed".format(step, tag),
-                    )
-                    log(
-                        train_logger,
-                        audio=wav_prediction,
-                        sampling_rate=sampling_rate,
-                        tag="Training/step_{}_{}_synthesized".format(step, tag),
-                    )
+
+                    aim.track(aim.Audio(wav_reconstruction, format='wav'), name = 'waves',  context = {'type':'wav_reconstruction'})
+                    aim.track(aim.Audio(wav_prediction, format='wav'), name = 'waves',  context = {'type':'wav_prediction'})
+
+                    plotly_fig = tls.mpl_to_plotly(fig)
+
+                    aim.track(aim.Image(fig_to_img(fig)), name = 'Sepctrograms',  context = {'type':'MEL'})
+                    aim.track(aim.Figure(plotly_fig), name = 'Sepctrograms',  context = {'type':'MEL Interactive'})
+
+                    # log(
+                    #     train_logger,
+                    #     fig=fig,
+                    #     tag="Training/step_{}_{}".format(step, tag),
+                    # )
+                    # sampling_rate = preprocess_config["preprocessing"]["audio"][
+                    #     "sampling_rate"
+                    # ]
+                    # log(
+                    #     train_logger,
+                    #     audio=wav_reconstruction,
+                    #     sampling_rate=sampling_rate,
+                    #     tag="Training/step_{}_{}_reconstructed".format(step, tag),
+                    # )
+                    # log(
+                    #     train_logger,
+                    #     audio=wav_prediction,
+                    #     sampling_rate=sampling_rate,
+                    #     tag="Training/step_{}_{}_synthesized".format(step, tag),
+                    # )
 
                 if step % val_step == 0:
                     model.eval()
@@ -167,6 +209,9 @@ def main(args, configs):
 
             inner_bar.update(1)
         epoch += 1
+
+
+
 
 
 if __name__ == "__main__":
