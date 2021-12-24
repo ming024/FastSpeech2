@@ -5,7 +5,7 @@ import torch
 import yaml
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
 from utils.model import get_model, get_vocoder, get_param_num
@@ -21,15 +21,18 @@ import numpy as np
 import PIL
 
 import matplotlib.pyplot as plt
-import plotly
-import plotly.plotly as py
-import plotly.tools as tls
+# import plotly
+# import plotly.plotly as py
+# import plotly.tools as tls
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def fig_to_img(fig):
-    return PIL.Image.frombytes('RGB',fig.canvas.get_width_height(),fig.canvas.tostring_rgb())
-
+    import io
+    buf = io.BytesIO()
+    fig.savefig(buf)
+    buf.seek(0)
+    return PIL.Image.open(buf)
 
 def main(args, configs):
     print("Prepare training ...")
@@ -67,8 +70,8 @@ def main(args, configs):
     val_log_path = os.path.join(train_config["path"]["log_path"], "val")
     os.makedirs(train_log_path, exist_ok=True)
     os.makedirs(val_log_path, exist_ok=True)
-    train_logger = SummaryWriter(train_log_path)
-    val_logger = SummaryWriter(val_log_path)
+    train_logger = None #SummaryWriter(train_log_path)
+    val_logger = None #SummaryWriter(val_log_path)
 
     # Training
     step = args.restore_step + 1
@@ -86,7 +89,7 @@ def main(args, configs):
     outer_bar.update()
 
 
-    aim_run  = aim.Run(experiemnt = "FS2")
+    aim_run  = aim.Run(experiment = "FS2")
     aim_run["train_config"] = train_config
     aim_run["preprocess_config"] = preprocess_config
 
@@ -107,7 +110,6 @@ def main(args, configs):
                 total_loss = total_loss / grad_acc_step
 
 
-
                 total_loss.backward()
                 if step % grad_acc_step == 0:
                     # Clipping gradients to avoid gradient explosion
@@ -121,11 +123,11 @@ def main(args, configs):
 
                     total_loss,mel_loss, postnet_mel_loss,pitch_loss,energy_loss,duration_loss = losses
 
-                    aim.track(total_loss.item() , name = "Loss", context = {'type':'total_loss'})
-                    aim.track(mel_loss.item() , name = "Loss", context = {'type':'mel_loss'})
-                    aim.track(postnet_mel_loss.item() , name = "Loss", context = {'type':'postnet_mel_loss'})
-                    aim.track(energy_loss.item() , name = "Loss", context = {'type':'pitch_loss'})
-                    aim.track(duration_loss.item() , name = "Loss", context = {'type':'duration_loss'})
+                    aim_run.track(total_loss.item() , name = "Loss", context = {'type':'total_loss'})
+                    aim_run.track(mel_loss.item() , name = "Loss", context = {'type':'mel_loss'})
+                    aim_run.track(postnet_mel_loss.item() , name = "Loss", context = {'type':'postnet_mel_loss'})
+                    aim_run.track(energy_loss.item() , name = "Loss", context = {'type':'pitch_loss'})
+                    aim_run.track(duration_loss.item() , name = "Loss", context = {'type':'duration_loss'})
 
                     losses = [l.item() for l in losses]
 
@@ -134,14 +136,14 @@ def main(args, configs):
                         *losses
                     )
 
-                    aim.track(aim.Text(message1 + message2 + "\n"), name = 'log_out')
+                    aim_run.track(aim.Text(message1 + message2 + "\n"), name = 'log_out')
 
                     with open(os.path.join(train_log_path, "log.txt"), "a") as f:
                         f.write(message1 + message2 + "\n")
 
                     outer_bar.write(message1 + message2)
 
-                    log(train_logger, step, losses=losses)
+                    # log(train_logger, step, losses=losses)
 
                 if step % synth_step == 0:
                     fig, wav_reconstruction, wav_prediction, tag = synth_one_sample(
@@ -152,13 +154,13 @@ def main(args, configs):
                         preprocess_config,
                     )
 
-                    aim.track(aim.Audio(wav_reconstruction, format='wav'), name = 'waves',  context = {'type':'wav_reconstruction'})
-                    aim.track(aim.Audio(wav_prediction, format='wav'), name = 'waves',  context = {'type':'wav_prediction'})
+                    aim_run.track(aim.Audio(wav_reconstruction, format='wav'), name = 'waves',  context = {'type':'wav_reconstruction'})
+                    aim_run.track(aim.Audio(wav_prediction, format='wav'), name = 'waves',  context = {'type':'wav_prediction'})
 
-                    plotly_fig = tls.mpl_to_plotly(fig)
+                    # plotly_fig = tls.mpl_to_plotly(fig)
 
-                    aim.track(aim.Image(fig_to_img(fig)), name = 'Sepctrograms',  context = {'type':'MEL'})
-                    aim.track(aim.Figure(plotly_fig), name = 'Sepctrograms',  context = {'type':'MEL Interactive'})
+                    aim_run.track(aim.Image(fig_to_img(fig)), name = 'Sepctrograms',  context = {'type':'MEL'})
+                    # aim.track(aim.Figure(plotly_fig), name = 'Sepctrograms',  context = {'type':'MEL Interactive'})
 
                     # log(
                     #     train_logger,
