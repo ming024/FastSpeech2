@@ -21,9 +21,10 @@ import numpy as np
 import PIL
 
 import matplotlib.pyplot as plt
-# import plotly
-# import plotly.plotly as py
-# import plotly.tools as tls
+from chart_studio import plotly
+import chart_studio.plotly as py
+import plotly.tools as tls
+import math
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -109,14 +110,17 @@ def main(args, configs):
                 # Backward
                 total_loss = total_loss / grad_acc_step
 
-
                 total_loss.backward()
+
                 if step % grad_acc_step == 0:
                     # Clipping gradients to avoid gradient explosion
-                    nn.utils.clip_grad_norm_(model.parameters(), grad_clip_thresh)
 
-                    # Update weights
-                    optimizer.step_and_update_lr()
+                    grad_norm = nn.utils.clip_grad_norm_(model.parameters(), grad_clip_thresh)
+
+                    if math.isnan(grad_norm):
+                        print("grad_norm is nan. Not Updating.")
+                    else:
+                        optimizer.step_and_update_lr()
                     optimizer.zero_grad()
 
                 if step % log_step == 0:
