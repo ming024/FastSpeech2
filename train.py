@@ -158,13 +158,16 @@ def main(args, configs):
                         preprocess_config,
                     )
 
-                    aim_run.track(aim.Audio(wav_reconstruction, format='wav'), name = 'waves',  context = {'type':'wav_reconstruction'})
-                    aim_run.track(aim.Audio(wav_prediction, format='wav'), name = 'waves',  context = {'type':'wav_prediction'})
+                    aim_run.track([
+                        aim.Audio(wav_reconstruction, format='wav', caption = 'ground truth'),
+                        aim.Audio(wav_prediction, format='wav', caption = 'pred')
+                    ], name = 'waves', context = {'type':'waves_pred_gt'})
+                    # aim_run.track(aim.Audio(wav_prediction, format='wav'), name = 'waves',  context = {'type':'wav_prediction'})
 
-                    # plotly_fig = tls.mpl_to_plotly(fig)
+                    plotly_fig = tls.mpl_to_plotly(fig)
 
                     aim_run.track(aim.Image(fig_to_img(fig)), name = 'Sepctrograms',  context = {'type':'MEL'})
-                    # aim.track(aim.Figure(plotly_fig), name = 'Sepctrograms',  context = {'type':'MEL Interactive'})
+                    aim_run.track(aim.Figure(plotly_fig), name = 'Sepctrograms',  context = {'type':'MEL Interactive'})
 
                     # log(
                     #     train_logger,
