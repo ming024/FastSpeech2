@@ -119,19 +119,27 @@ python3 train.py -p config/LJSpeech/preprocess.yaml -m config/LJSpeech/model.yam
 
 The model takes less than 10k steps (less than 1 hour on my GTX1080Ti GPU) of training to generate audio samples with acceptable quality, which is much more efficient than the autoregressive models such as Tacotron2.
 
-# TensorBoard
+# Visualizing insights with Aim
 
-Use
-```
-tensorboard --logdir output/log/LJSpeech
-```
+[Aim](https://github.com/aimhubio/aim) is an open-source experiment tracker that logs your training runs, enables a beautiful UI to compare them and an API to query them programmatically.
 
-to serve TensorBoard on your localhost.
-The loss curves, synthesized mel-spectrograms, and audios are shown.
+Execute `aim up` to run Aim UI on your server.
 
-![](./img/tensorboard_loss.png)
-![](./img/tensorboard_spec.png)
-![](./img/tensorboard_audio.png)
+**View all tracked runs, each metric last tracked values and tracked hyperparameters in Runs Dashboard:**
+
+<img width="1579" alt="Screen Shot 2022-03-02 at 19 41 11" src="https://user-images.githubusercontent.com/13848158/156395419-5b9659c7-dbad-4a8c-a557-660a8315bcd8.png">
+
+**Compare loss curves with Metrics Explorer - group and aggregate by any hyperparameter to easily compare the runs:**
+
+<img width="1576" alt="Screen Shot 2022-03-02 at 19 43 56" src="https://user-images.githubusercontent.com/13848158/156396025-a82987b5-9da2-497b-8fe6-9b6b7c1acf6a.png">
+
+**Compare and debug spectograms across training runs via Images Explorer:**
+
+<img width="1580" alt="Screen Shot 2022-03-02 at 21 12 26" src="https://user-images.githubusercontent.com/13848158/156412758-28c395de-6571-4b41-be7e-77d120b99e7e.png">
+
+**Deeply explore results of each run in single page:**
+
+<img width="1580" alt="Screen Shot 2022-03-02 at 21 14 37" src="https://user-images.githubusercontent.com/13848158/156413072-cad16296-3a87-454c-9b37-e223c051b775.png">
 
 # Implementation Issues
 
