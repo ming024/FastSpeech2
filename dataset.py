@@ -245,8 +245,12 @@ class TextDataset(Dataset):
     # AP: This is only used in batch inference...
     def __init__(self, filepath, preprocess_config):
         self.cleaners = preprocess_config["preprocessing"]["text"]["text_cleaners"]
+        self.preprocessed_path = preprocess_config["path"]["preprocessed_path"]
         self.use_spe_features = preprocess_config["preprocessing"]["text"][
             "use_spe_features"
+        ]
+        self.spe_feature_dim = preprocess_config["preprocessing"]["text"][
+            "spe_feature_dim"
         ]
         self.phones = {}
         if (
@@ -329,15 +333,16 @@ class TextDataset(Dataset):
 
     def collate_fn(self, data):
         ids = [d[0] for d in data]
-        languages = np.array(
-            [[ascii_lowercase.index(l) for l in x] for x in [d[1] for d in data]]
-        )
+        languages = np.array([d[1] for d in data])
         speakers = np.array([d[2] for d in data])
         texts = [d[3] for d in data]
         raw_texts = [d[4] for d in data]
         text_lens = np.array([text.shape[0] for text in texts])
 
-        texts = pad_1D(texts)
+        if self.use_spe_features:
+            texts = pad_SPE_D(texts, self.spe_feature_dim)
+        else:
+            texts = pad_1D(texts)
 
         return ids, raw_texts, languages, speakers, texts, text_lens, max(text_lens)
 
