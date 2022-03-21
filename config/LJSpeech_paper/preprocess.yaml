@@ -1,7 +1,7 @@
 dataset: "LJSpeech_paper"
 
 path:
-  corpus_path: "/home/ming/Data/LJSpeech-1.1"
+  corpus_path: "./data/LJSpeech-1.1"
   lexicon_path: "lexicon/librispeech-lexicon.txt"
   raw_path: "./raw_data/LJSpeech"
   preprocessed_path: "./preprocessed_data/LJSpeech_paper"

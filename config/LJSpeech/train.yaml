@@ -15,6 +15,6 @@ optimizer:
 step:
   total_step: 900000
   log_step: 100
-  synth_step: 1000
+  synth_step: 100
   val_step: 1000
-  save_step: 100000
+  save_step: 10000
