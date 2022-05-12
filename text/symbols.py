@@ -12,6 +12,7 @@ it's recommended to add it in the same fashion as below
 
 from text import cmudict, pinyin
 from g2p.mappings.langs import MAPPINGS_AVAILABLE
+from g2p.transducer import CompositeTransducer, Transducer
 from g2p import make_g2p
 from nltk.tokenize import RegexpTokenizer
 from unicodedata import normalize
@@ -38,14 +39,14 @@ MAPPINGS = {
     "str": {"norm": make_g2p("str", "str-equiv"), "ipa": make_g2p("str", "str-ipa")},
 }
 
-IPA = {
-    k: [
-        normalize("NFC", c)
-        for cs in [x for x in MAPPINGS[k]["ipa"]._transducers[-1].mapping.mapping]
-        for c in cs["out"].split()
-    ]
-    for k in MAPPINGS.keys()
-}
+IPA = {}
+
+for lang in MAPPINGS.keys():
+    if isinstance(MAPPINGS[lang]['ipa'], CompositeTransducer):
+        chars = MAPPINGS[lang]["ipa"]._transducers[-1].mapping.mapping
+    else:
+        chars = MAPPINGS[lang]["ipa"].mapping.mapping
+    IPA[lang] = [normalize('NFC', c['out']) for c in chars]
 
 TOKENIZERS = {
     k: RegexpTokenizer("|".join(sorted(v, key=lambda x: len(x), reverse=True)))
