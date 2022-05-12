@@ -26,7 +26,7 @@ _punctuation = "!(),.;? ':"
 _moh_punctuation = "!(),.;? "
 _special = "-"
 _letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-_silences = ["sp", "spn", "sil", "@sp", "@spn", "@sil"]
+_silences = ["@sp", "@spn", "@sil"] # ["sp", "spn", "sil", "@sp", "@spn", "@sil"] can be used as well
 
 # Prepend "@" to ARPAbet symbols to ensure uniqueness (some are the same as uppercase letters):
 # _arpabet = ["@" + s for s in cmudict.valid_symbols]
@@ -72,6 +72,6 @@ CHARS = (
     # + _moh_orth
     + list(_letters)
     + _arpabet
-    # + _pinyin
+    + _pinyin   # NOTE: I've left this in as it's needed for the pretrained models from the original repo, but it's not necessary for training your own models (including LJ)
     + _silences
 )
