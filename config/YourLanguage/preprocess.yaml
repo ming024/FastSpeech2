@@ -10,7 +10,7 @@ preprocessing:
   val_size: 512
   text:
     text_cleaners: ["english_cleaners"] # change this add method to text/cleaners.py
-    language: "en" # change this
+    language: "eng" # change this
     use_spe_features: False
     spe_feature_dim: 36
   audio:
