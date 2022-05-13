@@ -5,7 +5,7 @@ This fork of ming024's implementation was used for my M.Sc. Speech & Language Pr
 # Changes from ming024
 - Model allows removal of energy variance adaptor, postnet and optional depthwise separable convolutions similar to LightSpeech (Luo et. al. 2021). Changes can be made in `config/*/model.yaml`
 - Model allows for one-hot learnable language embeddings. Changes can be made in `config/*/model.yaml`
-- Model allows for deep-speaker based speaker embeddings (in addition to one-hot implementation from ming024). Changes can be made in `config/*/model.yaml`
+- Model allows for deep-speaker based speaker embeddings (in addition to one-hot implementation from ming024). Clone with `--recurse-submodule` or run `git submodule update --init` after cloning to enable. Changes can be made in `config/*/model.yaml`
 - Inputs can be multihot phonological feature vectors instead of one-hot character/phone embeddings. See Gutkin et. al. 2018, Wells and Richmond 2021, and my dissertation. For this to work you must have a mapping to IPA. Panphon is used to generate 24 segmental features. If your language uses phonemic tone, please amend features.py to use the 7 features from Wang 1967. Otherwise set the number of features accordingly in `config/*/model.py` and `config/*/preprocess.py`.
 
 This is a PyTorch implementation of Microsoft's text-to-speech system [**FastSpeech 2: Fast and High-Quality End-to-End Text to Speech**](https://arxiv.org/abs/2006.04558v1). 
