@@ -150,14 +150,14 @@ The loss curves, synthesized mel-spectrograms, and audios are shown.
 
 # Adding a new language
 
-- update the config in config/YourLanguage. Minimally change all the values with "change this" comments
-- add your input symobls to text/symbols.py
-- add your cleaner to text/cleaners.py
-- add your language specific preprocessor to synthesize.py
-- run MFA on your data and add to preprocessed_data
+- update the config in `config/YourLanguage`. Minimally change all the values with "change this" comments
+- add your input symbols to `text/symbols.py`
+- add your cleaner to `text/cleaners.py`
+- add your language specific preprocessor to `synthesize.py`
+- run MFA on your data and add to `preprocessed_data`
 - create lexicon for your data
 - preprocess your data with `python3 preprocess.py config/YourLanguage/preprocess.yaml`
-- train your system with `python3 train -p config/YourLanguage/preprocess.yaml -m config/YourLanguage/model.yaml -t config/YourLanguage/train.yaml
+- train your system with `python3 train -p config/YourLanguage/preprocess.yaml -m config/YourLanguage/model.yaml -t config/YourLanguage/train.yaml`
 - synthesize speech with `python3 synthesize.py --text "YOUR_DESIRED_TEXT" --restore_step 300000 --mode single -p config/YourLanguage/preprocess.yaml -m config/YourLanguage/model.yaml -t config/YourLanguage/train.yaml`
 
 # Implementation Issues
