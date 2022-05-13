@@ -156,9 +156,9 @@ The loss curves, synthesized mel-spectrograms, and audios are shown.
 - update the config in `config/YourLanguage`. Minimally change all the values with "change this" comments
 - add your input symbols to `text/symbols.py`
 - add your cleaner to `text/cleaners.py`
-- add your language specific preprocessor to `synthesize.py`
-- run MFA on your data and add to `preprocessed_data`
-- create lexicon for your data
+- add your language specific preprocessors to `preprocessor/yourlanguage.py` and `synthesize.py`
+- run MFA on your data and add to `preprocessed_data/YourLanguage/TextGrid`
+- create lexicon for your data and add to `lexicon/`
 - preprocess your data with `python3 preprocess.py config/YourLanguage/preprocess.yaml`
 - train your system with `python3 train -p config/YourLanguage/preprocess.yaml -m config/YourLanguage/model.yaml -t config/YourLanguage/train.yaml`
 - synthesize speech with `python3 synthesize.py --text "YOUR_DESIRED_TEXT" --restore_step 300000 --mode single -p config/YourLanguage/preprocess.yaml -m config/YourLanguage/model.yaml -t config/YourLanguage/train.yaml`
