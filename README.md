@@ -44,6 +44,9 @@ pip3 install -r requirements.txt
 ## Inference
 
 You have to download the [pretrained models](https://drive.google.com/drive/folders/1DOhZGlTLMbbAAFZmZGDdc77kz1PloS7F?usp=sharing) and put them in ``output/ckpt/LJSpeech/``,  ``output/ckpt/AISHELL3``, or ``output/ckpt/LibriTTS/``.
+Checkpoints should be named according to the number of training steps, so you will need to remove the dataset name from these pretrained model files.
+You will also need to unzip the HiFi-GAN checkpoint specified in the corresponding `model.yaml` config file, e.g. `cd hifigan && unzip generator_universal.pth.tar.zip`.
+Finally, uncomment the noted lines in `text/symbols.py` to export the correct list of `SYMBOLS` for these pre-trained models.
 
 For English single-speaker TTS, run
 ```
@@ -69,9 +72,9 @@ Here is an example of synthesized mel-spectrogram of the sentence "Printing, in 
 Batch inference is also supported, try
 
 ```
-python3 synthesize.py --source preprocessed_data/LJSpeech/val.txt --restore_step 900000 --mode batch -p config/LJSpeech/preprocess.yaml -m config/LJSpeech/model.yaml -t config/LJSpeech/train.yaml
+python3 synthesize.py --source val.txt --restore_step 900000 --mode batch -p config/LJSpeech/preprocess.yaml -m config/LJSpeech/model.yaml -t config/LJSpeech/train.yaml
 ```
-to synthesize all utterances in ``preprocessed_data/LJSpeech/val.txt``
+to synthesize all utterances in ``preprocessed_data/LJSpeech/val.txt`` (where the path to `val.txt` is specified in `config/LJSpeech/preprocess.yaml` as `preprocessed_path`).
 
 ## Controllability
 The pitch/volume/speaking rate of the synthesized utterances can be controlled by specifying the desired pitch/energy/duration ratios.
@@ -103,7 +106,7 @@ for some preparations.
 
 As described in the paper, [Montreal Forced Aligner](https://montreal-forced-aligner.readthedocs.io/en/latest/) (MFA) is used to obtain the alignments between the utterances and the phoneme sequences.
 Alignments of the supported datasets are provided [here](https://drive.google.com/drive/folders/1DBRkALpPd6FL9gjHMmMEdHODmkgNIIK4?usp=sharing).
-You have to unzip the files in ``preprocessed_data/LJSpeech/TextGrid/``.
+You have to unzip the files in ``preprocessed_data/LANGUAGE_CODE/SPEAKER_ID/TextGrid/``, where `LANGUAGE_CODE` is specified in your `preprocess.yaml` under `preprocessing.text.language` and `SPEAKER_ID` is determined by the corpus-specific preprocessor defined in `preprocessor/yourcorpus.py` (e.g. `preprocessed_data/eng/LJSpeech/TextGrid`).
 
 After that, run the preprocessing script by
 ```

@@ -8,6 +8,7 @@ nltk==3.5
 numba == 0.48
 numpy == 1.19.0
 panphon==0.19
+pillow==9.1.0
 pypinyin==0.39.0
 pyworld == 0.2.10
 PyYAML==5.4.1

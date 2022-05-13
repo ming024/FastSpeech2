@@ -14,6 +14,7 @@ def prepare_align(config):
     sampling_rate = config["preprocessing"]["audio"]["sampling_rate"]
     max_wav_value = config["preprocessing"]["audio"]["max_wav_value"]
     cleaners = config["preprocessing"]["text"]["text_cleaners"]
+    language = config["preprocessing"]["text"]["language"]
     for speaker in tqdm(os.listdir(in_dir)):
         for chapter in os.listdir(os.path.join(in_dir, speaker)):
             for file_name in os.listdir(os.path.join(in_dir, speaker, chapter)):
@@ -30,16 +31,16 @@ def prepare_align(config):
                     text = f.readline().strip("\n")
                 text = _clean_text(text, cleaners)
 
-                os.makedirs(os.path.join(out_dir, speaker), exist_ok=True)
+                os.makedirs(os.path.join(out_dir, language, speaker), exist_ok=True)
                 wav, _ = librosa.load(wav_path, sampling_rate)
                 wav = wav / max(abs(wav)) * max_wav_value
                 wavfile.write(
-                    os.path.join(out_dir, speaker, "{}.wav".format(base_name)),
+                    os.path.join(out_dir, language, speaker, "{}.wav".format(base_name)),
                     sampling_rate,
                     wav.astype(np.int16),
                 )
                 with open(
-                    os.path.join(out_dir, speaker, "{}.lab".format(base_name)),
+                    os.path.join(out_dir, language, speaker, "{}.lab".format(base_name)),
                     "w",
                 ) as f1:
                     f1.write(text)

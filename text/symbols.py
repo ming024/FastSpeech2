@@ -26,12 +26,12 @@ _punctuation = "!(),.;? ':"
 _moh_punctuation = "!(),.;? "
 _special = "-"
 _letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-_silences = ["@sp", "@spn", "@sil"] # ["sp", "spn", "sil", "@sp", "@spn", "@sil"] can be used as well
+_silences = ["sp", "spn", "sil"] # ["sp", "spn", "sil", "@sp", "@spn", "@sil"] can be used as well
 
 # Prepend "@" to ARPAbet symbols to ensure uniqueness (some are the same as uppercase letters):
 # _arpabet = ["@" + s for s in cmudict.valid_symbols]
 _arpabet = [s for s in cmudict.valid_symbols]
-_pinyin = ["@" + s for s in pinyin.valid_symbols]
+_pinyin = [s for s in pinyin.valid_symbols]
 
 MAPPINGS = {
     "git": {"norm": make_g2p("git", "git-equiv"), "ipa": make_g2p("git", "git-ipa")},
@@ -62,6 +62,9 @@ SYMBOLS["moh"] = MOH_BASE_SYMBOLS + IPA["moh"]
 SYMBOLS["git"] = BASE_SYMBOLS + IPA["git"]
 SYMBOLS["str"] = BASE_SYMBOLS + IPA["str"]
 SYMBOLS["eng"] = BASE_SYMBOLS + ARPA_IPA + _arpabet
+# NOTE: Use these symbols for pre-trained model checkpoints from the original repo
+#SYMBOLS["eng"] = [_pad] + list(_special) + list(_punctuation) + list(_letters) + _arpabet + _pinyin + _silences
+#SYMBOLS["zh"] = [_pad] + list(_special) + list(_punctuation) + list(_letters) + _arpabet + _pinyin + _silences
 
 # # Export all symbols:
 CHARS = (

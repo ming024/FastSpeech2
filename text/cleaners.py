@@ -100,3 +100,4 @@ for k, v in MAPPINGS.items():
     CLEANERS[k] = lambda x, v=v: v["ipa"](collapse_whitespace(x.lower())).output_string
 
 CLEANERS["eng"] = english_cleaners
+CLEANERS["zh"] = transliteration_cleaners

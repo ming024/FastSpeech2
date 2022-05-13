@@ -10,7 +10,7 @@ preprocessing:
   val_size: 512
   text:
     text_cleaners: ["english_cleaners"]
-    language: "en"
+    language: "eng"
     use_spe_features: False
     spe_feature_dim: 36
   audio:

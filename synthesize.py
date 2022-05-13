@@ -100,8 +100,7 @@ def preprocess(text, preprocess_config, lang):
         language_map = json.load(f)
     language_map = {v: k for k, v in language_map.items()}
     lang = language_map[lang]
-    # lexicon = read_lexicon(preprocess_config["path"]["lexicon_path"]) #TODO: pick the right lexicon!
-    lexicon = read_lexicon("./lexicon/moh-lexicon.txt")
+    lexicon = read_lexicon(preprocess_config["path"]["lexicon_path"])
     words = re.split(r"([,;.\-\?\!\s+])", text)
     g2p_norm = MAPPINGS[lang]["norm"]
     g2p = MAPPINGS[lang]["ipa"]
