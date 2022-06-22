@@ -3,7 +3,7 @@ inflect == 4.1.0
 librosa == 0.7.2
 matplotlib == 3.2.2
 numba == 0.48
-numpy == 1.19.0
+numpy == 1.22.0
 pypinyin==0.39.0
 pyworld == 0.2.10
 PyYAML==5.4.1
