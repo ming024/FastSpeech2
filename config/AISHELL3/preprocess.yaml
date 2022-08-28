@@ -13,7 +13,7 @@ preprocessing:
     language: "zh"
   audio:
     sampling_rate: 22050
-    max_wav_value: 32768.0
+    max_wav_value: 32767.0
   stft:
     filter_length: 1024
     hop_length: 256
