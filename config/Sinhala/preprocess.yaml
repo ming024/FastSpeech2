@@ -1,16 +1,16 @@
-dataset: "LJSpeech_paper"
+dataset: "Sinhala"
 
 path:
-  corpus_path: "/home/ming/Data/LJSpeech-1.1"
-  lexicon_path: "lexicon/librispeech-lexicon.txt"
-  raw_path: "./raw_data/LJSpeech"
-  preprocessed_path: "./preprocessed_data/LJSpeech_paper"
+  corpus_path: "/home/danoja/MSC/Project/implementation/Data/Sinhala"
+  lexicon_path: "/home/danoja/MSC/Project/implementation/DanojaDias_FastSpeech2/FastSpeech2/lexicon/sinhala-lexicon.txt"
+  raw_path: "./raw_data/Sinhala"
+  preprocessed_path: "/home/danoja/MSC/Project/implementation/DanojaDias_FastSpeech2/FastSpeech2/preprocessed_data/Sinhala"
 
 preprocessing:
   val_size: 512
   text:
-    text_cleaners: ["english_cleaners"]
-    language: "en"
+    text_cleaners: ["sinhala_cleaners"]
+    language: "si"
   audio:
     sampling_rate: 22050
     max_wav_value: 32767.0
@@ -24,7 +24,7 @@ preprocessing:
     mel_fmax: 8000 # please set to 8000 for HiFi-GAN vocoder, set to null for MelGAN vocoder
   pitch:
     feature: "frame_level" # support 'phoneme_level' or 'frame_level'
-    normalization: False
+    normalization: True
   energy:
     feature: "frame_level" # support 'phoneme_level' or 'frame_level'
-    normalization: False
+    normalization: True

@@ -17,6 +17,7 @@ hyperparameter. Some cleaners are English-specific. You'll typically want to use
 import re
 from unidecode import unidecode
 from .numbers import normalize_numbers
+from .numbers import normalize_numbers_sinhala
 _whitespace_re = re.compile(r'\s+')
 
 # List of (regular expression, replacement) pairs for abbreviations:
@@ -51,6 +52,8 @@ def expand_abbreviations(text):
 def expand_numbers(text):
     return normalize_numbers(text)
 
+def expand_numbers_sinhala(text):
+    return normalize_numbers_sinhala(text)
 
 def lowercase(text):
     return text.lower()
@@ -85,5 +88,11 @@ def english_cleaners(text):
     text = lowercase(text)
     text = expand_numbers(text)
     text = expand_abbreviations(text)
+    text = collapse_whitespace(text)
+    return text
+
+def sinhala_cleaners(text):
+    '''Pipeline for Sinhala text, including number and abbreviation expansion.'''
+    text = expand_numbers_sinhala(text)
     text = collapse_whitespace(text)
     return text

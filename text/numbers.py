@@ -20,6 +20,8 @@ def _remove_commas(m):
 def _expand_decimal_point(m):
     return m.group(1).replace(".", " point ")
 
+def _expand_decimal_point_sinhala(m):
+    return m.group(1).replace(".", " දශම ")
 
 def _expand_dollars(m):
     match = m.group(1)
@@ -70,4 +72,11 @@ def normalize_numbers(text):
     text = re.sub(_decimal_number_re, _expand_decimal_point, text)
     text = re.sub(_ordinal_re, _expand_ordinal, text)
     text = re.sub(_number_re, _expand_number, text)
+    return text
+
+def normalize_numbers_sinhala(text):
+    text = re.sub(_comma_number_re, _remove_commas, text)  # 1,2 => 12 is this really needed?
+    text = re.sub(_pounds_re, r"පවුම් \1 ක් ", text) #£3 => පවුම් 3 ක්
+    text = re.sub(_dollars_re, r"ඩොලර් \1 ක් ", text) #$3 => ඩොලර් 3 ක්
+    text = re.sub(_decimal_number_re, _expand_decimal_point_sinhala, text)  # 4.5 => 4 දශම 5
     return text
