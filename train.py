@@ -32,14 +32,14 @@ def main(args, configs):
     assert batch_size * group_size < len(dataset)
     loader = DataLoader(
         dataset,
-        batch_size=batch_size * group_size,
+        batch_size=batch_size,   # batch_size=batch_size * group_size,
         shuffle=True,
         collate_fn=dataset.collate_fn,
     )
 
     # Prepare model
     model, optimizer = get_model(args, configs, device, train=True)
-    model = nn.DataParallel(model)
+    # model = nn.DataParallel(model)
     num_param = get_param_num(model)
     Loss = FastSpeech2Loss(preprocess_config, model_config).to(device)
     print("Number of FastSpeech2 Parameters:", num_param)
@@ -151,7 +151,7 @@ def main(args, configs):
                 if step % save_step == 0:
                     torch.save(
                         {
-                            "model": model.module.state_dict(),
+                            "model": model.state_dict(),   # if n gpu: model.module.state_dict(),
                             "optimizer": optimizer._optimizer.state_dict(),
                         },
                         os.path.join(
