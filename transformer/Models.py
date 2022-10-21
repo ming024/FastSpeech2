@@ -170,4 +170,6 @@ class Decoder(nn.Module):
             if return_attns:
                 dec_slf_attn_list += [dec_slf_attn]
 
+        if return_attns:
+            return dec_output, mask, dec_slf_attn_list
         return dec_output, mask
