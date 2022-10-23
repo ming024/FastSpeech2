@@ -116,3 +116,7 @@ output/
 *.npy
 TextGrid/
 hifigan/*.pth.tar
+
+# some test script
+look_function.py
+run.sh
