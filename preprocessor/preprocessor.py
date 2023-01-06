@@ -1,6 +1,7 @@
 import os
 import random
 import json
+import warnings
 
 import tgt
 import librosa
@@ -258,6 +259,16 @@ class Preprocessor:
         start_time = 0
         end_time = 0
         end_idx = 0
+
+        new_tier = [] # MFA2.0(default config) may yield slices with no token which leads a mismatch in length.
+        for t1, t2 in zip(tier._objects[:-1], tier._objects[1:]):
+            new_tier.append(t1)
+            if (t2.start_time - t1.end_time) != 0:
+
+                warnings.warn('Find a slice with empty text.')
+                new_tier.append(tgt.Interval(start_time=t1.end_time, end_time=t2.start_time, text='spn'))
+        new_tier.append(t2)
+
         for t in tier._objects:
             s, e, p = t.start_time, t.end_time, t.text
 
