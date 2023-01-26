@@ -94,6 +94,7 @@ def synthesize(model, step, configs, vocoder, batchs, control_values):
             # Forward
             output = model(
                 *(batch[2:]),
+                d_targets=batch[6], # this overrides the durations
                 p_control=pitch_control,
                 e_control=energy_control,
                 d_control=duration_control

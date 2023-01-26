@@ -148,6 +148,7 @@ class Dataset(Dataset):
 
 class TextDataset(Dataset):
     def __init__(self, filepath, preprocess_config):
+        self.preprocess_config = preprocess_config
         self.cleaners = preprocess_config["preprocessing"]["text"]["text_cleaners"]
 
         self.basename, self.speaker, self.text, self.raw_text = self.process_meta(
@@ -169,8 +170,14 @@ class TextDataset(Dataset):
         speaker_id = self.speaker_map[speaker]
         raw_text = self.raw_text[idx]
         phone = np.array(text_to_sequence(self.text[idx], self.cleaners))
+        duration_path = os.path.join(
+            self.preprocess_config["path"]["preprocessed_path"],
+            "duration",
+            "{}-duration-{}.npy".format(speaker, basename),
+        )
+        durations = np.load(duration_path)
 
-        return (basename, speaker_id, phone, raw_text)
+        return (basename, speaker_id, phone, raw_text, durations)
 
     def process_meta(self, filename):
         with open(filename, "r", encoding="utf-8") as f:
@@ -192,10 +199,11 @@ class TextDataset(Dataset):
         texts = [d[2] for d in data]
         raw_texts = [d[3] for d in data]
         text_lens = np.array([text.shape[0] for text in texts])
+        durations = np.array([d[4] for d in data])
 
         texts = pad_1D(texts)
 
-        return ids, raw_texts, speakers, texts, text_lens, max(text_lens)
+        return ids, raw_texts, speakers, texts, text_lens, max(text_lens), durations
 
 
 if __name__ == "__main__":
