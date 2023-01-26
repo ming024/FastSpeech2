@@ -160,7 +160,7 @@ class TextDataset(Dataset):
             )
         ) as f:
             self.speaker_map = json.load(f)
-
+        self.has_durations = False
     def __len__(self):
         return len(self.text)
 
@@ -175,7 +175,11 @@ class TextDataset(Dataset):
             "duration",
             "{}-duration-{}.npy".format(speaker, basename),
         )
-        durations = np.load(duration_path)
+        try:
+            durations = np.load(duration_path)
+            self.has_durations = True
+        except OSError:
+            durations = None
 
         return (basename, speaker_id, phone, raw_text, durations)
 
@@ -199,7 +203,9 @@ class TextDataset(Dataset):
         texts = [d[2] for d in data]
         raw_texts = [d[3] for d in data]
         text_lens = np.array([text.shape[0] for text in texts])
-        durations = np.array([d[4] for d in data])
+        durations = None
+        if self.has_durations:
+            durations = np.array([d[4] for d in data])
 
         texts = pad_1D(texts)
 
