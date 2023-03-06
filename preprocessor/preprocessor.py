@@ -18,7 +18,6 @@ class Preprocessor:
         self.config = config
         self.in_dir = config["path"]["raw_path"]
         self.out_dir = config["path"]["preprocessed_path"]
-        self.out_dir = config["path"]["stats_path"]
         self.val_size = config["preprocessing"]["val_size"]
         self.sampling_rate = config["preprocessing"]["audio"]["sampling_rate"]
         self.hop_length = config["preprocessing"]["stft"]["hop_length"]
@@ -133,8 +132,7 @@ class Preprocessor:
                 ],
             }
             f.write(json.dumps(stats))
-       with open(os.path.join(self.stats_path, "stats.json"), "w") as f:
-            f.write(json.dumps(stats))
+
         print(
             "Total time: {} hours".format(
                 n_frames * self.hop_length / self.sampling_rate / 3600
@@ -162,7 +160,7 @@ class Preprocessor:
         )
 
         # Get alignments
-        textgrid = tgt.io.read_textgrid(tg_path, encoding='utf-8-sig')
+        textgrid = tgt.io.read_textgrid(tg_path)
         phone, duration, start, end = self.get_alignment(
             textgrid.get_tier_by_name("phones")
         )
