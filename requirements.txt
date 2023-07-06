@@ -8,7 +8,7 @@ pypinyin==0.39.0
 pyworld == 0.2.10
 PyYAML==5.4.1
 scikit-learn==0.23.2
-scipy == 1.5.0
+scipy == 1.10.0
 soundfile==0.10.3.post1
 tensorboard == 2.2.2
 tgt == 1.4.4
