@@ -28,7 +28,8 @@ pip3 install -r requirements.txt
 
 ## Inference
 
-You have to download the [pretrained models](https://drive.google.com/drive/folders/1DOhZGlTLMbbAAFZmZGDdc77kz1PloS7F?usp=sharing) and put them in ``output/ckpt/LJSpeech/``,  ``output/ckpt/AISHELL3``, or ``output/ckpt/LibriTTS/``.
+You have to download the [pretrained models](https://drive.google.com/drive/folders/1DOhZGlTLMbbAAFZmZGDdc77kz1PloS7F?usp=sharing) and put them in ``output/ckpt/LJSpeech/``,  ``output/ckpt/AISHELL3``, or ``output/ckpt/LibriTTS/``.  
+Also, unzip hifigan/generator_LJSpeech.pth.tar.zip and generator_universal.pth.tar.zip  
 
 For English single-speaker TTS, run
 ```
