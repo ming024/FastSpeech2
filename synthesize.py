@@ -84,7 +84,10 @@ def preprocess_mandarin(text, preprocess_config):
     return np.array(sequence)
 
 
-def synthesize(model, step, configs, vocoder, batchs, control_values):
+def synthesize(
+    model, step, configs, vocoder, batchs, control_values, 
+    do_plot_spectrogram=True, 
+):
     preprocess_config, model_config, train_config = configs
     pitch_control, energy_control, duration_control = control_values
 
@@ -105,6 +108,7 @@ def synthesize(model, step, configs, vocoder, batchs, control_values):
                 model_config,
                 preprocess_config,
                 train_config["path"]["result_path"],
+                do_plot_spectrogram, 
             )
 
 

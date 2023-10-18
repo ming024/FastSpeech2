@@ -161,7 +161,11 @@ def synth_one_sample(targets, predictions, vocoder, model_config, preprocess_con
     return fig, wav_reconstruction, wav_prediction, basename
 
 
-def synth_samples(targets, predictions, vocoder, model_config, preprocess_config, path):
+def synth_samples(
+    targets, predictions, vocoder, model_config, 
+    preprocess_config, path, 
+    do_plot_spectrogram=True, 
+):
 
     basenames = targets[0]
     for i in range(len(predictions[0])):
@@ -187,15 +191,16 @@ def synth_samples(targets, predictions, vocoder, model_config, preprocess_config
             stats = json.load(f)
             stats = stats["pitch"] + stats["energy"][:2]
 
-        fig = plot_mel(
-            [
-                (mel_prediction.cpu().numpy(), pitch, energy),
-            ],
-            stats,
-            ["Synthetized Spectrogram"],
-        )
-        plt.savefig(os.path.join(path, "{}.png".format(basename)))
-        plt.close()
+        if do_plot_spectrogram:
+            fig = plot_mel(
+                [
+                    (mel_prediction.cpu().numpy(), pitch, energy),
+                ],
+                stats,
+                ["Synthetized Spectrogram"],
+            )
+            plt.savefig(os.path.join(path, "{}.png".format(basename)))
+            plt.close()
 
     from .model import vocoder_infer
 
