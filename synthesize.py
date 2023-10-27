@@ -14,8 +14,9 @@ from utils.tools import to_device, synth_samples
 from dataset import TextDataset
 from text import text_to_sequence
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+print('device:', device)
 
 def read_lexicon(lex_path):
     lexicon = {}
