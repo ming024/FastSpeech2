@@ -11,7 +11,8 @@ import torch.nn.functional as F
 
 from utils.tools import get_mask_from_lengths, pad
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 
 
 class VarianceAdaptor(nn.Module):
@@ -77,6 +78,14 @@ class VarianceAdaptor(nn.Module):
             n_bins, model_config["transformer"]["encoder_hidden"]
         )
 
+    def manual_bucketize(self, input_tensor, boundaries):
+        boundaries = torch.tensor(boundaries).float()
+        expanded_input = input_tensor.unsqueeze(-1)
+        comparison = (expanded_input > boundaries).float()
+        bucket_indices = comparison.sum(-1).long()
+        return bucket_indices
+    
+
     def get_pitch_embedding(self, x, target, mask, control):
         prediction = self.pitch_predictor(x, mask)
         if target is not None:
@@ -84,7 +93,7 @@ class VarianceAdaptor(nn.Module):
         else:
             prediction = prediction * control
             embedding = self.pitch_embedding(
-                torch.bucketize(prediction, self.pitch_bins)
+                self.manual_bucketize(prediction, self.pitch_bins)
             )
         return prediction, embedding
 
@@ -95,7 +104,7 @@ class VarianceAdaptor(nn.Module):
         else:
             prediction = prediction * control
             embedding = self.energy_embedding(
-                torch.bucketize(prediction, self.energy_bins)
+                self.manual_bucketize(prediction, self.energy_bins)
             )
         return prediction, embedding
 
