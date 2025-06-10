@@ -17,6 +17,7 @@ hyperparameter. Some cleaners are English-specific. You'll typically want to use
 import re
 from unidecode import unidecode
 from .numbers import normalize_numbers
+from .german_numbers import german_normalize_numbers
 _whitespace_re = re.compile(r'\s+')
 
 # List of (regular expression, replacement) pairs for abbreviations:
@@ -85,5 +86,12 @@ def english_cleaners(text):
     text = lowercase(text)
     text = expand_numbers(text)
     text = expand_abbreviations(text)
+    text = collapse_whitespace(text)
+    return text
+
+def german_cleaners(text):
+    '''Basic pipeline that lowercases and collapses whitespace without transliteration.'''
+    text = lowercase(text)
+    text = german_normalize_numbers(text)
     text = collapse_whitespace(text)
     return text

@@ -13,6 +13,7 @@ from utils.model import get_model, get_vocoder
 from utils.tools import to_device, synth_samples
 from dataset import TextDataset
 from text import text_to_sequence
+from text.german_numbers import german_normalize_numbers
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -83,6 +84,41 @@ def preprocess_mandarin(text, preprocess_config):
 
     return np.array(sequence)
 
+def preprocess_de(text, preprocess_config):
+    text = text.rstrip(punctuation).replace("ß","ss")
+    lexicon = read_lexicon(preprocess_config["path"]["lexicon_path"])
+    def split_alphanum(match):
+        letters = match.group(1)
+        numbers = match.group(2)
+        # split if character+number 
+        return letters + " " + " ".join(list(numbers))
+    
+    text = re.sub(r'([a-zA-Z]+)(\d+)', split_alphanum, text)
+
+    text = german_normalize_numbers(text)
+
+    phones = []
+    words = re.split(r"([,;.\-\?\!\s+])", text)
+    
+    for w in words:
+        if w.lower() in lexicon:
+            phones += lexicon[w.lower()]
+        elif re.match(r"[,;.\-\?\!]", w):
+            phones.append("sil")
+    phones = "{" + "}{".join(phones) + "}"
+    phones = phones.replace("}{", " ")
+
+    # text_to_sequence get features
+    features = text_to_sequence(
+        phones,
+        preprocess_config["preprocessing"]["text"]["text_cleaners"],
+    )
+
+    print("Raw Text Sequence: {}".format(text))
+    print("Phoneme Sequence: {}".format(phones))
+    #print("features:{}".format(features))
+    return np.array(features)
+
 
 def synthesize(model, step, configs, vocoder, batchs, control_values):
     preprocess_config, model_config, train_config = configs
@@ -109,7 +145,6 @@ def synthesize(model, step, configs, vocoder, batchs, control_values):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument("--restore_step", type=int, required=True)
     parser.add_argument(
@@ -206,6 +241,8 @@ if __name__ == "__main__":
             texts = np.array([preprocess_english(args.text, preprocess_config)])
         elif preprocess_config["preprocessing"]["text"]["language"] == "zh":
             texts = np.array([preprocess_mandarin(args.text, preprocess_config)])
+        elif preprocess_config["preprocessing"]["text"]["language"] == "de":
+            texts = np.array([preprocess_de(args.text, preprocess_config)])
         text_lens = np.array([len(texts[0])])
         batchs = [(ids, raw_texts, speakers, texts, text_lens, max(text_lens))]
 

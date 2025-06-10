@@ -1,44 +1,44 @@
 """ from https://github.com/keithito/tacotron """
 import re
 from text import cleaners
+from string import punctuation
 from text.symbols import symbols
-
+from .en_phonological_features_new import phonological_features,default_feature
+import numpy as np 
+import torch
+import torch.nn as nn
 
 # Mappings from symbol to numeric ID and vice versa:
-_symbol_to_id = {s: i for i, s in enumerate(symbols)}
-_id_to_symbol = {i: s for i, s in enumerate(symbols)}
+#_symbol_to_id = {s: i for i, s in enumerate(symbols)}
+#_id_to_symbol = {i: s for i, s in enumerate(symbols)}
 
 # Regular expression matching text enclosed in curly braces:
 _curly_re = re.compile(r"(.*?)\{(.+?)\}(.*)")
 
-
+#for german 
 def text_to_sequence(text, cleaner_names):
-    """Converts a string of text to a sequence of IDs corresponding to the symbols in the text.
+    processed_phonemes = []
+    feature_list = []
 
-    The text can optionally have ARPAbet sequences enclosed in curly braces embedded
-    in it. For example, "Turn left on {HH AW1 S S T AH0 N} Street."
+    m = _curly_re.match(text)
+    phones = m.group(2).strip().split()
 
-    Args:
-      text: string to convert to a sequence
-      cleaner_names: names of the cleaner functions to run the text through
+    for p in phones:
+        #if p in diphthongs_map:
+            #for single_phoneme in diphthongs_map[p]:
+                #processed_phonemes.append(single_phoneme)
+                #feature = phonological_features.get(single_phoneme, default_feature)
+                #feature_list.append(feature)
+        #else:
+        processed_phonemes.append(p)
+        feature = phonological_features.get(p, default_feature)
+        #print(f"Phoneme: {p}, Feature shape: {np.array(feature).shape}, Feature type: {type(feature)}")
+        feature_list.append(feature)
 
-    Returns:
-      List of integers corresponding to the symbols in the text
-    """
-    sequence = []
+    features = np.array(feature_list, dtype=np.float32)
+    features = torch.from_numpy(features).float()       
+    return features
 
-    # Check for curly braces and treat their contents as ARPAbet:
-    while len(text):
-        m = _curly_re.match(text)
-
-        if not m:
-            sequence += _symbols_to_sequence(_clean_text(text, cleaner_names))
-            break
-        sequence += _symbols_to_sequence(_clean_text(m.group(1), cleaner_names))
-        sequence += _arpabet_to_sequence(m.group(2))
-        text = m.group(3)
-
-    return sequence
 
 
 def sequence_to_text(sequence):
@@ -73,3 +73,5 @@ def _arpabet_to_sequence(text):
 
 def _should_keep_symbol(s):
     return s in _symbol_to_id and s != "_" and s != "~"
+
+

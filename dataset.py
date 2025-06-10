@@ -34,7 +34,7 @@ class Dataset(Dataset):
         speaker = self.speaker[idx]
         speaker_id = self.speaker_map[speaker]
         raw_text = self.raw_text[idx]
-        phone = np.array(text_to_sequence(self.text[idx], self.cleaners))
+        phone = text_to_sequence(self.text[idx], self.cleaners) # delete np.array 
         mel_path = os.path.join(
             self.preprocessed_path,
             "mel",
@@ -59,11 +59,14 @@ class Dataset(Dataset):
             "{}-duration-{}.npy".format(speaker, basename),
         )
         duration = np.load(duration_path)
-
+        # add for debugging
+        assert len(pitch) == len(phone), \
+            f"Pitch length {len(pitch)} != Text length {len(phone)} for {basename}"
+                
         sample = {
             "id": basename,
             "speaker": speaker_id,
-            "text": phone,
+            "text": phone, #is feature vectors
             "raw_text": raw_text,
             "mel": mel,
             "pitch": pitch,
@@ -92,7 +95,7 @@ class Dataset(Dataset):
     def reprocess(self, data, idxs):
         ids = [data[idx]["id"] for idx in idxs]
         speakers = [data[idx]["speaker"] for idx in idxs]
-        texts = [data[idx]["text"] for idx in idxs]
+        texts = [data[idx]["text"].float() for idx in idxs]
         raw_texts = [data[idx]["raw_text"] for idx in idxs]
         mels = [data[idx]["mel"] for idx in idxs]
         pitches = [data[idx]["pitch"] for idx in idxs]
@@ -103,7 +106,8 @@ class Dataset(Dataset):
         mel_lens = np.array([mel.shape[0] for mel in mels])
 
         speakers = np.array(speakers)
-        texts = pad_1D(texts)
+        #texts = pad_1D(texts)
+        texts = pad_2D(texts)
         mels = pad_2D(mels)
         pitches = pad_1D(pitches)
         energies = pad_1D(energies)
@@ -168,7 +172,7 @@ class TextDataset(Dataset):
         speaker = self.speaker[idx]
         speaker_id = self.speaker_map[speaker]
         raw_text = self.raw_text[idx]
-        phone = np.array(text_to_sequence(self.text[idx], self.cleaners))
+        phone = text_to_sequence(self.text[idx], self.cleaners) # delete np.array
 
         return (basename, speaker_id, phone, raw_text)
 
@@ -189,12 +193,12 @@ class TextDataset(Dataset):
     def collate_fn(self, data):
         ids = [d[0] for d in data]
         speakers = np.array([d[1] for d in data])
-        texts = [d[2] for d in data]
+        texts = [d[2].astype(np.float32) for d in data]
         raw_texts = [d[3] for d in data]
         text_lens = np.array([text.shape[0] for text in texts])
 
-        texts = pad_1D(texts)
-
+        #texts = pad_1D(texts)
+        texts = pad_2D(texts)
         return ids, raw_texts, speakers, texts, text_lens, max(text_lens)
 
 

@@ -37,7 +37,7 @@ class Encoder(nn.Module):
         super(Encoder, self).__init__()
 
         n_position = config["max_seq_len"] + 1
-        n_src_vocab = len(symbols) + 1
+        #n_src_vocab = len(symbols) + 1
         d_word_vec = config["transformer"]["encoder_hidden"]
         n_layers = config["transformer"]["encoder_layer"]
         n_head = config["transformer"]["encoder_head"]
@@ -53,9 +53,11 @@ class Encoder(nn.Module):
         self.max_seq_len = config["max_seq_len"]
         self.d_model = d_model
 
-        self.src_word_emb = nn.Embedding(
-            n_src_vocab, d_word_vec, padding_idx=Constants.PAD
-        )
+        #self.src_word_emb = nn.Embedding(
+            #n_src_vocab, d_word_vec, padding_idx=Constants.PAD
+        #)
+        self.feature_proj = nn.Linear(41, d_word_vec)
+        
         self.position_enc = nn.Parameter(
             get_sinusoid_encoding_table(n_position, d_word_vec).unsqueeze(0),
             requires_grad=False,
@@ -70,25 +72,29 @@ class Encoder(nn.Module):
             ]
         )
 
-    def forward(self, src_seq, mask, return_attns=False):
-
+    def forward(self, src_features, mask, return_attns=False):
         enc_slf_attn_list = []
-        batch_size, max_len = src_seq.shape[0], src_seq.shape[1]
+        batch_size, max_len = src_features.shape[0], src_features.shape[1]
 
-        # -- Prepare masks
+        # -- prepare mask
         slf_attn_mask = mask.unsqueeze(1).expand(-1, max_len, -1)
+        
+        # add for feature vector type
+        enc_output = self.feature_proj(src_features.float())  # [batch, seq_len, d_word_vec]
 
-        # -- Forward
-        if not self.training and src_seq.shape[1] > self.max_seq_len:
-            enc_output = self.src_word_emb(src_seq) + get_sinusoid_encoding_table(
-                src_seq.shape[1], self.d_model
-            )[: src_seq.shape[1], :].unsqueeze(0).expand(batch_size, -1, -1).to(
-                src_seq.device
-            )
+        # #for debugging
+        #print(f"Input features shape: {src_features.shape}")
+        #print(f"First few values of input features:\n{src_features[:2, :5]}")
+        #print(f"Initial enc_output shape: {enc_output.shape}")
+        #print(f"First few values of initial enc_output:\n{enc_output[:2, :5, :5]}")
+
+        # --forward
+        if not self.training and max_len > self.max_seq_len:
+            enc_output += get_sinusoid_encoding_table(
+            max_len, self.d_model
+        )[:max_len, :].unsqueeze(0).expand(batch_size, -1, -1).to(src_features.device)
         else:
-            enc_output = self.src_word_emb(src_seq) + self.position_enc[
-                :, :max_len, :
-            ].expand(batch_size, -1, -1)
+            enc_output += self.position_enc[:, :max_len, :].expand(batch_size, -1, -1)
 
         for enc_layer in self.layer_stack:
             enc_output, enc_slf_attn = enc_layer(
@@ -96,9 +102,10 @@ class Encoder(nn.Module):
             )
             if return_attns:
                 enc_slf_attn_list += [enc_slf_attn]
-
+        #print(f"After Encoder, enc_output shape: {enc_output.shape}") #for debugging
+        #print(f"First few values of final enc_output:\n{enc_output[:2, :5, :5]}") #for debugging
+        
         return enc_output
-
 
 class Decoder(nn.Module):
     """ Decoder """
