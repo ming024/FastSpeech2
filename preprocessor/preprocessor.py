@@ -169,7 +169,7 @@ class Preprocessor:
             return None
 
         # Read and trim wav files
-        wav, _ = librosa.load(wav_path)
+        wav, _ = librosa.load(wav_path, sr=self.sampling_rate)
         wav = wav[
             int(self.sampling_rate * start) : int(self.sampling_rate * end)
         ].astype(np.float32)
